@@ -45,8 +45,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // هنا سيقوم زميلك بالانتقال إلى صفحة الـ Login باستخدام الـ State Management
-      // حالياً سنطبع رسالة في الـ Console
+   
       print("Navigate to Login Screen");
     }
   }
@@ -67,7 +66,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Column(
             children: [
               const SizedBox(height: 20),
-              // الـ PageView لعرض محتوى الصفحات المتحركة
+     
               Expanded(
                 child: PageView.builder(
                   controller: _pageController,
@@ -77,7 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // العنوان العالي
+                      
                         Text(
                           _onboardingData[index]["title"]!,
                           textAlign: TextAlign.center,
@@ -89,7 +88,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        // الصورة التي تملكها وتتوسط الشاشة
+                       
                         Expanded(
                           child: Image.asset(
                             _onboardingData[index]["image"]!,
@@ -97,7 +96,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           ),
                         ),
                         const SizedBox(height: 40),
-                        // النص الوصفي في الأسفل
+                        
                         Text(
                           _onboardingData[index]["desc"]!,
                           textAlign: TextAlign.center,
@@ -115,7 +114,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
 
-              // مؤشر النقاط السفلي (Dots Indicator)
+            
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
@@ -124,7 +123,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     height: 8,
-                    width: _currentPage == index ? 24 : 8, // استطالة خفيفة للنقطة النشطة
+                    width: _currentPage == index ? 24 : 8,
                     decoration: BoxDecoration(
                       color: _currentPage == index
                           ? AppColors.dotActive
@@ -136,7 +135,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
               const SizedBox(height: 40),
 
-              // زر الاستمرار الثابت في الأسفل
+             
               CustomButton(
                 text: OnboardingStrings.buttonText,
                 onPressed: _handleNextPage,
