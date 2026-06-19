@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Medical_Diagnostic_App',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Tajwal',
-        useMaterial3: true,
-      ),
+      theme: ThemeData(fontFamily: 'Tajwal', useMaterial3: true),
       home: const OnBoardingScreen(),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/consts/colors.dart';
 import '../../../../core/consts/strings.dart';
@@ -47,7 +48,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     } else {
       // هنا سيقوم زميلك بالانتقال إلى صفحة الـ Login باستخدام الـ State Management
       // حالياً سنطبع رسالة في الـ Console
-      print("Navigate to Login Screen");
+
+      if (kDebugMode) {
+        print("Navigate to Login Screen");
+      }
     }
   }
 
@@ -120,11 +124,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   _onboardingData.length,
-                      (index) => AnimatedContainer(
+                  (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
                     height: 8,
-                    width: _currentPage == index ? 24 : 8, // استطالة خفيفة للنقطة النشطة
+                    width: _currentPage == index
+                        ? 24
+                        : 8, // استطالة خفيفة للنقطة النشطة
                     decoration: BoxDecoration(
                       color: _currentPage == index
                           ? AppColors.dotActive
