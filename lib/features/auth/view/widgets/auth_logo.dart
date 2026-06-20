@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/utils.dart';
+
 class AuthLogo extends StatelessWidget {
   const AuthLogo({super.key});
 
@@ -9,9 +11,13 @@ class AuthLogo extends StatelessWidget {
       child: Container(
         height: 160,
         width: 160,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/logo.png'), 
+            image: AssetImage(
+              Utils.isLight(context)
+                  ? 'assets/icons/appLogo-removebg-solo.png'
+                  : 'assets/icons/appLogo-removebg-solo-dark.png',
+            ),
             fit: BoxFit.contain,
           ),
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/consts/colors.dart';
+import '../../../../core/theme/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.dotInactive.withOpacity(0.6), 
+        color: AppColors.dotInactive.withOpacity(0.6),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -32,23 +32,19 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: isPassword,
-        style: const TextStyle(
-          fontFamily: 'Tajwal',
-          color: AppColors.textDark,
-        ),
+        style: const TextStyle(),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(
-            fontFamily: 'Tajwal',
-            color: AppColors.textSecondary,
+            // color: AppColors.textSecondary,
             fontSize: 16,
           ),
-          prefixIcon: Icon(
-            prefixIcon,
-            color: AppColors.textSecondary,
-          ),
+          prefixIcon: Icon(prefixIcon),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
         ),
       ),
     );

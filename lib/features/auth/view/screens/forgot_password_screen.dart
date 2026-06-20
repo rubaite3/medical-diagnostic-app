@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../core/consts/colors.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/theme/colors.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -11,7 +12,6 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.authBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -26,7 +26,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
+                  // color: AppColors.textDark,
                 ),
               ),
               const SizedBox(height: 12),
@@ -37,7 +37,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 15,
-                    color: AppColors.textSecondary,
+                    // color: AppColors.textSecondary,
                     height: 1.4,
                   ),
                 ),
@@ -57,13 +57,13 @@ class ForgotPasswordScreen extends StatelessWidget {
               const SizedBox(height: 24),
               GestureDetector(
                 onTap: () {
-                  print("Navigate Back to LoginScreen");
+                  context.pop();
                 },
                 child: const Text(
                   AuthStrings.backToLogin,
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.textSecondary,
+                    // color: AppColors.textSecondary,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

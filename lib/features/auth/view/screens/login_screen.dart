@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../core/consts/colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import '../../../../core/theme/colors.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -11,7 +13,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.authBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -26,16 +27,13 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
+                  // color: AppColors.textDark,
                 ),
               ),
               const SizedBox(height: 8),
               const Text(
                 AuthStrings.loginSubTitle,
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.textSecondary,
-                ),
+                style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 35),
               const CustomTextField(
@@ -51,15 +49,14 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  
-                  print("Navigate to ForgotPasswordScreen");
+                  context.pushNamed(RoutePaths.forgotPass);
                 },
                 child: const Text(
                   AuthStrings.forgotPasswordLink,
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.medicalDark,
+                    // color: AppColors.medicalDark,
                   ),
                 ),
               ),
@@ -67,7 +64,6 @@ class LoginScreen extends StatelessWidget {
               CustomButton(
                 text: AuthStrings.loginBtn,
                 onPressed: () {
-                
                   print("Perform Login action");
                 },
               ),
@@ -77,17 +73,16 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text(
                     AuthStrings.dontHaveAccount,
-                    style: TextStyle(color: AppColors.textDark, fontSize: 15),
+                    style: TextStyle(fontSize: 15),
                   ),
                   GestureDetector(
                     onTap: () {
-                     
-                      print("Navigate to SignUpScreen");
+                      context.goNamed(RoutePaths.signUp);
                     },
                     child: const Text(
                       AuthStrings.signUpLink,
                       style: TextStyle(
-                        color: AppColors.medicalDark,
+                        // color: AppColors.medicalDark,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),

@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import '../../../../core/consts/colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import '../../../../core/theme/colors.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/custom_button.dart';
 
@@ -19,17 +21,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     {
       "title": OnboardingStrings.title1,
       "desc": OnboardingStrings.desc1,
-      "image": "assets/images/1.jpg",
+      "image": "assets/images/1-nobg.png",
     },
     {
       "title": OnboardingStrings.title2,
       "desc": OnboardingStrings.desc2,
-      "image": "assets/images/2.jpg",
+      "image": "assets/images/2-nobg.png",
     },
     {
       "title": OnboardingStrings.title3,
       "desc": OnboardingStrings.desc3,
-      "image": "assets/images/3.jpg",
+      "image": "assets/images/3-nobg.png",
     },
   ];
 
@@ -46,12 +48,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // هنا سيقوم زميلك بالانتقال إلى صفحة الـ Login باستخدام الـ State Management
-      // حالياً سنطبع رسالة في الـ Console
-
-      if (kDebugMode) {
-        print("Navigate to Login Screen");
-      }
+      context.pushNamed(RoutePaths.login);
     }
   }
 
@@ -64,7 +61,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
@@ -88,7 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             fontFamily: 'Tajwal',
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.textDark,
+                            // color: AppColors.textDark,
                           ),
                         ),
                         const SizedBox(height: 40),
@@ -107,7 +103,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           style: const TextStyle(
                             fontFamily: 'Tajwal',
                             fontSize: 16,
-                            color: AppColors.textSecondary,
+                            // color: AppColors.textSecondary,
                             height: 1.5,
                           ),
                         ),

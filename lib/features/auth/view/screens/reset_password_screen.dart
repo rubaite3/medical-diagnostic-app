@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/consts/colors.dart';
+import '../../../../core/theme/colors.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -11,7 +11,6 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.authBackground,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -26,7 +25,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
+                  // color: AppColors.textDark,
                 ),
               ),
               const SizedBox(height: 12),
@@ -37,7 +36,7 @@ class ResetPasswordScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 15,
-                    color: AppColors.textSecondary,
+                    // color: AppColors.textSecondary,
                     height: 1.4,
                   ),
                 ),
@@ -66,7 +65,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 AuthStrings.successMessage,
                 style: TextStyle(
                   fontSize: 15,
-                  color: AppColors.textDark,
+                  // color: AppColors.textDark,
                   fontWeight: FontWeight.w500,
                 ),
               ),

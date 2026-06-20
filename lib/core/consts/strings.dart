@@ -21,11 +21,11 @@ class AuthStrings {
   static const String loginBtn = "Login";
   static const String forgotPasswordLink = "Forgot Password?";
   static const String dontHaveAccount = "Don’t have an account? ";
-  static const String signUpLink = "Sign In";
+  static const String signUpLink = "Sign Up";
   // Sign Up
   static const String signUpTitle = "Create Account";
   static const String signUpSubTitle = "Sign up to get started";
-  static const String signUpBtn = "Sign In";
+  static const String signUpBtn = "Sign Up";
   static const String alreadyHaveAccount = "Already have an account? ";
   static const String loginLink = "Login";
   static const String termsAgree = "I agree to the Terms & Privacy Policy";
