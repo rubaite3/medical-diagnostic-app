@@ -6,12 +6,15 @@ import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
+import '../widgets/google_button.dart'; 
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -27,7 +30,6 @@ class LoginScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  // color: AppColors.textDark,
                 ),
               ),
               const SizedBox(height: 8),
@@ -56,7 +58,6 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    // color: AppColors.medicalDark,
                   ),
                 ),
               ),
@@ -68,6 +69,31 @@ class LoginScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 24),
+
+            
+              Row(
+                children: [
+                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      AuthStrings.orContinueWith,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ),
+                  ),
+                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                ],
+              ),
+              const SizedBox(height: 24),
+   GoogleButton(
+                onTap: () {
+                  print("Google Login Triggered");
+                },
+              ),
+              const SizedBox(height: 30),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -82,7 +108,6 @@ class LoginScreen extends StatelessWidget {
                     child: const Text(
                       AuthStrings.signUpLink,
                       style: TextStyle(
-                        // color: AppColors.medicalDark,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),

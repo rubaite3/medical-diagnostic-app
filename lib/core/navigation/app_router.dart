@@ -5,6 +5,7 @@ import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.
 import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
+import 'package:medical_diagnostic_app1/features/profile/view/screens/patient_profile_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -43,6 +44,13 @@ class AppRouter {
         path: RoutePaths.resetPass,
         builder: (_, _) {
           return ResetPasswordScreen();
+        },
+      ),
+      GoRoute(
+        name: RoutePaths.patientProfile,
+        path: RoutePaths.patientProfile,
+        builder: (_, _) {
+          return PatientProfileScreen();
         },
       ),
     ],

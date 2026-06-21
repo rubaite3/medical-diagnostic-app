@@ -50,4 +50,22 @@ class AuthStrings {
   static const String hintPassword = "Password";
   static const String hintNewPassword = "New Password";
   static const String hintConfirmPassword = "Confirm New Password";
+  // Auth Additional Strings
+static const String confirmPasswordHint = "Confirm Password";
+static const String orContinueWith = "Or continue with";
+static const String googleSignIn = "Google";
 }
+class PatientProfileStrings {
+  static const String patientProfileTitle = "Patient Medical Profile";
+  static const String patientProfileSubtitle = "Please complete your medical info accurately";
+  static const String birthDateHint = "Birth Date";
+  static const String ageHint = "Age";
+  static const String genderHint = "Gender";
+  static const String activityLevelHint = "Activity Level";
+  static const String smokerQuestion = "Are you a smoker?";
+  static const String diabetesQuestion = "Do you have diabetes?";
+  static const String hypertensionQuestion = "Do you have hypertension?";
+  static const String pregnantQuestion = "Are you currently pregnant?";
+  static const String saveProfileButton = "Save Medical Profile";
+}
+

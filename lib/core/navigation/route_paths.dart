@@ -5,4 +5,5 @@ class RoutePaths {
   static const signUp = '/signUp';
   static const forgotPass = '/forgotPass';
   static const resetPass = '/resetPass';
+  static const patientProfile = '/patientProfile';
 }

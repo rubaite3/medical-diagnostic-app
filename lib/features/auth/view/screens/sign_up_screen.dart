@@ -7,7 +7,7 @@ import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
-
+import '../widgets/google_button.dart'; 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -21,6 +21,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -36,7 +38,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  // color: AppColors.textDark,
                 ),
               ),
               const SizedBox(height: 8),
@@ -61,6 +62,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 isPassword: true,
               ),
               const SizedBox(height: 16),
+
+          
+              const CustomTextField(
+                hintText: AuthStrings.confirmPasswordHint,
+                prefixIcon: Icons.lock_reset_outlined,
+                isPassword: true,
+              ),
+              const SizedBox(height: 16),
               Row(
                 children: [
                   BlocBuilder<TermsCubit, TermsState>(
@@ -68,7 +77,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     builder: (context, state) {
                       return Checkbox(
                         value: state.isChecked,
-                        // activeColor: AppColors.medical,
                         onChanged: (value) {
                           _termsCubit.toggle();
                         },
@@ -80,12 +88,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       onTap: () {
                         _termsCubit.toggle();
                       },
-                      child: Text(
+                      child: const Text(
                         AuthStrings.termsAgree,
-                        style: TextStyle(
-                          fontSize: 14,
-                          // color: AppColors.textSecondary,
-                        ),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ),
                   ),
@@ -99,6 +104,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 },
               ),
               const SizedBox(height: 24),
+
+              Row(
+                children: [
+                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(
+                      AuthStrings.orContinueWith,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: Colors.black.withOpacity(0.4),
+                      ),
+                    ),
+                  ),
+                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              
+              GoogleButton(
+                onTap: () {
+                  print("Google Sign Up Triggered");
+                },
+              ),
+              const SizedBox(height: 30),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -113,7 +144,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: const Text(
                       AuthStrings.loginLink,
                       style: TextStyle(
-                        // color: AppColors.medicalDark,
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                       ),

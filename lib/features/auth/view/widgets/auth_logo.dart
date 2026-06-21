@@ -16,7 +16,7 @@ class AuthLogo extends StatelessWidget {
             image: AssetImage(
               Utils.isLight(context)
                   ? 'assets/icons/appLogo-removebg-solo.png'
-                  : 'assets/icons/appLogo-removebg-solo-dark.png',
+                  : 'assets/icons/appLogo-removebg-solo.png',//في حال زبطنا لوغو الدارك بشكل حلو منضيفو
             ),
             fit: BoxFit.contain,
           ),
