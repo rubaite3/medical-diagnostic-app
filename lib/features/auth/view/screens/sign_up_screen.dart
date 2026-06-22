@@ -7,7 +7,8 @@ import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
-import '../widgets/google_button.dart'; 
+import '../widgets/google_button.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
 
@@ -16,7 +17,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  bool _isAgreed = false;
   final _termsCubit = TermsCubit();
 
   @override
@@ -35,10 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(height: 25),
               const Text(
                 AuthStrings.signUpTitle,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -63,7 +60,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
               const SizedBox(height: 16),
 
-          
               const CustomTextField(
                 hintText: AuthStrings.confirmPasswordHint,
                 prefixIcon: Icons.lock_reset_outlined,
@@ -107,22 +103,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               Row(
                 children: [
-                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Expanded(
+                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       AuthStrings.orContinueWith,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                       ),
                     ),
                   ),
-                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Expanded(
+                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
+                  ),
                 ],
               ),
               const SizedBox(height: 24),
 
-              
               GoogleButton(
                 onTap: () {
                   print("Google Sign Up Triggered");

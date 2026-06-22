@@ -16,9 +16,9 @@ class PatientProfileScreen extends StatefulWidget {
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
-  
-  String _gender = 'male'; 
-  String _activityLevel = 'moderate'; 
+
+  String _gender = 'male';
+  String _activityLevel = 'moderate';
   bool _isSmoker = false;
   bool _hasDiabetes = false;
   bool _hasHypertension = false;
@@ -40,11 +40,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     );
     if (picked != null) {
       setState(() {
-        _birthDateController.text = "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
-        
+        _birthDateController.text =
+            "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+
         int age = DateTime.now().year - picked.year;
-        if (DateTime.now().month < picked.month || 
-           (DateTime.now().month == picked.month && DateTime.now().day < picked.day)) {
+        if (DateTime.now().month < picked.month ||
+            (DateTime.now().month == picked.month &&
+                DateTime.now().day < picked.day)) {
           age--;
         }
         _ageController.text = age.toString();
@@ -54,7 +56,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-       final theme = Theme.of(context);
+    final theme = Theme.of(context);
 
     return Scaffold(
       body: SafeArea(
@@ -64,17 +66,16 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 15),
-              
-           
+
               Container(
                 width: 100,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: AppColors.dotInactive.withOpacity(0.4),
+                  color: AppColors.dotInactive.withValues(alpha: 0.4),
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
+                      color: Colors.black.withValues(alpha: 0.05),
                       blurRadius: 6,
                       offset: const Offset(0, 3),
                     ),
@@ -86,9 +87,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   color: AppColors.medical,
                 ),
               ),
-              
+
               const SizedBox(height: 25),
-              
+
               Text(
                 PatientProfileStrings.patientProfileTitle,
                 style: theme.textTheme.headlineMedium?.copyWith(
@@ -102,7 +103,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 30),
 
-            
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
@@ -115,7 +115,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 16),
 
-          
               CustomTextField(
                 hintText: PatientProfileStrings.ageHint,
                 prefixIcon: Icons.calendar_today_outlined,
@@ -139,14 +138,22 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 16),
 
-        
               ProfileDropdownField(
                 hint: PatientProfileStrings.activityLevelHint,
                 value: _activityLevel,
                 items: const [
-                  DropdownMenuItem(value: 'sedentary', child: Text('Sedentary (Low Activity)')),
-                  DropdownMenuItem(value: 'moderate', child: Text('Moderate Activity')),
-                  DropdownMenuItem(value: 'active', child: Text('Highly Active')),
+                  DropdownMenuItem(
+                    value: 'sedentary',
+                    child: Text('Sedentary (Low Activity)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'moderate',
+                    child: Text('Moderate Activity'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'active',
+                    child: Text('Highly Active'),
+                  ),
                 ],
                 onChanged: (value) {
                   setState(() {
@@ -156,7 +163,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 20),
 
-              
               ProfileCheckboxRow(
                 title: PatientProfileStrings.smokerQuestion,
                 value: _isSmoker,
@@ -182,12 +188,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
               const SizedBox(height: 30),
 
-           
               CustomButton(
                 text: PatientProfileStrings.saveProfileButton,
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
               ),
               const SizedBox(height: 20),
             ],

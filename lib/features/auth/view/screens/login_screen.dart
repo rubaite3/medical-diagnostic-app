@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
-import '../../../../core/theme/colors.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
-import '../widgets/google_button.dart'; 
+import '../widgets/google_button.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -27,10 +26,7 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(height: 30),
               const Text(
                 AuthStrings.loginTitle,
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -55,10 +51,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 child: const Text(
                   AuthStrings.forgotPasswordLink,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
               ),
               const SizedBox(height: 30),
@@ -70,24 +63,27 @@ class LoginScreen extends StatelessWidget {
               ),
               const SizedBox(height: 24),
 
-            
               Row(
                 children: [
-                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Expanded(
+                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Text(
                       AuthStrings.orContinueWith,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                       ),
                     ),
                   ),
-                  Expanded(child: Divider(color: Colors.black.withOpacity(0.1))),
+                  Expanded(
+                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
+                  ),
                 ],
               ),
               const SizedBox(height: 24),
-   GoogleButton(
+              GoogleButton(
                 onTap: () {
                   print("Google Login Triggered");
                 },
