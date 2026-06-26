@@ -16,6 +16,7 @@ class PatientProfileScreen extends StatefulWidget {
 }
 
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
@@ -29,6 +30,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
   @override
   void dispose() {
+    _nameController.dispose();
     _birthDateController.dispose();
     _ageController.dispose();
     super.dispose();
@@ -113,7 +115,15 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 35),
 
-              // Form Fields
+              const SizedBox(height: 30),
+
+              CustomTextField(
+                hintText: AuthStrings.hintFullName,
+                prefixIcon: Icons.person_outline_rounded,
+                controller: _nameController,
+              ),
+              const SizedBox(height: 16),
+
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
@@ -193,9 +203,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: Colors.white.withValues(alpha: 0.5),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.dotInactive.withOpacity(0.5)),
+                  border: Border.all(color: AppColors.dotInactive.withValues(alpha: 0.5)),
                 ),
                 child: Column(
                   children: [
@@ -244,3 +254,4 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     );
   }
 }
+
