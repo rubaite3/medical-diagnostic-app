@@ -50,6 +50,7 @@ dependencies:
   equatable: ^2.0.8
   fpdart: ^1.2.0
   fluttertoast: ^9.1.0
+  lottie: ^3.4.0
 
 dev_dependencies:
   flutter_test:
