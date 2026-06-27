@@ -46,6 +46,10 @@ dependencies:
   flex_color_scheme: ^8.4.0
   get_it: ^9.2.1
   image_picker: ^1.2.2
+  pretty_dio_logger: ^1.4.0
+  equatable: ^2.0.8
+  fpdart: ^1.2.0
+  fluttertoast: ^9.1.0
 
 dev_dependencies:
   flutter_test:
