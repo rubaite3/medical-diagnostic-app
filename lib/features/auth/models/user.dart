@@ -1,0 +1,23 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'user.freezed.dart';
+part 'user.g.dart';
+
+@freezed
+sealed class User with _$User {
+  factory User({
+    @JsonKey(name: "full_name") String? fullName,
+    String? avatar,
+    @JsonKey(name: "birth_date") String? birthDate,
+    String? gender,
+    @JsonKey(name: "is_smoker") bool? isSmoker,
+    @JsonKey(name: "has_diabetes") bool? hasDiabetes,
+    @JsonKey(name: "has_hypertension") bool? hasHypertension,
+    @JsonKey(name: "is_pregnant") bool? isPregnant,
+    @JsonKey(name: "activity_level") String? activityLevel,
+    @JsonKey(name: "last_checkup_date") String? lastCheckupDate,
+    @JsonKey(name: "access_token") String? token,
+  }) = _User;
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+}

@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -34,5 +37,18 @@ class Utils {
           : Colors.red,
       textColor: level == 0 ? Colors.black : Colors.white,
     );
+  }
+}
+
+Future<bool> hasInternet() async {
+  try {
+    final result = await InternetAddress.lookup(
+      'google.com',
+    ).timeout(Duration(seconds: 5));
+    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+  } on SocketException catch (_) {
+    return false;
+  } on TimeoutException catch (_) {
+    return false;
   }
 }

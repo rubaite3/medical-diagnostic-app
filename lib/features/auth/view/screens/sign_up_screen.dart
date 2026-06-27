@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
-import 'package:medical_diagnostic_app1/features/auth/controllers/cubit/terms_cubit.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/terms_cubit/terms_cubit.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
