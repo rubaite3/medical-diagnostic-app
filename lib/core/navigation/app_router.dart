@@ -15,7 +15,7 @@ class AppRouter {
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final router = GoRouter(
-    initialLocation: RoutePaths.homeScreen,
+    initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
     routes: [
      
@@ -102,7 +102,7 @@ class MainWrapper extends StatelessWidget {
           if (index == 1) context.goNamed(RoutePaths.patientProfile);
         },
         selectedItemColor: colorScheme.primary,
-        unselectedItemColor: colorScheme.onSurfaceVariant.withOpacity(0.5),
+        unselectedItemColor: colorScheme.onSurfaceVariant.withValues(alpha:0.5),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
