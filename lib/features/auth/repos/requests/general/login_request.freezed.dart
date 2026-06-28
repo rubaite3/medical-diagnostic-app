@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginRequest {
 
- String get email; String get pasword;
+ String get email; String get password;
 /// Create a copy of LoginRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $LoginRequestCopyWith<LoginRequest> get copyWith => _$LoginRequestCopyWithImpl<L
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.pasword, pasword) || other.pasword == pasword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,pasword);
+int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'LoginRequest(email: $email, pasword: $pasword)';
+  return 'LoginRequest(email: $email, password: $password)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $LoginRequestCopyWith<$Res>  {
   factory $LoginRequestCopyWith(LoginRequest value, $Res Function(LoginRequest) _then) = _$LoginRequestCopyWithImpl;
 @useResult
 $Res call({
- String email, String pasword
+ String email, String password
 });
 
 
@@ -66,10 +66,10 @@ class _$LoginRequestCopyWithImpl<$Res>
 
 /// Create a copy of LoginRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? pasword = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,}) {
   return _then(LoginRequest(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,pasword: null == pasword ? _self.pasword : pasword // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -152,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String pasword)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginRequest() when $default != null:
-return $default(_that.email,_that.pasword);case _:
+return $default(_that.email,_that.password);case _:
   return orElse();
 
 }
@@ -173,10 +173,10 @@ return $default(_that.email,_that.pasword);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String pasword)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password)  $default,) {final _that = this;
 switch (_that) {
 case _LoginRequest():
-return $default(_that.email,_that.pasword);}
+return $default(_that.email,_that.password);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -190,10 +190,10 @@ return $default(_that.email,_that.pasword);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String pasword)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginRequest() when $default != null:
-return $default(_that.email,_that.pasword);case _:
+return $default(_that.email,_that.password);case _:
   return null;
 
 }
@@ -205,11 +205,11 @@ return $default(_that.email,_that.pasword);case _:
 @JsonSerializable()
 
 class _LoginRequest implements LoginRequest {
-   _LoginRequest({required this.email, required this.pasword});
+   _LoginRequest({required this.email, required this.password});
   factory _LoginRequest.fromJson(Map<String, dynamic> json) => _$LoginRequestFromJson(json);
 
 @override final  String email;
-@override final  String pasword;
+@override final  String password;
 
 /// Create a copy of LoginRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -224,16 +224,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.pasword, pasword) || other.pasword == pasword));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,pasword);
+int get hashCode => Object.hash(runtimeType,email,password);
 
 @override
 String toString() {
-  return 'LoginRequest(email: $email, pasword: $pasword)';
+  return 'LoginRequest(email: $email, password: $password)';
 }
 
 
@@ -244,7 +244,7 @@ abstract mixin class _$LoginRequestCopyWith<$Res> implements $LoginRequestCopyWi
   factory _$LoginRequestCopyWith(_LoginRequest value, $Res Function(_LoginRequest) _then) = __$LoginRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String email, String pasword
+ String email, String password
 });
 
 
@@ -261,10 +261,10 @@ class __$LoginRequestCopyWithImpl<$Res>
 
 /// Create a copy of LoginRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? pasword = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,}) {
   return _then(_LoginRequest(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,pasword: null == pasword ? _self.pasword : pasword // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:get_it/get_it.dart';
+import '../../features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'app_response.dart';
 
 class AppInterceptors extends Interceptor {
@@ -18,12 +20,12 @@ class AppInterceptors extends Interceptor {
   ) async {
     /// Tries to add Authorization header only if Authorization header not extisted
     if (!options.headers.containsKey(HttpHeaders.authorizationHeader)) {
-      // final state = ServiceLocator.instance<AuthBloc>().state;
+      final state = GetIt.instance<AuthBloc>().state;
 
-      // if (state.token != null) {
-      //   options.headers[HttpHeaders.authorizationHeader] =
-      //       'Bearer ${state.token}';
-      // }
+      if (state.token != null) {
+        options.headers[HttpHeaders.authorizationHeader] =
+            'Bearer ${state.token}';
+      }
     }
 
     return handler.next(options);
@@ -31,21 +33,17 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    /// Maps custom response
     final responseData = mapResponseData(
       requestOptions: response.requestOptions,
       response: response,
     );
 
-    return handler.resolve(responseData);
+    handler.next(responseData);
   }
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    /// Gets custom error message
     final errorMessage = getErrorMessage(err.type, err.response?.statusCode);
-
-    /// Maps custom response
     final responseData = mapResponseData(
       requestOptions: err.requestOptions,
       response: err.response,
@@ -53,7 +51,7 @@ class AppInterceptors extends Interceptor {
       isErrorResponse: true,
     );
 
-    return handler.resolve(responseData);
+    handler.resolve(responseData);
   }
 }
 
@@ -67,6 +65,8 @@ String getErrorMessage(DioExceptionType errorType, int? statusCode) {
       break;
     case DioExceptionType.badResponse:
       switch (statusCode) {
+        case 422:
+          errorMessage = DioExceptionMessage.unprocessableContentException;
         case 400:
           errorMessage = DioExceptionMessage.badRequestException;
           break;
@@ -99,6 +99,7 @@ class DioExceptionMessage {
       "Unknown error occurred, please try again later.";
   static const conflictException = "Conflict occurred";
   static const unauthorizedException = "Access denied";
+  static const unprocessableContentException = "Access denied";
   static const notFoundException =
       "The requested information could not be found";
   static const unexpectedException = "Unexpected error occurred.";
@@ -137,13 +138,12 @@ Response<dynamic> mapResponseData({
   return Response(
     statusCode: response?.statusCode ?? 500,
     requestOptions: requestOptions,
-    data: hasResponseData
-        ? responseData
-        : AppResponse(
-            message: customMessage,
-            success: isErrorResponse,
-            statusCode: response?.statusCode,
-            statusMessage: response?.statusMessage,
-          ).toJson((value) => null),
+    data: AppResponse(
+      data: responseData,
+      message: customMessage,
+      success: isErrorResponse,
+      statusCode: response?.statusCode,
+      statusMessage: response?.statusMessage,
+    ),
   );
 }

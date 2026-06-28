@@ -757,7 +757,7 @@ $ForgetPasswordRequestCopyWith<$Res> get forgetPasswordRequest {
 /// @nodoc
 mixin _$AuthState {
 
- Auth get auth; bool get isOnline; User? get user;
+ Auth get auth; bool get isOnline; User? get user; String? get token; Operation get op; String get statusMessage;
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -768,16 +768,16 @@ $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user)&&(identical(other.token, token) || other.token == token)&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,auth,isOnline,user);
+int get hashCode => Object.hash(runtimeType,auth,isOnline,user,token,op,statusMessage);
 
 @override
 String toString() {
-  return 'AuthState(auth: $auth, isOnline: $isOnline, user: $user)';
+  return 'AuthState(auth: $auth, isOnline: $isOnline, user: $user, token: $token, op: $op, statusMessage: $statusMessage)';
 }
 
 
@@ -788,7 +788,7 @@ abstract mixin class $AuthStateCopyWith<$Res>  {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) _then) = _$AuthStateCopyWithImpl;
 @useResult
 $Res call({
- Auth auth, bool isOnline, User? user
+ Auth auth, bool isOnline, User? user, String? token, Operation op, String statusMessage
 });
 
 
@@ -805,12 +805,15 @@ class _$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? auth = null,Object? isOnline = null,Object? user = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? auth = null,Object? isOnline = null,Object? user = freezed,Object? token = freezed,Object? op = null,Object? statusMessage = null,}) {
   return _then(AuthState(
 auth: null == auth ? _self.auth : auth // ignore: cast_nullable_to_non_nullable
 as Auth,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
 as bool,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,
+as User?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String?,op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
+as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 /// Create a copy of AuthState
@@ -904,10 +907,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Auth auth,  bool isOnline,  User? user)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Auth auth,  bool isOnline,  User? user,  String? token,  Operation op,  String statusMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.auth,_that.isOnline,_that.user);case _:
+return $default(_that.auth,_that.isOnline,_that.user,_that.token,_that.op,_that.statusMessage);case _:
   return orElse();
 
 }
@@ -925,10 +928,10 @@ return $default(_that.auth,_that.isOnline,_that.user);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Auth auth,  bool isOnline,  User? user)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Auth auth,  bool isOnline,  User? user,  String? token,  Operation op,  String statusMessage)  $default,) {final _that = this;
 switch (_that) {
 case _AuthState():
-return $default(_that.auth,_that.isOnline,_that.user);}
+return $default(_that.auth,_that.isOnline,_that.user,_that.token,_that.op,_that.statusMessage);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -942,10 +945,10 @@ return $default(_that.auth,_that.isOnline,_that.user);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Auth auth,  bool isOnline,  User? user)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Auth auth,  bool isOnline,  User? user,  String? token,  Operation op,  String statusMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthState() when $default != null:
-return $default(_that.auth,_that.isOnline,_that.user);case _:
+return $default(_that.auth,_that.isOnline,_that.user,_that.token,_that.op,_that.statusMessage);case _:
   return null;
 
 }
@@ -957,12 +960,15 @@ return $default(_that.auth,_that.isOnline,_that.user);case _:
 
 
 class _AuthState implements AuthState {
-  const _AuthState({required this.auth, required this.isOnline, this.user});
+  const _AuthState({required this.auth, required this.isOnline, this.user, this.token, required this.op, required this.statusMessage});
   
 
 @override final  Auth auth;
 @override final  bool isOnline;
 @override final  User? user;
+@override final  String? token;
+@override final  Operation op;
+@override final  String statusMessage;
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
@@ -974,16 +980,16 @@ _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user)&&(identical(other.token, token) || other.token == token)&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,auth,isOnline,user);
+int get hashCode => Object.hash(runtimeType,auth,isOnline,user,token,op,statusMessage);
 
 @override
 String toString() {
-  return 'AuthState(auth: $auth, isOnline: $isOnline, user: $user)';
+  return 'AuthState(auth: $auth, isOnline: $isOnline, user: $user, token: $token, op: $op, statusMessage: $statusMessage)';
 }
 
 
@@ -994,7 +1000,7 @@ abstract mixin class _$AuthStateCopyWith<$Res> implements $AuthStateCopyWith<$Re
   factory _$AuthStateCopyWith(_AuthState value, $Res Function(_AuthState) _then) = __$AuthStateCopyWithImpl;
 @override @useResult
 $Res call({
- Auth auth, bool isOnline, User? user
+ Auth auth, bool isOnline, User? user, String? token, Operation op, String statusMessage
 });
 
 
@@ -1011,12 +1017,15 @@ class __$AuthStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? auth = null,Object? isOnline = null,Object? user = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? auth = null,Object? isOnline = null,Object? user = freezed,Object? token = freezed,Object? op = null,Object? statusMessage = null,}) {
   return _then(_AuthState(
 auth: null == auth ? _self.auth : auth // ignore: cast_nullable_to_non_nullable
 as Auth,isOnline: null == isOnline ? _self.isOnline : isOnline // ignore: cast_nullable_to_non_nullable
 as bool,user: freezed == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as User?,
+as User?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
+as String?,op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
+as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 

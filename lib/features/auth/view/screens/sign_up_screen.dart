@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/terms_cubit/terms_cubit.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/register_request.dart';
 import '../../../../core/consts/strings.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -23,137 +28,201 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 15),
-              const AuthLogo(),
-              const SizedBox(height: 25),
-              const Text(
-                AuthStrings.signUpTitle,
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8),
-              const Text(
-                AuthStrings.signUpSubTitle,
-                style: TextStyle(fontSize: 16),
-              ),
-              const SizedBox(height: 30),
-              CustomTextField(
-                hintText: AuthStrings.hintFullName,
-                prefixIcon: Icons.person_outline,
-              ),
-              const SizedBox(height: 16),
-              const CustomTextField(
-                hintText: AuthStrings.hintEmail,
-                prefixIcon: Icons.email_outlined,
-              ),
-              const SizedBox(height: 16),
-              const CustomTextField(
-                hintText: AuthStrings.hintPassword,
-                prefixIcon: Icons.vpn_key_outlined,
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-
-              const CustomTextField(
-                hintText: AuthStrings.confirmPasswordHint,
-                prefixIcon: Icons.lock_reset_outlined,
-                isPassword: true,
-              ),
-              const SizedBox(height: 16),
-              Row(
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          context.goNamed(RoutePaths.onBoarding);
+        }
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24.0,
+              vertical: 20.0,
+            ),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  BlocBuilder<TermsCubit, TermsState>(
-                    bloc: _termsCubit,
-                    builder: (context, state) {
-                      return Checkbox(
-                        value: state.isChecked,
-                        onChanged: (value) {
-                          _termsCubit.toggle();
-                        },
-                      );
-                    },
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () {
-                        _termsCubit.toggle();
-                      },
-                      child: const Text(
-                        AuthStrings.termsAgree,
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              CustomButton(
-                text: AuthStrings.signUpBtn,
-                onPressed: () {
-                  print("Perform Sign Up action");
-                },
-              ),
-              const SizedBox(height: 24),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text(
-                      AuthStrings.orContinueWith,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.black.withValues(alpha: 0.4),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(color: Colors.black.withValues(alpha: 0.1)),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 24),
-
-              GoogleButton(
-                onTap: () {
-                  print("Google Sign Up Triggered");
-                },
-              ),
-              const SizedBox(height: 30),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                  const SizedBox(height: 15),
+                  const AuthLogo(),
+                  const SizedBox(height: 25),
                   const Text(
-                    AuthStrings.alreadyHaveAccount,
-                    style: TextStyle(fontSize: 15),
+                    AuthStrings.signUpTitle,
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      context.goNamed(RoutePaths.login);
+                  const SizedBox(height: 8),
+                  const Text(
+                    AuthStrings.signUpSubTitle,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 30),
+                  CustomTextField(
+                    validator: (value) =>
+                        value!.isEmpty ? "Name must not be empty" : null,
+                    hintText: AuthStrings.hintFullName,
+                    prefixIcon: Icons.person_outline,
+                    controller: _nameController,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    validator: (value) => value!.isEmpty
+                        ? "Email must not be empty"
+                        : Utils.isEmail(value)
+                        ? null
+                        : "Wrong email format",
+                    hintText: AuthStrings.hintEmail,
+                    prefixIcon: Icons.email_outlined,
+                    controller: _emailController,
+                  ),
+                  const SizedBox(height: 16),
+                  CustomTextField(
+                    validator: (value) =>
+                        value!.isEmpty ? "Password must not be empty" : null,
+                    hintText: AuthStrings.hintPassword,
+                    prefixIcon: Icons.vpn_key_outlined,
+                    isPassword: true,
+                    controller: _passController,
+                  ),
+                  const SizedBox(height: 16),
+
+                  CustomTextField(
+                    hintText: AuthStrings.confirmPasswordHint,
+                    prefixIcon: Icons.lock_reset_outlined,
+                    isPassword: true,
+                    controller: _passConfirmController,
+                    validator: (value) {
+                      return value!.isEmpty
+                          ? "Password must not be empty"
+                          : value == _passController.text
+                          ? null
+                          : "Passwords must match";
                     },
-                    child: const Text(
-                      AuthStrings.loginLink,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      BlocBuilder<TermsCubit, TermsState>(
+                        bloc: _termsCubit,
+                        builder: (context, state) {
+                          return Checkbox(
+                            value: state.isChecked,
+                            onChanged: (value) {
+                              _termsCubit.toggle();
+                            },
+                          );
+                        },
                       ),
-                    ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            _termsCubit.toggle();
+                          },
+                          child: const Text(
+                            AuthStrings.termsAgree,
+                            style: TextStyle(fontSize: 14),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  BlocListener<AuthBloc, AuthState>(
+                    listener: (context, state) {
+                      Utils.showToast(
+                        context,
+                        message: state.statusMessage,
+                        level: Utils.mapOp(state.op),
+                      );
+                      if (state.op.isSuccess) {
+                        context.pushNamed(
+                          RoutePaths.emailVerification,
+                          queryParameters: {'email': state.user?.email ?? ""},
+                        );
+                      }
+                    },
+                    listenWhen: (previous, current) {
+                      return (current.op != Operation.neutral);
+                    },
+                    child: const SizedBox(height: 20),
+                  ),
+                  CustomButton(
+                    text: AuthStrings.signUpBtn,
+                    onPressed: () {
+                      _register(context);
+                    },
+                  ),
+                  const SizedBox(height: 24),
+
+                  Row(
+                    children: [
+                      Expanded(child: Divider()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(AuthStrings.orContinueWith),
+                      ),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+
+                  GoogleButton(
+                    onTap: () {
+                      print("Google Sign Up Triggered");
+                    },
+                  ),
+                  const SizedBox(height: 30),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        AuthStrings.alreadyHaveAccount,
+                        style: TextStyle(fontSize: 15),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          context.goNamed(RoutePaths.login);
+                        },
+                        child: const Text(
+                          AuthStrings.loginLink,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  void _register(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      context.read<AuthBloc>().add(
+        AuthEvent.register(
+          RegisterRequest(
+            email: _emailController.text,
+            name: _nameController.text,
+            password: _passController.text,
+            passwordConfirmation: _passController.text,
+          ),
+        ),
+      );
+    }
+  }
+
+  final _emailController = TextEditingController();
+  final _passController = TextEditingController();
+  final _passConfirmController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 }

@@ -6,13 +6,14 @@ class CustomTextField extends StatelessWidget {
   final IconData prefixIcon;
   final bool isPassword;
   final TextEditingController? controller;
-
+  final String? Function(String? value)? validator;
   const CustomTextField({
     super.key,
     required this.hintText,
     required this.prefixIcon,
     this.isPassword = false,
     this.controller,
+    this.validator,
   });
 
   @override
@@ -29,7 +30,8 @@ class CustomTextField extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
+      child: TextFormField(
+        validator: validator,
         controller: controller,
         obscureText: isPassword,
         style: const TextStyle(),

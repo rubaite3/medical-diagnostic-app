@@ -7,9 +7,11 @@ import 'package:medical_diagnostic_app1/core/api/dio_client.dart';
 import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/resend_email_verification_request.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/verify_email_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/login_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/register_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/reset_password_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
 
 import 'requests/general/refresh_token_request.dart';
@@ -28,7 +30,7 @@ class AuthRepo {
   ) async {
     final response = await dioInstance.post(
       ApiConsts.register,
-      data: registerRequest,
+      data: registerRequest.toJson(),
     );
     return Utils.mapStatusCodeToResponse(response);
   }
@@ -43,18 +45,28 @@ class AuthRepo {
     return Utils.mapStatusCodeToResponse(response);
   }
 
-  Future<Either<AppError, AppResponse>> logout() async {
-    final response = await dioInstance.post(ApiConsts.logout);
+  Future<Either<AppError, AppResponse>> verifyOTP(
+    VerifyEmailRequest verifyEmailRequest,
+  ) async {
+    final response = await dioInstance.post(
+      ApiConsts.verifyOtp,
+      data: verifyEmailRequest,
+    );
     return Utils.mapStatusCodeToResponse(response);
   }
 
-  Future<Either<AppError, AppResponse>> resendEmailVerification(
+  Future<Either<AppError, AppResponse>> resendOTP(
     ResendEmailVerificationRequest resendEmailVerificationRequest,
   ) async {
     final response = await dioInstance.post(
-      ApiConsts.resendEmailVer,
+      ApiConsts.resendOtp,
       data: resendEmailVerificationRequest,
     );
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
+  Future<Either<AppError, AppResponse>> logout() async {
+    final response = await dioInstance.post(ApiConsts.logout);
     return Utils.mapStatusCodeToResponse(response);
   }
 
@@ -64,6 +76,16 @@ class AuthRepo {
     final response = await dioInstance.post(
       ApiConsts.forgetPassword,
       data: forgetPasswordRequest,
+    );
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
+  Future<Either<AppError, AppResponse>> resetPassword(
+    ResetPasswordRequest resetPasswordRequest,
+  ) async {
+    final response = await dioInstance.post(
+      ApiConsts.resetPassword,
+      data: resetPasswordRequest,
     );
     return Utils.mapStatusCodeToResponse(response);
   }

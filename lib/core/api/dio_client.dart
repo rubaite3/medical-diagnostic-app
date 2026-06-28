@@ -1,7 +1,6 @@
 import '../consts/api_consts.dart';
 import 'app_interceptors.dart';
 import 'package:dio/dio.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
   static DioClient? _singleton;
@@ -34,14 +33,13 @@ class DioClient {
     );
     dio.interceptors.addAll([
       AppInterceptors(),
-      PrettyDioLogger(
-        compact: true,
-        error: true,
-        maxWidth: 90,
-        requestBody: true,
+      LogInterceptor(
+        request: true,
         requestHeader: true,
+        requestBody: true,
         responseBody: true,
-        responseHeader: true,
+        responseHeader: false,
+        error: true,
       ),
     ]);
     return dio;

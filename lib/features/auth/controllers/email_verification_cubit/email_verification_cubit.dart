@@ -1,0 +1,74 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fpdart/fpdart.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:get_it/get_it.dart';
+import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/resend_email_verification_request.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/verify_email_request.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
+
+part 'email_verification_state.dart';
+part 'email_verification_cubit.freezed.dart';
+
+class EmailVerificationCubit extends Cubit<EmailVerificationState> {
+  EmailVerificationCubit(this._authRepo)
+    : super(EmailVerificationState.initial());
+
+  Future<void> verify(VerifyEmailRequest verifyEmailRequest) async {
+    GetIt.instance<LoaderCubit>().show();
+
+    final response = await _authRepo.verifyOTP(verifyEmailRequest);
+
+    switch (response) {
+      case Right():
+        {
+          emit(
+            state.copyWith(
+              message: "Email verified, Please Login",
+              op: Operation.success,
+            ),
+          );
+        }
+      case Left(value: final l):
+        {
+          emit(state.copyWith(message: l.errorMessage, op: Operation.failure));
+          emit(state.copyWith(message: "", op: Operation.neutral));
+        }
+    }
+
+    GetIt.instance<LoaderCubit>().hide();
+  }
+
+  Future<void> resend(
+    ResendEmailVerificationRequest resendEmailVerificationRequest, {
+    bool isPass = false,
+  }) async {
+    GetIt.instance<LoaderCubit>().show();
+
+    final response = isPass
+        ? await _authRepo.forgotPassword(
+            ForgetPasswordRequest(email: resendEmailVerificationRequest.email),
+          )
+        : await _authRepo.resendOTP(resendEmailVerificationRequest);
+
+    switch (response) {
+      case Right():
+        {
+          emit(state.copyWith(message: "OTP resent!", op: Operation.success));
+          emit(state.copyWith(message: "", op: Operation.neutral));
+        }
+      case Left(value: final l):
+        {
+          emit(state.copyWith(message: l.errorMessage, op: Operation.failure));
+          emit(state.copyWith(message: "", op: Operation.neutral));
+        }
+    }
+
+    GetIt.instance<LoaderCubit>().hide();
+  }
+
+  final AuthRepo _authRepo;
+}

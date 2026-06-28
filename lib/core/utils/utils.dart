@@ -3,52 +3,103 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:medical_diagnostic_app1/core/api/app_error.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 
 class Utils {
   static bool isLight(BuildContext ctx) {
     return MediaQuery.of(ctx).platformBrightness == Brightness.light;
   }
 
-  static Either<AppError, AppResponse> mapStatusCodeToResponse(
-    Response response,
-  ) {
-    return switch (response.statusCode) {
-      200 => Right(response.data),
-      _ => Left(
-        AppError(errorMessage: response.statusMessage ?? "Some error occurred"),
-      ),
+  static int mapOp(Operation op) {
+    return switch (op) {
+      Operation.failure => -1,
+      Operation.neutral => 0,
+      Operation.success => 1,
     };
   }
 
-  static void showToast({String message = "Custom", int level = 0}) {
-    Fluttertoast.showToast(
-      msg: message,
-      gravity: ToastGravity.BOTTOM,
-      toastLength: Toast.LENGTH_SHORT,
-      fontAsset: "Tajwal",
-      backgroundColor: level == 0
-          ? Colors.grey
-          : level == 1
-          ? Colors.green
-          : Colors.red,
-      textColor: level == 0 ? Colors.black : Colors.white,
-    );
+  static Either<AppError, AppResponse> mapStatusCodeToResponse(
+    Response response,
+  ) {
+    return (200 <= (response.statusCode ?? 500).toInt() &&
+            (response.statusCode ?? 500).toInt() < 300)
+        ? Right(response.data)
+        : Left(
+            AppError(
+              errorMessage: response.statusMessage ?? "Some error occurred",
+              statusCode: response.statusCode ?? 500,
+            ),
+          );
   }
-}
 
-Future<bool> hasInternet() async {
-  try {
-    final result = await InternetAddress.lookup(
-      'google.com',
-    ).timeout(Duration(seconds: 5));
-    return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
-  } on SocketException catch (_) {
-    return false;
-  } on TimeoutException catch (_) {
-    return false;
+  static void showToast(
+    BuildContext context, {
+    String message = "Custom",
+    int level = 0,
+  }) {
+    final color = switch (level) {
+      1 => const Color(0xFF2E7D32),
+      -1 => const Color(0xFFC62828),
+      _ => const Color(0xFF424242),
+    };
+    final icon = switch (level) {
+      1 => Icons.check_circle_rounded,
+      -1 => Icons.error_rounded,
+      _ => Icons.info_rounded,
+    };
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              Icon(icon, color: Colors.white, size: 22),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Text(
+                  message,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                    fontFamily: 'Tajawal',
+                  ),
+                ),
+              ),
+            ],
+          ),
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          backgroundColor: color,
+          elevation: 6,
+          duration: Duration(seconds: level == -1 ? 4 : 2),
+          margin: const EdgeInsets.fromLTRB(16, 0, 16, 24),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          dismissDirection: DismissDirection.horizontal,
+        ),
+      );
+  }
+
+  static bool isEmail(String value) => RegExp(
+    r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+  ).hasMatch(value);
+
+  static Future<bool> hasInternet() async {
+    try {
+      final result = await InternetAddress.lookup(
+        'google.com',
+      ).timeout(Duration(seconds: 5));
+      return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
+    } on SocketException catch (_) {
+      return false;
+    } on TimeoutException catch (_) {
+      return false;
+    }
   }
 }

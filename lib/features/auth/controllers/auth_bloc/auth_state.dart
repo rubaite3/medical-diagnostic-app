@@ -6,6 +6,15 @@ sealed class AuthState with _$AuthState {
     required Auth auth,
     required bool isOnline,
     User? user,
+
+    String? token,
+    required Operation op,
+    required String statusMessage,
   }) = _AuthState;
-  factory AuthState.initial() => AuthState(auth: Auth.guest, isOnline: true);
+  factory AuthState.initial() => AuthState(
+    statusMessage: "",
+    auth: Auth.guest,
+    isOnline: true,
+    op: Operation.neutral,
+  );
 }

@@ -1,11 +1,13 @@
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/features/auth/view/screens/email_verification_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/forgot_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
-import 'package:medical_diagnostic_app1/features/profile/view/screens/patient_profile_screen.dart';
+import 'package:medical_diagnostic_app1/features/home/view/screens/home_screen.dart';
+import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profile_screen.dart';
 
 class AppRouter {
   static final router = GoRouter(
@@ -47,10 +49,29 @@ class AppRouter {
         },
       ),
       GoRoute(
+        name: RoutePaths.emailVerification,
+        path: RoutePaths.emailVerification,
+        builder: (_, state) {
+          final email = state.uri.queryParameters['email'] ?? '';
+          final isPass =
+              (int.tryParse((state.uri.queryParameters['isPass'] as String)) ??
+                  0) ==
+              1;
+          return EmailVerificationScreen(email: email, isPass: isPass);
+        },
+      ),
+      GoRoute(
         name: RoutePaths.patientProfile,
         path: RoutePaths.patientProfile,
         builder: (_, _) {
           return PatientProfileScreen();
+        },
+      ),
+      GoRoute(
+        name: RoutePaths.homeScreen,
+        path: RoutePaths.homeScreen,
+        builder: (_, _) {
+          return HomeScreen();
         },
       ),
     ],
