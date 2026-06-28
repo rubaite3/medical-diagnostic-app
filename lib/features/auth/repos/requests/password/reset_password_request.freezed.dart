@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ResetPasswordRequest {
 
- String get email; int get otp; String get password;@JsonKey(name: "password_confirmation") String get passwordConfirmation;
+ String get email; String get password;@JsonKey(name: "password_confirmation") String get passwordConfirmation;
 /// Create a copy of ResetPasswordRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $ResetPasswordRequestCopyWith<ResetPasswordRequest> get copyWith => _$ResetPassw
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.password, password) || other.password == password)&&(identical(other.passwordConfirmation, passwordConfirmation) || other.passwordConfirmation == passwordConfirmation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ResetPasswordRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.passwordConfirmation, passwordConfirmation) || other.passwordConfirmation == passwordConfirmation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,otp,password,passwordConfirmation);
+int get hashCode => Object.hash(runtimeType,email,password,passwordConfirmation);
 
 @override
 String toString() {
-  return 'ResetPasswordRequest(email: $email, otp: $otp, password: $password, passwordConfirmation: $passwordConfirmation)';
+  return 'ResetPasswordRequest(email: $email, password: $password, passwordConfirmation: $passwordConfirmation)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $ResetPasswordRequestCopyWith<$Res>  {
   factory $ResetPasswordRequestCopyWith(ResetPasswordRequest value, $Res Function(ResetPasswordRequest) _then) = _$ResetPasswordRequestCopyWithImpl;
 @useResult
 $Res call({
- String email, int otp, String password,@JsonKey(name: "password_confirmation") String passwordConfirmation
+ String email, String password,@JsonKey(name: "password_confirmation") String passwordConfirmation
 });
 
 
@@ -66,11 +66,10 @@ class _$ResetPasswordRequestCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? otp = null,Object? password = null,Object? passwordConfirmation = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = null,Object? password = null,Object? passwordConfirmation = null,}) {
   return _then(ResetPasswordRequest(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,otp: null == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as int,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,passwordConfirmation: null == passwordConfirmation ? _self.passwordConfirmation : passwordConfirmation // ignore: cast_nullable_to_non_nullable
 as String,
   ));
@@ -154,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  int otp,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String email,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ResetPasswordRequest() when $default != null:
-return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation);case _:
+return $default(_that.email,_that.password,_that.passwordConfirmation);case _:
   return orElse();
 
 }
@@ -175,10 +174,10 @@ return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation)
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  int otp,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String email,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordRequest():
-return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation);}
+return $default(_that.email,_that.password,_that.passwordConfirmation);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -192,10 +191,10 @@ return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation)
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  int otp,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String email,  String password, @JsonKey(name: "password_confirmation")  String passwordConfirmation)?  $default,) {final _that = this;
 switch (_that) {
 case _ResetPasswordRequest() when $default != null:
-return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation);case _:
+return $default(_that.email,_that.password,_that.passwordConfirmation);case _:
   return null;
 
 }
@@ -207,11 +206,10 @@ return $default(_that.email,_that.otp,_that.password,_that.passwordConfirmation)
 @JsonSerializable()
 
 class _ResetPasswordRequest implements ResetPasswordRequest {
-   _ResetPasswordRequest({required this.email, required this.otp, required this.password, @JsonKey(name: "password_confirmation") required this.passwordConfirmation});
+   _ResetPasswordRequest({required this.email, required this.password, @JsonKey(name: "password_confirmation") required this.passwordConfirmation});
   factory _ResetPasswordRequest.fromJson(Map<String, dynamic> json) => _$ResetPasswordRequestFromJson(json);
 
 @override final  String email;
-@override final  int otp;
 @override final  String password;
 @override@JsonKey(name: "password_confirmation") final  String passwordConfirmation;
 
@@ -228,16 +226,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.password, password) || other.password == password)&&(identical(other.passwordConfirmation, passwordConfirmation) || other.passwordConfirmation == passwordConfirmation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ResetPasswordRequest&&(identical(other.email, email) || other.email == email)&&(identical(other.password, password) || other.password == password)&&(identical(other.passwordConfirmation, passwordConfirmation) || other.passwordConfirmation == passwordConfirmation));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,otp,password,passwordConfirmation);
+int get hashCode => Object.hash(runtimeType,email,password,passwordConfirmation);
 
 @override
 String toString() {
-  return 'ResetPasswordRequest(email: $email, otp: $otp, password: $password, passwordConfirmation: $passwordConfirmation)';
+  return 'ResetPasswordRequest(email: $email, password: $password, passwordConfirmation: $passwordConfirmation)';
 }
 
 
@@ -248,7 +246,7 @@ abstract mixin class _$ResetPasswordRequestCopyWith<$Res> implements $ResetPassw
   factory _$ResetPasswordRequestCopyWith(_ResetPasswordRequest value, $Res Function(_ResetPasswordRequest) _then) = __$ResetPasswordRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String email, int otp, String password,@JsonKey(name: "password_confirmation") String passwordConfirmation
+ String email, String password,@JsonKey(name: "password_confirmation") String passwordConfirmation
 });
 
 
@@ -265,11 +263,10 @@ class __$ResetPasswordRequestCopyWithImpl<$Res>
 
 /// Create a copy of ResetPasswordRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? otp = null,Object? password = null,Object? passwordConfirmation = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = null,Object? password = null,Object? passwordConfirmation = null,}) {
   return _then(_ResetPasswordRequest(
 email: null == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String,otp: null == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as int,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String,password: null == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String,passwordConfirmation: null == passwordConfirmation ? _self.passwordConfirmation : passwordConfirmation // ignore: cast_nullable_to_non_nullable
 as String,
   ));

@@ -38,7 +38,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     if (!isInit) {
       _emailVerificationCubit.resend(
         ResendEmailVerificationRequest(email: widget.email),
-        isPass: widget.isPass,
       );
     }
     setState(() => _canResend = false);
@@ -195,7 +194,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   );
                   if (state.message.contains("v")) {
                     if (widget.isPass) {
-                      context.goNamed(RoutePaths.resetPass);
+                      context.pushNamed(
+                        RoutePaths.resetPass,
+                        queryParameters: {'email': widget.email},
+                      );
                     } else {
                       context.goNamed(RoutePaths.login);
                     }

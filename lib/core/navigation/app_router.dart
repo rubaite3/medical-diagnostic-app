@@ -18,7 +18,6 @@ class AppRouter {
     initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
     routes: [
-     
       GoRoute(
         name: RoutePaths.onBoarding,
         path: RoutePaths.onBoarding,
@@ -42,6 +41,10 @@ class AppRouter {
       GoRoute(
         name: RoutePaths.resetPass,
         path: RoutePaths.resetPass,
+        builder: (_, state) {
+          final email = state.uri.queryParameters['email'] ?? "";
+          return ResetPasswordScreen(email: email);
+        },
         builder: (_, _) => const ResetPasswordScreen(),
       ),
       GoRoute(
@@ -49,12 +52,13 @@ class AppRouter {
         path: RoutePaths.emailVerification,
         builder: (_, state) {
           final email = state.uri.queryParameters['email'] ?? '';
-          final isPass = (int.tryParse(state.uri.queryParameters['isPass'] ?? '0') ?? 0) == 1;
+          final isPass =
+              (int.tryParse(state.uri.queryParameters['isPass'] ?? '0') ?? 0) ==
+              1;
           return EmailVerificationScreen(email: email, isPass: isPass);
         },
       ),
 
-      
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) {
@@ -87,7 +91,6 @@ class MainWrapper extends StatelessWidget {
     final colorScheme = theme.colorScheme;
     final String location = GoRouterState.of(context).uri.path;
 
-   
     int selectedIndex = 0;
     if (location == RoutePaths.patientProfile) {
       selectedIndex = 1;
@@ -102,18 +105,25 @@ class MainWrapper extends StatelessWidget {
           if (index == 1) context.goNamed(RoutePaths.patientProfile);
         },
         selectedItemColor: colorScheme.primary,
-        unselectedItemColor: colorScheme.onSurfaceVariant.withValues(alpha:0.5),
+        unselectedItemColor: colorScheme.onSurfaceVariant.withValues(
+          alpha: 0.5,
+        ),
         showSelectedLabels: true,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         backgroundColor: colorScheme.surface,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person_outline), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: 'Settings'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_outlined),
+            label: 'Settings',
+          ),
         ],
       ),
     );
   }
 }
-

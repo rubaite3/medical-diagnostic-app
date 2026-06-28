@@ -7,7 +7,6 @@ part 'reset_password_request.g.dart';
 sealed class ResetPasswordRequest with _$ResetPasswordRequest {
   factory ResetPasswordRequest({
     required String email,
-    required int otp,
     required String password,
     @JsonKey(name: "password_confirmation")
     required String passwordConfirmation,
