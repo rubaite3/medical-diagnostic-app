@@ -33,8 +33,8 @@ class AuthStrings {
   // Forgot Password
   static const String forgotTitle = "Forgot Password?";
   static const String forgotSubTitle =
-      "Don’t worry! Enter your email below to receive a password reset link.";
-  static const String sendLinkBtn = "Send Reset Link";
+      "Don’t worry! Enter your email below to receive a password reset OTP.";
+  static const String sendLinkBtn = "Send Reset OTP";
   static const String backToLogin = "Back to Login";
 
   // Reset Password
@@ -44,6 +44,14 @@ class AuthStrings {
   static const String updatePasswordBtn = "Update Password";
   static const String successMessage = "Reset link sent successfully.";
 
+  // Email Verification OTP
+  static const String otpTitle = "Verify Email";
+  static const String otpSubTitle = "Enter the 6-digit code sent to";
+  static const String otpBtn = "Verify";
+  static const String otpResend = "Resend code in ";
+  static const String otpResendActive = "Resend code";
+  static const String otpSuccess = "Email verified successfully!";
+
   // Hints
   static const String hintFullName = "Full Name";
   static const String hintEmail = "Email Address";
@@ -51,13 +59,15 @@ class AuthStrings {
   static const String hintNewPassword = "New Password";
   static const String hintConfirmPassword = "Confirm New Password";
   // Auth Additional Strings
-static const String confirmPasswordHint = "Confirm Password";
-static const String orContinueWith = "Or continue with";
-static const String googleSignIn = "Google";
+  static const String confirmPasswordHint = "Confirm Password";
+  static const String orContinueWith = "Or continue with";
+  static const String googleSignIn = "Google";
 }
+
 class PatientProfileStrings {
   static const String patientProfileTitle = "Patient Medical Profile";
-  static const String patientProfileSubtitle = "Please complete your medical info accurately";
+  static const String patientProfileSubtitle =
+      "Please complete your medical info accurately";
   static const String birthDateHint = "Birth Date";
   static const String ageHint = "Age";
   static const String genderHint = "Gender";
@@ -68,4 +78,3 @@ class PatientProfileStrings {
   static const String pregnantQuestion = "Are you currently pregnant?";
   static const String saveProfileButton = "Save Medical Profile";
 }
-

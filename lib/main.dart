@@ -1,13 +1,24 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:medical_diagnostic_app1/core/dependencies/service_locator.dart';
+import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/navigation/app_router.dart';
 import 'package:medical_diagnostic_app1/core/theme/central_theme.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/forgot_password_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_screen.dart';
+import 'package:medical_diagnostic_app1/core/widgets/loading_overlay.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: kIsWeb
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
+  );
+  initGetIt();
   runApp(const MyApp());
 }
 
@@ -16,13 +27,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Medical_Diagnostic_App',
-      theme: CentralTheme.lightTheme,
-      darkTheme: CentralTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      routerConfig: AppRouter.router,
-      debugShowCheckedModeBanner: false,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: GetIt.instance<LoaderCubit>()),
+        BlocProvider.value(value: GetIt.instance<AuthBloc>()),
+      ],
+      child: MaterialApp.router(
+        title: 'Medical_Diagnostic_App',
+        theme: CentralTheme.lightTheme,
+        darkTheme: CentralTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        routerConfig: AppRouter.router,
+        debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          return Stack(
+            children: [
+              ?child,
+              BlocBuilder<LoaderCubit, bool>(
+                builder: (context, isLoading) =>
+                    LoadingOverlay(isLoading: isLoading),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

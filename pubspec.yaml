@@ -46,6 +46,11 @@ dependencies:
   flex_color_scheme: ^8.4.0
   get_it: ^9.2.1
   image_picker: ^1.2.2
+  equatable: ^2.0.8
+  fpdart: ^1.2.0
+  lottie: ^3.4.0
+  path_provider: ^2.1.6
+  google_sign_in: ^7.2.0
 
 dev_dependencies:
   flutter_test:
@@ -71,6 +76,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/lottie/
     - shorebird.yaml
 
   # An image asset can refer to one or more resolution-specific "variants", see
