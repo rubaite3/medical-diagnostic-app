@@ -44,8 +44,9 @@ class AppRouter {
       GoRoute(
         name: RoutePaths.resetPass,
         path: RoutePaths.resetPass,
-        builder: (_, _) {
-          return ResetPasswordScreen();
+        builder: (_, state) {
+          final email = state.uri.queryParameters['email'] ?? "";
+          return ResetPasswordScreen(email: email);
         },
       ),
       GoRoute(

@@ -27,7 +27,7 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
         {
           emit(
             state.copyWith(
-              message: "Email verified, Please Login",
+              message: "OTP verified successfully!",
               op: Operation.success,
             ),
           );
@@ -43,16 +43,9 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
   }
 
   Future<void> resend(
-    ResendEmailVerificationRequest resendEmailVerificationRequest, {
-    bool isPass = false,
-  }) async {
-    GetIt.instance<LoaderCubit>().show();
-
-    final response = isPass
-        ? await _authRepo.forgotPassword(
-            ForgetPasswordRequest(email: resendEmailVerificationRequest.email),
-          )
-        : await _authRepo.resendOTP(resendEmailVerificationRequest);
+    ResendEmailVerificationRequest resendEmailVerificationRequest,
+  ) async {
+    final response = await _authRepo.resendOTP(resendEmailVerificationRequest);
 
     switch (response) {
       case Right():
@@ -66,8 +59,6 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
           emit(state.copyWith(message: "", op: Operation.neutral));
         }
     }
-
-    GetIt.instance<LoaderCubit>().hide();
   }
 
   final AuthRepo _authRepo;
