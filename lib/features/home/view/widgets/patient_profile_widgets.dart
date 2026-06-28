@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/theme/colors.dart';
 
 class ProfileDropdownField extends StatelessWidget {
   final String hint;
@@ -18,35 +17,25 @@ class ProfileDropdownField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.dotInactive.withValues(alpha: 0.6),
+        color: colorScheme.surfaceContainerHighest.withOpacity(0.5), // استخدام لون الحاوية من الثيم
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 6,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
       child: DropdownButtonFormField<String>(
-        initialValue: value,
+        value: value,
         items: items,
         onChanged: onChanged,
-
-        style: theme.textTheme.bodyLarge?.copyWith(color: Colors.black),
+        style: theme.textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: theme.textTheme.bodyMedium?.copyWith(
-            color: Colors.black.withValues(alpha: 0.5),
+            color: colorScheme.onSurfaceVariant,
           ),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 4,
-          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         ),
       ),
     );
@@ -68,6 +57,7 @@ class ProfileCheckboxRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -75,14 +65,14 @@ class ProfileCheckboxRow extends StatelessWidget {
         children: [
           Checkbox(
             value: value,
-            activeColor: AppColors.medical,
+            activeColor: colorScheme.primary, // لون التحديد من الثيم
             onChanged: onChanged,
           ),
           Expanded(
             child: Text(
               title,
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+                color: colorScheme.onSurface,
               ),
             ),
           ),

@@ -1,48 +1,70 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
-import 'package:medical_diagnostic_app1/core/utils/utils.dart';
-import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
+import '../../../../core/consts/strings.dart';
+import '../../../auth/controllers/auth_bloc/auth_bloc.dart';
+import '../widgets/home_widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    
     return Scaffold(
-      appBar: AppBar(),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            Expanded(flex: 5, child: SizedBox()),
-            Flexible(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 13.0),
-                child: BlocListener<AuthBloc, AuthState>(
-                  listener: (context, state) {
-                    Utils.showToast(
-                      context,
-                      message: state.statusMessage,
-                      level: Utils.mapOp(state.op),
-                    );
-                    if (state.op.isSuccess) {
-                      context.goNamed(RoutePaths.login);
-                    }
-                  },
-                  listenWhen: (previous, current) => !current.op.isNeutral,
-                  child: CustomButton(
-                    text: "Logout",
+      backgroundColor: colorScheme.surface, 
+      body: SafeArea(
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            final userName = state.user?.fullName?.split(' ').first ?? "User";
+            
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Spacer(flex: 1), 
+                  
+                  const HomeHeroImage(),
+                  
+                  const Spacer(flex: 1),
+                  
+                  Text(
+                    "${HomeStrings.welcome}$userName",
+                    style: theme.textTheme.headlineSmall?.copyWith( 
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  
+                  const SizedBox(height: 8),
+                  
+                  Text(
+                    HomeStrings.intro,
+                    style: theme.textTheme.bodyLarge?.copyWith( 
+                      color: colorScheme.onSurfaceVariant,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  
+                  const Spacer(flex: 1),
+                  
+                  HomeActionButton(
+                    text: HomeStrings.startAssessment,
+                    icon: Icons.auto_awesome,
                     onPressed: () {
-                      context.read<AuthBloc>().add(AuthEvent.logout());
+                  
                     },
                   ),
-                ),
+                  
+                  const Spacer(flex: 2),
+                ],
               ),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

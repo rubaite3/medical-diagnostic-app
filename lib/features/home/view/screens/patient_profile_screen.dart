@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import '../../../../core/consts/strings.dart';
-import '../../../../core/theme/colors.dart';
 import '../../../auth/view/widgets/custom_text_field.dart';
 import '../../../auth/view/widgets/custom_button.dart';
 import '../widgets/patient_profile_widgets.dart';
@@ -16,7 +15,6 @@ class PatientProfileScreen extends StatefulWidget {
 }
 
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
@@ -30,13 +28,13 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
   @override
   void dispose() {
-    _nameController.dispose();
     _birthDateController.dispose();
     _ageController.dispose();
     super.dispose();
   }
 
   Future<void> _selectBirthDate(BuildContext context) async {
+    final theme = Theme.of(context);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
@@ -44,12 +42,8 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: AppColors.medical,
-              onPrimary: Colors.white,
-              onSurface: AppColors.textDark,
-            ),
+          data: theme.copyWith(
+            colorScheme: theme.colorScheme, 
           ),
           child: child!,
         );
@@ -74,9 +68,10 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: colorScheme.surface, 
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -85,7 +80,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             children: [
               const SizedBox(height: 10),
               
-              // Profile Image Section
+              
               ProfileImagePicker(
                 initialImage: _profileImage,
                 onImageSelected: (File? image) {
@@ -102,7 +97,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 textAlign: TextAlign.center,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
+                  color: colorScheme.onSurface, 
                 ),
               ),
               const SizedBox(height: 8),
@@ -110,20 +105,12 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 PatientProfileStrings.patientProfileSubtitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: colorScheme.onSurfaceVariant, 
                 ),
               ),
               const SizedBox(height: 35),
 
-              const SizedBox(height: 30),
-
-              CustomTextField(
-                hintText: AuthStrings.hintFullName,
-                prefixIcon: Icons.person_outline_rounded,
-                controller: _nameController,
-              ),
-              const SizedBox(height: 16),
-
+          
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
@@ -194,7 +181,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     "Medical History",
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.medicalDark,
+                      color: colorScheme.primary, 
                     ),
                   ),
                 ),
@@ -203,9 +190,11 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.5),
+                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3), 
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.dotInactive.withValues(alpha: 0.5)),
+                  border: Border.all(
+                    color: colorScheme.outline.withValues(alpha: 0.2),
+                  ),
                 ),
                 child: Column(
                   children: [
@@ -214,20 +203,20 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       value: _isSmoker,
                       onChanged: (val) => setState(() => _isSmoker = val!),
                     ),
-                    const Divider(height: 1, indent: 45),
+                    Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.diabetesQuestion,
                       value: _hasDiabetes,
                       onChanged: (val) => setState(() => _hasDiabetes = val!),
                     ),
-                    const Divider(height: 1, indent: 45),
+                    Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.hypertensionQuestion,
                       value: _hasHypertension,
                       onChanged: (val) => setState(() => _hasHypertension = val!),
                     ),
                     if (_gender == 'female') ...[
-                      const Divider(height: 1, indent: 45),
+                      Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
                       ProfileCheckboxRow(
                         title: PatientProfileStrings.pregnantQuestion,
                         value: _isPregnant,
@@ -243,7 +232,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               CustomButton(
                 text: PatientProfileStrings.saveProfileButton,
                 onPressed: () {
-                  // Implement save logic
+               
                 },
               ),
               const SizedBox(height: 30),

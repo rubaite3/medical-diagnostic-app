@@ -78,3 +78,12 @@ class PatientProfileStrings {
   static const String pregnantQuestion = "Are you currently pregnant?";
   static const String saveProfileButton = "Save Medical Profile";
 }
+
+class HomeStrings {
+  static const String welcome = "Welcome, ";
+  static const String intro = "How are you feeling today? Let's start your health assessment.";
+  static const String startAssessment = "Start Diagnosis";
+  static const String navHome = "Home";
+  static const String navProfile = "Profile";
+  static const String navSettings = "Settings";
+}
