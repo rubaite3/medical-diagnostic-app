@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/email_verification_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/forgot_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.dart';
@@ -14,9 +19,35 @@ class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
+  static const _publicRoutes = [
+    RoutePaths.onBoarding,
+    RoutePaths.login,
+    RoutePaths.signUp,
+    RoutePaths.forgotPass,
+    RoutePaths.resetPass,
+    RoutePaths.emailVerification,
+  ];
+
+  static bool _isPublic(String location) =>
+      _publicRoutes.any((r) => location == r);
+
   static final router = GoRouter(
     initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
+    redirect: (context, state) {
+      final authState = context.read<AuthBloc>().state;
+      if (context.read<LoaderCubit>().state) return null;
+
+      final location = state.matchedLocation;
+
+      if (authState.auth.isGuest) {
+        if (!_isPublic(location)) return RoutePaths.login;
+        return null;
+      } else {
+        if (_isPublic(location)) return RoutePaths.homeScreen;
+        return null;
+      }
+    },
     routes: [
       GoRoute(
         name: RoutePaths.onBoarding,

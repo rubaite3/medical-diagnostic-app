@@ -4,9 +4,11 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:get_it/get_it.dart';
 import 'package:medical_diagnostic_app1/core/api/app_error.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 
 class Utils {
   static bool isLight(BuildContext ctx) {
@@ -24,15 +26,20 @@ class Utils {
   static Either<AppError, AppResponse> mapStatusCodeToResponse(
     Response response,
   ) {
-    return (200 <= (response.statusCode ?? 500).toInt() &&
-            (response.statusCode ?? 500).toInt() < 300)
-        ? Right(response.data)
-        : Left(
-            AppError(
-              errorMessage: response.statusMessage ?? "Some error occurred",
-              statusCode: response.statusCode ?? 500,
-            ),
-          );
+    if (200 <= (response.statusCode ?? 500).toInt() &&
+        (response.statusCode ?? 500).toInt() < 300) {
+      return Right(response.data);
+    } else {
+      if (response.statusCode == 401) {
+        GetIt.instance<AuthBloc>().add(AuthEvent.authToggeled(null));
+      }
+      return Left(
+        AppError(
+          errorMessage: response.statusMessage ?? "Some error occurred",
+          statusCode: response.statusCode ?? 500,
+        ),
+      );
+    }
   }
 
   static void showToast(

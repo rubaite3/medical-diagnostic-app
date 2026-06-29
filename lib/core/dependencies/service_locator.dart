@@ -11,4 +11,5 @@ void initGetIt() {
   _instance.registerSingleton<AuthBloc>(
     AuthBloc(authRepo: _instance<AuthRepo>()),
   );
+  _instance<AuthBloc>().add(AuthEvent.checkConnectivity());
 }

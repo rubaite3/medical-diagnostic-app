@@ -70,6 +70,11 @@ class AuthRepo {
     return Utils.mapStatusCodeToResponse(response);
   }
 
+  Future<Either<AppError, AppResponse>> checkAuthState() async {
+    final response = await dioInstance.get(ApiConsts.checkAuth);
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
   Future<Either<AppError, AppResponse>> forgotPassword(
     ForgetPasswordRequest forgetPasswordRequest,
   ) async {
@@ -100,7 +105,7 @@ class AuthRepo {
   ) async {
     final response = await dioInstance.patch(
       ApiConsts.profile,
-      data: updateProfileRequest.toFormData(),
+      data: await updateProfileRequest.toFormData(),
     );
     return Utils.mapStatusCodeToResponse(response);
   }

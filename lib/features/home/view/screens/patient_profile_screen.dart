@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:medical_diagnostic_app1/features/auth/models/user.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
 import 'dart:io';
 
 import '../../../../core/consts/strings.dart';
@@ -27,6 +33,73 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   File? _profileImage;
 
   @override
+  void initState() {
+    super.initState();
+    updateUser();
+  }
+
+  void updateProfile() {
+    final authUser = context.read<AuthBloc>().state.user;
+
+    final user = authUser?.copyWith(
+      avatar: _profileImage?.path,
+      activityLevel: _activityLevel,
+      birthDate: _birthDateController.text.isEmpty
+          ? null
+          : _birthDateController.text,
+      gender: _gender,
+      hasDiabetes: _hasDiabetes ? 1 : 0,
+      hasHypertension: _hasHypertension ? 1 : 0,
+      isPregnant: _isPregnant ? 1 : 0,
+      isSmoker: _isSmoker ? 1 : 0,
+    );
+    if (user != authUser) {
+      context.read<AuthBloc>().add(
+        AuthEvent.updateProfile(
+          UpdateProfileRequest(
+            avatar: _profileImage?.path,
+            activityLevel: _activityLevel,
+            birthDate: _birthDateController.text.isEmpty
+                ? null
+                : _birthDateController.text,
+            gender: _gender,
+            hasDiabetes: _hasDiabetes ? 1 : 0,
+            hasHypertension: _hasHypertension ? 1 : 0,
+            isPregnant: _isPregnant ? 1 : 0,
+            isSmoker: _isSmoker ? 1 : 0,
+          ),
+        ),
+      );
+    } else {
+      Utils.showToast(context, message: "No changes");
+    }
+  }
+
+  void updateUser() {
+    setState(() {
+      final user = context.read<AuthBloc>().state.user;
+      final date = DateTime.tryParse(user?.birthDate ?? "");
+      if (date != null) {
+        int age = DateTime.now().year - date.year;
+        if (DateTime.now().month < date.month ||
+            (DateTime.now().month == date.month &&
+                DateTime.now().day < date.day)) {
+          age--;
+          _ageController.text = age.toString();
+        }
+        _birthDateController.text = date.toString();
+      }
+
+      _gender = user?.gender ?? "male";
+      _activityLevel = user?.activityLevel ?? "moderate";
+      _isSmoker = (user?.isSmoker ?? 0) == 1;
+      _hasDiabetes = (user?.hasDiabetes ?? 0) == 1;
+      _hasHypertension = (user?.hasHypertension ?? 0) == 1;
+      _isPregnant = (user?.isPregnant ?? 0) == 1;
+    });
+  }
+
+  @override
   void dispose() {
     _birthDateController.dispose();
     _ageController.dispose();
@@ -42,9 +115,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
-          data: theme.copyWith(
-            colorScheme: theme.colorScheme, 
-          ),
+          data: theme.copyWith(colorScheme: theme.colorScheme),
           child: child!,
         );
       },
@@ -71,7 +142,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface, 
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -79,8 +150,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
-              
-              
+
               ProfileImagePicker(
                 initialImage: _profileImage,
                 onImageSelected: (File? image) {
@@ -90,14 +160,27 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 },
               ),
 
-              const SizedBox(height: 25),
+              BlocListener<AuthBloc, AuthState>(
+                listenWhen: (previous, current) => !current.op.isNeutral,
+                listener: (context, state) {
+                  Utils.showToast(
+                    context,
+                    message: state.statusMessage,
+                    level: Utils.mapOp(state.op),
+                  );
+                  if (state.op.isSuccess) {
+                    updateUser();
+                  }
+                },
+                child: const SizedBox(height: 25),
+              ),
 
               Text(
                 PatientProfileStrings.patientProfileTitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface, 
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 8),
@@ -105,12 +188,11 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 PatientProfileStrings.patientProfileSubtitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: colorScheme.onSurfaceVariant, 
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 35),
 
-          
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
@@ -124,6 +206,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               const SizedBox(height: 16),
 
               CustomTextField(
+                readOnly: true,
                 hintText: PatientProfileStrings.ageHint,
                 prefixIcon: Icons.calendar_today_outlined,
                 controller: _ageController,
@@ -169,9 +252,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   });
                 },
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Health Questions Section
               Align(
                 alignment: Alignment.centerLeft,
@@ -181,16 +264,18 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     "Medical History",
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: colorScheme.primary, 
+                      color: colorScheme.primary,
                     ),
                   ),
                 ),
               ),
-              
+
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.3), 
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.3,
+                  ),
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(
                     color: colorScheme.outline.withValues(alpha: 0.2),
@@ -203,20 +288,33 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       value: _isSmoker,
                       onChanged: (val) => setState(() => _isSmoker = val!),
                     ),
-                    Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
+                    Divider(
+                      height: 1,
+                      indent: 45,
+                      color: colorScheme.outline.withValues(alpha: 0.1),
+                    ),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.diabetesQuestion,
                       value: _hasDiabetes,
                       onChanged: (val) => setState(() => _hasDiabetes = val!),
                     ),
-                    Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
+                    Divider(
+                      height: 1,
+                      indent: 45,
+                      color: colorScheme.outline.withValues(alpha: 0.1),
+                    ),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.hypertensionQuestion,
                       value: _hasHypertension,
-                      onChanged: (val) => setState(() => _hasHypertension = val!),
+                      onChanged: (val) =>
+                          setState(() => _hasHypertension = val!),
                     ),
                     if (_gender == 'female') ...[
-                      Divider(height: 1, indent: 45, color: colorScheme.outline.withValues(alpha: 0.1)),
+                      Divider(
+                        height: 1,
+                        indent: 45,
+                        color: colorScheme.outline.withValues(alpha: 0.1),
+                      ),
                       ProfileCheckboxRow(
                         title: PatientProfileStrings.pregnantQuestion,
                         value: _isPregnant,
@@ -231,9 +329,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
               CustomButton(
                 text: PatientProfileStrings.saveProfileButton,
-                onPressed: () {
-               
-                },
+                onPressed: updateProfile,
               ),
               const SizedBox(height: 30),
             ],
@@ -243,4 +339,3 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     );
   }
 }
-
