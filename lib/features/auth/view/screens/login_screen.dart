@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                     listenWhen: (previous, current) =>
-                        current.op != Operation.neutral,
+                        (current.op != Operation.neutral),
                     child: const SizedBox(height: 8),
                   ),
                   const Text(

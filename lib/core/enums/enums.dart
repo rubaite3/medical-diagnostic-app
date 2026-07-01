@@ -8,6 +8,7 @@ enum Auth {
   bool get isLoading => this == Auth.loading;
 }
 
+
 enum Operation {
   success,
   failure,

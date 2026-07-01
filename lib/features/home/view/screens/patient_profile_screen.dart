@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:medical_diagnostic_app1/features/auth/models/user.dart';
+import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
 import 'dart:io';
 
 import '../../../../core/consts/strings.dart';
-import '../../../../core/theme/colors.dart';
 import '../../../auth/view/widgets/custom_text_field.dart';
 import '../../../auth/view/widgets/custom_button.dart';
 import '../widgets/patient_profile_widgets.dart';
@@ -28,6 +33,73 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   File? _profileImage;
 
   @override
+  void initState() {
+    super.initState();
+    updateUser();
+  }
+
+  void updateProfile() {
+    final authUser = context.read<AuthBloc>().state.user;
+
+    final user = authUser?.copyWith(
+      avatar: _profileImage?.path,
+      activityLevel: _activityLevel,
+      birthDate: _birthDateController.text.isEmpty
+          ? null
+          : _birthDateController.text,
+      gender: _gender,
+      hasDiabetes: _hasDiabetes ? 1 : 0,
+      hasHypertension: _hasHypertension ? 1 : 0,
+      isPregnant: _isPregnant ? 1 : 0,
+      isSmoker: _isSmoker ? 1 : 0,
+    );
+    if (user != authUser) {
+      context.read<AuthBloc>().add(
+        AuthEvent.updateProfile(
+          UpdateProfileRequest(
+            avatar: _profileImage?.path,
+            activityLevel: _activityLevel,
+            birthDate: _birthDateController.text.isEmpty
+                ? null
+                : _birthDateController.text,
+            gender: _gender,
+            hasDiabetes: _hasDiabetes ? 1 : 0,
+            hasHypertension: _hasHypertension ? 1 : 0,
+            isPregnant: _isPregnant ? 1 : 0,
+            isSmoker: _isSmoker ? 1 : 0,
+          ),
+        ),
+      );
+    } else {
+      Utils.showToast(context, message: "No changes");
+    }
+  }
+
+  void updateUser() {
+    setState(() {
+      final user = context.read<AuthBloc>().state.user;
+      final date = DateTime.tryParse(user?.birthDate ?? "");
+      if (date != null) {
+        int age = DateTime.now().year - date.year;
+        if (DateTime.now().month < date.month ||
+            (DateTime.now().month == date.month &&
+                DateTime.now().day < date.day)) {
+          age--;
+          _ageController.text = age.toString();
+        }
+        _birthDateController.text = date.toString();
+      }
+
+      _gender = user?.gender ?? "male";
+      _activityLevel = user?.activityLevel ?? "moderate";
+      _isSmoker = (user?.isSmoker ?? 0) == 1;
+      _hasDiabetes = (user?.hasDiabetes ?? 0) == 1;
+      _hasHypertension = (user?.hasHypertension ?? 0) == 1;
+      _isPregnant = (user?.isPregnant ?? 0) == 1;
+    });
+  }
+
+  @override
   void dispose() {
     _birthDateController.dispose();
     _ageController.dispose();
@@ -35,6 +107,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
   Future<void> _selectBirthDate(BuildContext context) async {
+    final theme = Theme.of(context);
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now().subtract(const Duration(days: 365 * 25)),
@@ -42,13 +115,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       lastDate: DateTime.now(),
       builder: (context, child) {
         return Theme(
-          data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: AppColors.medical,
-              onPrimary: Colors.white,
-              onSurface: AppColors.textDark,
-            ),
-          ),
+          data: theme.copyWith(colorScheme: theme.colorScheme),
           child: child!,
         );
       },
@@ -72,9 +139,10 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
@@ -82,8 +150,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 10),
-              
-              // Profile Image Section
+
               ProfileImagePicker(
                 initialImage: _profileImage,
                 onImageSelected: (File? image) {
@@ -93,14 +160,27 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 },
               ),
 
-              const SizedBox(height: 25),
+              BlocListener<AuthBloc, AuthState>(
+                listenWhen: (previous, current) => !current.op.isNeutral,
+                listener: (context, state) {
+                  Utils.showToast(
+                    context,
+                    message: state.statusMessage,
+                    level: Utils.mapOp(state.op),
+                  );
+                  if (state.op.isSuccess) {
+                    updateUser();
+                  }
+                },
+                child: const SizedBox(height: 25),
+              ),
 
               Text(
                 PatientProfileStrings.patientProfileTitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textDark,
+                  color: colorScheme.onSurface,
                 ),
               ),
               const SizedBox(height: 8),
@@ -108,12 +188,11 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 PatientProfileStrings.patientProfileSubtitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 35),
 
-              // Form Fields
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
@@ -127,6 +206,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               const SizedBox(height: 16),
 
               CustomTextField(
+                readOnly: true,
                 hintText: PatientProfileStrings.ageHint,
                 prefixIcon: Icons.calendar_today_outlined,
                 controller: _ageController,
@@ -172,9 +252,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   });
                 },
               ),
-              
+
               const SizedBox(height: 24),
-              
+
               // Health Questions Section
               Align(
                 alignment: Alignment.centerLeft,
@@ -184,18 +264,22 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                     "Medical History",
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: AppColors.medicalDark,
+                      color: colorScheme.primary,
                     ),
                   ),
                 ),
               ),
-              
+
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.5),
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.3,
+                  ),
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: AppColors.dotInactive.withOpacity(0.5)),
+                  border: Border.all(
+                    color: colorScheme.outline.withValues(alpha: 0.2),
+                  ),
                 ),
                 child: Column(
                   children: [
@@ -204,20 +288,33 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       value: _isSmoker,
                       onChanged: (val) => setState(() => _isSmoker = val!),
                     ),
-                    const Divider(height: 1, indent: 45),
+                    Divider(
+                      height: 1,
+                      indent: 45,
+                      color: colorScheme.outline.withValues(alpha: 0.1),
+                    ),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.diabetesQuestion,
                       value: _hasDiabetes,
                       onChanged: (val) => setState(() => _hasDiabetes = val!),
                     ),
-                    const Divider(height: 1, indent: 45),
+                    Divider(
+                      height: 1,
+                      indent: 45,
+                      color: colorScheme.outline.withValues(alpha: 0.1),
+                    ),
                     ProfileCheckboxRow(
                       title: PatientProfileStrings.hypertensionQuestion,
                       value: _hasHypertension,
-                      onChanged: (val) => setState(() => _hasHypertension = val!),
+                      onChanged: (val) =>
+                          setState(() => _hasHypertension = val!),
                     ),
                     if (_gender == 'female') ...[
-                      const Divider(height: 1, indent: 45),
+                      Divider(
+                        height: 1,
+                        indent: 45,
+                        color: colorScheme.outline.withValues(alpha: 0.1),
+                      ),
                       ProfileCheckboxRow(
                         title: PatientProfileStrings.pregnantQuestion,
                         value: _isPregnant,
@@ -232,9 +329,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
               CustomButton(
                 text: PatientProfileStrings.saveProfileButton,
-                onPressed: () {
-                  // Implement save logic
-                },
+                onPressed: updateProfile,
               ),
               const SizedBox(height: 30),
             ],

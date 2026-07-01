@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String? value)? validator;
   final TextInputAction? textInputAction;
+  final bool? readOnly;
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.textInputAction,
+    this.readOnly,
   });
 
   @override
@@ -33,6 +35,7 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        readOnly: readOnly ?? false,
         textInputAction: textInputAction,
         validator: validator,
         controller: controller,

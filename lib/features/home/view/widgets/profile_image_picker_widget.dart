@@ -78,7 +78,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   void _showImageSourceBottomSheet() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -99,16 +98,28 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.photo_library_rounded, color: AppColors.medical),
-                  title: const Text('Choose from Gallery', style: TextStyle(fontWeight: FontWeight.w500)),
+                  leading: const Icon(
+                    Icons.photo_library_rounded,
+                    color: AppColors.medical,
+                  ),
+                  title: const Text(
+                    'Choose from Gallery',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImageFromGallery();
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.camera_alt_rounded, color: AppColors.medical),
-                  title: const Text('Take a Photo', style: TextStyle(fontWeight: FontWeight.w500)),
+                  leading: const Icon(
+                    Icons.camera_alt_rounded,
+                    color: AppColors.medical,
+                  ),
+                  title: const Text(
+                    'Take a Photo',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImageFromCamera();
@@ -116,8 +127,17 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                 ),
                 if (_selectedImage != null)
                   ListTile(
-                    leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
-                    title: const Text('Remove Photo', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.w500)),
+                    leading: const Icon(
+                      Icons.delete_outline_rounded,
+                      color: Colors.redAccent,
+                    ),
+                    title: const Text(
+                      'Remove Photo',
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     onTap: () {
                       Navigator.pop(context);
                       _removeImage();
@@ -155,24 +175,18 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.medical.withValues(alpha:0.15),
+                  color: AppColors.medical.withValues(alpha: 0.15),
                   blurRadius: 15,
                   offset: const Offset(0, 8),
                 ),
               ],
-              border: Border.all(
-                color: Colors.white,
-                width: 4,
-              ),
+              border: Border.all(color: Colors.white, width: 4),
             ),
             child: GestureDetector(
               onTap: _showImageSourceBottomSheet,
               child: ClipOval(
                 child: _selectedImage != null
-                    ? Image.file(
-                        _selectedImage!,
-                        fit: BoxFit.cover,
-                      )
+                    ? Image.file(_selectedImage!, fit: BoxFit.cover)
                     : const Icon(
                         Icons.person_rounded,
                         size: 75,
@@ -192,7 +206,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                 border: Border.all(color: Colors.white, width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.medical.withValues(alpha:0.3),
+                    color: AppColors.medical.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),

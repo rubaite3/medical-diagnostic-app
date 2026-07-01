@@ -56,7 +56,7 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckConnectivity value)?  checkConnectivity,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,TResult Function( _UpdateProfile value)?  updateProfile,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -64,11 +64,13 @@ return connectivityToggeled(_that);case _AuthToggeled() when authToggeled != nul
 return authToggeled(_that);case _AuthLoading() when authLoading != null:
 return authLoading(_that);case _Login() when login != null:
 return login(_that);case _Logout() when logout != null:
-return logout(_that);case _Register() when register != null:
+return logout(_that);case _CheckConnectivity() when checkConnectivity != null:
+return checkConnectivity(_that);case _Register() when register != null:
 return register(_that);case _RefreshToken() when refreshToken != null:
 return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
-return forgotPass(_that);case _:
+return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
+return updateProfile(_that);case _:
   return orElse();
 
 }
@@ -86,7 +88,7 @@ return forgotPass(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckConnectivity value)  checkConnectivity,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,required TResult Function( _UpdateProfile value)  updateProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
@@ -94,11 +96,13 @@ return connectivityToggeled(_that);case _AuthToggeled():
 return authToggeled(_that);case _AuthLoading():
 return authLoading(_that);case _Login():
 return login(_that);case _Logout():
-return logout(_that);case _Register():
+return logout(_that);case _CheckConnectivity():
+return checkConnectivity(_that);case _Register():
 return register(_that);case _RefreshToken():
 return refreshToken(_that);case _ResendEmailVerification():
 return resendEmailVerify(_that);case _ForgotPass():
-return forgotPass(_that);}
+return forgotPass(_that);case _UpdateProfile():
+return updateProfile(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -112,7 +116,7 @@ return forgotPass(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckConnectivity value)?  checkConnectivity,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,TResult? Function( _UpdateProfile value)?  updateProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -120,11 +124,13 @@ return connectivityToggeled(_that);case _AuthToggeled() when authToggeled != nul
 return authToggeled(_that);case _AuthLoading() when authLoading != null:
 return authLoading(_that);case _Login() when login != null:
 return login(_that);case _Logout() when logout != null:
-return logout(_that);case _Register() when register != null:
+return logout(_that);case _CheckConnectivity() when checkConnectivity != null:
+return checkConnectivity(_that);case _Register() when register != null:
 return register(_that);case _RefreshToken() when refreshToken != null:
 return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
-return forgotPass(_that);case _:
+return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
+return updateProfile(_that);case _:
   return null;
 
 }
@@ -141,18 +147,20 @@ return forgotPass(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function()?  checkConnectivity,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
 return authToggeled(_that.user);case _AuthLoading() when authLoading != null:
 return authLoading();case _Login() when login != null:
 return login(_that.loginRequest);case _Logout() when logout != null:
-return logout();case _Register() when register != null:
+return logout();case _CheckConnectivity() when checkConnectivity != null:
+return checkConnectivity();case _Register() when register != null:
 return register(_that.registerRequest);case _RefreshToken() when refreshToken != null:
 return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
-return forgotPass(_that.forgetPasswordRequest);case _:
+return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
+return updateProfile(_that.updateProfileRequest);case _:
   return orElse();
 
 }
@@ -170,18 +178,20 @@ return forgotPass(_that.forgetPasswordRequest);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function()  checkConnectivity,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,required TResult Function( UpdateProfileRequest updateProfileRequest)  updateProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
 return connectivityToggeled(_that.isOnline);case _AuthToggeled():
 return authToggeled(_that.user);case _AuthLoading():
 return authLoading();case _Login():
 return login(_that.loginRequest);case _Logout():
-return logout();case _Register():
+return logout();case _CheckConnectivity():
+return checkConnectivity();case _Register():
 return register(_that.registerRequest);case _RefreshToken():
 return refreshToken();case _ResendEmailVerification():
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass():
-return forgotPass(_that.forgetPasswordRequest);}
+return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile():
+return updateProfile(_that.updateProfileRequest);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -195,18 +205,20 @@ return forgotPass(_that.forgetPasswordRequest);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function()?  checkConnectivity,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult? Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
 return authToggeled(_that.user);case _AuthLoading() when authLoading != null:
 return authLoading();case _Login() when login != null:
 return login(_that.loginRequest);case _Logout() when logout != null:
-return logout();case _Register() when register != null:
+return logout();case _CheckConnectivity() when checkConnectivity != null:
+return checkConnectivity();case _Register() when register != null:
 return register(_that.registerRequest);case _RefreshToken() when refreshToken != null:
 return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
-return forgotPass(_that.forgetPasswordRequest);case _:
+return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
+return updateProfile(_that.updateProfileRequest);case _:
   return null;
 
 }
@@ -500,6 +512,38 @@ String toString() {
 /// @nodoc
 
 
+class _CheckConnectivity implements AuthEvent {
+  const _CheckConnectivity();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckConnectivity);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.checkConnectivity()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class _Register implements AuthEvent {
   const _Register(this.registerRequest);
   
@@ -755,6 +799,82 @@ $ForgetPasswordRequestCopyWith<$Res> get forgetPasswordRequest {
 }
 
 /// @nodoc
+
+
+class _UpdateProfile implements AuthEvent {
+  const _UpdateProfile(this.updateProfileRequest);
+  
+
+ final  UpdateProfileRequest updateProfileRequest;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$UpdateProfileCopyWith<_UpdateProfile> get copyWith => __$UpdateProfileCopyWithImpl<_UpdateProfile>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UpdateProfile&&(identical(other.updateProfileRequest, updateProfileRequest) || other.updateProfileRequest == updateProfileRequest));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,updateProfileRequest);
+
+@override
+String toString() {
+  return 'AuthEvent.updateProfile(updateProfileRequest: $updateProfileRequest)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$UpdateProfileCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory _$UpdateProfileCopyWith(_UpdateProfile value, $Res Function(_UpdateProfile) _then) = __$UpdateProfileCopyWithImpl;
+@useResult
+$Res call({
+ UpdateProfileRequest updateProfileRequest
+});
+
+
+$UpdateProfileRequestCopyWith<$Res> get updateProfileRequest;
+
+}
+/// @nodoc
+class __$UpdateProfileCopyWithImpl<$Res>
+    implements _$UpdateProfileCopyWith<$Res> {
+  __$UpdateProfileCopyWithImpl(this._self, this._then);
+
+  final _UpdateProfile _self;
+  final $Res Function(_UpdateProfile) _then;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? updateProfileRequest = null,}) {
+  return _then(_UpdateProfile(
+null == updateProfileRequest ? _self.updateProfileRequest : updateProfileRequest // ignore: cast_nullable_to_non_nullable
+as UpdateProfileRequest,
+  ));
+}
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$UpdateProfileRequestCopyWith<$Res> get updateProfileRequest {
+  
+  return $UpdateProfileRequestCopyWith<$Res>(_self.updateProfileRequest, (value) {
+    return _then(_self.copyWith(updateProfileRequest: value));
+  });
+}
+}
+
+
+/// @nodoc
 mixin _$AuthState {
 
  Auth get auth; bool get isOnline; User? get user; String? get token; Operation get op; String get statusMessage;
@@ -764,6 +884,8 @@ mixin _$AuthState {
 @pragma('vm:prefer-inline')
 $AuthStateCopyWith<AuthState> get copyWith => _$AuthStateCopyWithImpl<AuthState>(this as AuthState, _$identity);
 
+  /// Serializes this AuthState to a JSON map.
+  Map<String, dynamic> toJson();
 
 
 @override
@@ -771,7 +893,7 @@ bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user)&&(identical(other.token, token) || other.token == token)&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,auth,isOnline,user,token,op,statusMessage);
 
@@ -957,11 +1079,11 @@ return $default(_that.auth,_that.isOnline,_that.user,_that.token,_that.op,_that.
 }
 
 /// @nodoc
-
+@JsonSerializable()
 
 class _AuthState implements AuthState {
   const _AuthState({required this.auth, required this.isOnline, this.user, this.token, required this.op, required this.statusMessage});
-  
+  factory _AuthState.fromJson(Map<String, dynamic> json) => _$AuthStateFromJson(json);
 
 @override final  Auth auth;
 @override final  bool isOnline;
@@ -976,14 +1098,17 @@ class _AuthState implements AuthState {
 @pragma('vm:prefer-inline')
 _$AuthStateCopyWith<_AuthState> get copyWith => __$AuthStateCopyWithImpl<_AuthState>(this, _$identity);
 
-
+@override
+Map<String, dynamic> toJson() {
+  return _$AuthStateToJson(this, );
+}
 
 @override
 bool operator ==(Object other) {
   return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthState&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.isOnline, isOnline) || other.isOnline == isOnline)&&(identical(other.user, user) || other.user == user)&&(identical(other.token, token) || other.token == token)&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage));
 }
 
-
+@JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode => Object.hash(runtimeType,auth,isOnline,user,token,op,statusMessage);
 
