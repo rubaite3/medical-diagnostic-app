@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -26,8 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {

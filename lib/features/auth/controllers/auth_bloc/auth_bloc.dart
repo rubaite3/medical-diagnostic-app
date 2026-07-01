@@ -1,12 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fpdart/src/either.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:medical_diagnostic_app1/core/api/app_error.dart';
-import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
@@ -17,7 +14,6 @@ import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/fo
 
 import '../../../../core/utils/utils.dart';
 import '../../models/user.dart';
-import '../../repos/requests/general/refresh_token_request.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
