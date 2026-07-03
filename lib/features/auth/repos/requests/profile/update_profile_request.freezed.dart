@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$UpdateProfileRequest {
 
-@JsonKey(includeIfNull: false, name: "full_name") String? get fullName;@JsonKey(includeIfNull: false) String? get avatar;@JsonKey(includeIfNull: false, name: "birth_date") String? get birthDate;@JsonKey(includeIfNull: false) String? get gender;@JsonKey(includeIfNull: false, name: "is_smoker") int? get isSmoker;@JsonKey(includeIfNull: false, name: "has_diabetes") int? get hasDiabetes;@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) int? get hasHypertension;@JsonKey(includeIfNull: false, name: "is_pregnant") int? get isPregnant;@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? get activityLevel;@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? get lastCheckupDate;
+@JsonKey(includeIfNull: false, name: "full_name") String? get fullName;@JsonKey(includeIfNull: false) String? get avatar;@JsonKey(includeIfNull: false, name: "birth_date") DateTime? get birthDate;@JsonKey(includeIfNull: false) String? get gender;@JsonKey(includeIfNull: false, name: "is_smoker") bool? get isSmoker;@JsonKey(includeIfNull: false, name: "has_diabetes") bool? get hasDiabetes;@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) bool? get hasHypertension;@JsonKey(includeIfNull: false, name: "is_pregnant") bool? get isPregnant;@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? get activityLevel;@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? get lastCheckupDate;
 /// Create a copy of UpdateProfileRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $UpdateProfileRequestCopyWith<$Res>  {
   factory $UpdateProfileRequestCopyWith(UpdateProfileRequest value, $Res Function(UpdateProfileRequest) _then) = _$UpdateProfileRequestCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(includeIfNull: false, name: "full_name") String? fullName,@JsonKey(includeIfNull: false) String? avatar,@JsonKey(includeIfNull: false, name: "birth_date") String? birthDate,@JsonKey(includeIfNull: false) String? gender,@JsonKey(includeIfNull: false, name: "is_smoker") int? isSmoker,@JsonKey(includeIfNull: false, name: "has_diabetes") int? hasDiabetes,@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) int? hasHypertension,@JsonKey(includeIfNull: false, name: "is_pregnant") int? isPregnant,@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? activityLevel,@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? lastCheckupDate
+@JsonKey(includeIfNull: false, name: "full_name") String? fullName,@JsonKey(includeIfNull: false) String? avatar,@JsonKey(includeIfNull: false, name: "birth_date") DateTime? birthDate,@JsonKey(includeIfNull: false) String? gender,@JsonKey(includeIfNull: false, name: "is_smoker") bool? isSmoker,@JsonKey(includeIfNull: false, name: "has_diabetes") bool? hasDiabetes,@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) bool? hasHypertension,@JsonKey(includeIfNull: false, name: "is_pregnant") bool? isPregnant,@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? activityLevel,@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? lastCheckupDate
 });
 
 
@@ -71,12 +71,12 @@ class _$UpdateProfileRequestCopyWithImpl<$Res>
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
-as String?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as DateTime?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,isSmoker: freezed == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
-as int?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes // ignore: cast_nullable_to_non_nullable
-as int?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
-as int?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
-as int?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
+as bool?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes // ignore: cast_nullable_to_non_nullable
+as bool?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
+as bool?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
+as bool?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
 as String?,lastCheckupDate: freezed == lastCheckupDate ? _self.lastCheckupDate : lastCheckupDate // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  String? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  int? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  int? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  int? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  int? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  DateTime? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  bool? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  bool? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  bool? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  bool? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _UpdateProfileRequest() when $default != null:
 return $default(_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.lastCheckupDate);case _:
@@ -181,7 +181,7 @@ return $default(_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  String? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  int? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  int? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  int? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  int? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  DateTime? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  bool? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  bool? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  bool? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  bool? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)  $default,) {final _that = this;
 switch (_that) {
 case _UpdateProfileRequest():
 return $default(_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.lastCheckupDate);}
@@ -198,7 +198,7 @@ return $default(_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.i
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  String? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  int? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  int? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  int? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  int? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(includeIfNull: false, name: "full_name")  String? fullName, @JsonKey(includeIfNull: false)  String? avatar, @JsonKey(includeIfNull: false, name: "birth_date")  DateTime? birthDate, @JsonKey(includeIfNull: false)  String? gender, @JsonKey(includeIfNull: false, name: "is_smoker")  bool? isSmoker, @JsonKey(includeIfNull: false, name: "has_diabetes")  bool? hasDiabetes, @JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false)  bool? hasHypertension, @JsonKey(includeIfNull: false, name: "is_pregnant")  bool? isPregnant, @JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false)  String? activityLevel, @JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false)  String? lastCheckupDate)?  $default,) {final _that = this;
 switch (_that) {
 case _UpdateProfileRequest() when $default != null:
 return $default(_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.lastCheckupDate);case _:
@@ -218,12 +218,12 @@ class _UpdateProfileRequest implements UpdateProfileRequest {
 
 @override@JsonKey(includeIfNull: false, name: "full_name") final  String? fullName;
 @override@JsonKey(includeIfNull: false) final  String? avatar;
-@override@JsonKey(includeIfNull: false, name: "birth_date") final  String? birthDate;
+@override@JsonKey(includeIfNull: false, name: "birth_date") final  DateTime? birthDate;
 @override@JsonKey(includeIfNull: false) final  String? gender;
-@override@JsonKey(includeIfNull: false, name: "is_smoker") final  int? isSmoker;
-@override@JsonKey(includeIfNull: false, name: "has_diabetes") final  int? hasDiabetes;
-@override@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) final  int? hasHypertension;
-@override@JsonKey(includeIfNull: false, name: "is_pregnant") final  int? isPregnant;
+@override@JsonKey(includeIfNull: false, name: "is_smoker") final  bool? isSmoker;
+@override@JsonKey(includeIfNull: false, name: "has_diabetes") final  bool? hasDiabetes;
+@override@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) final  bool? hasHypertension;
+@override@JsonKey(includeIfNull: false, name: "is_pregnant") final  bool? isPregnant;
 @override@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) final  String? activityLevel;
 @override@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) final  String? lastCheckupDate;
 
@@ -260,7 +260,7 @@ abstract mixin class _$UpdateProfileRequestCopyWith<$Res> implements $UpdateProf
   factory _$UpdateProfileRequestCopyWith(_UpdateProfileRequest value, $Res Function(_UpdateProfileRequest) _then) = __$UpdateProfileRequestCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(includeIfNull: false, name: "full_name") String? fullName,@JsonKey(includeIfNull: false) String? avatar,@JsonKey(includeIfNull: false, name: "birth_date") String? birthDate,@JsonKey(includeIfNull: false) String? gender,@JsonKey(includeIfNull: false, name: "is_smoker") int? isSmoker,@JsonKey(includeIfNull: false, name: "has_diabetes") int? hasDiabetes,@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) int? hasHypertension,@JsonKey(includeIfNull: false, name: "is_pregnant") int? isPregnant,@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? activityLevel,@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? lastCheckupDate
+@JsonKey(includeIfNull: false, name: "full_name") String? fullName,@JsonKey(includeIfNull: false) String? avatar,@JsonKey(includeIfNull: false, name: "birth_date") DateTime? birthDate,@JsonKey(includeIfNull: false) String? gender,@JsonKey(includeIfNull: false, name: "is_smoker") bool? isSmoker,@JsonKey(includeIfNull: false, name: "has_diabetes") bool? hasDiabetes,@JsonKey(includeIfNull: false, name: "has_hypertension")@JsonKey(includeIfNull: false) bool? hasHypertension,@JsonKey(includeIfNull: false, name: "is_pregnant") bool? isPregnant,@JsonKey(includeIfNull: false, name: "activity_level")@JsonKey(includeIfNull: false) String? activityLevel,@JsonKey(includeIfNull: false, name: "last_checkup_date")@JsonKey(includeIfNull: false) String? lastCheckupDate
 });
 
 
@@ -282,12 +282,12 @@ class __$UpdateProfileRequestCopyWithImpl<$Res>
 fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
-as String?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
+as DateTime?,gender: freezed == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String?,isSmoker: freezed == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
-as int?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes // ignore: cast_nullable_to_non_nullable
-as int?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
-as int?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
-as int?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
+as bool?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes // ignore: cast_nullable_to_non_nullable
+as bool?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
+as bool?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
+as bool?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
 as String?,lastCheckupDate: freezed == lastCheckupDate ? _self.lastCheckupDate : lastCheckupDate // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

@@ -10,14 +10,14 @@ sealed class UpdateProfileRequest with _$UpdateProfileRequest {
   factory UpdateProfileRequest({
     @JsonKey(includeIfNull: false, name: "full_name") String? fullName,
     @JsonKey(includeIfNull: false) String? avatar,
-    @JsonKey(includeIfNull: false, name: "birth_date") String? birthDate,
+    @JsonKey(includeIfNull: false, name: "birth_date") DateTime? birthDate,
     @JsonKey(includeIfNull: false) String? gender,
-    @JsonKey(includeIfNull: false, name: "is_smoker") int? isSmoker,
-    @JsonKey(includeIfNull: false, name: "has_diabetes") int? hasDiabetes,
+    @JsonKey(includeIfNull: false, name: "is_smoker") bool? isSmoker,
+    @JsonKey(includeIfNull: false, name: "has_diabetes") bool? hasDiabetes,
     @JsonKey(includeIfNull: false, name: "has_hypertension")
     @JsonKey(includeIfNull: false)
-    int? hasHypertension,
-    @JsonKey(includeIfNull: false, name: "is_pregnant") int? isPregnant,
+    bool? hasHypertension,
+    @JsonKey(includeIfNull: false, name: "is_pregnant") bool? isPregnant,
     @JsonKey(includeIfNull: false, name: "activity_level")
     @JsonKey(includeIfNull: false)
     String? activityLevel,
@@ -39,9 +39,20 @@ extension UpdateProfileRequestX on UpdateProfileRequest {
     if (birthDate != null) {
       map['birth_date'] = DateFormat(
         'MM/dd/yyyy',
-      ).format(map['birth_date']).toString();
+      ).format(birthDate!).toString();
     }
-    print(map['birth_date']);
+    if (isSmoker != null) {
+      map['is_smoker'] = isSmoker! ? 1 : 0;
+    }
+    if (hasDiabetes != null) {
+      map['has_diabetes'] = hasDiabetes! ? 1 : 0;
+    }
+    if (hasHypertension != null) {
+      map['has_hypertension'] = hasHypertension! ? 1 : 0;
+    }
+    if (isPregnant != null) {
+      map['is_pregnant'] = isPregnant! ? 1 : 0;
+    }
     return FormData.fromMap(map);
   }
 }

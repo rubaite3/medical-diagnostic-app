@@ -66,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         message: state.statusMessage,
                       );
                       if (state.op.isSuccess) {
-                        context.goNamed(RoutePaths.home);
+                        context.goNamed(RoutePaths.homeScreen);
                       }
                     },
                     listenWhen: (previous, current) =>

@@ -65,7 +65,7 @@ class AuthStrings {
 }
 
 class PatientProfileStrings {
-  static const String patientProfileTitle = "Patient Medical Profile";
+  static const String patientProfileTitle = " Medical Profile";
   static const String patientProfileSubtitle =
       "Please complete your medical info accurately";
   static const String birthDateHint = "Birth Date";
@@ -77,11 +77,13 @@ class PatientProfileStrings {
   static const String hypertensionQuestion = "Do you have hypertension?";
   static const String pregnantQuestion = "Are you currently pregnant?";
   static const String saveProfileButton = "Save Medical Profile";
+  static const String resetProfileButton = "Reset Medical Profile";
 }
 
 class HomeStrings {
   static const String welcome = "Welcome, ";
-  static const String intro = "How are you feeling today? Let's start your health assessment.";
+  static const String intro =
+      "How are you feeling today? Let's start your health assessment.";
   static const String startAssessment = "Start Diagnosis";
   static const String navHome = "Home";
   static const String navProfile = "Profile";

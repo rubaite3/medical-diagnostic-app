@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
-import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/email_verification_screen.dart';
@@ -17,8 +16,8 @@ import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profi
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
-
+  static final _homeNavigatorKey = GlobalKey<NavigatorState>();
+  static final _patientProfileNavigatorKey = GlobalKey<NavigatorState>();
   static const _publicRoutes = [
     RoutePaths.onBoarding,
     RoutePaths.login,
@@ -42,6 +41,7 @@ class AppRouter {
 
       if (authState.auth.isGuest) {
         if (!_isPublic(location)) return RoutePaths.login;
+
         return null;
       } else {
         if (_isPublic(location)) return RoutePaths.homeScreen;
@@ -89,21 +89,32 @@ class AppRouter {
         },
       ),
 
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) {
-          return MainWrapper(child: child);
-        },
-        routes: [
-          GoRoute(
-            name: RoutePaths.homeScreen,
-            path: RoutePaths.homeScreen,
-            builder: (_, _) => const HomeScreen(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            MainWrapper(navigationShell: navigationShell),
+        branches: [
+          StatefulShellBranch(
+            navigatorKey: _homeNavigatorKey,
+            initialLocation: RoutePaths.homeScreen,
+            routes: [
+              GoRoute(
+                name: RoutePaths.homeScreen,
+                path: RoutePaths.homeScreen,
+                builder: (context, state) => HomeScreen(),
+              ),
+            ],
           ),
-          GoRoute(
-            name: RoutePaths.patientProfile,
-            path: RoutePaths.patientProfile,
-            builder: (_, _) => const PatientProfileScreen(),
+
+          StatefulShellBranch(
+            navigatorKey: _patientProfileNavigatorKey,
+            initialLocation: RoutePaths.patientProfile,
+            routes: [
+              GoRoute(
+                name: RoutePaths.patientProfile,
+                path: RoutePaths.patientProfile,
+                builder: (context, state) => PatientProfileScreen(),
+              ),
+            ],
           ),
         ],
       ),
@@ -112,27 +123,22 @@ class AppRouter {
 }
 
 class MainWrapper extends StatelessWidget {
-  final Widget child;
-  const MainWrapper({super.key, required this.child});
+  final StatefulNavigationShell navigationShell;
+  const MainWrapper({super.key, required this.navigationShell});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final String location = GoRouterState.of(context).uri.path;
-
-    int selectedIndex = 0;
-    if (location == RoutePaths.patientProfile) {
-      selectedIndex = 1;
-    }
 
     return Scaffold(
-      body: child,
+      body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
+        currentIndex: navigationShell.currentIndex,
         onTap: (index) {
-          if (index == 0) context.goNamed(RoutePaths.homeScreen);
-          if (index == 1) context.goNamed(RoutePaths.patientProfile);
+          if (0 <= index && index < 2) {
+            navigationShell.goBranch(index);
+          }
         },
         selectedItemColor: colorScheme.primary,
         unselectedItemColor: colorScheme.onSurfaceVariant.withValues(

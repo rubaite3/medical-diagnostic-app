@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
-import 'package:medical_diagnostic_app1/features/auth/models/user.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
+import 'package:medical_diagnostic_app1/features/home/view/controllers/cubit/patient_profile_cubit.dart';
 import 'dart:io';
 
 import '../../../../core/consts/strings.dart';
@@ -21,52 +21,33 @@ class PatientProfileScreen extends StatefulWidget {
 }
 
 class _PatientProfileScreenState extends State<PatientProfileScreen> {
-  final TextEditingController _birthDateController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
-
-  String _gender = 'male';
-  String _activityLevel = 'moderate';
-  bool _isSmoker = false;
-  bool _hasDiabetes = false;
-  bool _hasHypertension = false;
-  bool _isPregnant = false;
-  File? _profileImage;
-
   @override
   void initState() {
     super.initState();
+    _patientProfileCubit = PatientProfileCubit(
+      user: context.read<AuthBloc>().state.user!,
+    );
     updateUser();
   }
 
   void updateProfile() {
     final authUser = context.read<AuthBloc>().state.user;
+    final profileUser = _patientProfileCubit.state.user;
 
-    final user = authUser?.copyWith(
-      avatar: _profileImage?.path,
-      activityLevel: _activityLevel,
-      birthDate: _birthDateController.text.isEmpty
-          ? null
-          : _birthDateController.text,
-      gender: _gender,
-      hasDiabetes: _hasDiabetes ? 1 : 0,
-      hasHypertension: _hasHypertension ? 1 : 0,
-      isPregnant: _isPregnant ? 1 : 0,
-      isSmoker: _isSmoker ? 1 : 0,
-    );
-    if (user != authUser) {
+    if (profileUser != authUser) {
       context.read<AuthBloc>().add(
         AuthEvent.updateProfile(
           UpdateProfileRequest(
-            avatar: _profileImage?.path,
-            activityLevel: _activityLevel,
-            birthDate: _birthDateController.text.isEmpty
+            avatar: (profileUser.avatar ?? "").contains('http')
                 ? null
-                : _birthDateController.text,
-            gender: _gender,
-            hasDiabetes: _hasDiabetes ? 1 : 0,
-            hasHypertension: _hasHypertension ? 1 : 0,
-            isPregnant: _isPregnant ? 1 : 0,
-            isSmoker: _isSmoker ? 1 : 0,
+                : profileUser.avatar,
+            activityLevel: profileUser.activityLevel,
+            birthDate: profileUser.birthDate,
+            gender: profileUser.gender,
+            hasDiabetes: profileUser.hasDiabetes,
+            hasHypertension: profileUser.hasHypertension,
+            isPregnant: profileUser.isPregnant,
+            isSmoker: profileUser.isSmoker,
           ),
         ),
       );
@@ -76,27 +57,25 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
   void updateUser() {
-    setState(() {
-      final user = context.read<AuthBloc>().state.user;
-      final date = DateTime.tryParse(user?.birthDate ?? "");
-      if (date != null) {
-        int age = DateTime.now().year - date.year;
-        if (DateTime.now().month < date.month ||
-            (DateTime.now().month == date.month &&
-                DateTime.now().day < date.day)) {
-          age--;
-          _ageController.text = age.toString();
-        }
-        _birthDateController.text = date.toString();
+    final authUser = context.read<AuthBloc>().state.user;
+    final date = authUser?.birthDate;
+    if (date != null) {
+      birthDate = date;
+      int age = DateTime.now().year - date.year;
+      if (DateTime.now().month < date.month ||
+          (DateTime.now().month == date.month &&
+              DateTime.now().day < date.day)) {
+        age--;
+        _ageController.text = age.toString();
       }
-
-      _gender = user?.gender ?? "male";
-      _activityLevel = user?.activityLevel ?? "moderate";
-      _isSmoker = (user?.isSmoker ?? 0) == 1;
-      _hasDiabetes = (user?.hasDiabetes ?? 0) == 1;
-      _hasHypertension = (user?.hasHypertension ?? 0) == 1;
-      _isPregnant = (user?.isPregnant ?? 0) == 1;
-    });
+      _birthDateController.text = DateFormat(
+        DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY,
+      ).format(date);
+    } else {
+      _birthDateController.clear();
+      _ageController.clear();
+    }
+    _patientProfileCubit.updateUser(authUser);
   }
 
   @override
@@ -121,18 +100,20 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
       },
     );
     if (picked != null) {
-      setState(() {
-        _birthDateController.text =
-            "${picked.year}-${picked.month.toString().padLeft(2, '0')}-${picked.day.toString().padLeft(2, '0')}";
+      _patientProfileCubit.updateUser(
+        _patientProfileCubit.state.user.copyWith(birthDate: picked),
+      );
+      _birthDateController.text = DateFormat(
+        DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY,
+      ).format(picked);
 
-        int age = DateTime.now().year - picked.year;
-        if (DateTime.now().month < picked.month ||
-            (DateTime.now().month == picked.month &&
-                DateTime.now().day < picked.day)) {
-          age--;
-        }
-        _ageController.text = age.toString();
-      });
+      int age = DateTime.now().year - picked.year;
+      if (DateTime.now().month < picked.month ||
+          (DateTime.now().month == picked.month &&
+              DateTime.now().day < picked.day)) {
+        age--;
+      }
+      _ageController.text = age.toString();
     }
   }
 
@@ -151,13 +132,19 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
             children: [
               const SizedBox(height: 10),
 
-              ProfileImagePicker(
-                initialImage: _profileImage,
-                onImageSelected: (File? image) {
-                  setState(() {
-                    _profileImage = image;
-                  });
-                },
+              BlocSelector<AuthBloc, AuthState, String>(
+                selector: (state) => state.user?.avatar ?? "",
+                builder: (context, state) => ProfileImagePicker(
+                  onImageSelected: (File? image) {
+                    if (image != null) {
+                      _patientProfileCubit.updateUser(
+                        _patientProfileCubit.state.user.copyWith(
+                          avatar: image.path,
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
 
               BlocListener<AuthBloc, AuthState>(
@@ -175,12 +162,18 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 child: const SizedBox(height: 25),
               ),
 
-              Text(
-                PatientProfileStrings.patientProfileTitle,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: colorScheme.onSurface,
+              BlocSelector<PatientProfileCubit, PatientProfileState, String>(
+                selector: (state) => state.user.fullName ?? "Patient",
+                bloc: _patientProfileCubit,
+                builder: (context, state) => Text(
+                  state[0].toUpperCase() +
+                      state.substring(1) +
+                      PatientProfileStrings.patientProfileTitle,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -196,61 +189,92 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               GestureDetector(
                 onTap: () => _selectBirthDate(context),
                 child: AbsorbPointer(
-                  child: CustomTextField(
-                    hintText: PatientProfileStrings.birthDateHint,
-                    prefixIcon: Icons.cake_outlined,
-                    controller: _birthDateController,
-                  ),
+                  child:
+                      BlocSelector<
+                        PatientProfileCubit,
+                        PatientProfileState,
+                        DateTime
+                      >(
+                        bloc: _patientProfileCubit,
+                        selector: (state) =>
+                            state.user.birthDate ?? DateTime.now(),
+                        builder: (context, state) => CustomTextField(
+                          hintText: PatientProfileStrings.birthDateHint,
+                          prefixIcon: Icons.cake_outlined,
+                          controller: _birthDateController,
+                        ),
+                      ),
                 ),
               ),
               const SizedBox(height: 16),
 
-              CustomTextField(
-                readOnly: true,
-                hintText: PatientProfileStrings.ageHint,
-                prefixIcon: Icons.calendar_today_outlined,
-                controller: _ageController,
+              BlocSelector<PatientProfileCubit, PatientProfileState, DateTime>(
+                bloc: _patientProfileCubit,
+                selector: (state) => state.user.birthDate ?? DateTime.now(),
+                builder: (context, state) => CustomTextField(
+                  readOnly: true,
+                  hintText: PatientProfileStrings.ageHint,
+                  prefixIcon: Icons.calendar_today_outlined,
+                  controller: _ageController,
+                ),
               ),
               const SizedBox(height: 16),
 
-              ProfileDropdownField(
-                hint: PatientProfileStrings.genderHint,
-                value: _gender,
-                items: const [
-                  DropdownMenuItem(value: 'male', child: Text('Male')),
-                  DropdownMenuItem(value: 'female', child: Text('Female')),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _gender = value!;
-                    if (_gender == 'male') _isPregnant = false;
-                  });
+              BlocSelector<PatientProfileCubit, PatientProfileState, String>(
+                bloc: _patientProfileCubit,
+                selector: (state) {
+                  return state.user.gender ?? "male";
                 },
+                builder: (context, state) => ProfileDropdownField(
+                  hint: PatientProfileStrings.genderHint,
+                  value: state,
+                  items: const [
+                    DropdownMenuItem(value: 'male', child: Text('Male')),
+                    DropdownMenuItem(value: 'female', child: Text('Female')),
+                  ],
+                  onChanged: (value) {
+                    _patientProfileCubit.updateUser(
+                      _patientProfileCubit.state.user.copyWith(
+                        gender: value!,
+                        isPregnant: false,
+                      ),
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 16),
 
-              ProfileDropdownField(
-                hint: PatientProfileStrings.activityLevelHint,
-                value: _activityLevel,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'sedentary',
-                    child: Text('Sedentary (Low Activity)'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'moderate',
-                    child: Text('Moderate Activity'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'active',
-                    child: Text('Highly Active'),
-                  ),
-                ],
-                onChanged: (value) {
-                  setState(() {
-                    _activityLevel = value!;
-                  });
+              BlocSelector<PatientProfileCubit, PatientProfileState, String>(
+                bloc: _patientProfileCubit,
+                selector: (state) {
+                  return state.user.activityLevel ?? "moderate";
                 },
+
+                builder: (context, state) => ProfileDropdownField(
+                  hint: PatientProfileStrings.activityLevelHint,
+                  value: state,
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'sedentary',
+                      child: Text('Sedentary (Low Activity)'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'moderate',
+                      child: Text('Moderate Activity'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'active',
+                      child: Text('Highly Active'),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    _patientProfileCubit.updateUser(
+                      _patientProfileCubit.state.user.copyWith(
+                        activityLevel: value!,
+                      ),
+                    );
+                  },
+                ),
               ),
 
               const SizedBox(height: 24),
@@ -283,44 +307,118 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 ),
                 child: Column(
                   children: [
-                    ProfileCheckboxRow(
-                      title: PatientProfileStrings.smokerQuestion,
-                      value: _isSmoker,
-                      onChanged: (val) => setState(() => _isSmoker = val!),
+                    BlocSelector<
+                      PatientProfileCubit,
+                      PatientProfileState,
+                      bool
+                    >(
+                      bloc: _patientProfileCubit,
+                      selector: (state) => state.user.isSmoker ?? false,
+                      builder: (context, state) => ProfileCheckboxRow(
+                        title: PatientProfileStrings.smokerQuestion,
+                        value: state,
+                        onChanged: (val) {
+                          _patientProfileCubit.updateUser(
+                            _patientProfileCubit.state.user.copyWith(
+                              isSmoker: val,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     Divider(
                       height: 1,
                       indent: 45,
                       color: colorScheme.outline.withValues(alpha: 0.1),
                     ),
-                    ProfileCheckboxRow(
-                      title: PatientProfileStrings.diabetesQuestion,
-                      value: _hasDiabetes,
-                      onChanged: (val) => setState(() => _hasDiabetes = val!),
+                    BlocSelector<
+                      PatientProfileCubit,
+                      PatientProfileState,
+                      bool
+                    >(
+                      bloc: _patientProfileCubit,
+                      selector: (state) => state.user.hasDiabetes ?? false,
+                      builder: (context, state) => ProfileCheckboxRow(
+                        title: PatientProfileStrings.diabetesQuestion,
+                        value: state,
+                        onChanged: (val) {
+                          _patientProfileCubit.updateUser(
+                            _patientProfileCubit.state.user.copyWith(
+                              hasDiabetes: val,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     Divider(
                       height: 1,
                       indent: 45,
                       color: colorScheme.outline.withValues(alpha: 0.1),
                     ),
-                    ProfileCheckboxRow(
-                      title: PatientProfileStrings.hypertensionQuestion,
-                      value: _hasHypertension,
-                      onChanged: (val) =>
-                          setState(() => _hasHypertension = val!),
+                    BlocSelector<
+                      PatientProfileCubit,
+                      PatientProfileState,
+                      bool
+                    >(
+                      bloc: _patientProfileCubit,
+                      selector: (state) => state.user.hasHypertension ?? false,
+                      builder: (context, state) => ProfileCheckboxRow(
+                        title: PatientProfileStrings.hypertensionQuestion,
+                        value: state,
+                        onChanged: (val) {
+                          _patientProfileCubit.updateUser(
+                            _patientProfileCubit.state.user.copyWith(
+                              hasHypertension: val,
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                    if (_gender == 'female') ...[
-                      Divider(
-                        height: 1,
-                        indent: 45,
-                        color: colorScheme.outline.withValues(alpha: 0.1),
-                      ),
-                      ProfileCheckboxRow(
-                        title: PatientProfileStrings.pregnantQuestion,
-                        value: _isPregnant,
-                        onChanged: (val) => setState(() => _isPregnant = val!),
-                      ),
-                    ],
+                    BlocSelector<
+                      PatientProfileCubit,
+                      PatientProfileState,
+                      bool
+                    >(
+                      bloc: _patientProfileCubit,
+                      selector: (state) =>
+                          (state.user.gender ?? "male") == "male",
+                      builder: (context, state) {
+                        return state
+                            ? SizedBox()
+                            : Column(
+                                children: [
+                                  Divider(
+                                    height: 1,
+                                    indent: 45,
+                                    color: colorScheme.outline.withValues(
+                                      alpha: 0.1,
+                                    ),
+                                  ),
+                                  BlocSelector<
+                                    PatientProfileCubit,
+                                    PatientProfileState,
+                                    bool
+                                  >(
+                                    bloc: _patientProfileCubit,
+                                    selector: (state) =>
+                                        state.user.isPregnant ?? false,
+                                    builder: (context, state) =>
+                                        ProfileCheckboxRow(
+                                          title: PatientProfileStrings
+                                              .pregnantQuestion,
+                                          value: state,
+                                          onChanged: (val) {
+                                            _patientProfileCubit.updateUser(
+                                              _patientProfileCubit.state.user
+                                                  .copyWith(isPregnant: val),
+                                            );
+                                          },
+                                        ),
+                                  ),
+                                ],
+                              );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -332,10 +430,21 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 onPressed: updateProfile,
               ),
               const SizedBox(height: 30),
+              CustomButton(
+                text: PatientProfileStrings.resetProfileButton,
+                onPressed: updateUser,
+              ),
+              const SizedBox(height: 30),
             ],
           ),
         ),
       ),
     );
   }
+
+  final TextEditingController _birthDateController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  late final PatientProfileCubit _patientProfileCubit;
+  DateTime? birthDate;
+  File? _profileImage;
 }

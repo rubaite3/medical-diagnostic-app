@@ -1,11 +1,12 @@
 class ApiConsts {
-  static final yousefUrl =
-      "https://deep-pangolin-normally.ngrok-free.app/api/v1";
+  static final yousefUrl = "https://deep-pangolin-normally.ngrok-free.app";
   static final rubaUrl = "https://----";
   static final serverUrl = yousefUrl;
 
+  static final baseUrl = "$serverUrl/api/v1";
+
   // Auth
-  static final authPrefix = "$serverUrl/auth";
+  static final authPrefix = "$baseUrl/auth";
   static final login = "$authPrefix/login";
   static final register = "$authPrefix/register";
   static final refreshToken = "$authPrefix/refresh";

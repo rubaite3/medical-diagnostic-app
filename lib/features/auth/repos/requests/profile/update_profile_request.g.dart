@@ -11,12 +11,14 @@ _UpdateProfileRequest _$UpdateProfileRequestFromJson(
 ) => _UpdateProfileRequest(
   fullName: json['full_name'] as String?,
   avatar: json['avatar'] as String?,
-  birthDate: json['birth_date'] as String?,
+  birthDate: json['birth_date'] == null
+      ? null
+      : DateTime.parse(json['birth_date'] as String),
   gender: json['gender'] as String?,
-  isSmoker: (json['is_smoker'] as num?)?.toInt(),
-  hasDiabetes: (json['has_diabetes'] as num?)?.toInt(),
-  hasHypertension: (json['has_hypertension'] as num?)?.toInt(),
-  isPregnant: (json['is_pregnant'] as num?)?.toInt(),
+  isSmoker: json['is_smoker'] as bool?,
+  hasDiabetes: json['has_diabetes'] as bool?,
+  hasHypertension: json['has_hypertension'] as bool?,
+  isPregnant: json['is_pregnant'] as bool?,
   activityLevel: json['activity_level'] as String?,
   lastCheckupDate: json['last_checkup_date'] as String?,
 );
@@ -26,7 +28,7 @@ Map<String, dynamic> _$UpdateProfileRequestToJson(
 ) => <String, dynamic>{
   'full_name': ?instance.fullName,
   'avatar': ?instance.avatar,
-  'birth_date': ?instance.birthDate,
+  'birth_date': ?instance.birthDate?.toIso8601String(),
   'gender': ?instance.gender,
   'is_smoker': ?instance.isSmoker,
   'has_diabetes': ?instance.hasDiabetes,

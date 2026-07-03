@@ -12,7 +12,12 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: onPressed,
+        onPressed: onPressed == null
+            ? null
+            : () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                onPressed!();
+              },
         style: ElevatedButton.styleFrom(
           // backgroundColor: AppColors.primaryButton,
           shape: RoundedRectangleBorder(
