@@ -178,6 +178,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 onPressed: !_verifyButtonActivated
                     ? null
                     : () {
+                        FocusManager.instance.primaryFocus?.unfocus();
                         final code = _controllers.map((c) => c.text).join();
                         _emailVerificationCubit.verify(
                           VerifyEmailRequest(otp: code, email: widget.email),

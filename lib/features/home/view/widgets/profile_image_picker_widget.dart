@@ -1,31 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 
 import '../../../../core/theme/colors.dart';
 
 class ProfileImagePicker extends StatefulWidget {
   final Function(File?) onImageSelected;
-  final File? initialImage;
 
-  const ProfileImagePicker({
-    super.key,
-    required this.onImageSelected,
-    this.initialImage,
-  });
+  const ProfileImagePicker({super.key, required this.onImageSelected});
 
   @override
   State<ProfileImagePicker> createState() => _ProfileImagePickerState();
 }
 
 class _ProfileImagePickerState extends State<ProfileImagePicker> {
-  late File? _selectedImage;
+  File? _selectedImage;
   final ImagePicker _imagePicker = ImagePicker();
 
   @override
   void initState() {
     super.initState();
-    _selectedImage = widget.initialImage;
   }
 
   Future<void> _pickImageFromGallery() async {
@@ -64,7 +63,13 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         widget.onImageSelected(_selectedImage);
       }
     } catch (e) {
-      _showErrorSnackBar('Failed to capture image: $e');
+      if (mounted) {
+        Utils.showToast(
+          context,
+          level: -1,
+          message: 'Failed to capture image: $e',
+        );
+      }
     }
   }
 
@@ -78,7 +83,6 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
   void _showImageSourceBottomSheet() {
     showModalBottomSheet(
       context: context,
-      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -99,16 +103,28 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.photo_library_rounded, color: AppColors.medical),
-                  title: const Text('Choose from Gallery', style: TextStyle(fontWeight: FontWeight.w500)),
+                  leading: const Icon(
+                    Icons.photo_library_rounded,
+                    color: AppColors.medical,
+                  ),
+                  title: const Text(
+                    'Choose from Gallery',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImageFromGallery();
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.camera_alt_rounded, color: AppColors.medical),
-                  title: const Text('Take a Photo', style: TextStyle(fontWeight: FontWeight.w500)),
+                  leading: const Icon(
+                    Icons.camera_alt_rounded,
+                    color: AppColors.medical,
+                  ),
+                  title: const Text(
+                    'Take a Photo',
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   onTap: () {
                     Navigator.pop(context);
                     _pickImageFromCamera();
@@ -116,8 +132,17 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                 ),
                 if (_selectedImage != null)
                   ListTile(
-                    leading: const Icon(Icons.delete_outline_rounded, color: Colors.redAccent),
-                    title: const Text('Remove Photo', style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.w500)),
+                    leading: const Icon(
+                      Icons.delete_outline_rounded,
+                      color: Colors.redAccent,
+                    ),
+                    title: const Text(
+                      'Remove Photo',
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     onTap: () {
                       Navigator.pop(context);
                       _removeImage();
@@ -155,29 +180,32 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: AppColors.medical.withValues(alpha:0.15),
+                  color: AppColors.medical.withValues(alpha: 0.15),
                   blurRadius: 15,
                   offset: const Offset(0, 8),
                 ),
               ],
-              border: Border.all(
-                color: Colors.white,
-                width: 4,
-              ),
+              border: Border.all(color: Colors.white, width: 4),
             ),
             child: GestureDetector(
               onTap: _showImageSourceBottomSheet,
-              child: ClipOval(
-                child: _selectedImage != null
-                    ? Image.file(
-                        _selectedImage!,
-                        fit: BoxFit.cover,
-                      )
-                    : const Icon(
-                        Icons.person_rounded,
-                        size: 75,
-                        color: AppColors.medical,
-                      ),
+              child: BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  _selectedImage = null;
+                },
+                listenWhen: (previous, current) =>
+                    previous.user?.avatar != current.user?.avatar,
+                builder: (context, state) => ClipOval(
+                  child: (state.user?.avatar != null && _selectedImage == null)
+                      ? Image.network(state.user!.avatar!)
+                      : _selectedImage != null
+                      ? Image.file(_selectedImage!, fit: BoxFit.cover)
+                      : const Icon(
+                          Icons.person_rounded,
+                          size: 75,
+                          color: AppColors.medical,
+                        ),
+                ),
               ),
             ),
           ),
@@ -192,7 +220,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                 border: Border.all(color: Colors.white, width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.medical.withValues(alpha:0.3),
+                    color: AppColors.medical.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),

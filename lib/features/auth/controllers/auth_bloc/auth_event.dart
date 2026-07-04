@@ -8,6 +8,7 @@ sealed class AuthEvent with _$AuthEvent {
   const factory AuthEvent.authLoading() = _AuthLoading;
   const factory AuthEvent.login(LoginRequest loginRequest) = _Login;
   const factory AuthEvent.logout() = _Logout;
+  const factory AuthEvent.checkConnectivity() = _CheckConnectivity;
   const factory AuthEvent.register(RegisterRequest registerRequest) = _Register;
   const factory AuthEvent.refreshToken() = _RefreshToken;
   const factory AuthEvent.resendEmailVerify(
@@ -16,4 +17,7 @@ sealed class AuthEvent with _$AuthEvent {
   const factory AuthEvent.forgotPass(
     ForgetPasswordRequest forgetPasswordRequest,
   ) = _ForgotPass;
+  const factory AuthEvent.updateProfile(
+    UpdateProfileRequest updateProfileRequest,
+  ) = _UpdateProfile;
 }

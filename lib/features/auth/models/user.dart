@@ -9,7 +9,7 @@ sealed class User with _$User {
     String? email,
     @JsonKey(name: "full_name") String? fullName,
     String? avatar,
-    @JsonKey(name: "birth_date") String? birthDate,
+    @JsonKey(name: "birth_date") DateTime? birthDate,
     String? gender,
     @JsonKey(name: "is_smoker") bool? isSmoker,
     @JsonKey(name: "has_diabetes") bool? hasDiabetes,

@@ -17,6 +17,7 @@ class ApiConsts {
   static final forgetPassword = "$authPrefix/forget-password";
   static final resetPassword = "$authPrefix/reset-password";
   static final logout = "$authPrefix/logout";
+  static final checkAuth = "$authPrefix/check-auth";
 
   // Profile
   static final profile = "$authPrefix/profile";

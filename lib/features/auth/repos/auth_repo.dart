@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fpdart/fpdart.dart';
 import 'package:medical_diagnostic_app1/core/api/app_error.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
@@ -70,6 +68,11 @@ class AuthRepo {
     return Utils.mapStatusCodeToResponse(response);
   }
 
+  Future<Either<AppError, AppResponse>> checkAuthState() async {
+    final response = await dioInstance.get(ApiConsts.checkAuth);
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
   Future<Either<AppError, AppResponse>> forgotPassword(
     ForgetPasswordRequest forgetPasswordRequest,
   ) async {
@@ -100,7 +103,7 @@ class AuthRepo {
   ) async {
     final response = await dioInstance.patch(
       ApiConsts.profile,
-      data: updateProfileRequest.toFormData(),
+      data: await updateProfileRequest.toFormData(),
     );
     return Utils.mapStatusCodeToResponse(response);
   }

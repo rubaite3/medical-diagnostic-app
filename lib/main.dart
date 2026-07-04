@@ -7,6 +7,7 @@ import 'package:medical_diagnostic_app1/core/dependencies/service_locator.dart';
 import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/navigation/app_router.dart';
 import 'package:medical_diagnostic_app1/core/theme/central_theme.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/core/widgets/loading_overlay.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -40,14 +41,28 @@ class MyApp extends StatelessWidget {
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
-          return Stack(
-            children: [
-              ?child,
-              BlocBuilder<LoaderCubit, bool>(
-                builder: (context, isLoading) =>
-                    LoadingOverlay(isLoading: isLoading),
-              ),
-            ],
+          return BlocListener<AuthBloc, AuthState>(
+            listenWhen: (previous, current) =>
+                !current.op.isNeutral &&
+                ((!current.isOnline) ||
+                    (!previous.isOnline && current.isOnline) ||
+                    ((previous.auth.isAuth) && (current.auth.isGuest))),
+            listener: (context, state) {
+              Utils.showToast(
+                context,
+                message: state.statusMessage,
+                level: Utils.mapOp(state.op),
+              );
+            },
+            child: Stack(
+              children: [
+                ?child,
+                BlocBuilder<LoaderCubit, bool>(
+                  builder: (context, isLoading) =>
+                      LoadingOverlay(isLoading: isLoading),
+                ),
+              ],
+            ),
           );
         },
       ),

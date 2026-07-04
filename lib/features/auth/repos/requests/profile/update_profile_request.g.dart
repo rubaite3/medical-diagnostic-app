@@ -11,7 +11,9 @@ _UpdateProfileRequest _$UpdateProfileRequestFromJson(
 ) => _UpdateProfileRequest(
   fullName: json['full_name'] as String?,
   avatar: json['avatar'] as String?,
-  birthDate: json['birth_date'] as String?,
+  birthDate: json['birth_date'] == null
+      ? null
+      : DateTime.parse(json['birth_date'] as String),
   gender: json['gender'] as String?,
   isSmoker: json['is_smoker'] as bool?,
   hasDiabetes: json['has_diabetes'] as bool?,
@@ -24,14 +26,14 @@ _UpdateProfileRequest _$UpdateProfileRequestFromJson(
 Map<String, dynamic> _$UpdateProfileRequestToJson(
   _UpdateProfileRequest instance,
 ) => <String, dynamic>{
-  'full_name': instance.fullName,
-  'avatar': instance.avatar,
-  'birth_date': instance.birthDate,
-  'gender': instance.gender,
-  'is_smoker': instance.isSmoker,
-  'has_diabetes': instance.hasDiabetes,
-  'has_hypertension': instance.hasHypertension,
-  'is_pregnant': instance.isPregnant,
-  'activity_level': instance.activityLevel,
-  'last_checkup_date': instance.lastCheckupDate,
+  'full_name': ?instance.fullName,
+  'avatar': ?instance.avatar,
+  'birth_date': ?instance.birthDate?.toIso8601String(),
+  'gender': ?instance.gender,
+  'is_smoker': ?instance.isSmoker,
+  'has_diabetes': ?instance.hasDiabetes,
+  'has_hypertension': ?instance.hasHypertension,
+  'is_pregnant': ?instance.isPregnant,
+  'activity_level': ?instance.activityLevel,
+  'last_checkup_date': ?instance.lastCheckupDate,
 };

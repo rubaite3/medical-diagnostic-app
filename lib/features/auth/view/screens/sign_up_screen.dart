@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -26,8 +25,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, result) {
@@ -80,8 +77,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    validator: (value) =>
-                        value!.isEmpty ? "Password must not be empty" : null,
+                    validator: (value) => value!.isEmpty
+                        ? "Password must not be empty"
+                        : value.trim().length < 7
+                        ? "Password must be at least 8 chars"
+                        : null,
                     hintText: AuthStrings.hintPassword,
                     prefixIcon: Icons.vpn_key_outlined,
                     isPassword: true,
@@ -154,25 +154,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _register(context);
                     },
                   ),
-                  const SizedBox(height: 24),
 
-                  Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(AuthStrings.orContinueWith),
-                      ),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
+                  // لا تحذفيه
+                  if (false) _buildGoogle(),
 
-                  GoogleButton(
-                    onTap: () {
-                      print("Google Sign Up Triggered");
-                    },
-                  ),
                   const SizedBox(height: 30),
 
                   Row(
@@ -202,6 +187,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Column _buildGoogle() {
+    return Column(
+      children: [
+        const SizedBox(height: 24),
+
+        Row(
+          children: [
+            Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(AuthStrings.orContinueWith),
+            ),
+            Expanded(child: Divider()),
+          ],
+        ),
+        const SizedBox(height: 24),
+        GoogleButton(
+          onTap: () {
+            print("Google Sign Up Triggered");
+          },
+        ),
+      ],
     );
   }
 
