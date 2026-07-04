@@ -36,32 +36,27 @@ class SettingsScreen extends StatelessWidget {
               title: SettingsStrings.language,
               onTap: () => context.goNamed(RoutePaths.language),
             ),
-            
+
             const SizedBox(height: 24),
             _buildSectionTitle(context, SettingsStrings.support),
-            SettingsItemWidget(
-              title: SettingsStrings.feedback,
-              onTap: () {}, // جاهز للربط
-            ),
             SettingsItemWidget(
               title: SettingsStrings.appUpdates,
               onTap: () => context.goNamed(RoutePaths.appUpdates),
             ),
             SettingsItemWidget(
-              title: SettingsStrings.aboutAda,
-              onTap: () => context.goNamed(RoutePaths.aboutAda),
+              title: SettingsStrings.aboutVitalia,
+              onTap: () => context.goNamed(RoutePaths.aboutVitalia),
             ),
             SettingsItemWidget(
               title: SettingsStrings.safetyInfo,
               onTap: () => context.goNamed(RoutePaths.safetyInfo),
             ),
-            
+
             const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: InkWell(
                 onTap: () {
-                  // استخدام حقيقي لـ AuthBloc لتسجيل الخروج
                   context.read<AuthBloc>().add(const AuthEvent.logout());
                 },
                 child: Text(

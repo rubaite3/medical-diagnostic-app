@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import '../widgets/settings_item_widget.dart';
+import 'webview_screen.dart'; 
 
-class AboutAdaScreen extends StatelessWidget {
-  const AboutAdaScreen({super.key});
+class AboutVitaliaScreen extends StatelessWidget {
+  const AboutVitaliaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(SettingsStrings.aboutAda),
+        title: const Text(SettingsStrings.aboutVitalia),
         centerTitle: true,
       ),
       body: ListView(
@@ -20,7 +22,7 @@ class AboutAdaScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Ada App', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+                Text('Vitalia App', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 16),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,11 +33,11 @@ class AboutAdaScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Ada Health GmbH', style: theme.textTheme.bodyLarge),
+                          Text('Vitalia GmbH', style: theme.textTheme.bodyLarge),
                           const SizedBox(height: 4),
                           Text('Neue Grünstraße 17\n10179 Berlin\nGermany', style: theme.textTheme.bodyMedium),
                           const SizedBox(height: 4),
-                          Text('support@ada.com', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary)),
+                          Text('support@vitalia.com', style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.primary)),
                         ],
                       ),
                     ),
@@ -45,10 +47,46 @@ class AboutAdaScreen extends StatelessWidget {
             ),
           ),
           const Divider(),
-          SettingsItemWidget(title: 'Terms and conditions', onTap: () {  }),
-          SettingsItemWidget(title: 'Privacy Policy', onTap: () {  }),
-          SettingsItemWidget(title: 'Third-party software', onTap: () {  }),
-          SettingsItemWidget(title: 'Medical quality', onTap: () { }),
+          SettingsItemWidget(
+            title: 'Terms and conditions',
+            onTap: () {
+            
+              context.push(
+                '/settings/webview',
+                extra: {'title': 'Terms and conditions', 'url': ''}, 
+               );
+            },
+          ),
+          SettingsItemWidget(
+            title: 'Privacy Policy',
+            onTap: () {
+              
+              context.push(
+                '/settings/webview',
+                extra: {'title': 'Privacy Policy', 'url': ''}, 
+               );
+            },
+          ),
+          SettingsItemWidget(
+            title: 'Third-party software',
+            onTap: () {
+             
+              context.push(
+                '/settings/webview',
+                extra: {'title': 'Third-party software', 'url': ''}, 
+               );
+            },
+          ),
+          SettingsItemWidget(
+            title: 'Medical quality',
+            onTap: () {
+             
+              context.push(
+                '/settings/webview',
+                extra: {'title': 'Medical quality', 'url': ''}, 
+               );
+            },
+          ),
         ],
       ),
     );

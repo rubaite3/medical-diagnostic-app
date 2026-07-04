@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; 
 import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
 
@@ -22,7 +23,7 @@ class AppUpdatesScreen extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                'assets/images/logo.png', // استخدم صورة موجودة في مشروعك
+                "assets/icons/appLogo-removebg-solo.png",
                 height: 150,
                 errorBuilder: (context, error, stackTrace) => const Icon(Icons.update, size: 100),
               ),
@@ -51,7 +52,14 @@ class AppUpdatesScreen extends StatelessWidget {
             CustomButton(
               text: SettingsStrings.readMore,
               onPressed: () {
-             
+                
+                context.push(
+                  '/settings/webview',
+                  extra: {
+                    'title': SettingsStrings.appUpdates, 
+                    'url': 'https://vitalia.com/updates', 
+                  },
+                );
               },
             ),
           ],

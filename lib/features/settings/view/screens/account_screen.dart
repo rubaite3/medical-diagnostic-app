@@ -13,11 +13,11 @@ class AccountScreen extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     
-    // جلب بيانات المستخدم الحقيقية من AuthBloc
+
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         final userEmail = state.user?.email ?? "Not logged in";
-        // معرف المستخدم الافتراضي (يمكن إضافته للـ Model لاحقاً)
+        
         const String userId = "d34ac463-c0d3-40a1-b094-8cd034b5eb1b";
 
         return Scaffold(
@@ -74,7 +74,7 @@ class AccountScreen extends StatelessWidget {
                 
                 InkWell(
                   onTap: () {
-                    // جاهز للربط مع دالة حذف الحساب في المستقبل
+                    
                     Utils.showToast(context, message: "Delete account feature is not available in the current API");
                   },
                   child: Padding(

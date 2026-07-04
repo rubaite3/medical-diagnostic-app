@@ -11,6 +11,6 @@ class RoutePaths {
   static const account = '/account';
   static const language = '/language';
   static const appUpdates = '/appUpdates';
-  static const aboutAda = '/aboutAda';
+  static const aboutVitalia = '/aboutVitalia';
   static const safetyInfo = '/safetyInfo';
 }

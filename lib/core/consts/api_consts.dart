@@ -2,13 +2,15 @@ class ApiConsts {
   static final yousefUrl =
       "https://deep-pangolin-normally.ngrok-free.app/api/v1";
   static final rubaUrl =
-      "https://enjoyment-tiling-glandular.ngrok-free.dev/api/v1";
+      "https://enjoyment-tiling-glandular.ngrok-free.dev";
   static final serverUrl =
       rubaUrl; // Change this to yousefUrl when you want to use the other server
 
   // Auth
-  
-  static final authPrefix = "$serverUrl/auth";
+   static final baseUrl = "$serverUrl/api/v1";
+
+  // Auth
+  static final authPrefix = "$baseUrl/auth";
   static final login = "$authPrefix/login";
   static final register = "$authPrefix/register";
   static final refreshToken = "$authPrefix/refresh";

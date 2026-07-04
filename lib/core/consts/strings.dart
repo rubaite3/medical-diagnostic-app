@@ -97,7 +97,7 @@ class SettingsStrings {
   static const String support = "Support";
   static const String feedback = "Feedback";
   static const String appUpdates = "App Updates";
-  static const String aboutAda = "About Vitalia";
+  static const String aboutVitalia = "About Vitalia";
   static const String safetyInfo = "Safety information";
   static const String logout = "Log out";
   static const String version = "Version 4.4.2 (2010356790)";
