@@ -90,8 +90,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
-                    validator: (value) =>
-                        value!.isEmpty ? "Password must not be empty" : null,
+                    validator: (value) => value!.isEmpty
+                        ? "Password must not be empty"
+                        : value.trim().length < 8
+                        ? "Passwrod must be 8 chars at lease"
+                        : null,
                     controller: _passwordController,
                     hintText: AuthStrings.hintPassword,
                     prefixIcon: Icons.vpn_key_outlined,
@@ -126,24 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-                  const SizedBox(height: 24),
+                  // لا تحذفيه
+                  if (false) _buildGoogle(),
 
-                  Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Text(AuthStrings.orContinueWith),
-                      ),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  GoogleButton(
-                    onTap: () {
-                      print("Google Login Triggered");
-                    },
-                  ),
                   const SizedBox(height: 30),
 
                   Row(
@@ -173,6 +161,31 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Column _buildGoogle() {
+    return Column(
+      children: [
+        const SizedBox(height: 24),
+
+        Row(
+          children: [
+            Expanded(child: Divider()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(AuthStrings.orContinueWith),
+            ),
+            Expanded(child: Divider()),
+          ],
+        ),
+        const SizedBox(height: 24),
+        GoogleButton(
+          onTap: () {
+            print("Google Login Triggered");
+          },
+        ),
+      ],
     );
   }
 

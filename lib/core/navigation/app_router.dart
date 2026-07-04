@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
+import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/email_verification_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/forgot_password_screen.dart';
@@ -11,6 +13,7 @@ import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.
 import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
+import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/home_screen.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profile_screen.dart';
 
@@ -132,6 +135,39 @@ class MainWrapper extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
+      appBar: AppBar(),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Expanded(flex: 5, child: SizedBox()),
+            Flexible(
+              flex: 1,
+              child: BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  Utils.showToast(
+                    context,
+                    level: Utils.mapOp(state.op),
+                    message: state.statusMessage,
+                  );
+                  if (state.statusMessage.contains("Logged out")) {
+                    context.goNamed(RoutePaths.login);
+                  }
+                },
+                listenWhen: (previous, current) => !current.op.isNeutral,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: CustomButton(
+                    text: "Logout",
+                    onPressed: () {
+                      context.read<AuthBloc>().add(AuthEvent.logout());
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,

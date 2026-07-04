@@ -33,6 +33,35 @@ class Utils {
       if (response.statusCode == 401) {
         GetIt.instance<AuthBloc>().add(AuthEvent.authToggeled(null));
       }
+      if (response.statusCode == 422) {
+        if (response.data.data["errors"] == null) {
+          return Left(
+            AppError(
+              errorMessage:
+                  response.data.data["message"] ?? "Some error occurred",
+              statusCode: response.statusCode ?? 500,
+            ),
+          );
+        }
+        final errors = response.data.data["errors"] as Map<String, dynamic>;
+        var errorMessage = "";
+        errors.forEach((key, value) {
+          for (var error in (value as List)) {
+            if (value.indexOf(error) != 0) {
+              errorMessage += "\n";
+            }
+            errorMessage += error;
+          }
+        });
+        return Left(
+          AppError(
+            errorMessage: errorMessage.isEmpty
+                ? "Some error occurred"
+                : errorMessage,
+            statusCode: response.statusCode ?? 500,
+          ),
+        );
+      }
       return Left(
         AppError(
           errorMessage: response.statusMessage ?? "Some error occurred",

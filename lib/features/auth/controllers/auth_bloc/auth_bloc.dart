@@ -141,9 +141,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               op: Operation.failure,
-              statusMessage: l.statusCode == 422
-                  ? "Sorry , Email has already been taken!"
-                  : l.errorMessage,
+              statusMessage: l.errorMessage,
             ),
           );
           emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
