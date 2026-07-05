@@ -89,3 +89,36 @@ class HomeStrings {
   static const String navProfile = "Profile";
   static const String navSettings = "Settings";
 }
+class SettingsStrings {
+  static const String settingsTitle = "Settings";
+  static const String accountSettings = "Account settings";
+  static const String accountLogin = "Account login";
+  static const String language = "Language";
+  static const String support = "Support";
+  static const String feedback = "Feedback";
+  static const String appUpdates = "App Updates";
+  static const String aboutVitalia = "About Vitalia";
+  static const String safetyInfo = "Safety information";
+  static const String logout = "Log out";
+  static const String version = "Version 4.4.2 (2010356790)";
+
+  // Account Screen
+  static const String accountTitle = "Account";
+  static const String signedUpWithGoogle = "You have signed up with Google:";
+  static const String userIdLabel = "User ID:";
+  static const String deleteAccount = "Delete your account and data";
+  static const String deleteAccountConfirm = "Are you sure you want to delete your account?";
+
+  // Language Screen
+  static const String changeLanguage = "Change language";
+
+  // App Updates Screen
+  static const String updatesTitle = "Changes to your Vitalia app";
+  static const String updatesDesc = "We've made a few updates to improve your experience and continue providing you with the best possible health assessment experience.";
+  static const String whatIsNew = "What's new";
+  static const String historyBack = "Your assessment history is back. You can now access your previous health assessments directly in the app.";
+  static const String languagesAdded = "Romanian and Swahili are available again. You can now use the app in English, German, French, Spanish, Portuguese, Romanian or Swahili.";
+  static const String questionsFeedback = "Questions or feedback?";
+  static const String contactSupport = "We'd love to hear from you. Contact us at support@vitalia.com.";
+  static const String readMore = "Read more";
+}

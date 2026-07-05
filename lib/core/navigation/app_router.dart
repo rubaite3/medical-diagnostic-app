@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -16,11 +18,19 @@ import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_scree
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/home_screen.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profile_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/about_vitalia_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/account_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/app_updates_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/language_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/safety_info_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/settings_screen.dart';
+import 'package:medical_diagnostic_app1/features/settings/view/screens/webview_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _homeNavigatorKey = GlobalKey<NavigatorState>();
   static final _patientProfileNavigatorKey = GlobalKey<NavigatorState>();
+  static final _settingsNavigatorKey = GlobalKey<NavigatorState>();
   static const _publicRoutes = [
     RoutePaths.onBoarding,
     RoutePaths.login,
@@ -36,6 +46,7 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
+    refreshListenable: GoRouterRefreshStream(GetIt.instance<AuthBloc>().stream),
     redirect: (context, state) {
       final authState = context.read<AuthBloc>().state;
       if (context.read<LoaderCubit>().state) return null;
@@ -119,6 +130,54 @@ class AppRouter {
               ),
             ],
           ),
+          StatefulShellBranch(
+            navigatorKey: _settingsNavigatorKey,
+            initialLocation: RoutePaths.settings,
+            routes: [
+              GoRoute(
+                name: RoutePaths.settings,
+                path: RoutePaths.settings,
+                builder: (context, state) => const SettingsScreen(),
+                routes: [
+                  GoRoute(
+                    name: RoutePaths.account,
+                    path: 'account',
+                    builder: (context, state) => const AccountScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.language,
+                    path: 'language',
+                    builder: (context, state) => const LanguageScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.appUpdates,
+                    path: 'appUpdates',
+                    builder: (context, state) => const AppUpdatesScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.aboutVitalia,
+                    path: 'aboutVitalia',
+                    builder: (context, state) => const AboutVitaliaScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.safetyInfo,
+                    path: 'safetyInfo',
+                    builder: (context, state) => const SafetyInfoScreen(),
+                  ),
+                  GoRoute(
+                    path: 'webview',
+                    builder: (context, state) {
+                      final args = state.extra as Map<String, String>;
+                      return WebViewScreen(
+                        title: args['title']!,
+                        url: args['url']!,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     ],
@@ -136,43 +195,11 @@ class MainWrapper extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            Expanded(flex: 5, child: SizedBox()),
-            Flexible(
-              flex: 1,
-              child: BlocListener<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  Utils.showToast(
-                    context,
-                    level: Utils.mapOp(state.op),
-                    message: state.statusMessage,
-                  );
-                  if (state.statusMessage.contains("Logged out")) {
-                    context.goNamed(RoutePaths.login);
-                  }
-                },
-                listenWhen: (previous, current) => !current.op.isNeutral,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                  child: CustomButton(
-                    text: "Logout",
-                    onPressed: () {
-                      context.read<AuthBloc>().add(AuthEvent.logout());
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
         onTap: (index) {
-          if (0 <= index && index < 2) {
+          if (0 <= index && index < 3) {
             navigationShell.goBranch(index);
           }
         },
@@ -197,5 +224,22 @@ class MainWrapper extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen(
+      (dynamic _) => notifyListeners(),
+    );
+  }
+
+  late final StreamSubscription<dynamic> _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 }

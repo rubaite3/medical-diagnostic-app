@@ -7,4 +7,10 @@ class RoutePaths {
   static const patientProfile = '/patientProfile';
   static const emailVerification = '/emailVerification';
   static const homeScreen = '/home';
+   static const settings = '/settings';
+  static const account = '/account';
+  static const language = '/language';
+  static const appUpdates = '/appUpdates';
+  static const aboutVitalia = '/aboutVitalia';
+  static const safetyInfo = '/safetyInfo';
 }
