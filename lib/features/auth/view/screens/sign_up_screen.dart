@@ -136,7 +136,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         message: state.statusMessage,
                         level: Utils.mapOp(state.op),
                       );
-                      if (state.op.isSuccess) {
+                      if (state.op.isSuccess &&
+                          !state.statusMessage.contains("Internet")) {
                         context.pushNamed(
                           RoutePaths.emailVerification,
                           queryParameters: {'email': state.user?.email ?? ""},
