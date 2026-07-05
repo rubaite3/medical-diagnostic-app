@@ -46,7 +46,7 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
-      refreshListenable: GoRouterRefreshStream(GetIt.instance<AuthBloc>().stream),
+    refreshListenable: GoRouterRefreshStream(GetIt.instance<AuthBloc>().stream),
     redirect: (context, state) {
       final authState = context.read<AuthBloc>().state;
       if (context.read<LoaderCubit>().state) return null;
@@ -131,53 +131,53 @@ class AppRouter {
             ],
           ),
           StatefulShellBranch(
-  navigatorKey: _settingsNavigatorKey,
-  initialLocation: RoutePaths.settings,
-  routes: [
-    GoRoute(
-      name: RoutePaths.settings,
-      path: RoutePaths.settings,
-      builder: (context, state) => const SettingsScreen(),
-      routes: [
-        GoRoute(
-          name: RoutePaths.account,
-          path: 'account',
-          builder: (context, state) => const AccountScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.language,
-          path: 'language',
-          builder: (context, state) => const LanguageScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.appUpdates,
-          path: 'appUpdates',
-          builder: (context, state) => const AppUpdatesScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.aboutVitalia,
-          path: 'aboutVitalia',
-          builder: (context, state) => const AboutVitaliaScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.safetyInfo,
-          path: 'safetyInfo',
-          builder: (context, state) => const SafetyInfoScreen(),
-        ), GoRoute(
-          path: 'webview', 
-          builder: (context, state) {
-            final args = state.extra as Map<String, String>;
-            return WebViewScreen(
-              title: args['title']!,
-              url: args['url']!,
-            );
-          },
-        ),
-      ],
-    ),
-  ],
-),
-
+            navigatorKey: _settingsNavigatorKey,
+            initialLocation: RoutePaths.settings,
+            routes: [
+              GoRoute(
+                name: RoutePaths.settings,
+                path: RoutePaths.settings,
+                builder: (context, state) => const SettingsScreen(),
+                routes: [
+                  GoRoute(
+                    name: RoutePaths.account,
+                    path: 'account',
+                    builder: (context, state) => const AccountScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.language,
+                    path: 'language',
+                    builder: (context, state) => const LanguageScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.appUpdates,
+                    path: 'appUpdates',
+                    builder: (context, state) => const AppUpdatesScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.aboutVitalia,
+                    path: 'aboutVitalia',
+                    builder: (context, state) => const AboutVitaliaScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.safetyInfo,
+                    path: 'safetyInfo',
+                    builder: (context, state) => const SafetyInfoScreen(),
+                  ),
+                  GoRoute(
+                    path: 'webview',
+                    builder: (context, state) {
+                      final args = state.extra as Map<String, String>;
+                      return WebViewScreen(
+                        title: args['title']!,
+                        url: args['url']!,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     ],
@@ -194,7 +194,7 @@ class MainWrapper extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(), 
+      appBar: AppBar(),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
@@ -226,10 +226,13 @@ class MainWrapper extends StatelessWidget {
     );
   }
 }
+
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream().listen((dynamic _) => notifyListeners());
+    _subscription = stream.asBroadcastStream().listen(
+      (dynamic _) => notifyListeners(),
+    );
   }
 
   late final StreamSubscription<dynamic> _subscription;
