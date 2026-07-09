@@ -23,4 +23,13 @@ class ApiConsts {
 
   // Profile
   static final profile = "$authPrefix/profile";
+
+  static final diagnosisPrefix = "$baseUrl/diagnosis";
+  static final diagnosisStart = "$diagnosisPrefix/start";
+  static final diagnosisSearchSymptoms = "$diagnosisPrefix/symptoms/search";
+  static final diagnosisSymptomQuestions = "$diagnosisPrefix/symptoms/questions";
+  static final diagnosisSubmitAnswers = "$diagnosisPrefix/symptoms/answers";
+  static final diagnosisFollowUpNext = "$diagnosisPrefix/follow-up/next";
+  static final diagnosisFollowUpAnswer = "$diagnosisPrefix/follow-up/answer";
+  static final diagnosisReport = "$diagnosisPrefix/report";
 }

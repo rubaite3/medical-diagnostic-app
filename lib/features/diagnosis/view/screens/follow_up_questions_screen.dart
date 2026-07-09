@@ -1,0 +1,178 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
+import 'package:medical_diagnostic_app1/core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
+
+class FollowUpQuestionsScreen extends StatefulWidget {
+  const FollowUpQuestionsScreen({super.key});
+
+  @override
+  State<FollowUpQuestionsScreen> createState() =>
+      _FollowUpQuestionsScreenState();
+}
+
+class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
+  List<String> _selectedOptionIds = [];
+
+  @override
+  void initState() {
+    super.initState();
+    
+    final state = context.read<DiagnosisCubit>().state;
+    if (state.currentFollowUp == null) {
+      context.read<DiagnosisCubit>().getNextFollowUp();
+    }
+  }
+
+  void _toggleOption(String optionId, bool isSingle) {
+    setState(() {
+      if (isSingle) {
+        _selectedOptionIds = [optionId];
+      } else {
+        if (_selectedOptionIds.contains(optionId)) {
+          _selectedOptionIds.remove(optionId);
+        } else {
+          _selectedOptionIds.add(optionId);
+        }
+      }
+    });
+  }
+
+  Future<void> _submitAnswer() async {
+    final state = context.read<DiagnosisCubit>().state;
+    final question = state.currentFollowUp?.question;
+    if (question == null) return;
+
+    if (_selectedOptionIds.isEmpty) {
+      Utils.showToast(context,
+          message: "Please select an answer.",
+          level: -1); // -1 = failure
+      return;
+    }
+
+    await context
+        .read<DiagnosisCubit>()
+        .submitFollowUpAnswer(question.id, _selectedOptionIds);
+
+    if (!mounted) return;
+
+   
+    final afterSubmit = context.read<DiagnosisCubit>().state;
+    if (afterSubmit.op.isFailure) return;
+
+   
+    await context.read<DiagnosisCubit>().getNextFollowUp();
+
+    if (!mounted) return;
+    final newState = context.read<DiagnosisCubit>().state;
+
+    if (newState.currentFollowUp?.responseType == 'diagnosis') {
+    
+      context.goNamed(RoutePaths.preliminaryResults);
+    } else {
+     
+      setState(() => _selectedOptionIds = []);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return BlocConsumer<DiagnosisCubit, DiagnosisState>(
+      listenWhen: (prev, curr) => !curr.op.isNeutral && !curr.op.isLoading,
+      listener: (context, state) {
+        if (state.op.isFailure) {
+          Utils.showToast(context,
+              message: state.statusMessage,
+              level: Utils.mapOp(state.op));
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: colorScheme.surface,
+          appBar: AppBar(
+            backgroundColor: colorScheme.surface,
+            elevation: 0,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new_rounded,
+                  color: colorScheme.onSurface),
+              onPressed: () => context.pop(),
+            ),
+          ),
+          body: SafeArea(
+            child: state.op.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : _buildContent(context, state, theme, colorScheme),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildContent(
+    BuildContext context,
+    DiagnosisState state,
+    ThemeData theme,
+    ColorScheme colorScheme,
+  ) {
+    final followUp = state.currentFollowUp;
+    final question = followUp?.question;
+
+    if (followUp == null || question == null) {
+      return DiagnosisErrorWidget(
+        message: DiagnosisStrings.errorGeneral,
+        onRetry: () => context.read<DiagnosisCubit>().getNextFollowUp(),
+      );
+    }
+
+    final isSingle =
+        question.type == 'single_choice' || question.type == 'yes_no';
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+      child: Column(
+        children: [
+          // Progress Bar
+          FollowUpProgressBar(
+            current: state.followUpProgress,
+            total: state.followUpTotal,
+          ),
+          const SizedBox(height: 24),
+
+          DiagnosisPageHeader(
+            title: DiagnosisStrings.followUpTitle,
+            subtitle: DiagnosisStrings.followUpSubtitle,
+            icon: Icons.question_answer_outlined,
+          ),
+          const SizedBox(height: 24),
+
+          Expanded(
+            child: SingleChildScrollView(
+              child: QuestionCard(
+                question: question,
+                selectedIds: _selectedOptionIds,
+                onOptionToggled: (optId) => _toggleOption(optId, isSingle),
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+          CustomButton(
+            text: DiagnosisStrings.submitFollowUpBtn,
+          
+            onPressed: state.op.isLoading ? null : _submitAnswer,
+          ),
+          const SizedBox(height: 8),
+        ],
+      ),
+    );
+  }
+}
