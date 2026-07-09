@@ -13,4 +13,17 @@ class RoutePaths {
   static const appUpdates = '/appUpdates';
   static const aboutVitalia = '/aboutVitalia';
   static const safetyInfo = '/safetyInfo';
+  static const baselineGender = '/diagnosis/baseline/gender';
+  static const baselineActivity = '/diagnosis/baseline/activity';
+  static const baselineSmoker = '/diagnosis/baseline/smoker';
+  static const baselineDiabetes = '/diagnosis/baseline/diabetes';
+  static const baselineHypertension = '/diagnosis/baseline/hypertension';
+  static const baselinePregnant = '/diagnosis/baseline/pregnant';
+  
+  static const symptomSearch = '/diagnosis/symptoms';
+  static const symptomQuestions = '/diagnosis/symptomQuestions';
+  static const followUpQuestions = '/diagnosis/followUp';
+  static const preliminaryResults = '/diagnosis/preliminaryResults';
+  static const diagnosisPayment = '/diagnosis/payment';
+  static const fullReport = '/diagnosis/fullReport';
 }

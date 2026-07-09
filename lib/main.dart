@@ -10,6 +10,7 @@ import 'package:medical_diagnostic_app1/core/theme/central_theme.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/core/widgets/loading_overlay.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
 import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider.value(value: GetIt.instance<LoaderCubit>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
+        BlocProvider.value(value: GetIt.instance<DiagnosisCubit>()),
       ],
       child: MaterialApp.router(
         title: 'Medical_Diagnostic_App',

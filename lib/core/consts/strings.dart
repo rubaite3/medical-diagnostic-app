@@ -121,4 +121,101 @@ class SettingsStrings {
   static const String questionsFeedback = "Questions or feedback?";
   static const String contactSupport = "We'd love to hear from you. Contact us at support@vitalia.com.";
   static const String readMore = "Read more";
+
 }
+
+  class DiagnosisStrings {
+  // --- Baseline Step-by-Step ---
+  static const String genderTitle = "What is your gender?";
+  static const String genderSubtitle = "This helps us provide gender-specific medical analysis.";
+  
+  static const String activityTitle = "What is your activity level?";
+  static const String activitySubtitle = "Select the option that best describes your daily movement.";
+  
+  static const String smokerTitle = "Do you smoke?";
+  static const String smokerSubtitle = "Smoking status is a key factor in many health conditions.";
+  
+  static const String diabetesTitle = "Do you have diabetes?";
+  static const String diabetesSubtitle = "Please indicate if you have been diagnosed with diabetes.";
+  
+  static const String hypertensionTitle = "Do you have hypertension?";
+  static const String hypertensionSubtitle = "High blood pressure can affect various symptoms.";
+  
+  static const String pregnantTitle = "Are you pregnant?";
+  static const String pregnantSubtitle = "Pregnancy changes how we evaluate certain symptoms.";
+
+  static const String nextBtn = "Next";
+  static const String finishBaselineBtn = "Start Assessment";
+
+  // --- Symptom Search ---
+  static const String symptomSearchTitle = "Select Your Symptoms";
+  static const String symptomSearchSubtitle =
+      "Search and add all symptoms you are currently experiencing.";
+  static const String symptomSearchHint = "Search for a symptom...";
+  static const String selectedSymptomsLabel = "Selected Symptoms";
+  static const String noSymptomsFound = "No symptoms found. Try a different search.";
+  static const String noSymptomsSelected = "No symptoms selected yet.";
+  static const String continueBtn = "Continue";
+  static const String addSymptomBtn = "Add";
+  static const String removeSymptomBtn = "Remove";
+
+  // --- Symptom Questions ---
+  static const String symptomQuestionsTitle = "Symptom Details";
+  static const String symptomQuestionsSubtitle =
+      "Please answer the following questions about your symptom.";
+  static const String nextSymptomBtn = "Next";
+  static const String submitAnswersBtn = "Submit & Continue";
+
+  // --- Follow-Up Questions ---
+  static const String followUpTitle = "Follow-Up Questions";
+  static const String followUpSubtitle =
+      "Answer these questions to help us refine your diagnosis.";
+  static const String followUpProgress = "Question";
+  static const String submitFollowUpBtn = "Next";
+
+  // --- Screen 6: Preliminary Results ---
+  static const String preliminaryResultsTitle = "Preliminary Results";
+  static const String preliminaryResultsSubtitle =
+      "Based on your symptoms, here are the most probable conditions.";
+  static const String probabilityLabel = "Probability";
+  static const String viewFullReportBtn = "View Full Report";
+  static const String startNewDiagnosisBtn = "Start New Diagnosis";
+
+  // --- Screen 7: Payment ---
+  static const String paymentTitle = "Unlock Full Report";
+  static const String paymentSubtitle =
+      "Get your detailed medical report with personalized recommendations.";
+  static const String paymentFeature1 = "Detailed disease analysis";
+  static const String paymentFeature2 = "Personalized medical recommendations";
+  static const String paymentFeature3 = "Downloadable PDF report";
+  static const String paymentFeature4 = "Doctor consultation suggestions";
+  static const String paymentAmount = " 4.99 ";
+  static const String paymentBtn = "Pay with Stripe";
+  static const String paymentSecure = "Secured by Stripe";
+  static const String paymentCancelAnytime = "One-time payment, no subscription";
+
+  // --- Screen 8: Full Report ---
+  static const String fullReportTitle = "Full Diagnostic Report";
+  static const String fullReportSubtitle =
+      "Your comprehensive health analysis and recommendations.";
+  static const String downloadReportBtn = "Download PDF";
+  static const String shareReportBtn = "Share Report";
+  static const String recommendationsLabel = "Recommendations";
+  static const String diagnosisDetailsLabel = "Diagnosis Details";
+  static const String consultDoctorLabel = "Consult a Doctor";
+
+  // --- General ---
+  static const String backBtn = "Back";
+  static const String cancelBtn = "Cancel";
+  static const String retryBtn = "Retry";
+  static const String errorGeneral = "Something went wrong. Please try again.";
+  static const String loadingText = "Please wait...";
+  
+  static const String genderMale = "Male";
+  static const String genderFemale = "Female";
+  static const String activitySedentary = "Sedentary (Low Activity)";
+  static const String activityModerate = "Moderate Activity";
+  static const String activityActive = "Highly Active";
+  static const String yes = "Yes";
+  static const String no = "No";
+  }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import '../../../../core/consts/strings.dart';
 import '../../../../core/navigation/route_paths.dart';
 import '../../../auth/controllers/auth_bloc/auth_bloc.dart';
@@ -55,15 +56,28 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 32),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: InkWell(
-                onTap: () {
-                  context.read<AuthBloc>().add(const AuthEvent.logout());
+              child: BlocListener<AuthBloc, AuthState>(
+                listenWhen: (previous, current) => !current.op.isNeutral,
+                listener: (context, state) {
+                  Utils.showToast(
+                    context,
+                    message: state.statusMessage,
+                    level: Utils.mapOp(state.op),
+                  );
+                  if (state.statusMessage.contains("Logged")) {
+                    context.goNamed(RoutePaths.login);
+                  }
                 },
-                child: Text(
-                  SettingsStrings.logout,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    color: colorScheme.primary,
-                    fontWeight: FontWeight.bold,
+                child: InkWell(
+                  onTap: () {
+                    context.read<AuthBloc>().add(const AuthEvent.logout());
+                  },
+                  child: Text(
+                    SettingsStrings.logout,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
