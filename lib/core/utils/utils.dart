@@ -20,6 +20,7 @@ class Utils {
       Operation.failure => -1,
       Operation.neutral => 0,
       Operation.success => 1,
+      Operation.loading => 0,
     };
   }
 

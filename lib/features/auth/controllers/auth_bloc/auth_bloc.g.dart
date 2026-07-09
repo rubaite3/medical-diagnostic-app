@@ -37,4 +37,5 @@ const _$OperationEnumMap = {
   Operation.success: 'success',
   Operation.failure: 'failure',
   Operation.neutral: 'neutral',
+  Operation.loading: 'loading',
 };

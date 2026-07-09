@@ -12,9 +12,11 @@ enum Auth {
 enum Operation {
   success,
   failure,
-  neutral;
+  neutral,
+  loading;
 
   bool get isSuccess => this == Operation.success;
   bool get isFailure => this == Operation.failure;
   bool get isNeutral => this == Operation.neutral;
+  bool get isLoading => this == Operation.loading;
 }

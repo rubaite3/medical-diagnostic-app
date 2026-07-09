@@ -16,6 +16,16 @@ import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_s
 import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/repos/diagnosis_repo.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/baseline_screens.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/diagnosis_payment_screen.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/follow_up_questions_screen.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/full_report_screen.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/preliminary_results_screen.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/symptom_questions_screen.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/symptom_search_screen.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/home_screen.dart';
 import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profile_screen.dart';
 import 'package:medical_diagnostic_app1/features/settings/view/screens/about_vitalia_screen.dart';
@@ -31,6 +41,7 @@ class AppRouter {
   static final _homeNavigatorKey = GlobalKey<NavigatorState>();
   static final _patientProfileNavigatorKey = GlobalKey<NavigatorState>();
   static final _settingsNavigatorKey = GlobalKey<NavigatorState>();
+
   static const _publicRoutes = [
     RoutePaths.onBoarding,
     RoutePaths.login,
@@ -46,7 +57,7 @@ class AppRouter {
   static final router = GoRouter(
     initialLocation: RoutePaths.onBoarding,
     navigatorKey: _rootNavigatorKey,
-      refreshListenable: GoRouterRefreshStream(GetIt.instance<AuthBloc>().stream),
+    refreshListenable: GoRouterRefreshStream(GetIt.instance<AuthBloc>().stream),
     redirect: (context, state) {
       final authState = context.read<AuthBloc>().state;
       if (context.read<LoaderCubit>().state) return null;
@@ -55,7 +66,6 @@ class AppRouter {
 
       if (authState.auth.isGuest) {
         if (!_isPublic(location)) return RoutePaths.login;
-
         return null;
       } else {
         if (_isPublic(location)) return RoutePaths.homeScreen;
@@ -63,6 +73,7 @@ class AppRouter {
       }
     },
     routes: [
+      // Auth Routes
       GoRoute(
         name: RoutePaths.onBoarding,
         path: RoutePaths.onBoarding,
@@ -103,6 +114,81 @@ class AppRouter {
         },
       ),
 
+      // Diagnosis Flow (ShellRoute)
+      ShellRoute(
+        builder: (context, state, child) {
+          return BlocProvider(
+            create: (context) => DiagnosisCubit(repo: GetIt.instance<DiagnosisRepo>()),
+            child: child,
+          );
+        },
+        routes: [
+          GoRoute(
+            name: RoutePaths.baselineGender,
+            path: RoutePaths.baselineGender,
+            builder: (context, state) => const GenderSelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.baselineActivity,
+            path: RoutePaths.baselineActivity,
+            builder: (context, state) => const ActivitySelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.baselineSmoker,
+            path: RoutePaths.baselineSmoker,
+            builder: (context, state) => const SmokerSelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.baselineDiabetes,
+            path: RoutePaths.baselineDiabetes,
+            builder: (context, state) => const DiabetesSelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.baselineHypertension,
+            path: RoutePaths.baselineHypertension,
+            builder: (context, state) => const HypertensionSelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.baselinePregnant,
+            path: RoutePaths.baselinePregnant,
+            builder: (context, state) => const PregnancySelectionScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.symptomSearch,
+            path: RoutePaths.symptomSearch,
+            builder: (context, state) => const SymptomSearchScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.symptomQuestions,
+            path: RoutePaths.symptomQuestions,
+            builder: (context, state) {
+              final symptoms = state.extra as List<Symptom>;
+              return SymptomQuestionsScreen(symptoms: symptoms);
+            },
+          ),
+          GoRoute(
+            name: RoutePaths.followUpQuestions,
+            path: RoutePaths.followUpQuestions,
+            builder: (context, state) => const FollowUpQuestionsScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.preliminaryResults,
+            path: RoutePaths.preliminaryResults,
+            builder: (context, state) => const PreliminaryResultsScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.diagnosisPayment,
+            path: RoutePaths.diagnosisPayment,
+            builder: (context, state) => const DiagnosisPaymentScreen(),
+          ),
+          GoRoute(
+            name: RoutePaths.fullReport,
+            path: RoutePaths.fullReport,
+            builder: (context, state) => const FullReportScreen(),
+          ),
+        ],
+      ),
+
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
             MainWrapper(navigationShell: navigationShell),
@@ -114,11 +200,10 @@ class AppRouter {
               GoRoute(
                 name: RoutePaths.homeScreen,
                 path: RoutePaths.homeScreen,
-                builder: (context, state) => HomeScreen(),
+                builder: (context, state) => const HomeScreen(),
               ),
             ],
           ),
-
           StatefulShellBranch(
             navigatorKey: _patientProfileNavigatorKey,
             initialLocation: RoutePaths.patientProfile,
@@ -126,58 +211,58 @@ class AppRouter {
               GoRoute(
                 name: RoutePaths.patientProfile,
                 path: RoutePaths.patientProfile,
-                builder: (context, state) => PatientProfileScreen(),
+                builder: (context, state) => const PatientProfileScreen(),
               ),
             ],
           ),
           StatefulShellBranch(
-  navigatorKey: _settingsNavigatorKey,
-  initialLocation: RoutePaths.settings,
-  routes: [
-    GoRoute(
-      name: RoutePaths.settings,
-      path: RoutePaths.settings,
-      builder: (context, state) => const SettingsScreen(),
-      routes: [
-        GoRoute(
-          name: RoutePaths.account,
-          path: 'account',
-          builder: (context, state) => const AccountScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.language,
-          path: 'language',
-          builder: (context, state) => const LanguageScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.appUpdates,
-          path: 'appUpdates',
-          builder: (context, state) => const AppUpdatesScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.aboutVitalia,
-          path: 'aboutVitalia',
-          builder: (context, state) => const AboutVitaliaScreen(),
-        ),
-        GoRoute(
-          name: RoutePaths.safetyInfo,
-          path: 'safetyInfo',
-          builder: (context, state) => const SafetyInfoScreen(),
-        ), GoRoute(
-          path: 'webview', 
-          builder: (context, state) {
-            final args = state.extra as Map<String, String>;
-            return WebViewScreen(
-              title: args['title']!,
-              url: args['url']!,
-            );
-          },
-        ),
-      ],
-    ),
-  ],
-),
-
+            navigatorKey: _settingsNavigatorKey,
+            initialLocation: RoutePaths.settings,
+            routes: [
+              GoRoute(
+                name: RoutePaths.settings,
+                path: RoutePaths.settings,
+                builder: (context, state) => const SettingsScreen(),
+                routes: [
+                  GoRoute(
+                    name: RoutePaths.account,
+                    path: 'account',
+                    builder: (context, state) => const AccountScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.language,
+                    path: 'language',
+                    builder: (context, state) => const LanguageScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.appUpdates,
+                    path: 'appUpdates',
+                    builder: (context, state) => const AppUpdatesScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.aboutVitalia,
+                    path: 'aboutVitalia',
+                    builder: (context, state) => const AboutVitaliaScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.safetyInfo,
+                    path: 'safetyInfo',
+                    builder: (context, state) => const SafetyInfoScreen(),
+                  ),
+                  GoRoute(
+                    path: 'webview',
+                    builder: (context, state) {
+                      final args = state.extra as Map<String, String>;
+                      return WebViewScreen(
+                        title: args['title']!,
+                        url: args['url']!,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         ],
       ),
     ],
@@ -194,7 +279,7 @@ class MainWrapper extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(), 
+      appBar: AppBar(),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
@@ -226,10 +311,13 @@ class MainWrapper extends StatelessWidget {
     );
   }
 }
+
 class GoRouterRefreshStream extends ChangeNotifier {
   GoRouterRefreshStream(Stream<dynamic> stream) {
     notifyListeners();
-    _subscription = stream.asBroadcastStream().listen((dynamic _) => notifyListeners());
+    _subscription = stream.asBroadcastStream().listen((event) {
+      notifyListeners();
+    });
   }
 
   late final StreamSubscription<dynamic> _subscription;
