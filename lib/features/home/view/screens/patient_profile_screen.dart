@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
 import 'package:medical_diagnostic_app1/features/home/view/controllers/cubit/patient_profile_cubit.dart';
 import 'dart:io';
 
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../auth/view/widgets/custom_text_field.dart';
 import '../../../auth/view/widgets/custom_button.dart';
 import '../widgets/patient_profile_widgets.dart';
@@ -52,7 +54,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         ),
       );
     } else {
-      Utils.showToast(context, message: "No changes");
+      Utils.showToast(context, message: S.of(context).profileNoChanges);
     }
   }
 
@@ -168,7 +170,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 builder: (context, state) => Text(
                   state[0].toUpperCase() +
                       state.substring(1) +
-                      PatientProfileStrings.patientProfileTitle,
+                      S.of(context).patientProfileTitle,
                   textAlign: TextAlign.center,
                   style: theme.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -178,7 +180,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                PatientProfileStrings.patientProfileSubtitle,
+                S.of(context).patientProfileSubtitle,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: colorScheme.onSurfaceVariant,
@@ -199,7 +201,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                         selector: (state) =>
                             state.user.birthDate ?? DateTime.now(),
                         builder: (context, state) => CustomTextField(
-                          hintText: PatientProfileStrings.birthDateHint,
+                          hintText: S.of(context).birthDateHint,
                           prefixIcon: Icons.cake_outlined,
                           controller: _birthDateController,
                         ),
@@ -213,7 +215,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 selector: (state) => state.user.birthDate ?? DateTime.now(),
                 builder: (context, state) => CustomTextField(
                   readOnly: true,
-                  hintText: PatientProfileStrings.ageHint,
+                  hintText: S.of(context).ageHint,
                   prefixIcon: Icons.calendar_today_outlined,
                   controller: _ageController,
                 ),
@@ -226,7 +228,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   return state.user.gender ?? "male";
                 },
                 builder: (context, state) => ProfileDropdownField(
-                  hint: PatientProfileStrings.genderHint,
+                  hint: S.of(context).genderHint,
                   value: state,
                   items: const [
                     DropdownMenuItem(value: 'male', child: Text('Male')),
@@ -251,7 +253,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                 },
 
                 builder: (context, state) => ProfileDropdownField(
-                  hint: PatientProfileStrings.activityLevelHint,
+                  hint: S.of(context).activityLevelHint,
                   value: state,
                   items: const [
                     DropdownMenuItem(
@@ -315,7 +317,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       bloc: _patientProfileCubit,
                       selector: (state) => state.user.isSmoker ?? false,
                       builder: (context, state) => ProfileCheckboxRow(
-                        title: PatientProfileStrings.smokerQuestion,
+                        title: S.of(context).smokerQuestion,
                         value: state,
                         onChanged: (val) {
                           _patientProfileCubit.updateUser(
@@ -339,7 +341,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       bloc: _patientProfileCubit,
                       selector: (state) => state.user.hasDiabetes ?? false,
                       builder: (context, state) => ProfileCheckboxRow(
-                        title: PatientProfileStrings.diabetesQuestion,
+                        title: S.of(context).diabetesQuestion,
                         value: state,
                         onChanged: (val) {
                           _patientProfileCubit.updateUser(
@@ -363,7 +365,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                       bloc: _patientProfileCubit,
                       selector: (state) => state.user.hasHypertension ?? false,
                       builder: (context, state) => ProfileCheckboxRow(
-                        title: PatientProfileStrings.hypertensionQuestion,
+                        title: S.of(context).hypertensionQuestion,
                         value: state,
                         onChanged: (val) {
                           _patientProfileCubit.updateUser(
@@ -404,8 +406,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                                         state.user.isPregnant ?? false,
                                     builder: (context, state) =>
                                         ProfileCheckboxRow(
-                                          title: PatientProfileStrings
-                                              .pregnantQuestion,
+                                          title: S.of(context).pregnantQuestion,
                                           value: state,
                                           onChanged: (val) {
                                             _patientProfileCubit.updateUser(
@@ -425,13 +426,55 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
               const SizedBox(height: 40),
 
+              // Session History entry
+              GestureDetector(
+                onTap: () {
+                  context.pushNamed(RoutePaths.sessionHistory);
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer.withValues(alpha: 0.4),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: colorScheme.outline.withValues(alpha: 0.2),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.history_outlined, color: colorScheme.primary),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          S.of(context).sessionHistoryTitle,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: colorScheme.onSurface,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
               CustomButton(
-                text: PatientProfileStrings.saveProfileButton,
+                text: S.of(context).saveProfileBtn,
                 onPressed: updateProfile,
               ),
               const SizedBox(height: 30),
               CustomButton(
-                text: PatientProfileStrings.resetProfileButton,
+                text: S.of(context).resetProfileBtn,
                 onPressed: updateUser,
               ),
               const SizedBox(height: 30),

@@ -20,4 +20,6 @@ sealed class AuthEvent with _$AuthEvent {
   const factory AuthEvent.updateProfile(
     UpdateProfileRequest updateProfileRequest,
   ) = _UpdateProfile;
+
+  const factory AuthEvent.getProfile() = _GetProfile;
 }

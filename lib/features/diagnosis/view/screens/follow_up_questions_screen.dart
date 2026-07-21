@@ -4,8 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
 
@@ -23,7 +24,7 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     final state = context.read<DiagnosisCubit>().state;
     if (state.currentFollowUp == null) {
       context.read<DiagnosisCubit>().getNextFollowUp();
@@ -50,35 +51,34 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     if (question == null) return;
 
     if (_selectedOptionIds.isEmpty) {
-      Utils.showToast(context,
-          message: "Please select an answer.",
-          level: -1); // -1 = failure
+      Utils.showToast(
+        context,
+        message: S.of(context).diagPleaseSelectAnswer,
+        level: -1,
+      );
       return;
     }
 
-    await context
-        .read<DiagnosisCubit>()
-        .submitFollowUpAnswer(question.id, _selectedOptionIds);
+    await context.read<DiagnosisCubit>().submitFollowUpAnswer(
+      question.id,
+      _selectedOptionIds.first,
+    );
 
-    if (!mounted) return;
+    // if (!mounted) return;
 
-   
-    final afterSubmit = context.read<DiagnosisCubit>().state;
-    if (afterSubmit.op.isFailure) return;
+    // final afterSubmit = context.read<DiagnosisCubit>().state;
+    // if (afterSubmit.op.isFailure) return;
 
-   
-    await context.read<DiagnosisCubit>().getNextFollowUp();
+    // await context.read<DiagnosisCubit>().getNextFollowUp();
 
-    if (!mounted) return;
-    final newState = context.read<DiagnosisCubit>().state;
+    // if (!mounted) return;
+    // final newState = context.read<DiagnosisCubit>().state;
 
-    if (newState.currentFollowUp?.responseType == 'diagnosis') {
-    
-      context.goNamed(RoutePaths.preliminaryResults);
-    } else {
-     
-      setState(() => _selectedOptionIds = []);
-    }
+    // if (newState.currentFollowUp?.responseType == 'diagnosis') {
+    //   context.goNamed(RoutePaths.preliminaryResults);
+    // } else {
+    //   setState(() => _selectedOptionIds = []);
+    // }
   }
 
   @override
@@ -90,27 +90,48 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
       listenWhen: (prev, curr) => !curr.op.isNeutral && !curr.op.isLoading,
       listener: (context, state) {
         if (state.op.isFailure) {
-          Utils.showToast(context,
-              message: state.statusMessage,
-              level: Utils.mapOp(state.op));
+          Utils.showToast(
+            context,
+            message: state.statusMessage,
+            level: Utils.mapOp(state.op),
+          );
+        }
+        if (state.op.isSuccess) {
+          setState(() {
+            _selectedOptionIds = [];
+          });
+          if ((state.currentFollowUp?.responseType ?? "") == "diagnosis") {
+            context.goNamed(RoutePaths.preliminaryResults);
+          }
+          if ((state.currentFollowUp?.responseType ?? "") ==
+              "need_more_symptoms") {
+            Utils.showToast(
+              context,
+              message: state.currentFollowUp?.question?.text ?? "",
+              level: Utils.mapOp(state.op),
+              duration: 10,
+            );
+            context.goNamed(RoutePaths.symptomSearch);
+          }
         }
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: colorScheme.surface,
           appBar: AppBar(
-            backgroundColor: colorScheme.surface,
             elevation: 0,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new_rounded,
-                  color: colorScheme.onSurface),
-              onPressed: () => context.pop(),
+              icon: Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: colorScheme.onSurface,
+              ),
+              onPressed: () {
+                context.read<DiagnosisCubit>().reset();
+                context.goNamed(RoutePaths.homeScreen);
+              },
             ),
           ),
           body: SafeArea(
-            child: state.op.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : _buildContent(context, state, theme, colorScheme),
+            child: _buildContent(context, state, theme, colorScheme),
           ),
         );
       },
@@ -126,15 +147,17 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     final followUp = state.currentFollowUp;
     final question = followUp?.question;
 
-    if (followUp == null || question == null) {
+    if ((followUp == null || question == null) &&
+        (state.currentFollowUp?.responseType ?? "") != "diagnosis") {
       return DiagnosisErrorWidget(
-        message: DiagnosisStrings.errorGeneral,
+        message: S.of(context).errorGeneral,
         onRetry: () => context.read<DiagnosisCubit>().getNextFollowUp(),
       );
     }
 
     final isSingle =
-        question.type == 'single_choice' || question.type == 'yes_no';
+        (question?.type ?? "") == 'single_choice' ||
+        (question?.type ?? "") == 'yes_no';
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
@@ -143,13 +166,13 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
           // Progress Bar
           FollowUpProgressBar(
             current: state.followUpProgress,
-            total: state.followUpTotal,
+            total: state.currentFollowUp?.total ?? 0,
           ),
           const SizedBox(height: 24),
 
           DiagnosisPageHeader(
-            title: DiagnosisStrings.followUpTitle,
-            subtitle: DiagnosisStrings.followUpSubtitle,
+            title: S.of(context).followUpTitle,
+            subtitle: S.of(context).followUpSubtitle,
             icon: Icons.question_answer_outlined,
           ),
           const SizedBox(height: 24),
@@ -157,7 +180,9 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
           Expanded(
             child: SingleChildScrollView(
               child: QuestionCard(
-                question: question,
+                question:
+                    question ??
+                    Question(id: "", text: "", type: "", options: []),
                 selectedIds: _selectedOptionIds,
                 onOptionToggled: (optId) => _toggleOption(optId, isSingle),
               ),
@@ -166,8 +191,7 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
 
           const SizedBox(height: 16),
           CustomButton(
-            text: DiagnosisStrings.submitFollowUpBtn,
-          
+            text: S.of(context).submitFollowUpBtn,
             onPressed: state.op.isLoading ? null : _submitAnswer,
           ),
           const SizedBox(height: 8),

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/reset_password_request.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../controllers/reset_password_cubit/reset_password_cubit.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -44,8 +44,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 const SizedBox(height: 30),
                 const AuthLogo(),
                 const SizedBox(height: 40),
-                const Text(
-                  AuthStrings.resetTitle,
+              Text(
+                S.of(context).resetTitle,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -56,7 +56,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10.0),
                   child: Text(
-                    AuthStrings.resetSubTitle,
+                    S.of(context).resetSubtitle,
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       fontSize: 15,
@@ -74,7 +74,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ? "Password must be 8 chars or more"
                       : null,
                   controller: _passwordController,
-                  hintText: AuthStrings.hintNewPassword,
+                  hintText: S.of(context).hintNewPassword,
                   prefixIcon: Icons.vpn_key_outlined,
                   isPassword: true,
                 ),
@@ -86,13 +86,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                       ? "Passwords don't match"
                       : null,
                   controller: _confirmPasswordController,
-                  hintText: AuthStrings.hintConfirmPassword,
+                  hintText: S.of(context).hintConfirmPassword,
                   prefixIcon: Icons.vpn_key_outlined,
                   isPassword: true,
                 ),
                 const SizedBox(height: 35),
                 CustomButton(
-                  text: AuthStrings.updatePasswordBtn,
+                  text: S.of(context).updatePasswordBtn,
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _resetPasswordCubit.resetPass(

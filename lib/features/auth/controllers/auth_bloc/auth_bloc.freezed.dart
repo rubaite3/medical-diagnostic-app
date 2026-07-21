@@ -56,7 +56,7 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckConnectivity value)?  checkConnectivity,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,TResult Function( _UpdateProfile value)?  updateProfile,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckConnectivity value)?  checkConnectivity,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,TResult Function( _UpdateProfile value)?  updateProfile,TResult Function( _GetProfile value)?  getProfile,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -70,7 +70,8 @@ return register(_that);case _RefreshToken() when refreshToken != null:
 return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
-return updateProfile(_that);case _:
+return updateProfile(_that);case _GetProfile() when getProfile != null:
+return getProfile(_that);case _:
   return orElse();
 
 }
@@ -88,7 +89,7 @@ return updateProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckConnectivity value)  checkConnectivity,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,required TResult Function( _UpdateProfile value)  updateProfile,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckConnectivity value)  checkConnectivity,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,required TResult Function( _UpdateProfile value)  updateProfile,required TResult Function( _GetProfile value)  getProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
@@ -102,7 +103,8 @@ return register(_that);case _RefreshToken():
 return refreshToken(_that);case _ResendEmailVerification():
 return resendEmailVerify(_that);case _ForgotPass():
 return forgotPass(_that);case _UpdateProfile():
-return updateProfile(_that);}
+return updateProfile(_that);case _GetProfile():
+return getProfile(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -116,7 +118,7 @@ return updateProfile(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckConnectivity value)?  checkConnectivity,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,TResult? Function( _UpdateProfile value)?  updateProfile,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckConnectivity value)?  checkConnectivity,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,TResult? Function( _UpdateProfile value)?  updateProfile,TResult? Function( _GetProfile value)?  getProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -130,7 +132,8 @@ return register(_that);case _RefreshToken() when refreshToken != null:
 return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
-return updateProfile(_that);case _:
+return updateProfile(_that);case _GetProfile() when getProfile != null:
+return getProfile(_that);case _:
   return null;
 
 }
@@ -147,7 +150,7 @@ return updateProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function()?  checkConnectivity,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function()?  checkConnectivity,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult Function()?  getProfile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
@@ -160,7 +163,8 @@ return register(_that.registerRequest);case _RefreshToken() when refreshToken !=
 return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
-return updateProfile(_that.updateProfileRequest);case _:
+return updateProfile(_that.updateProfileRequest);case _GetProfile() when getProfile != null:
+return getProfile();case _:
   return orElse();
 
 }
@@ -178,7 +182,7 @@ return updateProfile(_that.updateProfileRequest);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function()  checkConnectivity,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,required TResult Function( UpdateProfileRequest updateProfileRequest)  updateProfile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function()  checkConnectivity,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,required TResult Function( UpdateProfileRequest updateProfileRequest)  updateProfile,required TResult Function()  getProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
 return connectivityToggeled(_that.isOnline);case _AuthToggeled():
@@ -191,7 +195,8 @@ return register(_that.registerRequest);case _RefreshToken():
 return refreshToken();case _ResendEmailVerification():
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass():
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile():
-return updateProfile(_that.updateProfileRequest);}
+return updateProfile(_that.updateProfileRequest);case _GetProfile():
+return getProfile();}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -205,7 +210,7 @@ return updateProfile(_that.updateProfileRequest);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function()?  checkConnectivity,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult? Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function()?  checkConnectivity,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult? Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult? Function()?  getProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
@@ -218,7 +223,8 @@ return register(_that.registerRequest);case _RefreshToken() when refreshToken !=
 return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
-return updateProfile(_that.updateProfileRequest);case _:
+return updateProfile(_that.updateProfileRequest);case _GetProfile() when getProfile != null:
+return getProfile();case _:
   return null;
 
 }
@@ -872,6 +878,38 @@ $UpdateProfileRequestCopyWith<$Res> get updateProfileRequest {
   });
 }
 }
+
+/// @nodoc
+
+
+class _GetProfile implements AuthEvent {
+  const _GetProfile();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetProfile);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.getProfile()';
+}
+
+
+}
+
+
+
 
 
 /// @nodoc

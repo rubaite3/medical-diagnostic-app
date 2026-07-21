@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
@@ -25,7 +25,7 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
   @override
   void initState() {
     super.initState();
-    
+
     _searchController.addListener(() {
       final hasText = _searchController.text.isNotEmpty;
       if (hasText != _hasText) {
@@ -51,21 +51,20 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
     });
   }
 
-  void _onSearchChanged(String query) {
+  void _onSearchSubmitted(String query) {
     context.read<DiagnosisCubit>().searchSymptoms(query);
   }
 
   void _proceed() {
     if (_selectedSymptoms.isEmpty) {
-      Utils.showToast(context,
-          message: "Please select at least one symptom.",
-          level: -1); // -1 = failure
+      Utils.showToast(
+        context,
+        message: S.of(context).diagSelectAtLeastOneSymptom,
+        level: -1,
+      ); // -1 = failure
       return;
     }
-    context.goNamed(
-      RoutePaths.symptomQuestions,
-      extra: _selectedSymptoms,
-    );
+    context.read<DiagnosisCubit>().selectSymptoms(_selectedSymptoms);
   }
 
   @override
@@ -75,134 +74,166 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded,
-              color: colorScheme.onSurface),
-          onPressed: () => context.pop(),
+          icon: BlocListener<DiagnosisCubit, DiagnosisState>(
+            listener: (context, state) {
+              if (state.op.isFailure) {
+                Utils.showToast(
+                  context,
+                  message: state.statusMessage,
+                  level: Utils.mapOp(state.op),
+                );
+              }
+              if (state.op.isSuccess) {
+                context.goNamed(RoutePaths.followUpQuestions);
+              }
+            },
+            listenWhen: (previous, current) => !current.op.isNeutral,
+            child: Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: colorScheme.onSurface,
+            ),
+          ),
+          onPressed: () {
+            context.read<DiagnosisCubit>().reset();
+            context.goNamed(RoutePaths.homeScreen);
+          },
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
-          child: Column(
-            children: [
-              DiagnosisPageHeader(
-                title: DiagnosisStrings.symptomSearchTitle,
-                subtitle: DiagnosisStrings.symptomSearchSubtitle,
-                icon: Icons.search_rounded,
-              ),
-              const SizedBox(height: 24),
-
-              // Search Field
-              Container(
-                decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest
-                      .withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                      color: colorScheme.outline.withValues(alpha: 0.3)),
-                ),
-                child: TextField(
-                  controller: _searchController,
-                  onChanged: _onSearchChanged,
-                  style: theme.textTheme.bodyLarge
-                      ?.copyWith(color: colorScheme.onSurface),
-                  decoration: InputDecoration(
-                    hintText: DiagnosisStrings.symptomSearchHint,
-                    hintStyle: theme.textTheme.bodyLarge
-                        ?.copyWith(color: colorScheme.onSurfaceVariant),
-                    prefixIcon: Icon(Icons.search,
-                        color: colorScheme.onSurfaceVariant),
-                   
-                    suffixIcon: _hasText
-                        ? IconButton(
-                            icon: Icon(Icons.clear,
-                                color: colorScheme.onSurfaceVariant),
-                            onPressed: () {
-                              _searchController.clear();
-                              context
-                                  .read<DiagnosisCubit>()
-                                  .searchSymptoms('');
-                            },
-                          )
-                        : null,
-                    border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 14),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  DiagnosisPageHeader(
+                    title: S.of(context).symptomSearchTitle,
+                    subtitle: S.of(context).symptomSearchSubtitle,
+                    icon: Icons.search_rounded,
                   ),
-                ),
-              ),
-              const SizedBox(height: 16),
+                  const SizedBox(height: 24),
 
-              // Search Results
-              Expanded(
-                child: BlocBuilder<DiagnosisCubit, DiagnosisState>(
-                  builder: (context, state) {
-                    if (state.op.isLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (!_hasText) {
-                      return _buildSelectedSection(theme, colorScheme);
-                    }
-
-                    if (state.searchResults.isEmpty) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildSelectedSection(theme, colorScheme),
-                          const SizedBox(height: 16),
-                          Center(
-                            child: Text(
-                              DiagnosisStrings.noSymptomsFound,
-                              style: theme.textTheme.bodyMedium?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      );
-                    }
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildSelectedSection(theme, colorScheme),
-                        const SizedBox(height: 16),
-                        Expanded(
-                          child: ListView.separated(
-                            itemCount: state.searchResults.length,
-                            separatorBuilder: (_, __) =>
-                                const SizedBox(height: 8),
-                            itemBuilder: (context, index) {
-                              final symptom = state.searchResults[index];
-                              final isSelected = _selectedSymptoms
-                                  .any((s) => s.id == symptom.id);
-                              return _SymptomResultTile(
-                                symptom: symptom,
-                                isSelected: isSelected,
-                                onTap: () => _toggleSymptom(symptom),
-                              );
-                            },
-                          ),
+                  // Search Field
+                  Container(
+                    decoration: BoxDecoration(
+                      color: colorScheme.surfaceContainerHighest.withValues(
+                        alpha: 0.5,
+                      ),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: colorScheme.outline.withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: TextField(
+                      textInputAction: TextInputAction.search,
+                      controller: _searchController,
+                      onSubmitted: _onSearchSubmitted,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurface,
+                      ),
+                      decoration: InputDecoration(
+                        hintText: S.of(context).symptomSearchHint,
+                        hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
                         ),
-                      ],
-                    );
-                  },
-                ),
-              ),
+                        prefixIcon: Icon(
+                          Icons.search,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
 
-              const SizedBox(height: 16),
-              CustomButton(
-                text: DiagnosisStrings.continueBtn,
-                onPressed: _proceed,
+                        suffixIcon: _hasText
+                            ? IconButton(
+                                icon: Icon(
+                                  Icons.clear,
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                                onPressed: () {
+                                  _searchController.clear();
+                                  context.read<DiagnosisCubit>().searchSymptoms(
+                                    '',
+                                  );
+                                },
+                              )
+                            : null,
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  _buildSelectedSection(theme, colorScheme),
+                ],
               ),
-              const SizedBox(height: 8),
-            ],
+            ),
+            const SizedBox(height: 16),
+
+            // Search Results (scrolls; shrinks when keyboard opens)
+            Expanded(
+              child: BlocBuilder<DiagnosisCubit, DiagnosisState>(
+                builder: (context, state) {
+                  if (state.searchOp.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  if (!_hasText) {
+                    return const SizedBox.shrink();
+                  }
+
+                  if (state.searchResults.isEmpty) {
+                    return SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                      child: Center(
+                        child: Text(
+                          S.of(context).noSymptomsFound,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.separated(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24.0,
+                      vertical: 8,
+                    ),
+                    itemCount: state.searchResults.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 8),
+                    itemBuilder: (context, index) {
+                      final symptom = state.searchResults[index];
+                      final isSelected = _selectedSymptoms.any(
+                        (s) => s.id == symptom.id,
+                      );
+                      return _SymptomResultTile(
+                        symptom: symptom,
+                        isSelected: isSelected,
+                        onTap: () => _toggleSymptom(symptom),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 8, 24, 16),
+          child: CustomButton(
+            text: S.of(context).continueBtn,
+            onPressed: _proceed,
           ),
         ),
       ),
@@ -213,22 +244,25 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DiagnosisSectionLabel(label: DiagnosisStrings.selectedSymptomsLabel),
+        DiagnosisSectionLabel(label: S.of(context).selectedSymptomsLabel),
         if (_selectedSymptoms.isEmpty)
           Text(
-            DiagnosisStrings.noSymptomsSelected,
-            style: theme.textTheme.bodyMedium
-                ?.copyWith(color: colorScheme.onSurfaceVariant),
+            S.of(context).noSymptomsSelected,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
           )
         else
           Wrap(
             spacing: 8,
             runSpacing: 8,
             children: _selectedSymptoms
-                .map((s) => SymptomChip(
-                      label: s.name,
-                      onRemove: () => _toggleSymptom(s),
-                    ))
+                .map(
+                  (s) => SymptomChip(
+                    label: s.nameLocal ?? "",
+                    onRemove: () => _toggleSymptom(s),
+                  ),
+                )
                 .toList(),
           ),
       ],
@@ -284,7 +318,7 @@ class _SymptomResultTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    symptom.name,
+                    symptom.nameLocal ?? "",
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: isSelected
@@ -292,9 +326,9 @@ class _SymptomResultTile extends StatelessWidget {
                           : colorScheme.onSurface,
                     ),
                   ),
-                  if (symptom.description.isNotEmpty)
+                  if ((symptom.summary ?? "").isNotEmpty)
                     Text(
-                      symptom.description,
+                      (symptom.summary ?? ""),
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),

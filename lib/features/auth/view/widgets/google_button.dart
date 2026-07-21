@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 
 class GoogleButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -45,7 +45,7 @@ class GoogleButton extends StatelessWidget {
             ),
             const SizedBox(width: 12),
             Text(
-              AuthStrings.googleSignIn,
+              S.of(context).googleSignIn,
               style: theme.textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: Colors.black,

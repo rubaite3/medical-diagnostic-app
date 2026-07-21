@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../widgets/settings_item_widget.dart';
 import 'webview_screen.dart'; 
 
@@ -12,7 +12,7 @@ class AboutVitaliaScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(SettingsStrings.aboutVitalia),
+        title: Text(S.of(context).aboutVitalia),
         centerTitle: true,
       ),
       body: ListView(

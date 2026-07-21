@@ -2,14 +2,35 @@ plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    id("com.google.gms.google-services")
+}
+
+dependencies {
+  // Import the Firebase BoM
+  implementation(platform("com.google.firebase:firebase-bom:34.16.0"))
+
+  // Core library desugaring (required by flutter_local_notifications)
+  coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.5")
+
+
+  // TODO: Add the dependencies for Firebase products you want to use
+  // When using the BoM, don't specify versions in Firebase dependencies
+  // https://firebase.google.com/docs/android/setup#available-libraries
+}
+
+configurations.all {
+    resolutionStrategy {
+        force("com.android.tools:desugar_jdk_libs:2.1.5")
+        force("com.android.tools:desugar_jdk_libs_configuration:2.1.5")
+    }
 }
 
 android {
     namespace = "com.example.medical_diagnostic_app1"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
-
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -31,6 +52,10 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
+    }
+
+    lint {
+        abortOnError = false
     }
 }
 

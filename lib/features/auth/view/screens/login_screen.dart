@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/login_request.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../../core/enums/enums.dart';
 import '../../../../core/utils/utils.dart';
 import '../widgets/auth_logo.dart';
@@ -54,8 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 20),
                   const AuthLogo(),
                   const SizedBox(height: 30),
-                  const Text(
-                    AuthStrings.loginTitle,
+                  Text(
+                    S.of(context).loginTitle,
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   BlocListener<AuthBloc, AuthState>(
@@ -73,8 +73,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         (current.op != Operation.neutral),
                     child: const SizedBox(height: 8),
                   ),
-                  const Text(
-                    AuthStrings.loginSubTitle,
+                  Text(
+                    S.of(context).loginSubtitle,
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 35),
@@ -85,7 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? null
                         : "Invalid Email format",
                     controller: _emailController,
-                    hintText: AuthStrings.hintEmail,
+                    hintText: S.of(context).hintEmail,
                     prefixIcon: Icons.email_outlined,
                   ),
                   const SizedBox(height: 16),
@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? "Passwrod must be 8 chars at lease"
                         : null,
                     controller: _passwordController,
-                    hintText: AuthStrings.hintPassword,
+                    hintText: S.of(context).hintPassword,
                     prefixIcon: Icons.vpn_key_outlined,
                     isPassword: true,
                   ),
@@ -105,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () {
                       context.pushNamed(RoutePaths.forgotPass);
                     },
-                    child: const Text(
-                      AuthStrings.forgotPasswordLink,
+                    child: Text(
+                      S.of(context).forgotPasswordLink,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 30),
                   CustomButton(
-                    text: AuthStrings.loginBtn,
+                    text: S.of(context).loginBtn,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
@@ -130,23 +130,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   // لا تحذفيه
-                  if (false) _buildGoogle(),
+                  if (false) _buildGoogle(context),
 
                   const SizedBox(height: 30),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        AuthStrings.dontHaveAccount,
+                      Text(
+                        S.of(context).dontHaveAccount,
                         style: TextStyle(fontSize: 15),
                       ),
                       GestureDetector(
                         onTap: () {
                           context.goNamed(RoutePaths.signUp);
                         },
-                        child: const Text(
-                          AuthStrings.signUpLink,
+                  child: Text(
+                    S.of(context).signUpLink,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -164,7 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Column _buildGoogle() {
+  Column _buildGoogle(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 24),
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Expanded(child: Divider()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(AuthStrings.orContinueWith),
+              child: Text(S.of(context).orContinueWith),
             ),
             Expanded(child: Divider()),
           ],

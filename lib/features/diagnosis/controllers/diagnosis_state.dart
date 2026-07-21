@@ -9,21 +9,24 @@ abstract class DiagnosisState with _$DiagnosisState {
   const factory DiagnosisState({
     @Default(Operation.neutral) Operation op,
     @Default("") String statusMessage,
-    
-
     String? gender,
     String? activityLevel,
     @Default(false) bool isSmoker,
     @Default(false) bool hasDiabetes,
     @Default(false) bool hasHypertension,
     @Default(false) bool isPregnant,
+    @Default(false) bool? isAlcoholic,
+    @Default("") String? patientJob,
 
     String? sessionId,
+    @Default(Operation.neutral) Operation searchOp,
     @Default([]) List<Symptom> searchResults,
     @Default([]) List<Question> currentQuestions,
     FollowUpResponse? currentFollowUp,
     @Default(0) int followUpProgress,
     @Default(0) int followUpTotal,
-    Map<String, dynamic>? finalReport,
+    FinalReport? finalReport,
+
+    @Default(0.0) double downloadProgress,
   }) = _DiagnosisState;
 }

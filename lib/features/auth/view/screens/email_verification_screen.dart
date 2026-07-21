@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/theme/colors.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -102,13 +102,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              const Text(
-                AuthStrings.otpTitle,
+              Text(
+                S.of(context).otpTitle,
                 style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Text(
-                AuthStrings.otpSubTitle,
+                S.of(context).otpSubtitle,
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 4),
@@ -174,7 +174,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               ),
               const SizedBox(height: 32),
               CustomButton(
-                text: AuthStrings.otpBtn,
+                text: S.of(context).otpBtn,
                 onPressed: !_verifyButtonActivated
                     ? null
                     : () {
@@ -211,8 +211,8 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 onTap: _canResend ? (() => _startResendTimer(false)) : null,
                 child: Text(
                   _canResend
-                      ? AuthStrings.otpResendActive
-                      : '${AuthStrings.otpResend}$_secondsRemaining',
+                      ? S.of(context).otpResendActive
+                      : '${S.of(context).otpResend}$_secondsRemaining',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w600,

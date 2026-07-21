@@ -15,7 +15,9 @@ _StartDiagnosisRequest _$StartDiagnosisRequestFromJson(
   hasHypertension: json['has_hypertension'] as bool,
   isPregnant: json['is_pregnant'] as bool?,
   activityLevel: json['activity_level'] as String,
-  assessmentFor: json['assessment_for'] as String,
+  assessmentFor: json['assessment_for'] as String? ?? "myself",
+  isAlcoholic: json['is_alcoholic'] as bool?,
+  patientJob: json['patient_job'] as String?,
 );
 
 Map<String, dynamic> _$StartDiagnosisRequestToJson(
@@ -28,6 +30,8 @@ Map<String, dynamic> _$StartDiagnosisRequestToJson(
   'is_pregnant': instance.isPregnant,
   'activity_level': instance.activityLevel,
   'assessment_for': instance.assessmentFor,
+  'is_alcoholic': instance.isAlcoholic,
+  'patient_job': instance.patientJob,
 };
 
 _StartDiagnosisResponse _$StartDiagnosisResponseFromJson(
@@ -39,15 +43,19 @@ Map<String, dynamic> _$StartDiagnosisResponseToJson(
 ) => <String, dynamic>{'session_id': instance.sessionId};
 
 _Symptom _$SymptomFromJson(Map<String, dynamic> json) => _Symptom(
-  id: json['id'] as String,
-  name: json['name'] as String,
-  description: json['description'] as String,
+  id: (json['id'] as num?)?.toInt(),
+  nameEn: json['name_en'] as String?,
+  nameLocal: json['name_local'] as String?,
+  summary: json['summary'] as String?,
+  type: json['type'] as String?,
 );
 
 Map<String, dynamic> _$SymptomToJson(_Symptom instance) => <String, dynamic>{
   'id': instance.id,
-  'name': instance.name,
-  'description': instance.description,
+  'name_en': instance.nameEn,
+  'name_local': instance.nameLocal,
+  'summary': instance.summary,
+  'type': instance.type,
 };
 
 _QuestionOption _$QuestionOptionFromJson(Map<String, dynamic> json) =>
@@ -86,51 +94,50 @@ Map<String, dynamic> _$SymptomAnswerToJson(_SymptomAnswer instance) =>
       'selected_option_ids': instance.selectedOptionIds,
     };
 
-_SubmitSymptomAnswersRequest _$SubmitSymptomAnswersRequestFromJson(
+_SelectSymptomRequest _$SelectSymptomRequestFromJson(
   Map<String, dynamic> json,
-) => _SubmitSymptomAnswersRequest(
+) => _SelectSymptomRequest(
+  name: json['name'] as String,
   sessionId: json['session_id'] as String,
-  symptomId: json['symptom_id'] as String,
-  answers: (json['answers'] as List<dynamic>)
-      .map((e) => SymptomAnswer.fromJson(e as Map<String, dynamic>))
-      .toList(),
 );
 
-Map<String, dynamic> _$SubmitSymptomAnswersRequestToJson(
-  _SubmitSymptomAnswersRequest instance,
-) => <String, dynamic>{
-  'session_id': instance.sessionId,
-  'symptom_id': instance.symptomId,
-  'answers': instance.answers,
-};
+Map<String, dynamic> _$SelectSymptomRequestToJson(
+  _SelectSymptomRequest instance,
+) => <String, dynamic>{'name': instance.name, 'session_id': instance.sessionId};
 
 _ProbableDisease _$ProbableDiseaseFromJson(Map<String, dynamic> json) =>
     _ProbableDisease(
-      name: json['name'] as String,
-      probability: (json['probability'] as num).toDouble(),
-      colorCode: json['color_code'] as String,
+      diseaseName: json['disease_name'] as String?,
+      diseaseNameLocal: json['disease_name_local'] as String?,
+      probability: (json['probability'] as num?)?.toDouble(),
+      confidence: json['confidence'] as String?,
+      specialist: json['specialist'] as String?,
+      advice: json['advice'] as String?,
     );
 
 Map<String, dynamic> _$ProbableDiseaseToJson(_ProbableDisease instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'disease_name': instance.diseaseName,
+      'disease_name_local': instance.diseaseNameLocal,
       'probability': instance.probability,
-      'color_code': instance.colorCode,
+      'confidence': instance.confidence,
+      'specialist': instance.specialist,
+      'advice': instance.advice,
     };
 
 _DiagnosisSummary _$DiagnosisSummaryFromJson(Map<String, dynamic> json) =>
     _DiagnosisSummary(
-      probableDiseases: (json['probable_diseases'] as List<dynamic>)
+      diagnoses: (json['diagnoses'] as List<dynamic>)
           .map((e) => ProbableDisease.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$DiagnosisSummaryToJson(_DiagnosisSummary instance) =>
-    <String, dynamic>{'probable_diseases': instance.probableDiseases};
+    <String, dynamic>{'diagnoses': instance.diagnoses};
 
 _FollowUpResponse _$FollowUpResponseFromJson(Map<String, dynamic> json) =>
     _FollowUpResponse(
-      responseType: json['response_type'] as String,
+      responseType: json['response_type'] as String? ?? "question",
       question: json['question'] == null
           ? null
           : Question.fromJson(json['question'] as Map<String, dynamic>),
@@ -139,7 +146,7 @@ _FollowUpResponse _$FollowUpResponseFromJson(Map<String, dynamic> json) =>
           : DiagnosisSummary.fromJson(
               json['diagnosis_summary'] as Map<String, dynamic>,
             ),
-      total: (json['total'] as num).toInt(),
+      total: (json['total'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$FollowUpResponseToJson(_FollowUpResponse instance) =>
@@ -155,9 +162,7 @@ _SubmitFollowUpAnswerRequest _$SubmitFollowUpAnswerRequestFromJson(
 ) => _SubmitFollowUpAnswerRequest(
   sessionId: json['session_id'] as String,
   questionId: json['question_id'] as String,
-  selectedOptionIds: (json['selected_option_ids'] as List<dynamic>)
-      .map((e) => e as String)
-      .toList(),
+  answer: json['answer'] as String,
 );
 
 Map<String, dynamic> _$SubmitFollowUpAnswerRequestToJson(
@@ -165,5 +170,86 @@ Map<String, dynamic> _$SubmitFollowUpAnswerRequestToJson(
 ) => <String, dynamic>{
   'session_id': instance.sessionId,
   'question_id': instance.questionId,
-  'selected_option_ids': instance.selectedOptionIds,
+  'answer': instance.answer,
 };
+
+_ConversationTurn _$ConversationTurnFromJson(Map<String, dynamic> json) =>
+    _ConversationTurn(
+      role: json['role'] as String?,
+      text: json['text'] as String?,
+    );
+
+Map<String, dynamic> _$ConversationTurnToJson(_ConversationTurn instance) =>
+    <String, dynamic>{'role': instance.role, 'text': instance.text};
+
+_Diagnosis _$DiagnosisFromJson(Map<String, dynamic> json) => _Diagnosis(
+  diseaseName: json['disease_name'] as String?,
+  probability: (json['probability'] as num?)?.toDouble(),
+  confidence: json['confidence'] as String?,
+  specialist: json['specialist'] as String?,
+  advice: json['advice'] as String?,
+  diseaseNameLocal: json['disease_name_local'] as String?,
+  specialistLocal: json['specialist_local'] as String?,
+  adviceLocal: json['advice_local'] as String?,
+);
+
+Map<String, dynamic> _$DiagnosisToJson(_Diagnosis instance) =>
+    <String, dynamic>{
+      'disease_name': instance.diseaseName,
+      'probability': instance.probability,
+      'confidence': instance.confidence,
+      'specialist': instance.specialist,
+      'advice': instance.advice,
+      'disease_name_local': instance.diseaseNameLocal,
+      'specialist_local': instance.specialistLocal,
+      'advice_local': instance.adviceLocal,
+    };
+
+_FinalReport _$FinalReportFromJson(Map<String, dynamic> json) => _FinalReport(
+  sessionId: json['session_id'] as String?,
+  patientName: json['patient_name'] as String?,
+  startedAt: json['started_at'] as String?,
+  completedAt: json['completed_at'] as String?,
+  status: json['status'] as String?,
+  diagnoses:
+      (json['diagnoses'] as List<dynamic>?)
+          ?.map((e) => Diagnosis.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  advice: json['advice'] as String?,
+  conversation:
+      (json['conversation'] as List<dynamic>?)
+          ?.map((e) => ConversationTurn.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+);
+
+Map<String, dynamic> _$FinalReportToJson(_FinalReport instance) =>
+    <String, dynamic>{
+      'session_id': instance.sessionId,
+      'patient_name': instance.patientName,
+      'started_at': instance.startedAt,
+      'completed_at': instance.completedAt,
+      'status': instance.status,
+      'diagnoses': instance.diagnoses,
+      'advice': instance.advice,
+      'conversation': instance.conversation,
+    };
+
+_SessionHistoryItem _$SessionHistoryItemFromJson(Map<String, dynamic> json) =>
+    _SessionHistoryItem(
+      sessionId: json['session_id'] as String?,
+      createdAt: json['created_at'] as String?,
+      status: json['status'] as String?,
+      topDisease: json['top_disease'] as String?,
+      topProbability: (json['top_probability'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$SessionHistoryItemToJson(_SessionHistoryItem instance) =>
+    <String, dynamic>{
+      'session_id': instance.sessionId,
+      'created_at': instance.createdAt,
+      'status': instance.status,
+      'top_disease': instance.topDisease,
+      'top_probability': instance.topProbability,
+    };

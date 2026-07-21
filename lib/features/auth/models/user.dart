@@ -12,6 +12,8 @@ sealed class User with _$User {
     @JsonKey(name: "birth_date") DateTime? birthDate,
     String? gender,
     @JsonKey(name: "is_smoker") bool? isSmoker,
+    String? occupation,
+    @JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,
     @JsonKey(name: "has_diabetes") bool? hasDiabetes,
     @JsonKey(name: "has_hypertension") bool? hasHypertension,
     @JsonKey(name: "is_pregnant") bool? isPregnant,

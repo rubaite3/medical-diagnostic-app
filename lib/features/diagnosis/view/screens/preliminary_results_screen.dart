@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
+
+import '../../../../core/utils/utils.dart';
 
 class PreliminaryResultsScreen extends StatelessWidget {
   const PreliminaryResultsScreen({super.key});
@@ -26,18 +28,19 @@ class PreliminaryResultsScreen extends StatelessWidget {
       body: SafeArea(
         child: BlocBuilder<DiagnosisCubit, DiagnosisState>(
           builder: (context, state) {
-            final summary =
-                state.currentFollowUp?.diagnosisSummary;
-            final diseases = summary?.probableDiseases ?? [];
+            final summary = state.currentFollowUp?.diagnosisSummary;
+            final diseases = summary?.diagnoses ?? [];
 
             return Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0, vertical: 16),
+                horizontal: 24.0,
+                vertical: 16,
+              ),
               child: Column(
                 children: [
                   DiagnosisPageHeader(
-                    title: DiagnosisStrings.preliminaryResultsTitle,
-                    subtitle: DiagnosisStrings.preliminaryResultsSubtitle,
+                    title: S.of(context).preliminaryResultsTitle,
+                    subtitle: S.of(context).preliminaryResultsSubtitle,
                     icon: Icons.analytics_outlined,
                   ),
                   const SizedBox(height: 24),
@@ -57,9 +60,13 @@ class PreliminaryResultsScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               final d = diseases[index];
                               return ProbabilityBar(
-                                diseaseName: d.name,
-                                probability: d.probability,
-                                colorCode: d.colorCode,
+                                diseaseName:
+                                    d.diseaseNameLocal ?? d.diseaseName ?? "",
+                                probability: d.probability ?? 0.0,
+                                barColor: Utils.colorFromProbability(
+                                  context,
+                                  d.probability ?? 0.0,
+                                ),
                               );
                             },
                           ),
@@ -71,21 +78,25 @@ class PreliminaryResultsScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: colorScheme.primaryContainer
-                          .withValues(alpha: 0.3),
+                      color: colorScheme.primaryContainer.withValues(
+                        alpha: 0.3,
+                      ),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                          color: colorScheme.primary.withValues(alpha: 0.2)),
+                        color: colorScheme.primary.withValues(alpha: 0.2),
+                      ),
                     ),
                     child: Row(
                       children: [
-                        Icon(Icons.info_outline,
-                            color: colorScheme.primary, size: 18),
+                        Icon(
+                          Icons.info_outline,
+                          color: colorScheme.primary,
+                          size: 18,
+                        ),
                         const SizedBox(width: 10),
                         Expanded(
                           child: Text(
-                            "These are preliminary results based on AI analysis. "
-                            "Please consult a doctor for a confirmed diagnosis.",
+                            S.of(context).disclaimerMessage,
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -98,7 +109,7 @@ class PreliminaryResultsScreen extends StatelessWidget {
                   const SizedBox(height: 16),
 
                   CustomButton(
-                    text: DiagnosisStrings.viewFullReportBtn,
+                    text: S.of(context).viewFullReportBtn,
                     onPressed: () =>
                         context.goNamed(RoutePaths.diagnosisPayment),
                   ),
@@ -110,7 +121,7 @@ class PreliminaryResultsScreen extends StatelessWidget {
                       context.goNamed(RoutePaths.homeScreen);
                     },
                     child: Text(
-                      DiagnosisStrings.startNewDiagnosisBtn,
+                      S.of(context).startNewDiagnosisBtn,
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.primary,
                         fontWeight: FontWeight.w600,

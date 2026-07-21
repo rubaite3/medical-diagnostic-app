@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../../core/navigation/route_paths.dart';
 import '../../../auth/controllers/auth_bloc/auth_bloc.dart';
 import '../widgets/settings_item_widget.dart';
@@ -18,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        title: const Text(SettingsStrings.settingsTitle),
+        title: Text(S.of(context).settingsTitle),
         centerTitle: true,
         elevation: 0,
         backgroundColor: colorScheme.surface,
@@ -28,28 +28,28 @@ class SettingsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            _buildSectionTitle(context, SettingsStrings.accountSettings),
+            _buildSectionTitle(context, S.of(context).accountSettings),
             SettingsItemWidget(
-              title: SettingsStrings.accountLogin,
+              title: S.of(context).accountLogin,
               onTap: () => context.goNamed(RoutePaths.account),
             ),
             SettingsItemWidget(
-              title: SettingsStrings.language,
+              title: S.of(context).language,
               onTap: () => context.goNamed(RoutePaths.language),
             ),
 
             const SizedBox(height: 24),
-            _buildSectionTitle(context, SettingsStrings.support),
+            _buildSectionTitle(context, S.of(context).support),
             SettingsItemWidget(
-              title: SettingsStrings.appUpdates,
+              title: S.of(context).appUpdates,
               onTap: () => context.goNamed(RoutePaths.appUpdates),
             ),
             SettingsItemWidget(
-              title: SettingsStrings.aboutVitalia,
+              title: S.of(context).aboutVitalia,
               onTap: () => context.goNamed(RoutePaths.aboutVitalia),
             ),
             SettingsItemWidget(
-              title: SettingsStrings.safetyInfo,
+              title: S.of(context).safetyInfo,
               onTap: () => context.goNamed(RoutePaths.safetyInfo),
             ),
 
@@ -64,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                     message: state.statusMessage,
                     level: Utils.mapOp(state.op),
                   );
-                  if (state.statusMessage.contains("Logged")) {
+                  if (state.statusMessage == S.of(context).authLoggedOut) {
                     context.goNamed(RoutePaths.login);
                   }
                 },
@@ -73,7 +73,7 @@ class SettingsScreen extends StatelessWidget {
                     context.read<AuthBloc>().add(const AuthEvent.logout());
                   },
                   child: Text(
-                    SettingsStrings.logout,
+                    S.of(context).logout,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -85,7 +85,7 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 40),
             Center(
               child: Text(
-                SettingsStrings.version,
+                S.of(context).version,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),

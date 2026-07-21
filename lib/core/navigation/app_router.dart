@@ -1,40 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
-import 'package:medical_diagnostic_app1/core/enums/enums.dart';
-import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
-import 'package:medical_diagnostic_app1/core/utils/utils.dart';
-import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/email_verification_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/forgot_password_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/login_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/on_boarding_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/reset_password_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/screens/sign_up_screen.dart';
-import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/repos/diagnosis_repo.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/baseline_screens.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/diagnosis_payment_screen.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/follow_up_questions_screen.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/full_report_screen.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/preliminary_results_screen.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/symptom_questions_screen.dart';
-import 'package:medical_diagnostic_app1/features/diagnosis/view/screens/symptom_search_screen.dart';
-import 'package:medical_diagnostic_app1/features/home/view/screens/home_screen.dart';
-import 'package:medical_diagnostic_app1/features/home/view/screens/patient_profile_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/about_vitalia_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/account_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/app_updates_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/language_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/safety_info_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/settings_screen.dart';
-import 'package:medical_diagnostic_app1/features/settings/view/screens/webview_screen.dart';
+import "app_router_exports.dart";
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -49,6 +13,7 @@ class AppRouter {
     RoutePaths.forgotPass,
     RoutePaths.resetPass,
     RoutePaths.emailVerification,
+    RoutePaths.tempSessionPreview,
   ];
 
   static bool _isPublic(String location) =>
@@ -59,7 +24,7 @@ class AppRouter {
     navigatorKey: _rootNavigatorKey,
     redirect: (context, state) {
       final authState = context.read<AuthBloc>().state;
-      if (context.read<LoaderCubit>().state) return null;
+      if (context.read<LoaderCubit>().state.isLoading) return null;
 
       final location = state.matchedLocation;
 
@@ -127,38 +92,55 @@ class AppRouter {
                 builder: (context, state) => const HomeScreen(),
                 routes: [
                   GoRoute(
+                    name: RoutePaths.tempSessionPreview,
+                    path: RoutePaths.tempSessionPreview,
+                    builder: (context, state) =>
+                        const TempSessionPreviewScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.notifications,
+                    path: RoutePaths.notifications,
+                    builder: (context, state) => const NotificationsScreen(),
+                  ),
+                  GoRoute(
                     name: RoutePaths.baselineGender,
                     path: RoutePaths.baselineGender,
-                    builder: (context, state) => const GenderSelectionScreen(),
+                    builder: (context, state) => GenderSelectionScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.baselineOccupation,
+                    path: RoutePaths.baselineOccupation,
+                    builder: (context, state) => OccupationScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselineActivity,
                     path: RoutePaths.baselineActivity,
-                    builder: (context, state) =>
-                        const ActivitySelectionScreen(),
+                    builder: (context, state) => ActivitySelectionScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselineSmoker,
                     path: RoutePaths.baselineSmoker,
-                    builder: (context, state) => const SmokerSelectionScreen(),
+                    builder: (context, state) => SmokerSelectionScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.baselineAlcohol,
+                    path: RoutePaths.baselineAlcohol,
+                    builder: (context, state) => AlcoholScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselineDiabetes,
                     path: RoutePaths.baselineDiabetes,
-                    builder: (context, state) =>
-                        const DiabetesSelectionScreen(),
+                    builder: (context, state) => DiabetesSelectionScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselineHypertension,
                     path: RoutePaths.baselineHypertension,
-                    builder: (context, state) =>
-                        const HypertensionSelectionScreen(),
+                    builder: (context, state) => HypertensionSelectionScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselinePregnant,
                     path: RoutePaths.baselinePregnant,
-                    builder: (context, state) =>
-                        const PregnancySelectionScreen(),
+                    builder: (context, state) => PregnancySelectionScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.symptomSearch,
@@ -182,18 +164,21 @@ class AppRouter {
                   GoRoute(
                     name: RoutePaths.preliminaryResults,
                     path: RoutePaths.preliminaryResults,
-                    builder: (context, state) =>
-                        const PreliminaryResultsScreen(),
+                    builder: (context, state) => PreliminaryResultsScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.diagnosisPayment,
                     path: RoutePaths.diagnosisPayment,
-                    builder: (context, state) => const DiagnosisPaymentScreen(),
+                    builder: (context, state) => DiagnosisPaymentScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.fullReport,
                     path: RoutePaths.fullReport,
-                    builder: (context, state) => const FullReportScreen(),
+                    builder: (context, state) {
+                      final sessionId =
+                          state.uri.queryParameters['sessionId'] ?? "";
+                      return FullReportScreen(sessionId: sessionId);
+                    },
                   ),
                 ],
               ),
@@ -207,6 +192,13 @@ class AppRouter {
                 name: RoutePaths.patientProfile,
                 path: RoutePaths.patientProfile,
                 builder: (context, state) => const PatientProfileScreen(),
+                routes: [
+                  GoRoute(
+                    name: RoutePaths.sessionHistory,
+                    path: RoutePaths.sessionHistory,
+                    builder: (context, state) => const SessionHistoryScreen(),
+                  ),
+                ],
               ),
             ],
           ),
@@ -274,7 +266,6 @@ class MainWrapper extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(),
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
@@ -291,15 +282,18 @@ class MainWrapper extends StatelessWidget {
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
         backgroundColor: colorScheme.surface,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: 'Home'),
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
+            icon: const Icon(Icons.home_filled),
+            label: S.of(context).navHome,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: 'Settings',
+            icon: const Icon(Icons.person_outline),
+            label: S.of(context).navProfile,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.settings_outlined),
+            label: S.of(context).navSettings,
           ),
         ],
       ),

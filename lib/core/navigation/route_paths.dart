@@ -7,7 +7,7 @@ class RoutePaths {
   static const patientProfile = '/patientProfile';
   static const emailVerification = '/emailVerification';
   static const homeScreen = '/home';
-   static const settings = '/settings';
+  static const settings = '/settings';
   static const account = '/account';
   static const language = '/language';
   static const appUpdates = '/appUpdates';
@@ -19,11 +19,16 @@ class RoutePaths {
   static const baselineDiabetes = '/diagnosis/baseline/diabetes';
   static const baselineHypertension = '/diagnosis/baseline/hypertension';
   static const baselinePregnant = '/diagnosis/baseline/pregnant';
-  
+  static const baselineOccupation = '/diagnosis/baseline/occupation';
+  static const baselineAlcohol = '/diagnosis/baseline/alcohol';
+
   static const symptomSearch = '/diagnosis/symptoms';
   static const symptomQuestions = '/diagnosis/symptomQuestions';
   static const followUpQuestions = '/diagnosis/followUp';
   static const preliminaryResults = '/diagnosis/preliminaryResults';
   static const diagnosisPayment = '/diagnosis/payment';
   static const fullReport = '/diagnosis/fullReport';
+  static const sessionHistory = 'sessionHistory';
+  static const notifications = 'notifications';
+  static const tempSessionPreview = '/temp/sessionPreview';
 }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
 
 class DiagnosisPageHeader extends StatelessWidget {
   final String title;
@@ -80,7 +79,6 @@ class DiagnosisSectionLabel extends StatelessWidget {
   }
 }
 
-
 class DiagnosisDropdownField extends StatelessWidget {
   final String hint;
   final String? value;
@@ -114,8 +112,13 @@ class DiagnosisDropdownField extends StatelessWidget {
         items: items,
         onChanged: onChanged,
         dropdownColor: colorScheme.surface,
-        style: theme.textTheme.bodyLarge?.copyWith(color: colorScheme.onSurface),
-        icon: Icon(Icons.keyboard_arrow_down_rounded, color: colorScheme.primary),
+        style: theme.textTheme.bodyLarge?.copyWith(
+          color: colorScheme.onSurface,
+        ),
+        icon: Icon(
+          Icons.keyboard_arrow_down_rounded,
+          color: colorScheme.primary,
+        ),
       ),
     );
   }
@@ -153,7 +156,8 @@ class DiagnosisCheckboxRow extends StatelessWidget {
               onChanged: onChanged,
               activeColor: colorScheme.primary,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4)),
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
             const SizedBox(width: 8),
             Expanded(
@@ -170,7 +174,6 @@ class DiagnosisCheckboxRow extends StatelessWidget {
     );
   }
 }
-
 
 class FollowUpProgressBar extends StatelessWidget {
   final int current;
@@ -195,7 +198,7 @@ class FollowUpProgressBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "${DiagnosisStrings.followUpProgress} $current of $total",
+              "${S.of(context).followUpProgress} $current ${S.of(context).keyword_of} $total",
               style: theme.textTheme.bodySmall?.copyWith(
                 color: colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w600,
@@ -225,7 +228,6 @@ class FollowUpProgressBar extends StatelessWidget {
     );
   }
 }
-
 
 class QuestionCard extends StatelessWidget {
   final Question question;
@@ -351,8 +353,7 @@ class _OptionTile extends StatelessWidget {
                   color: isSelected
                       ? colorScheme.primary
                       : colorScheme.onSurface,
-                  fontWeight:
-                      isSelected ? FontWeight.w600 : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
             ),
@@ -363,39 +364,22 @@ class _OptionTile extends StatelessWidget {
   }
 }
 
-
 class ProbabilityBar extends StatelessWidget {
   final String diseaseName;
   final double probability;
-  final String colorCode;
+  final Color barColor;
 
   const ProbabilityBar({
     super.key,
     required this.diseaseName,
     required this.probability,
-    required this.colorCode,
+    required this.barColor,
   });
-
-  Color _resolveColor(BuildContext context) {
-    switch (colorCode.toLowerCase()) {
-      case 'red':
-        return const Color(0xFFE53935);
-      case 'orange':
-        return const Color(0xFFFB8C00);
-      case 'yellow':
-        return const Color(0xFFFDD835);
-      case 'green':
-        return const Color(0xFF43A047);
-      default:
-        return Theme.of(context).colorScheme.primary;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final barColor = _resolveColor(context);
     final percent = probability.clamp(0.0, 1.0);
 
     return Container(
@@ -429,8 +413,10 @@ class ProbabilityBar extends StatelessWidget {
                 ),
               ),
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: barColor.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(20),
@@ -460,7 +446,6 @@ class ProbabilityBar extends StatelessWidget {
     );
   }
 }
-
 
 class AssessmentForCard extends StatelessWidget {
   final String title;
@@ -551,7 +536,6 @@ class AssessmentForCard extends StatelessWidget {
   }
 }
 
-
 class SymptomChip extends StatelessWidget {
   final String label;
   final VoidCallback onRemove;
@@ -591,7 +575,6 @@ class SymptomChip extends StatelessWidget {
   }
 }
 
-
 class DiagnosisErrorWidget extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
@@ -623,14 +606,13 @@ class DiagnosisErrorWidget extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
-            CustomButton(text: DiagnosisStrings.retryBtn, onPressed: onRetry),
+            CustomButton(text: S.of(context).retryBtn, onPressed: onRetry),
           ],
         ),
       ),
     );
   }
 }
-
 
 class PaymentFeatureRow extends StatelessWidget {
   final String text;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 
 class SafetyInfoScreen extends StatelessWidget {
   const SafetyInfoScreen({super.key});
@@ -8,7 +8,7 @@ class SafetyInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(SettingsStrings.safetyInfo),
+        title: Text(S.of(context).safetyInfo),
         centerTitle: true,
       ),
       body: const Center(

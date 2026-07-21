@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
+import 'package:medical_diagnostic_app1/core/utils/utils.dart';
+import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
-
 
 class BaselineStepScreen extends StatelessWidget {
   final String title;
@@ -33,13 +34,20 @@ class BaselineStepScreen extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.onSurface),
-          onPressed: () => context.pop(),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: colorScheme.onSurface,
+          ),
+          onPressed: () {
+            if (GoRouterState.of(context).uri.path ==
+                RoutePaths.baselineGender) {
+              context.read<DiagnosisCubit>().reset();
+            }
+            context.pop();
+          },
         ),
       ),
       body: SafeArea(
@@ -51,7 +59,9 @@ class BaselineStepScreen extends StatelessWidget {
               const SizedBox(height: 40),
               Expanded(child: content),
               CustomButton(
-                text: isLast ? DiagnosisStrings.finishBaselineBtn : DiagnosisStrings.nextBtn,
+                text: isLast
+                    ? S.of(context).diagnosisFinishBaselineBtn
+                    : S.of(context).diagnosisNextBtn,
                 onPressed: onNext,
               ),
               const SizedBox(height: 8),
@@ -72,24 +82,104 @@ class GenderSelectionScreen extends StatelessWidget {
     return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         return BaselineStepScreen(
-          title: DiagnosisStrings.genderTitle,
-          subtitle: DiagnosisStrings.genderSubtitle,
+          title: S.of(context).diagnosisGenderTitle,
+          subtitle: S.of(context).diagnosisGenderSubtitle,
           icon: Icons.person_outline_rounded,
-          onNext: () => context.pushNamed(RoutePaths.baselineActivity),
+          onNext: () {
+            if (state.gender == null) {
+              Utils.showToast(
+                context,
+                message: S.of(context).diagMustChooseGender,
+                level: -1,
+              );
+            } else {
+              context.pushNamed(RoutePaths.baselineOccupation);
+            }
+          },
           content: Column(
             children: [
               _SelectionTile(
-                label: DiagnosisStrings.genderMale,
+                label: S.of(context).genderMale,
                 isSelected: state.gender == 'male',
-                onTap: () => context.read<DiagnosisCubit>().updateBaseline(gender: 'male'),
+                onTap: () => context.read<DiagnosisCubit>().updateBaseline(
+                  gender: 'male',
+                ),
               ),
               const SizedBox(height: 12),
               _SelectionTile(
-                label: DiagnosisStrings.genderFemale,
+                label: S.of(context).genderFemale,
                 isSelected: state.gender == 'female',
-                onTap: () => context.read<DiagnosisCubit>().updateBaseline(gender: 'female'),
+                onTap: () => context.read<DiagnosisCubit>().updateBaseline(
+                  gender: 'female',
+                ),
               ),
             ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+// 1b. Occupation Screen (text input)
+class OccupationScreen extends StatefulWidget {
+  const OccupationScreen({super.key});
+
+  @override
+  State<OccupationScreen> createState() => _OccupationScreenState();
+}
+
+class _OccupationScreenState extends State<OccupationScreen> {
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.text = context.read<DiagnosisCubit>().state.patientJob ?? "";
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+      builder: (context, state) {
+        return BaselineStepScreen(
+          title: S.of(context).diagnosisOccupationTitle,
+          subtitle: S.of(context).diagnosisOccupationSubtitle,
+          icon: Icons.work_outline_rounded,
+          onNext: () {
+            final value = _controller.text.trim();
+            if (value.isEmpty) {
+              Utils.showToast(
+                context,
+                message: S.of(context).diagMustEnterOccupation,
+                level: -1,
+              );
+            } else {
+              context.read<DiagnosisCubit>().updateBaseline(patientJob: value);
+              context.pushNamed(RoutePaths.baselineActivity);
+            }
+          },
+          content: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).padding.bottom + 10,
+            ),
+            child: TextField(
+              controller: _controller,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                hintText: S.of(context).diagnosisOccupationHint,
+                prefixIcon: const Icon(Icons.work_outline_rounded),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
           ),
         );
       },
@@ -106,30 +196,52 @@ class ActivitySelectionScreen extends StatelessWidget {
     return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         return BaselineStepScreen(
-          title: DiagnosisStrings.activityTitle,
-          subtitle: DiagnosisStrings.activitySubtitle,
+          title: S.of(context).diagnosisActivityTitle,
+          subtitle: S.of(context).diagnosisActivitySubtitle,
           icon: Icons.directions_run_rounded,
-          onNext: () => context.pushNamed(RoutePaths.baselineSmoker),
-          content: Column(
-            children: [
-              _SelectionTile(
-                label: DiagnosisStrings.activitySedentary,
-                isSelected: state.activityLevel == 'sedentary',
-                onTap: () => context.read<DiagnosisCubit>().updateBaseline(activityLevel: 'sedentary'),
-              ),
-              const SizedBox(height: 12),
-              _SelectionTile(
-                label: DiagnosisStrings.activityModerate,
-                isSelected: state.activityLevel == 'moderate',
-                onTap: () => context.read<DiagnosisCubit>().updateBaseline(activityLevel: 'moderate'),
-              ),
-              const SizedBox(height: 12),
-              _SelectionTile(
-                label: DiagnosisStrings.activityActive,
-                isSelected: state.activityLevel == 'active',
-                onTap: () => context.read<DiagnosisCubit>().updateBaseline(activityLevel: 'active'),
-              ),
-            ],
+          onNext: () {
+            if (state.activityLevel == null) {
+              Utils.showToast(
+                context,
+                message: S.of(context).diagMustChooseActivity,
+                level: -1,
+              );
+            } else {
+              context.pushNamed(RoutePaths.baselineSmoker);
+            }
+          },
+          content: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).padding.bottom + 10,
+            ),
+
+            child: Column(
+              children: [
+                _SelectionTile(
+                  label: S.of(context).activitySedentary,
+                  isSelected: state.activityLevel == 'sedentary',
+                  onTap: () => context.read<DiagnosisCubit>().updateBaseline(
+                    activityLevel: 'sedentary',
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _SelectionTile(
+                  label: S.of(context).activityModerate,
+                  isSelected: state.activityLevel == 'moderate',
+                  onTap: () => context.read<DiagnosisCubit>().updateBaseline(
+                    activityLevel: 'moderate',
+                  ),
+                ),
+                const SizedBox(height: 12),
+                _SelectionTile(
+                  label: S.of(context).activityActive,
+                  isSelected: state.activityLevel == 'active',
+                  onTap: () => context.read<DiagnosisCubit>().updateBaseline(
+                    activityLevel: 'active',
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -146,13 +258,38 @@ class SmokerSelectionScreen extends StatelessWidget {
     return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         return BaselineStepScreen(
-          title: DiagnosisStrings.smokerTitle,
-          subtitle: DiagnosisStrings.smokerSubtitle,
+          title: S.of(context).diagnosisSmokerTitle,
+          subtitle: S.of(context).diagnosisSmokerSubtitle,
           icon: Icons.smoking_rooms_rounded,
-          onNext: () => context.pushNamed(RoutePaths.baselineDiabetes),
+          onNext: () => context.pushNamed(RoutePaths.baselineAlcohol),
           content: _YesNoSelection(
             value: state.isSmoker,
-            onChanged: (val) => context.read<DiagnosisCubit>().updateBaseline(isSmoker: val),
+            onChanged: (val) =>
+                context.read<DiagnosisCubit>().updateBaseline(isSmoker: val),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// 3b. Alcohol Screen (yes/no)
+class AlcoholScreen extends StatelessWidget {
+  const AlcoholScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+      builder: (context, state) {
+        return BaselineStepScreen(
+          title: S.of(context).diagnosisAlcoholTitle,
+          subtitle: S.of(context).diagnosisAlcoholSubtitle,
+          icon: Icons.local_bar_outlined,
+          onNext: () => context.pushNamed(RoutePaths.baselineDiabetes),
+          content: _YesNoSelection(
+            value: state.isAlcoholic ?? false,
+            onChanged: (val) =>
+                context.read<DiagnosisCubit>().updateBaseline(isAlcoholic: val),
           ),
         );
       },
@@ -169,13 +306,14 @@ class DiabetesSelectionScreen extends StatelessWidget {
     return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         return BaselineStepScreen(
-          title: DiagnosisStrings.diabetesTitle,
-          subtitle: DiagnosisStrings.diabetesSubtitle,
+          title: S.of(context).diagnosisDiabetesTitle,
+          subtitle: S.of(context).diagnosisDiabetesSubtitle,
           icon: Icons.medical_services_outlined,
           onNext: () => context.pushNamed(RoutePaths.baselineHypertension),
           content: _YesNoSelection(
             value: state.hasDiabetes,
-            onChanged: (val) => context.read<DiagnosisCubit>().updateBaseline(hasDiabetes: val),
+            onChanged: (val) =>
+                context.read<DiagnosisCubit>().updateBaseline(hasDiabetes: val),
           ),
         );
       },
@@ -189,20 +327,34 @@ class HypertensionSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+    return BlocConsumer<DiagnosisCubit, DiagnosisState>(
+      listenWhen: (previous, current) => !current.op.isNeutral,
+      listener: (context, state) {
+        Utils.showToast(
+          context,
+          message: state.statusMessage,
+          level: Utils.mapOp(state.op),
+        );
+        if (state.op.isSuccess) {
+          context.goNamed(RoutePaths.symptomSearch);
+          context.read<AuthBloc>().add(AuthEvent.getProfile());
+        }
+      },
       builder: (context, state) {
         final isFemale = state.gender == 'female';
         return BaselineStepScreen(
-          title: DiagnosisStrings.hypertensionTitle,
-          subtitle: DiagnosisStrings.hypertensionSubtitle,
+          title: S.of(context).diagnosisHypertensionTitle,
+          subtitle: S.of(context).diagnosisHypertensionSubtitle,
           icon: Icons.speed_rounded,
-          onNext: () => isFemale 
-              ? context.pushNamed(RoutePaths.baselinePregnant) 
+          onNext: () => isFemale
+              ? context.pushNamed(RoutePaths.baselinePregnant)
               : _finish(context),
           isLast: !isFemale,
           content: _YesNoSelection(
             value: state.hasHypertension,
-            onChanged: (val) => context.read<DiagnosisCubit>().updateBaseline(hasHypertension: val),
+            onChanged: (val) => context.read<DiagnosisCubit>().updateBaseline(
+              hasHypertension: val,
+            ),
           ),
         );
       },
@@ -210,10 +362,7 @@ class HypertensionSelectionScreen extends StatelessWidget {
   }
 
   void _finish(BuildContext context) async {
-    await context.read<DiagnosisCubit>().startDiagnosis();
-    if (context.mounted) {
-      context.goNamed(RoutePaths.symptomSearch);
-    }
+    context.read<DiagnosisCubit>().startDiagnosis();
   }
 }
 
@@ -223,17 +372,30 @@ class PregnancySelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+    return BlocConsumer<DiagnosisCubit, DiagnosisState>(
+      listenWhen: (previous, current) => !current.op.isNeutral,
+      listener: (context, state) {
+        Utils.showToast(
+          context,
+          message: state.statusMessage,
+          level: Utils.mapOp(state.op),
+        );
+        if (state.op.isSuccess) {
+          context.goNamed(RoutePaths.symptomSearch);
+          context.read<AuthBloc>().add(AuthEvent.getProfile());
+        }
+      },
       builder: (context, state) {
         return BaselineStepScreen(
-          title: DiagnosisStrings.pregnantTitle,
-          subtitle: DiagnosisStrings.pregnantSubtitle,
+          title: S.of(context).diagnosisPregnantTitle,
+          subtitle: S.of(context).diagnosisPregnantSubtitle,
           icon: Icons.child_care_rounded,
           isLast: true,
           onNext: () => _finish(context),
           content: _YesNoSelection(
             value: state.isPregnant,
-            onChanged: (val) => context.read<DiagnosisCubit>().updateBaseline(isPregnant: val),
+            onChanged: (val) =>
+                context.read<DiagnosisCubit>().updateBaseline(isPregnant: val),
           ),
         );
       },
@@ -241,10 +403,7 @@ class PregnancySelectionScreen extends StatelessWidget {
   }
 
   void _finish(BuildContext context) async {
-    await context.read<DiagnosisCubit>().startDiagnosis();
-    if (context.mounted) {
-      context.goNamed(RoutePaths.symptomSearch);
-    }
+    context.read<DiagnosisCubit>().startDiagnosis();
   }
 }
 
@@ -254,7 +413,11 @@ class _SelectionTile extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
 
-  const _SelectionTile({required this.label, required this.isSelected, required this.onTap});
+  const _SelectionTile({
+    required this.label,
+    required this.isSelected,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -265,15 +428,32 @@ class _SelectionTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primary.withValues(alpha: 0.1) : colorScheme.surface,
+          color: isSelected
+              ? colorScheme.primary.withValues(alpha: 0.1)
+              : colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: isSelected ? colorScheme.primary : colorScheme.outline.withValues(alpha: 0.2), width: 1.5),
+          border: Border.all(
+            color: isSelected
+                ? colorScheme.primary
+                : colorScheme.outline.withValues(alpha: 0.2),
+            width: 1.5,
+          ),
         ),
         child: Row(
           children: [
-            Icon(isSelected ? Icons.radio_button_checked : Icons.radio_button_off, color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant),
+            Icon(
+              isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+              color: isSelected
+                  ? colorScheme.primary
+                  : colorScheme.onSurfaceVariant,
+            ),
             const SizedBox(width: 12),
-            Text(label, style: theme.textTheme.bodyLarge?.copyWith(fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)),
+            Text(
+              label,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
           ],
         ),
       ),
@@ -291,9 +471,17 @@ class _YesNoSelection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _SelectionTile(label: DiagnosisStrings.yes, isSelected: value == true, onTap: () => onChanged(true)),
+        _SelectionTile(
+          label: S.of(context).yes,
+          isSelected: value == true,
+          onTap: () => onChanged(true),
+        ),
         const SizedBox(height: 12),
-        _SelectionTile(label: DiagnosisStrings.no, isSelected: value == false, onTap: () => onChanged(false)),
+        _SelectionTile(
+          label: S.of(context).no,
+          isSelected: value == false,
+          onTap: () => onChanged(false),
+        ),
       ],
     );
   }

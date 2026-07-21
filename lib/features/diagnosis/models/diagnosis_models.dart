@@ -12,7 +12,9 @@ abstract class StartDiagnosisRequest with _$StartDiagnosisRequest {
     @JsonKey(name: 'has_hypertension') required bool hasHypertension,
     @JsonKey(name: 'is_pregnant') bool? isPregnant,
     @JsonKey(name: 'activity_level') required String activityLevel,
-    @JsonKey(name: 'assessment_for') required String assessmentFor,
+    @Default("myself") @JsonKey(name: 'assessment_for') String assessmentFor,
+    @JsonKey(name: 'is_alcoholic') bool? isAlcoholic,
+    @JsonKey(name: 'patient_job') String? patientJob,
   }) = _StartDiagnosisRequest;
 
   factory StartDiagnosisRequest.fromJson(Map<String, dynamic> json) =>
@@ -32,9 +34,11 @@ abstract class StartDiagnosisResponse with _$StartDiagnosisResponse {
 @freezed
 abstract class Symptom with _$Symptom {
   const factory Symptom({
-    required String id,
-    required String name,
-    required String description,
+    int? id,
+    @JsonKey(name: "name_en") String? nameEn,
+    @JsonKey(name: "name_local") String? nameLocal,
+    String? summary,
+    String? type,
   }) = _Symptom;
 
   factory Symptom.fromJson(Map<String, dynamic> json) =>
@@ -43,10 +47,8 @@ abstract class Symptom with _$Symptom {
 
 @freezed
 abstract class QuestionOption with _$QuestionOption {
-  const factory QuestionOption({
-    required String id,
-    required String label,
-  }) = _QuestionOption;
+  const factory QuestionOption({required String id, required String label}) =
+      _QuestionOption;
 
   factory QuestionOption.fromJson(Map<String, dynamic> json) =>
       _$QuestionOptionFromJson(json);
@@ -69,7 +71,8 @@ abstract class Question with _$Question {
 abstract class SymptomAnswer with _$SymptomAnswer {
   const factory SymptomAnswer({
     @JsonKey(name: 'question_id') required String questionId,
-    @JsonKey(name: 'selected_option_ids') required List<String> selectedOptionIds,
+    @JsonKey(name: 'selected_option_ids')
+    required List<String> selectedOptionIds,
   }) = _SymptomAnswer;
 
   factory SymptomAnswer.fromJson(Map<String, dynamic> json) =>
@@ -77,23 +80,25 @@ abstract class SymptomAnswer with _$SymptomAnswer {
 }
 
 @freezed
-abstract class SubmitSymptomAnswersRequest with _$SubmitSymptomAnswersRequest {
-  const factory SubmitSymptomAnswersRequest({
-    @JsonKey(name: 'session_id') required String sessionId,
-    @JsonKey(name: 'symptom_id') required String symptomId,
-    required List<SymptomAnswer> answers,
-  }) = _SubmitSymptomAnswersRequest;
+abstract class SelectSymptomRequest with _$SelectSymptomRequest {
+  const factory SelectSymptomRequest({
+    required String name,
+    @JsonKey(name: "session_id") required String sessionId,
+  }) = _SelectSymptomRequest;
 
-  factory SubmitSymptomAnswersRequest.fromJson(Map<String, dynamic> json) =>
-      _$SubmitSymptomAnswersRequestFromJson(json);
+  factory SelectSymptomRequest.fromJson(Map<String, dynamic> json) =>
+      _$SelectSymptomRequestFromJson(json);
 }
 
 @freezed
 abstract class ProbableDisease with _$ProbableDisease {
   const factory ProbableDisease({
-    required String name,
-    required double probability,
-    @JsonKey(name: 'color_code') required String colorCode,
+    @JsonKey(name: "disease_name") String? diseaseName,
+    @JsonKey(name: "disease_name_local") String? diseaseNameLocal,
+    double? probability,
+    String? confidence,
+    String? specialist,
+    String? advice,
   }) = _ProbableDisease;
 
   factory ProbableDisease.fromJson(Map<String, dynamic> json) =>
@@ -102,9 +107,8 @@ abstract class ProbableDisease with _$ProbableDisease {
 
 @freezed
 abstract class DiagnosisSummary with _$DiagnosisSummary {
-  const factory DiagnosisSummary({
-    @JsonKey(name: 'probable_diseases') required List<ProbableDisease> probableDiseases,
-  }) = _DiagnosisSummary;
+  const factory DiagnosisSummary({required List<ProbableDisease> diagnoses}) =
+      _DiagnosisSummary;
 
   factory DiagnosisSummary.fromJson(Map<String, dynamic> json) =>
       _$DiagnosisSummaryFromJson(json);
@@ -113,10 +117,10 @@ abstract class DiagnosisSummary with _$DiagnosisSummary {
 @freezed
 abstract class FollowUpResponse with _$FollowUpResponse {
   const factory FollowUpResponse({
-    @JsonKey(name: 'response_type') required String responseType,
+    @Default("question") @JsonKey(name: 'response_type') String responseType,
     Question? question,
     @JsonKey(name: 'diagnosis_summary') DiagnosisSummary? diagnosisSummary,
-    required int total,
+    int? total,
   }) = _FollowUpResponse;
 
   factory FollowUpResponse.fromJson(Map<String, dynamic> json) =>
@@ -128,9 +132,66 @@ abstract class SubmitFollowUpAnswerRequest with _$SubmitFollowUpAnswerRequest {
   const factory SubmitFollowUpAnswerRequest({
     @JsonKey(name: 'session_id') required String sessionId,
     @JsonKey(name: 'question_id') required String questionId,
-    @JsonKey(name: 'selected_option_ids') required List<String> selectedOptionIds,
+    required String answer,
   }) = _SubmitFollowUpAnswerRequest;
 
   factory SubmitFollowUpAnswerRequest.fromJson(Map<String, dynamic> json) =>
       _$SubmitFollowUpAnswerRequestFromJson(json);
+}
+
+@freezed
+abstract class ConversationTurn with _$ConversationTurn {
+  const factory ConversationTurn({String? role, String? text}) =
+      _ConversationTurn;
+
+  factory ConversationTurn.fromJson(Map<String, dynamic> json) =>
+      _$ConversationTurnFromJson(json);
+}
+
+@freezed
+abstract class Diagnosis with _$Diagnosis {
+  const factory Diagnosis({
+    @JsonKey(name: "disease_name") String? diseaseName,
+    double? probability,
+    String? confidence,
+    String? specialist,
+    String? advice,
+    @JsonKey(name: "disease_name_local") String? diseaseNameLocal,
+    @JsonKey(name: "specialist_local") String? specialistLocal,
+    @JsonKey(name: "advice_local") String? adviceLocal,
+  }) = _Diagnosis;
+
+  factory Diagnosis.fromJson(Map<String, dynamic> json) =>
+      _$DiagnosisFromJson(json);
+}
+
+@freezed
+abstract class FinalReport with _$FinalReport {
+  const factory FinalReport({
+    @JsonKey(name: "session_id") String? sessionId,
+    @JsonKey(name: "patient_name") String? patientName,
+    @JsonKey(name: "started_at") String? startedAt,
+    @JsonKey(name: "completed_at") String? completedAt,
+    String? status,
+    @Default([]) List<Diagnosis> diagnoses,
+    String? advice,
+    @Default([]) List<ConversationTurn> conversation,
+  }) = _FinalReport;
+
+  factory FinalReport.fromJson(Map<String, dynamic> json) =>
+      _$FinalReportFromJson(json);
+}
+
+@freezed
+abstract class SessionHistoryItem with _$SessionHistoryItem {
+  const factory SessionHistoryItem({
+    @JsonKey(name: 'session_id') String? sessionId,
+    @JsonKey(name: 'created_at') String? createdAt,
+    String? status,
+    @JsonKey(name: 'top_disease') String? topDisease,
+    @JsonKey(name: 'top_probability') double? topProbability,
+  }) = _SessionHistoryItem;
+
+  factory SessionHistoryItem.fromJson(Map<String, dynamic> json) =>
+      _$SessionHistoryItemFromJson(json);
 }

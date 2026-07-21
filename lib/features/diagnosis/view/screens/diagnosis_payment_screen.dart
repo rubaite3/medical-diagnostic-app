@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
+
+import '../../../../core/utils/utils.dart';
 
 class DiagnosisPaymentScreen extends StatelessWidget {
   const DiagnosisPaymentScreen({super.key});
@@ -21,9 +23,14 @@ class DiagnosisPaymentScreen extends StatelessWidget {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded,
-              color: colorScheme.onSurface),
-          onPressed: () => context.pop(),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: colorScheme.onSurface,
+          ),
+          onPressed: () {
+            context.read<DiagnosisCubit>().reset();
+            context.pop();
+          },
         ),
       ),
       body: SafeArea(
@@ -32,8 +39,8 @@ class DiagnosisPaymentScreen extends StatelessWidget {
           child: Column(
             children: [
               DiagnosisPageHeader(
-                title: DiagnosisStrings.paymentTitle,
-                subtitle: DiagnosisStrings.paymentSubtitle,
+                title: S.of(context).paymentTitle,
+                subtitle: S.of(context).paymentSubtitle,
                 icon: Icons.description_outlined,
               ),
               const SizedBox(height: 32),
@@ -42,22 +49,20 @@ class DiagnosisPaymentScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: colorScheme.surfaceContainerHighest
-                      .withValues(alpha: 0.4),
+                  color: colorScheme.surfaceContainerHighest.withValues(
+                    alpha: 0.4,
+                  ),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
-                      color: colorScheme.outline.withValues(alpha: 0.25)),
+                    color: colorScheme.outline.withValues(alpha: 0.25),
+                  ),
                 ),
                 child: Column(
-                  children: const [
-                    PaymentFeatureRow(
-                        text: DiagnosisStrings.paymentFeature1),
-                    PaymentFeatureRow(
-                        text: DiagnosisStrings.paymentFeature2),
-                    PaymentFeatureRow(
-                        text: DiagnosisStrings.paymentFeature3),
-                    PaymentFeatureRow(
-                        text: DiagnosisStrings.paymentFeature4),
+                  children: [
+                    PaymentFeatureRow(text: S.of(context).paymentFeature1),
+                    PaymentFeatureRow(text: S.of(context).paymentFeature2),
+                    PaymentFeatureRow(text: S.of(context).paymentFeature3),
+                    PaymentFeatureRow(text: S.of(context).paymentFeature4),
                   ],
                 ),
               ),
@@ -66,7 +71,7 @@ class DiagnosisPaymentScreen extends StatelessWidget {
 
               // Price display
               Text(
-                DiagnosisStrings.paymentAmount,
+                S.of(context).paymentAmount,
                 style: theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
@@ -74,7 +79,7 @@ class DiagnosisPaymentScreen extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                DiagnosisStrings.paymentCancelAnytime,
+                S.of(context).paymentCancelAnytime,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: colorScheme.onSurfaceVariant,
                 ),
@@ -83,19 +88,30 @@ class DiagnosisPaymentScreen extends StatelessWidget {
               const Spacer(),
 
               // Stripe Payment Button
-              BlocBuilder<DiagnosisCubit, DiagnosisState>(
+              BlocConsumer<DiagnosisCubit, DiagnosisState>(
                 builder: (context, state) {
                   return _StripePayButton(
                     isLoading: state.op.isLoading,
                     onPressed: () async {
                       // TODO: Integrate Stripe SDK here.
                       // On successful payment, call getReport then navigate.
-                      await context.read<DiagnosisCubit>().getReport();
-                      if (context.mounted) {
-                        context.goNamed(RoutePaths.fullReport);
-                      }
                     },
                   );
+                },
+                listener: (BuildContext context, DiagnosisState state) {
+                  Utils.showToast(
+                    context,
+                    message: state.statusMessage,
+                    level: -1,
+                  );
+                  if (state.op.isSuccess) {
+                    final String sessionId =
+                        context.read<DiagnosisCubit>().state.sessionId ?? "";
+                    context.goNamed(
+                      RoutePaths.fullReport,
+                      queryParameters: {'sessionId': sessionId},
+                    );
+                  }
                 },
               ),
 
@@ -105,11 +121,14 @@ class DiagnosisPaymentScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.lock_outline,
-                      size: 14, color: colorScheme.onSurfaceVariant),
+                  Icon(
+                    Icons.lock_outline,
+                    size: 14,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                   const SizedBox(width: 6),
                   Text(
-                    DiagnosisStrings.paymentSecure,
+                    S.of(context).paymentSecure,
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -125,15 +144,11 @@ class DiagnosisPaymentScreen extends StatelessWidget {
   }
 }
 
-
 class _StripePayButton extends StatelessWidget {
   final bool isLoading;
   final VoidCallback onPressed;
 
-  const _StripePayButton({
-    required this.isLoading,
-    required this.onPressed,
-  });
+  const _StripePayButton({required this.isLoading, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +161,7 @@ class _StripePayButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xFF635BFF), 
+          backgroundColor: const Color(0xFF635BFF),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -165,10 +180,11 @@ class _StripePayButton extends StatelessWidget {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-           
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 6, vertical: 2),
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(4),
@@ -185,7 +201,7 @@ class _StripePayButton extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    DiagnosisStrings.paymentBtn,
+                    S.of(context).paymentBtn,
                     style: theme.textTheme.titleSmall?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

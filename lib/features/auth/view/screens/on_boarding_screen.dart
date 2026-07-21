@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import '../../../../core/theme/colors.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../widgets/custom_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -16,22 +16,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<Map<String, String>> _onboardingData = [
-    {
-      "title": OnboardingStrings.title1,
-      "desc": OnboardingStrings.desc1,
-      "image": "assets/images/1-nobg.png",
-    },
-    {
-      "title": OnboardingStrings.title2,
-      "desc": OnboardingStrings.desc2,
-      "image": "assets/images/2-nobg.png",
-    },
-    {
-      "title": OnboardingStrings.title3,
-      "desc": OnboardingStrings.desc3,
-      "image": "assets/images/3-nobg.png",
-    },
+  final List<String> _onboardingImages = [
+    "assets/images/1-nobg.png",
+    "assets/images/2-nobg.png",
+    "assets/images/3-nobg.png",
   ];
 
   void _onPageChanged(int index) {
@@ -41,7 +29,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   void _handleNextPage() {
-    if (_currentPage < _onboardingData.length - 1) {
+    if (_currentPage < _onboardingImages.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -59,6 +47,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final titles = [S.of(context).onboardingTitle1, S.of(context).onboardingTitle2, S.of(context).onboardingTitle3];
+    final descs = [S.of(context).onboardingDesc1, S.of(context).onboardingDesc2, S.of(context).onboardingDesc3];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -71,13 +61,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 child: PageView.builder(
                   controller: _pageController,
                   onPageChanged: _onPageChanged,
-                  itemCount: _onboardingData.length,
+                  itemCount: _onboardingImages.length,
                   itemBuilder: (context, index) {
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          _onboardingData[index]["title"]!,
+                          titles[index],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontFamily: 'Tajwal',
@@ -90,14 +80,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
                         Expanded(
                           child: Image.asset(
-                            _onboardingData[index]["image"]!,
+                            _onboardingImages[index],
                             fit: BoxFit.contain,
                           ),
                         ),
                         const SizedBox(height: 40),
 
                         Text(
-                          _onboardingData[index]["desc"]!,
+                          descs[index],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontFamily: 'Tajwal',
@@ -116,7 +106,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  _onboardingData.length,
+                  _onboardingImages.length,
                   (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.symmetric(horizontal: 4.0),
@@ -136,7 +126,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               const SizedBox(height: 40),
 
               CustomButton(
-                text: OnboardingStrings.buttonText,
+                text: S.of(context).onboardingButton,
                 onPressed: _handleNextPage,
               ),
               const SizedBox(height: 10),

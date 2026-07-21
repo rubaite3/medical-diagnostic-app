@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button.dart';
-import 'package:medical_diagnostic_app1/core/consts/strings.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
@@ -22,7 +22,6 @@ class SymptomQuestionsScreen extends StatefulWidget {
 class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
   int _currentSymptomIndex = 0;
 
- 
   final Map<String, Map<String, List<String>>> _allAnswers = {};
 
   @override
@@ -34,13 +33,13 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
   Symptom get _currentSymptom => widget.symptoms[_currentSymptomIndex];
 
   void _loadQuestionsForCurrentSymptom() {
-    context.read<DiagnosisCubit>().getSymptomQuestions(_currentSymptom.id);
+    // context.read<DiagnosisCubit>().getSymptomQuestions(_currentSymptom.id);
   }
 
   void _toggleOption(String questionId, String optionId, bool isSingle) {
     setState(() {
       final symptomId = _currentSymptom.id;
-      _allAnswers[symptomId] ??= {};
+      // _allAnswers[symptomId ?? 0] ??= {};
       _allAnswers[symptomId]![questionId] ??= [];
 
       final current = _allAnswers[symptomId]![questionId]!;
@@ -61,19 +60,20 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
     final symptomAnswerMap = _allAnswers[symptomId] ?? {};
 
     final answers = symptomAnswerMap.entries
-        .map((e) => SymptomAnswer(
-              questionId: e.key,
-              selectedOptionIds: e.value,
-            ))
+        .map(
+          (e) => SymptomAnswer(questionId: e.key, selectedOptionIds: e.value),
+        )
         .toList();
 
-    await context.read<DiagnosisCubit>().submitSymptomAnswers(symptomId, answers);
+    // await context.read<DiagnosisCubit>().submitSymptomAnswers(
+    //   symptomId,
+    //   answers,
+    // );
 
     if (!mounted) return;
     final state = context.read<DiagnosisCubit>().state;
     if (state.op.isFailure) {
-      Utils.showToast(context,
-          message: state.statusMessage, level: -1);
+      Utils.showToast(context, message: state.statusMessage, level: -1);
       return;
     }
 
@@ -81,7 +81,6 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
       setState(() => _currentSymptomIndex++);
       _loadQuestionsForCurrentSymptom();
     } else {
-      
       await context.read<DiagnosisCubit>().getNextFollowUp();
       if (!mounted) return;
       context.goNamed(RoutePaths.followUpQuestions);
@@ -99,9 +98,14 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded,
-              color: colorScheme.onSurface),
-          onPressed: () => context.pop(),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: colorScheme.onSurface,
+          ),
+          onPressed: () {
+            context.read<DiagnosisCubit>().reset();
+            context.goNamed(RoutePaths.homeScreen);
+          },
         ),
         title: Text(
           "${_currentSymptomIndex + 1} / ${widget.symptoms.length}",
@@ -112,13 +116,14 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
       ),
       body: SafeArea(
         child: BlocConsumer<DiagnosisCubit, DiagnosisState>(
-          listenWhen: (prev, curr) =>
-              !curr.op.isNeutral && !curr.op.isLoading,
+          listenWhen: (prev, curr) => !curr.op.isNeutral && !curr.op.isLoading,
           listener: (context, state) {
             if (state.op.isFailure) {
-              Utils.showToast(context,
-                  message: state.statusMessage,
-                  level: Utils.mapOp(state.op));
+              Utils.showToast(
+                context,
+                message: state.statusMessage,
+                level: Utils.mapOp(state.op),
+              );
             }
           },
           builder: (context, state) {
@@ -128,12 +133,14 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
 
             return Padding(
               padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0, vertical: 16),
+                horizontal: 24.0,
+                vertical: 16,
+              ),
               child: Column(
                 children: [
                   DiagnosisPageHeader(
-                    title: _currentSymptom.name,
-                    subtitle: DiagnosisStrings.symptomQuestionsSubtitle,
+                    title: _currentSymptom.nameLocal ?? "",
+                    subtitle: S.of(context).symptomQuestionsSubtitle,
                     icon: Icons.quiz_outlined,
                   ),
                   const SizedBox(height: 24),
@@ -154,17 +161,18 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
                                 const SizedBox(height: 16),
                             itemBuilder: (context, index) {
                               final question = state.currentQuestions[index];
-                              final isSingle = question.type ==
-                                      'single_choice' ||
+                              final isSingle =
+                                  question.type == 'single_choice' ||
                                   question.type == 'yes_no';
-                              final selected = _allAnswers[_currentSymptom.id]
-                                      ?[question.id] ??
+                              final selected =
+                                  _allAnswers[_currentSymptom.id]?[question
+                                      .id] ??
                                   [];
                               return QuestionCard(
                                 question: question,
                                 selectedIds: selected,
-                                onOptionToggled: (optId) => _toggleOption(
-                                    question.id, optId, isSingle),
+                                onOptionToggled: (optId) =>
+                                    _toggleOption(question.id, optId, isSingle),
                               );
                             },
                           ),
@@ -172,9 +180,11 @@ class _SymptomQuestionsScreenState extends State<SymptomQuestionsScreen> {
                   const SizedBox(height: 16),
                   CustomButton(
                     text: _currentSymptomIndex < widget.symptoms.length - 1
-                        ? DiagnosisStrings.nextSymptomBtn
-                        : DiagnosisStrings.submitAnswersBtn,
-                    onPressed: state.op.isLoading ? null : _submitCurrentSymptom,
+                        ? S.of(context).nextSymptomBtn
+                        : S.of(context).submitAnswersBtn,
+                    onPressed: state.op.isLoading
+                        ? null
+                        : _submitCurrentSymptom,
                   ),
                   const SizedBox(height: 8),
                 ],

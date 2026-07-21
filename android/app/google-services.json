@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "535737760085",
+    "project_id": "medical-ai-project-35a8d",
+    "storage_bucket": "medical-ai-project-35a8d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535737760085:android:15cc9d47fa0a075fb997dc",
+        "android_client_info": {
+          "package_name": "com.example.medical_diagnostic_app1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXnUozVH_vkDGuaYBEksDzAjREfTs6uO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

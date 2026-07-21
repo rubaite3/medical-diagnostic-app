@@ -6,7 +6,7 @@ import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
 
-import '../../../../core/controllers/loader_cubit.dart';
+import '../../../../core/controllers/loader_cubit/loader_cubit.dart';
 
 part 'forgot_pass_state.dart';
 part 'forgot_pass_cubit.freezed.dart';

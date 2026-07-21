@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
 
@@ -13,6 +14,9 @@ sealed class UpdateProfileRequest with _$UpdateProfileRequest {
     @JsonKey(includeIfNull: false, name: "birth_date") DateTime? birthDate,
     @JsonKey(includeIfNull: false) String? gender,
     @JsonKey(includeIfNull: false, name: "is_smoker") bool? isSmoker,
+    String? occupation,
+    @JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,
+
     @JsonKey(includeIfNull: false, name: "has_diabetes") bool? hasDiabetes,
     @JsonKey(includeIfNull: false, name: "has_hypertension")
     @JsonKey(includeIfNull: false)
@@ -53,6 +57,7 @@ extension UpdateProfileRequestX on UpdateProfileRequest {
     if (isPregnant != null) {
       map['is_pregnant'] = isPregnant! ? 1 : 0;
     }
+    debugPrint(map.toString());
     return FormData.fromMap(map);
   }
 }

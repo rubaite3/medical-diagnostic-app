@@ -10,6 +10,8 @@ import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 
+import '../../generated/l10n.dart';
+
 class Utils {
   static bool isLight(BuildContext ctx) {
     return MediaQuery.of(ctx).platformBrightness == Brightness.light;
@@ -39,7 +41,7 @@ class Utils {
           return Left(
             AppError(
               errorMessage:
-                  response.data.data["message"] ?? "Some error occurred",
+                  response.data.data["message"] ?? S.current.someErrorOccurred,
               statusCode: response.statusCode ?? 500,
             ),
           );
@@ -57,7 +59,7 @@ class Utils {
         return Left(
           AppError(
             errorMessage: errorMessage.isEmpty
-                ? "Some error occurred"
+                ? S.current.someErrorOccurred
                 : errorMessage,
             statusCode: response.statusCode ?? 500,
           ),
@@ -65,7 +67,7 @@ class Utils {
       }
       return Left(
         AppError(
-          errorMessage: response.statusMessage ?? "Some error occurred",
+          errorMessage: response.statusMessage ?? S.current.someErrorOccurred,
           statusCode: response.statusCode ?? 500,
         ),
       );
@@ -76,6 +78,7 @@ class Utils {
     BuildContext context, {
     String message = "Custom",
     int level = 0,
+    int? duration,
   }) {
     final color = switch (level) {
       1 => const Color(0xFF2E7D32),
@@ -115,7 +118,7 @@ class Utils {
           ),
           backgroundColor: color,
           elevation: 6,
-          duration: Duration(seconds: level == -1 ? 4 : 2),
+          duration: Duration(seconds: duration ?? (level == -1 ? 4 : 2)),
           margin: const EdgeInsets.fromLTRB(16, 0, 16, 24),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           dismissDirection: DismissDirection.horizontal,
@@ -138,5 +141,31 @@ class Utils {
     } on TimeoutException catch (_) {
       return false;
     }
+  }
+
+  static String languageName(String code) {
+    return switch (code) {
+      'en' => 'English',
+      'ar' => 'العربية',
+      'ko' => '한국어',
+      'de' => 'Deutsch',
+      _ => code,
+    };
+  }
+
+  static Color colorFromProbability(BuildContext context, double probability) {
+    final code = switch (probability) {
+      >= 0.75 => 'green',
+      >= 0.5 => 'yellow',
+      >= 0.25 => 'orange',
+      _ => 'red',
+    };
+    return switch (code) {
+      'red' => const Color(0xFFE53935),
+      'orange' => const Color(0xFFFB8C00),
+      'yellow' => const Color(0xFFFDD835),
+      'green' => const Color(0xFF43A047),
+      _ => Theme.of(context).colorScheme.primary,
+    };
   }
 }

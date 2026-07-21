@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$StartDiagnosisRequest {
 
- String get gender;@JsonKey(name: 'is_smoker') bool get isSmoker;@JsonKey(name: 'has_diabetes') bool get hasDiabetes;@JsonKey(name: 'has_hypertension') bool get hasHypertension;@JsonKey(name: 'is_pregnant') bool? get isPregnant;@JsonKey(name: 'activity_level') String get activityLevel;@JsonKey(name: 'assessment_for') String get assessmentFor;
+ String get gender;@JsonKey(name: 'is_smoker') bool get isSmoker;@JsonKey(name: 'has_diabetes') bool get hasDiabetes;@JsonKey(name: 'has_hypertension') bool get hasHypertension;@JsonKey(name: 'is_pregnant') bool? get isPregnant;@JsonKey(name: 'activity_level') String get activityLevel;@JsonKey(name: 'assessment_for') String get assessmentFor;@JsonKey(name: 'is_alcoholic') bool? get isAlcoholic;@JsonKey(name: 'patient_job') String? get patientJob;
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $StartDiagnosisRequestCopyWith<StartDiagnosisRequest> get copyWith => _$StartDia
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor);
+int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob);
 
 @override
 String toString() {
-  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor)';
+  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $StartDiagnosisRequestCopyWith<$Res>  {
   factory $StartDiagnosisRequestCopyWith(StartDiagnosisRequest value, $Res Function(StartDiagnosisRequest) _then) = _$StartDiagnosisRequestCopyWithImpl;
 @useResult
 $Res call({
- String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor
+ String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob
 });
 
 
@@ -66,7 +66,7 @@ class _$StartDiagnosisRequestCopyWithImpl<$Res>
 
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,}) {
   return _then(StartDiagnosisRequest(
 gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,isSmoker: null == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
@@ -75,7 +75,9 @@ as bool,hasHypertension: null == hasHypertension ? _self.hasHypertension : hasHy
 as bool,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
 as bool?,activityLevel: null == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
 as String,assessmentFor: null == assessmentFor ? _self.assessmentFor : assessmentFor // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
+as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -160,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest() when $default != null:
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob);case _:
   return orElse();
 
 }
@@ -181,10 +183,10 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob)  $default,) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest():
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +203,10 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob)?  $default,) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest() when $default != null:
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob);case _:
   return null;
 
 }
@@ -216,7 +218,7 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 @JsonSerializable()
 
 class _StartDiagnosisRequest implements StartDiagnosisRequest {
-  const _StartDiagnosisRequest({required this.gender, @JsonKey(name: 'is_smoker') required this.isSmoker, @JsonKey(name: 'has_diabetes') required this.hasDiabetes, @JsonKey(name: 'has_hypertension') required this.hasHypertension, @JsonKey(name: 'is_pregnant') this.isPregnant, @JsonKey(name: 'activity_level') required this.activityLevel, @JsonKey(name: 'assessment_for') required this.assessmentFor});
+  const _StartDiagnosisRequest({required this.gender, @JsonKey(name: 'is_smoker') required this.isSmoker, @JsonKey(name: 'has_diabetes') required this.hasDiabetes, @JsonKey(name: 'has_hypertension') required this.hasHypertension, @JsonKey(name: 'is_pregnant') this.isPregnant, @JsonKey(name: 'activity_level') required this.activityLevel, @JsonKey(name: 'assessment_for') this.assessmentFor = "myself", @JsonKey(name: 'is_alcoholic') this.isAlcoholic, @JsonKey(name: 'patient_job') this.patientJob});
   factory _StartDiagnosisRequest.fromJson(Map<String, dynamic> json) => _$StartDiagnosisRequestFromJson(json);
 
 @override final  String gender;
@@ -226,6 +228,8 @@ class _StartDiagnosisRequest implements StartDiagnosisRequest {
 @override@JsonKey(name: 'is_pregnant') final  bool? isPregnant;
 @override@JsonKey(name: 'activity_level') final  String activityLevel;
 @override@JsonKey(name: 'assessment_for') final  String assessmentFor;
+@override@JsonKey(name: 'is_alcoholic') final  bool? isAlcoholic;
+@override@JsonKey(name: 'patient_job') final  String? patientJob;
 
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -240,16 +244,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor);
+int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob);
 
 @override
 String toString() {
-  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor)';
+  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob)';
 }
 
 
@@ -260,7 +264,7 @@ abstract mixin class _$StartDiagnosisRequestCopyWith<$Res> implements $StartDiag
   factory _$StartDiagnosisRequestCopyWith(_StartDiagnosisRequest value, $Res Function(_StartDiagnosisRequest) _then) = __$StartDiagnosisRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor
+ String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob
 });
 
 
@@ -277,7 +281,7 @@ class __$StartDiagnosisRequestCopyWithImpl<$Res>
 
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,}) {
   return _then(_StartDiagnosisRequest(
 gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,isSmoker: null == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
@@ -286,7 +290,9 @@ as bool,hasHypertension: null == hasHypertension ? _self.hasHypertension : hasHy
 as bool,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
 as bool?,activityLevel: null == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
 as String,assessmentFor: null == assessmentFor ? _self.assessmentFor : assessmentFor // ignore: cast_nullable_to_non_nullable
-as String,
+as String,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
+as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -560,7 +566,7 @@ as String,
 /// @nodoc
 mixin _$Symptom {
 
- String get id; String get name; String get description;
+ int? get id;@JsonKey(name: "name_en") String? get nameEn;@JsonKey(name: "name_local") String? get nameLocal; String? get summary; String? get type;
 /// Create a copy of Symptom
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -573,16 +579,16 @@ $SymptomCopyWith<Symptom> get copyWith => _$SymptomCopyWithImpl<Symptom>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Symptom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Symptom&&(identical(other.id, id) || other.id == id)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameLocal, nameLocal) || other.nameLocal == nameLocal)&&(identical(other.summary, summary) || other.summary == summary)&&(identical(other.type, type) || other.type == type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,description);
+int get hashCode => Object.hash(runtimeType,id,nameEn,nameLocal,summary,type);
 
 @override
 String toString() {
-  return 'Symptom(id: $id, name: $name, description: $description)';
+  return 'Symptom(id: $id, nameEn: $nameEn, nameLocal: $nameLocal, summary: $summary, type: $type)';
 }
 
 
@@ -593,7 +599,7 @@ abstract mixin class $SymptomCopyWith<$Res>  {
   factory $SymptomCopyWith(Symptom value, $Res Function(Symptom) _then) = _$SymptomCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String description
+ int? id,@JsonKey(name: "name_en") String? nameEn,@JsonKey(name: "name_local") String? nameLocal, String? summary, String? type
 });
 
 
@@ -610,12 +616,14 @@ class _$SymptomCopyWithImpl<$Res>
 
 /// Create a copy of Symptom
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? description = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? nameEn = freezed,Object? nameLocal = freezed,Object? summary = freezed,Object? type = freezed,}) {
   return _then(Symptom(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,nameEn: freezed == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
+as String?,nameLocal: freezed == nameLocal ? _self.nameLocal : nameLocal // ignore: cast_nullable_to_non_nullable
+as String?,summary: freezed == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -700,10 +708,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id, @JsonKey(name: "name_en")  String? nameEn, @JsonKey(name: "name_local")  String? nameLocal,  String? summary,  String? type)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Symptom() when $default != null:
-return $default(_that.id,_that.name,_that.description);case _:
+return $default(_that.id,_that.nameEn,_that.nameLocal,_that.summary,_that.type);case _:
   return orElse();
 
 }
@@ -721,10 +729,10 @@ return $default(_that.id,_that.name,_that.description);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id, @JsonKey(name: "name_en")  String? nameEn, @JsonKey(name: "name_local")  String? nameLocal,  String? summary,  String? type)  $default,) {final _that = this;
 switch (_that) {
 case _Symptom():
-return $default(_that.id,_that.name,_that.description);case _:
+return $default(_that.id,_that.nameEn,_that.nameLocal,_that.summary,_that.type);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -741,10 +749,10 @@ return $default(_that.id,_that.name,_that.description);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id, @JsonKey(name: "name_en")  String? nameEn, @JsonKey(name: "name_local")  String? nameLocal,  String? summary,  String? type)?  $default,) {final _that = this;
 switch (_that) {
 case _Symptom() when $default != null:
-return $default(_that.id,_that.name,_that.description);case _:
+return $default(_that.id,_that.nameEn,_that.nameLocal,_that.summary,_that.type);case _:
   return null;
 
 }
@@ -756,12 +764,14 @@ return $default(_that.id,_that.name,_that.description);case _:
 @JsonSerializable()
 
 class _Symptom implements Symptom {
-  const _Symptom({required this.id, required this.name, required this.description});
+  const _Symptom({this.id, @JsonKey(name: "name_en") this.nameEn, @JsonKey(name: "name_local") this.nameLocal, this.summary, this.type});
   factory _Symptom.fromJson(Map<String, dynamic> json) => _$SymptomFromJson(json);
 
-@override final  String id;
-@override final  String name;
-@override final  String description;
+@override final  int? id;
+@override@JsonKey(name: "name_en") final  String? nameEn;
+@override@JsonKey(name: "name_local") final  String? nameLocal;
+@override final  String? summary;
+@override final  String? type;
 
 /// Create a copy of Symptom
 /// with the given fields replaced by the non-null parameter values.
@@ -776,16 +786,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Symptom&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.description, description) || other.description == description));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Symptom&&(identical(other.id, id) || other.id == id)&&(identical(other.nameEn, nameEn) || other.nameEn == nameEn)&&(identical(other.nameLocal, nameLocal) || other.nameLocal == nameLocal)&&(identical(other.summary, summary) || other.summary == summary)&&(identical(other.type, type) || other.type == type));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,description);
+int get hashCode => Object.hash(runtimeType,id,nameEn,nameLocal,summary,type);
 
 @override
 String toString() {
-  return 'Symptom(id: $id, name: $name, description: $description)';
+  return 'Symptom(id: $id, nameEn: $nameEn, nameLocal: $nameLocal, summary: $summary, type: $type)';
 }
 
 
@@ -796,7 +806,7 @@ abstract mixin class _$SymptomCopyWith<$Res> implements $SymptomCopyWith<$Res> {
   factory _$SymptomCopyWith(_Symptom value, $Res Function(_Symptom) _then) = __$SymptomCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String description
+ int? id,@JsonKey(name: "name_en") String? nameEn,@JsonKey(name: "name_local") String? nameLocal, String? summary, String? type
 });
 
 
@@ -813,12 +823,14 @@ class __$SymptomCopyWithImpl<$Res>
 
 /// Create a copy of Symptom
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? description = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? nameEn = freezed,Object? nameLocal = freezed,Object? summary = freezed,Object? type = freezed,}) {
   return _then(_Symptom(
-id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,description: null == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
-as String,
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,nameEn: freezed == nameEn ? _self.nameEn : nameEn // ignore: cast_nullable_to_non_nullable
+as String?,nameLocal: freezed == nameLocal ? _self.nameLocal : nameLocal // ignore: cast_nullable_to_non_nullable
+as String?,summary: freezed == summary ? _self.summary : summary // ignore: cast_nullable_to_non_nullable
+as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -1643,42 +1655,42 @@ as List<String>,
 
 
 /// @nodoc
-mixin _$SubmitSymptomAnswersRequest {
+mixin _$SelectSymptomRequest {
 
-@JsonKey(name: 'session_id') String get sessionId;@JsonKey(name: 'symptom_id') String get symptomId; List<SymptomAnswer> get answers;
-/// Create a copy of SubmitSymptomAnswersRequest
+ String get name;@JsonKey(name: "session_id") String get sessionId;
+/// Create a copy of SelectSymptomRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$SubmitSymptomAnswersRequestCopyWith<SubmitSymptomAnswersRequest> get copyWith => _$SubmitSymptomAnswersRequestCopyWithImpl<SubmitSymptomAnswersRequest>(this as SubmitSymptomAnswersRequest, _$identity);
+$SelectSymptomRequestCopyWith<SelectSymptomRequest> get copyWith => _$SelectSymptomRequestCopyWithImpl<SelectSymptomRequest>(this as SelectSymptomRequest, _$identity);
 
-  /// Serializes this SubmitSymptomAnswersRequest to a JSON map.
+  /// Serializes this SelectSymptomRequest to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitSymptomAnswersRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.symptomId, symptomId) || other.symptomId == symptomId)&&const DeepCollectionEquality().equals(other.answers, answers));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SelectSymptomRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,symptomId,const DeepCollectionEquality().hash(answers));
+int get hashCode => Object.hash(runtimeType,name,sessionId);
 
 @override
 String toString() {
-  return 'SubmitSymptomAnswersRequest(sessionId: $sessionId, symptomId: $symptomId, answers: $answers)';
+  return 'SelectSymptomRequest(name: $name, sessionId: $sessionId)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SubmitSymptomAnswersRequestCopyWith<$Res>  {
-  factory $SubmitSymptomAnswersRequestCopyWith(SubmitSymptomAnswersRequest value, $Res Function(SubmitSymptomAnswersRequest) _then) = _$SubmitSymptomAnswersRequestCopyWithImpl;
+abstract mixin class $SelectSymptomRequestCopyWith<$Res>  {
+  factory $SelectSymptomRequestCopyWith(SelectSymptomRequest value, $Res Function(SelectSymptomRequest) _then) = _$SelectSymptomRequestCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'symptom_id') String symptomId, List<SymptomAnswer> answers
+ String name,@JsonKey(name: "session_id") String sessionId
 });
 
 
@@ -1686,29 +1698,28 @@ $Res call({
 
 }
 /// @nodoc
-class _$SubmitSymptomAnswersRequestCopyWithImpl<$Res>
-    implements $SubmitSymptomAnswersRequestCopyWith<$Res> {
-  _$SubmitSymptomAnswersRequestCopyWithImpl(this._self, this._then);
+class _$SelectSymptomRequestCopyWithImpl<$Res>
+    implements $SelectSymptomRequestCopyWith<$Res> {
+  _$SelectSymptomRequestCopyWithImpl(this._self, this._then);
 
-  final SubmitSymptomAnswersRequest _self;
-  final $Res Function(SubmitSymptomAnswersRequest) _then;
+  final SelectSymptomRequest _self;
+  final $Res Function(SelectSymptomRequest) _then;
 
-/// Create a copy of SubmitSymptomAnswersRequest
+/// Create a copy of SelectSymptomRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = null,Object? symptomId = null,Object? answers = null,}) {
-  return _then(SubmitSymptomAnswersRequest(
-sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
-as String,symptomId: null == symptomId ? _self.symptomId : symptomId // ignore: cast_nullable_to_non_nullable
-as String,answers: null == answers ? _self.answers : answers // ignore: cast_nullable_to_non_nullable
-as List<SymptomAnswer>,
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? sessionId = null,}) {
+  return _then(SelectSymptomRequest(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [SubmitSymptomAnswersRequest].
-extension SubmitSymptomAnswersRequestPatterns on SubmitSymptomAnswersRequest {
+/// Adds pattern-matching-related methods to [SelectSymptomRequest].
+extension SelectSymptomRequestPatterns on SelectSymptomRequest {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1721,10 +1732,10 @@ extension SubmitSymptomAnswersRequestPatterns on SubmitSymptomAnswersRequest {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SubmitSymptomAnswersRequest value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SelectSymptomRequest value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest() when $default != null:
+case _SelectSymptomRequest() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1743,10 +1754,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SubmitSymptomAnswersRequest value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SelectSymptomRequest value)  $default,){
 final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest():
+case _SelectSymptomRequest():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1764,10 +1775,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SubmitSymptomAnswersRequest value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SelectSymptomRequest value)?  $default,){
 final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest() when $default != null:
+case _SelectSymptomRequest() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1785,10 +1796,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'symptom_id')  String symptomId,  List<SymptomAnswer> answers)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name, @JsonKey(name: "session_id")  String sessionId)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest() when $default != null:
-return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
+case _SelectSymptomRequest() when $default != null:
+return $default(_that.name,_that.sessionId);case _:
   return orElse();
 
 }
@@ -1806,10 +1817,10 @@ return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'symptom_id')  String symptomId,  List<SymptomAnswer> answers)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name, @JsonKey(name: "session_id")  String sessionId)  $default,) {final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest():
-return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
+case _SelectSymptomRequest():
+return $default(_that.name,_that.sessionId);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1826,10 +1837,10 @@ return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'symptom_id')  String symptomId,  List<SymptomAnswer> answers)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name, @JsonKey(name: "session_id")  String sessionId)?  $default,) {final _that = this;
 switch (_that) {
-case _SubmitSymptomAnswersRequest() when $default != null:
-return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
+case _SelectSymptomRequest() when $default != null:
+return $default(_that.name,_that.sessionId);case _:
   return null;
 
 }
@@ -1840,54 +1851,47 @@ return $default(_that.sessionId,_that.symptomId,_that.answers);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _SubmitSymptomAnswersRequest implements SubmitSymptomAnswersRequest {
-  const _SubmitSymptomAnswersRequest({@JsonKey(name: 'session_id') required this.sessionId, @JsonKey(name: 'symptom_id') required this.symptomId, required  List<SymptomAnswer> answers}): _answers = answers;
-  factory _SubmitSymptomAnswersRequest.fromJson(Map<String, dynamic> json) => _$SubmitSymptomAnswersRequestFromJson(json);
+class _SelectSymptomRequest implements SelectSymptomRequest {
+  const _SelectSymptomRequest({required this.name, @JsonKey(name: "session_id") required this.sessionId});
+  factory _SelectSymptomRequest.fromJson(Map<String, dynamic> json) => _$SelectSymptomRequestFromJson(json);
 
-@override@JsonKey(name: 'session_id') final  String sessionId;
-@override@JsonKey(name: 'symptom_id') final  String symptomId;
- final  List<SymptomAnswer> _answers;
-@override List<SymptomAnswer> get answers {
-  if (_answers is EqualUnmodifiableListView) return _answers;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_answers);
-}
+@override final  String name;
+@override@JsonKey(name: "session_id") final  String sessionId;
 
-
-/// Create a copy of SubmitSymptomAnswersRequest
+/// Create a copy of SelectSymptomRequest
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$SubmitSymptomAnswersRequestCopyWith<_SubmitSymptomAnswersRequest> get copyWith => __$SubmitSymptomAnswersRequestCopyWithImpl<_SubmitSymptomAnswersRequest>(this, _$identity);
+_$SelectSymptomRequestCopyWith<_SelectSymptomRequest> get copyWith => __$SelectSymptomRequestCopyWithImpl<_SelectSymptomRequest>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$SubmitSymptomAnswersRequestToJson(this, );
+  return _$SelectSymptomRequestToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitSymptomAnswersRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.symptomId, symptomId) || other.symptomId == symptomId)&&const DeepCollectionEquality().equals(other._answers, _answers));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectSymptomRequest&&(identical(other.name, name) || other.name == name)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,symptomId,const DeepCollectionEquality().hash(_answers));
+int get hashCode => Object.hash(runtimeType,name,sessionId);
 
 @override
 String toString() {
-  return 'SubmitSymptomAnswersRequest(sessionId: $sessionId, symptomId: $symptomId, answers: $answers)';
+  return 'SelectSymptomRequest(name: $name, sessionId: $sessionId)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SubmitSymptomAnswersRequestCopyWith<$Res> implements $SubmitSymptomAnswersRequestCopyWith<$Res> {
-  factory _$SubmitSymptomAnswersRequestCopyWith(_SubmitSymptomAnswersRequest value, $Res Function(_SubmitSymptomAnswersRequest) _then) = __$SubmitSymptomAnswersRequestCopyWithImpl;
+abstract mixin class _$SelectSymptomRequestCopyWith<$Res> implements $SelectSymptomRequestCopyWith<$Res> {
+  factory _$SelectSymptomRequestCopyWith(_SelectSymptomRequest value, $Res Function(_SelectSymptomRequest) _then) = __$SelectSymptomRequestCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'symptom_id') String symptomId, List<SymptomAnswer> answers
+ String name,@JsonKey(name: "session_id") String sessionId
 });
 
 
@@ -1895,21 +1899,20 @@ $Res call({
 
 }
 /// @nodoc
-class __$SubmitSymptomAnswersRequestCopyWithImpl<$Res>
-    implements _$SubmitSymptomAnswersRequestCopyWith<$Res> {
-  __$SubmitSymptomAnswersRequestCopyWithImpl(this._self, this._then);
+class __$SelectSymptomRequestCopyWithImpl<$Res>
+    implements _$SelectSymptomRequestCopyWith<$Res> {
+  __$SelectSymptomRequestCopyWithImpl(this._self, this._then);
 
-  final _SubmitSymptomAnswersRequest _self;
-  final $Res Function(_SubmitSymptomAnswersRequest) _then;
+  final _SelectSymptomRequest _self;
+  final $Res Function(_SelectSymptomRequest) _then;
 
-/// Create a copy of SubmitSymptomAnswersRequest
+/// Create a copy of SelectSymptomRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = null,Object? symptomId = null,Object? answers = null,}) {
-  return _then(_SubmitSymptomAnswersRequest(
-sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
-as String,symptomId: null == symptomId ? _self.symptomId : symptomId // ignore: cast_nullable_to_non_nullable
-as String,answers: null == answers ? _self._answers : answers // ignore: cast_nullable_to_non_nullable
-as List<SymptomAnswer>,
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? sessionId = null,}) {
+  return _then(_SelectSymptomRequest(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -1920,7 +1923,7 @@ as List<SymptomAnswer>,
 /// @nodoc
 mixin _$ProbableDisease {
 
- String get name; double get probability;@JsonKey(name: 'color_code') String get colorCode;
+@JsonKey(name: "disease_name") String? get diseaseName;@JsonKey(name: "disease_name_local") String? get diseaseNameLocal; double? get probability; String? get confidence; String? get specialist; String? get advice;
 /// Create a copy of ProbableDisease
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1933,16 +1936,16 @@ $ProbableDiseaseCopyWith<ProbableDisease> get copyWith => _$ProbableDiseaseCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProbableDisease&&(identical(other.name, name) || other.name == name)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.colorCode, colorCode) || other.colorCode == colorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProbableDisease&&(identical(other.diseaseName, diseaseName) || other.diseaseName == diseaseName)&&(identical(other.diseaseNameLocal, diseaseNameLocal) || other.diseaseNameLocal == diseaseNameLocal)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.specialist, specialist) || other.specialist == specialist)&&(identical(other.advice, advice) || other.advice == advice));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,probability,colorCode);
+int get hashCode => Object.hash(runtimeType,diseaseName,diseaseNameLocal,probability,confidence,specialist,advice);
 
 @override
 String toString() {
-  return 'ProbableDisease(name: $name, probability: $probability, colorCode: $colorCode)';
+  return 'ProbableDisease(diseaseName: $diseaseName, diseaseNameLocal: $diseaseNameLocal, probability: $probability, confidence: $confidence, specialist: $specialist, advice: $advice)';
 }
 
 
@@ -1953,7 +1956,7 @@ abstract mixin class $ProbableDiseaseCopyWith<$Res>  {
   factory $ProbableDiseaseCopyWith(ProbableDisease value, $Res Function(ProbableDisease) _then) = _$ProbableDiseaseCopyWithImpl;
 @useResult
 $Res call({
- String name, double probability,@JsonKey(name: 'color_code') String colorCode
+@JsonKey(name: "disease_name") String? diseaseName,@JsonKey(name: "disease_name_local") String? diseaseNameLocal, double? probability, String? confidence, String? specialist, String? advice
 });
 
 
@@ -1970,12 +1973,15 @@ class _$ProbableDiseaseCopyWithImpl<$Res>
 
 /// Create a copy of ProbableDisease
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? probability = null,Object? colorCode = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? diseaseName = freezed,Object? diseaseNameLocal = freezed,Object? probability = freezed,Object? confidence = freezed,Object? specialist = freezed,Object? advice = freezed,}) {
   return _then(ProbableDisease(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,probability: null == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
-as double,colorCode: null == colorCode ? _self.colorCode : colorCode // ignore: cast_nullable_to_non_nullable
-as String,
+diseaseName: freezed == diseaseName ? _self.diseaseName : diseaseName // ignore: cast_nullable_to_non_nullable
+as String?,diseaseNameLocal: freezed == diseaseNameLocal ? _self.diseaseNameLocal : diseaseNameLocal // ignore: cast_nullable_to_non_nullable
+as String?,probability: freezed == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
+as double?,confidence: freezed == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
+as String?,specialist: freezed == specialist ? _self.specialist : specialist // ignore: cast_nullable_to_non_nullable
+as String?,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2060,10 +2066,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  double probability, @JsonKey(name: 'color_code')  String colorCode)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "disease_name")  String? diseaseName, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal,  double? probability,  String? confidence,  String? specialist,  String? advice)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProbableDisease() when $default != null:
-return $default(_that.name,_that.probability,_that.colorCode);case _:
+return $default(_that.diseaseName,_that.diseaseNameLocal,_that.probability,_that.confidence,_that.specialist,_that.advice);case _:
   return orElse();
 
 }
@@ -2081,10 +2087,10 @@ return $default(_that.name,_that.probability,_that.colorCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  double probability, @JsonKey(name: 'color_code')  String colorCode)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "disease_name")  String? diseaseName, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal,  double? probability,  String? confidence,  String? specialist,  String? advice)  $default,) {final _that = this;
 switch (_that) {
 case _ProbableDisease():
-return $default(_that.name,_that.probability,_that.colorCode);case _:
+return $default(_that.diseaseName,_that.diseaseNameLocal,_that.probability,_that.confidence,_that.specialist,_that.advice);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2101,10 +2107,10 @@ return $default(_that.name,_that.probability,_that.colorCode);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  double probability, @JsonKey(name: 'color_code')  String colorCode)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "disease_name")  String? diseaseName, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal,  double? probability,  String? confidence,  String? specialist,  String? advice)?  $default,) {final _that = this;
 switch (_that) {
 case _ProbableDisease() when $default != null:
-return $default(_that.name,_that.probability,_that.colorCode);case _:
+return $default(_that.diseaseName,_that.diseaseNameLocal,_that.probability,_that.confidence,_that.specialist,_that.advice);case _:
   return null;
 
 }
@@ -2116,12 +2122,15 @@ return $default(_that.name,_that.probability,_that.colorCode);case _:
 @JsonSerializable()
 
 class _ProbableDisease implements ProbableDisease {
-  const _ProbableDisease({required this.name, required this.probability, @JsonKey(name: 'color_code') required this.colorCode});
+  const _ProbableDisease({@JsonKey(name: "disease_name") this.diseaseName, @JsonKey(name: "disease_name_local") this.diseaseNameLocal, this.probability, this.confidence, this.specialist, this.advice});
   factory _ProbableDisease.fromJson(Map<String, dynamic> json) => _$ProbableDiseaseFromJson(json);
 
-@override final  String name;
-@override final  double probability;
-@override@JsonKey(name: 'color_code') final  String colorCode;
+@override@JsonKey(name: "disease_name") final  String? diseaseName;
+@override@JsonKey(name: "disease_name_local") final  String? diseaseNameLocal;
+@override final  double? probability;
+@override final  String? confidence;
+@override final  String? specialist;
+@override final  String? advice;
 
 /// Create a copy of ProbableDisease
 /// with the given fields replaced by the non-null parameter values.
@@ -2136,16 +2145,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProbableDisease&&(identical(other.name, name) || other.name == name)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.colorCode, colorCode) || other.colorCode == colorCode));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProbableDisease&&(identical(other.diseaseName, diseaseName) || other.diseaseName == diseaseName)&&(identical(other.diseaseNameLocal, diseaseNameLocal) || other.diseaseNameLocal == diseaseNameLocal)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.specialist, specialist) || other.specialist == specialist)&&(identical(other.advice, advice) || other.advice == advice));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,probability,colorCode);
+int get hashCode => Object.hash(runtimeType,diseaseName,diseaseNameLocal,probability,confidence,specialist,advice);
 
 @override
 String toString() {
-  return 'ProbableDisease(name: $name, probability: $probability, colorCode: $colorCode)';
+  return 'ProbableDisease(diseaseName: $diseaseName, diseaseNameLocal: $diseaseNameLocal, probability: $probability, confidence: $confidence, specialist: $specialist, advice: $advice)';
 }
 
 
@@ -2156,7 +2165,7 @@ abstract mixin class _$ProbableDiseaseCopyWith<$Res> implements $ProbableDisease
   factory _$ProbableDiseaseCopyWith(_ProbableDisease value, $Res Function(_ProbableDisease) _then) = __$ProbableDiseaseCopyWithImpl;
 @override @useResult
 $Res call({
- String name, double probability,@JsonKey(name: 'color_code') String colorCode
+@JsonKey(name: "disease_name") String? diseaseName,@JsonKey(name: "disease_name_local") String? diseaseNameLocal, double? probability, String? confidence, String? specialist, String? advice
 });
 
 
@@ -2173,12 +2182,15 @@ class __$ProbableDiseaseCopyWithImpl<$Res>
 
 /// Create a copy of ProbableDisease
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? probability = null,Object? colorCode = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? diseaseName = freezed,Object? diseaseNameLocal = freezed,Object? probability = freezed,Object? confidence = freezed,Object? specialist = freezed,Object? advice = freezed,}) {
   return _then(_ProbableDisease(
-name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,probability: null == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
-as double,colorCode: null == colorCode ? _self.colorCode : colorCode // ignore: cast_nullable_to_non_nullable
-as String,
+diseaseName: freezed == diseaseName ? _self.diseaseName : diseaseName // ignore: cast_nullable_to_non_nullable
+as String?,diseaseNameLocal: freezed == diseaseNameLocal ? _self.diseaseNameLocal : diseaseNameLocal // ignore: cast_nullable_to_non_nullable
+as String?,probability: freezed == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
+as double?,confidence: freezed == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
+as String?,specialist: freezed == specialist ? _self.specialist : specialist // ignore: cast_nullable_to_non_nullable
+as String?,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -2189,7 +2201,7 @@ as String,
 /// @nodoc
 mixin _$DiagnosisSummary {
 
-@JsonKey(name: 'probable_diseases') List<ProbableDisease> get probableDiseases;
+ List<ProbableDisease> get diagnoses;
 /// Create a copy of DiagnosisSummary
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2202,16 +2214,16 @@ $DiagnosisSummaryCopyWith<DiagnosisSummary> get copyWith => _$DiagnosisSummaryCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiagnosisSummary&&const DeepCollectionEquality().equals(other.probableDiseases, probableDiseases));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiagnosisSummary&&const DeepCollectionEquality().equals(other.diagnoses, diagnoses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(probableDiseases));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(diagnoses));
 
 @override
 String toString() {
-  return 'DiagnosisSummary(probableDiseases: $probableDiseases)';
+  return 'DiagnosisSummary(diagnoses: $diagnoses)';
 }
 
 
@@ -2222,7 +2234,7 @@ abstract mixin class $DiagnosisSummaryCopyWith<$Res>  {
   factory $DiagnosisSummaryCopyWith(DiagnosisSummary value, $Res Function(DiagnosisSummary) _then) = _$DiagnosisSummaryCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'probable_diseases') List<ProbableDisease> probableDiseases
+ List<ProbableDisease> diagnoses
 });
 
 
@@ -2239,9 +2251,9 @@ class _$DiagnosisSummaryCopyWithImpl<$Res>
 
 /// Create a copy of DiagnosisSummary
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? probableDiseases = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? diagnoses = null,}) {
   return _then(DiagnosisSummary(
-probableDiseases: null == probableDiseases ? _self.probableDiseases : probableDiseases // ignore: cast_nullable_to_non_nullable
+diagnoses: null == diagnoses ? _self.diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
 as List<ProbableDisease>,
   ));
 }
@@ -2327,10 +2339,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'probable_diseases')  List<ProbableDisease> probableDiseases)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ProbableDisease> diagnoses)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DiagnosisSummary() when $default != null:
-return $default(_that.probableDiseases);case _:
+return $default(_that.diagnoses);case _:
   return orElse();
 
 }
@@ -2348,10 +2360,10 @@ return $default(_that.probableDiseases);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'probable_diseases')  List<ProbableDisease> probableDiseases)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ProbableDisease> diagnoses)  $default,) {final _that = this;
 switch (_that) {
 case _DiagnosisSummary():
-return $default(_that.probableDiseases);case _:
+return $default(_that.diagnoses);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2368,10 +2380,10 @@ return $default(_that.probableDiseases);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'probable_diseases')  List<ProbableDisease> probableDiseases)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ProbableDisease> diagnoses)?  $default,) {final _that = this;
 switch (_that) {
 case _DiagnosisSummary() when $default != null:
-return $default(_that.probableDiseases);case _:
+return $default(_that.diagnoses);case _:
   return null;
 
 }
@@ -2383,14 +2395,14 @@ return $default(_that.probableDiseases);case _:
 @JsonSerializable()
 
 class _DiagnosisSummary implements DiagnosisSummary {
-  const _DiagnosisSummary({@JsonKey(name: 'probable_diseases') required  List<ProbableDisease> probableDiseases}): _probableDiseases = probableDiseases;
+  const _DiagnosisSummary({required  List<ProbableDisease> diagnoses}): _diagnoses = diagnoses;
   factory _DiagnosisSummary.fromJson(Map<String, dynamic> json) => _$DiagnosisSummaryFromJson(json);
 
- final  List<ProbableDisease> _probableDiseases;
-@override@JsonKey(name: 'probable_diseases') List<ProbableDisease> get probableDiseases {
-  if (_probableDiseases is EqualUnmodifiableListView) return _probableDiseases;
+ final  List<ProbableDisease> _diagnoses;
+@override List<ProbableDisease> get diagnoses {
+  if (_diagnoses is EqualUnmodifiableListView) return _diagnoses;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_probableDiseases);
+  return EqualUnmodifiableListView(_diagnoses);
 }
 
 
@@ -2407,16 +2419,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiagnosisSummary&&const DeepCollectionEquality().equals(other._probableDiseases, _probableDiseases));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiagnosisSummary&&const DeepCollectionEquality().equals(other._diagnoses, _diagnoses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_probableDiseases));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_diagnoses));
 
 @override
 String toString() {
-  return 'DiagnosisSummary(probableDiseases: $probableDiseases)';
+  return 'DiagnosisSummary(diagnoses: $diagnoses)';
 }
 
 
@@ -2427,7 +2439,7 @@ abstract mixin class _$DiagnosisSummaryCopyWith<$Res> implements $DiagnosisSumma
   factory _$DiagnosisSummaryCopyWith(_DiagnosisSummary value, $Res Function(_DiagnosisSummary) _then) = __$DiagnosisSummaryCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'probable_diseases') List<ProbableDisease> probableDiseases
+ List<ProbableDisease> diagnoses
 });
 
 
@@ -2444,9 +2456,9 @@ class __$DiagnosisSummaryCopyWithImpl<$Res>
 
 /// Create a copy of DiagnosisSummary
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? probableDiseases = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? diagnoses = null,}) {
   return _then(_DiagnosisSummary(
-probableDiseases: null == probableDiseases ? _self._probableDiseases : probableDiseases // ignore: cast_nullable_to_non_nullable
+diagnoses: null == diagnoses ? _self._diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
 as List<ProbableDisease>,
   ));
 }
@@ -2458,7 +2470,7 @@ as List<ProbableDisease>,
 /// @nodoc
 mixin _$FollowUpResponse {
 
-@JsonKey(name: 'response_type') String get responseType; Question? get question;@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? get diagnosisSummary; int get total;
+@JsonKey(name: 'response_type') String get responseType; Question? get question;@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? get diagnosisSummary; int? get total;
 /// Create a copy of FollowUpResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2491,7 +2503,7 @@ abstract mixin class $FollowUpResponseCopyWith<$Res>  {
   factory $FollowUpResponseCopyWith(FollowUpResponse value, $Res Function(FollowUpResponse) _then) = _$FollowUpResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'response_type') String responseType, Question? question,@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? diagnosisSummary, int total
+@JsonKey(name: 'response_type') String responseType, Question? question,@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? diagnosisSummary, int? total
 });
 
 
@@ -2508,13 +2520,13 @@ class _$FollowUpResponseCopyWithImpl<$Res>
 
 /// Create a copy of FollowUpResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? responseType = null,Object? question = freezed,Object? diagnosisSummary = freezed,Object? total = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? responseType = null,Object? question = freezed,Object? diagnosisSummary = freezed,Object? total = freezed,}) {
   return _then(FollowUpResponse(
 responseType: null == responseType ? _self.responseType : responseType // ignore: cast_nullable_to_non_nullable
 as String,question: freezed == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
 as Question?,diagnosisSummary: freezed == diagnosisSummary ? _self.diagnosisSummary : diagnosisSummary // ignore: cast_nullable_to_non_nullable
-as DiagnosisSummary?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,
+as DiagnosisSummary?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 /// Create a copy of FollowUpResponse
@@ -2623,7 +2635,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int total)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int? total)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FollowUpResponse() when $default != null:
 return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.total);case _:
@@ -2644,7 +2656,7 @@ return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int total)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int? total)  $default,) {final _that = this;
 switch (_that) {
 case _FollowUpResponse():
 return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.total);case _:
@@ -2664,7 +2676,7 @@ return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int total)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'response_type')  String responseType,  Question? question, @JsonKey(name: 'diagnosis_summary')  DiagnosisSummary? diagnosisSummary,  int? total)?  $default,) {final _that = this;
 switch (_that) {
 case _FollowUpResponse() when $default != null:
 return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.total);case _:
@@ -2679,13 +2691,13 @@ return $default(_that.responseType,_that.question,_that.diagnosisSummary,_that.t
 @JsonSerializable()
 
 class _FollowUpResponse implements FollowUpResponse {
-  const _FollowUpResponse({@JsonKey(name: 'response_type') required this.responseType, this.question, @JsonKey(name: 'diagnosis_summary') this.diagnosisSummary, required this.total});
+  const _FollowUpResponse({@JsonKey(name: 'response_type') this.responseType = "question", this.question, @JsonKey(name: 'diagnosis_summary') this.diagnosisSummary, this.total});
   factory _FollowUpResponse.fromJson(Map<String, dynamic> json) => _$FollowUpResponseFromJson(json);
 
 @override@JsonKey(name: 'response_type') final  String responseType;
 @override final  Question? question;
 @override@JsonKey(name: 'diagnosis_summary') final  DiagnosisSummary? diagnosisSummary;
-@override final  int total;
+@override final  int? total;
 
 /// Create a copy of FollowUpResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -2720,7 +2732,7 @@ abstract mixin class _$FollowUpResponseCopyWith<$Res> implements $FollowUpRespon
   factory _$FollowUpResponseCopyWith(_FollowUpResponse value, $Res Function(_FollowUpResponse) _then) = __$FollowUpResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'response_type') String responseType, Question? question,@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? diagnosisSummary, int total
+@JsonKey(name: 'response_type') String responseType, Question? question,@JsonKey(name: 'diagnosis_summary') DiagnosisSummary? diagnosisSummary, int? total
 });
 
 
@@ -2737,13 +2749,13 @@ class __$FollowUpResponseCopyWithImpl<$Res>
 
 /// Create a copy of FollowUpResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? responseType = null,Object? question = freezed,Object? diagnosisSummary = freezed,Object? total = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? responseType = null,Object? question = freezed,Object? diagnosisSummary = freezed,Object? total = freezed,}) {
   return _then(_FollowUpResponse(
 responseType: null == responseType ? _self.responseType : responseType // ignore: cast_nullable_to_non_nullable
 as String,question: freezed == question ? _self.question : question // ignore: cast_nullable_to_non_nullable
 as Question?,diagnosisSummary: freezed == diagnosisSummary ? _self.diagnosisSummary : diagnosisSummary // ignore: cast_nullable_to_non_nullable
-as DiagnosisSummary?,total: null == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
-as int,
+as DiagnosisSummary?,total: freezed == total ? _self.total : total // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -2778,7 +2790,7 @@ $DiagnosisSummaryCopyWith<$Res>? get diagnosisSummary {
 /// @nodoc
 mixin _$SubmitFollowUpAnswerRequest {
 
-@JsonKey(name: 'session_id') String get sessionId;@JsonKey(name: 'question_id') String get questionId;@JsonKey(name: 'selected_option_ids') List<String> get selectedOptionIds;
+@JsonKey(name: 'session_id') String get sessionId;@JsonKey(name: 'question_id') String get questionId; String get answer;
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2791,16 +2803,16 @@ $SubmitFollowUpAnswerRequestCopyWith<SubmitFollowUpAnswerRequest> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&const DeepCollectionEquality().equals(other.selectedOptionIds, selectedOptionIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,questionId,const DeepCollectionEquality().hash(selectedOptionIds));
+int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer);
 
 @override
 String toString() {
-  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, selectedOptionIds: $selectedOptionIds)';
+  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer)';
 }
 
 
@@ -2811,7 +2823,7 @@ abstract mixin class $SubmitFollowUpAnswerRequestCopyWith<$Res>  {
   factory $SubmitFollowUpAnswerRequestCopyWith(SubmitFollowUpAnswerRequest value, $Res Function(SubmitFollowUpAnswerRequest) _then) = _$SubmitFollowUpAnswerRequestCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId,@JsonKey(name: 'selected_option_ids') List<String> selectedOptionIds
+@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer
 });
 
 
@@ -2828,12 +2840,12 @@ class _$SubmitFollowUpAnswerRequestCopyWithImpl<$Res>
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = null,Object? questionId = null,Object? selectedOptionIds = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,}) {
   return _then(SubmitFollowUpAnswerRequest(
 sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
-as String,selectedOptionIds: null == selectedOptionIds ? _self.selectedOptionIds : selectedOptionIds // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
@@ -2918,10 +2930,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId, @JsonKey(name: 'selected_option_ids')  List<String> selectedOptionIds)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest() when $default != null:
-return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer);case _:
   return orElse();
 
 }
@@ -2939,10 +2951,10 @@ return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId, @JsonKey(name: 'selected_option_ids')  List<String> selectedOptionIds)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)  $default,) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest():
-return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2959,10 +2971,10 @@ return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId, @JsonKey(name: 'selected_option_ids')  List<String> selectedOptionIds)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)?  $default,) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest() when $default != null:
-return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer);case _:
   return null;
 
 }
@@ -2974,18 +2986,12 @@ return $default(_that.sessionId,_that.questionId,_that.selectedOptionIds);case _
 @JsonSerializable()
 
 class _SubmitFollowUpAnswerRequest implements SubmitFollowUpAnswerRequest {
-  const _SubmitFollowUpAnswerRequest({@JsonKey(name: 'session_id') required this.sessionId, @JsonKey(name: 'question_id') required this.questionId, @JsonKey(name: 'selected_option_ids') required  List<String> selectedOptionIds}): _selectedOptionIds = selectedOptionIds;
+  const _SubmitFollowUpAnswerRequest({@JsonKey(name: 'session_id') required this.sessionId, @JsonKey(name: 'question_id') required this.questionId, required this.answer});
   factory _SubmitFollowUpAnswerRequest.fromJson(Map<String, dynamic> json) => _$SubmitFollowUpAnswerRequestFromJson(json);
 
 @override@JsonKey(name: 'session_id') final  String sessionId;
 @override@JsonKey(name: 'question_id') final  String questionId;
- final  List<String> _selectedOptionIds;
-@override@JsonKey(name: 'selected_option_ids') List<String> get selectedOptionIds {
-  if (_selectedOptionIds is EqualUnmodifiableListView) return _selectedOptionIds;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_selectedOptionIds);
-}
-
+@override final  String answer;
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -3000,16 +3006,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&const DeepCollectionEquality().equals(other._selectedOptionIds, _selectedOptionIds));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,questionId,const DeepCollectionEquality().hash(_selectedOptionIds));
+int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer);
 
 @override
 String toString() {
-  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, selectedOptionIds: $selectedOptionIds)';
+  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer)';
 }
 
 
@@ -3020,7 +3026,7 @@ abstract mixin class _$SubmitFollowUpAnswerRequestCopyWith<$Res> implements $Sub
   factory _$SubmitFollowUpAnswerRequestCopyWith(_SubmitFollowUpAnswerRequest value, $Res Function(_SubmitFollowUpAnswerRequest) _then) = __$SubmitFollowUpAnswerRequestCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId,@JsonKey(name: 'selected_option_ids') List<String> selectedOptionIds
+@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer
 });
 
 
@@ -3037,12 +3043,1133 @@ class __$SubmitFollowUpAnswerRequestCopyWithImpl<$Res>
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = null,Object? questionId = null,Object? selectedOptionIds = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,}) {
   return _then(_SubmitFollowUpAnswerRequest(
 sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
-as String,selectedOptionIds: null == selectedOptionIds ? _self._selectedOptionIds : selectedOptionIds // ignore: cast_nullable_to_non_nullable
-as List<String>,
+as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$ConversationTurn {
+
+ String? get role; String? get text;
+/// Create a copy of ConversationTurn
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ConversationTurnCopyWith<ConversationTurn> get copyWith => _$ConversationTurnCopyWithImpl<ConversationTurn>(this as ConversationTurn, _$identity);
+
+  /// Serializes this ConversationTurn to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ConversationTurn&&(identical(other.role, role) || other.role == role)&&(identical(other.text, text) || other.text == text));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,role,text);
+
+@override
+String toString() {
+  return 'ConversationTurn(role: $role, text: $text)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ConversationTurnCopyWith<$Res>  {
+  factory $ConversationTurnCopyWith(ConversationTurn value, $Res Function(ConversationTurn) _then) = _$ConversationTurnCopyWithImpl;
+@useResult
+$Res call({
+ String? role, String? text
+});
+
+
+
+
+}
+/// @nodoc
+class _$ConversationTurnCopyWithImpl<$Res>
+    implements $ConversationTurnCopyWith<$Res> {
+  _$ConversationTurnCopyWithImpl(this._self, this._then);
+
+  final ConversationTurn _self;
+  final $Res Function(ConversationTurn) _then;
+
+/// Create a copy of ConversationTurn
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? role = freezed,Object? text = freezed,}) {
+  return _then(ConversationTurn(
+role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [ConversationTurn].
+extension ConversationTurnPatterns on ConversationTurn {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ConversationTurn value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ConversationTurn() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ConversationTurn value)  $default,){
+final _that = this;
+switch (_that) {
+case _ConversationTurn():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ConversationTurn value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ConversationTurn() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? role,  String? text)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ConversationTurn() when $default != null:
+return $default(_that.role,_that.text);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? role,  String? text)  $default,) {final _that = this;
+switch (_that) {
+case _ConversationTurn():
+return $default(_that.role,_that.text);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? role,  String? text)?  $default,) {final _that = this;
+switch (_that) {
+case _ConversationTurn() when $default != null:
+return $default(_that.role,_that.text);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _ConversationTurn implements ConversationTurn {
+  const _ConversationTurn({this.role, this.text});
+  factory _ConversationTurn.fromJson(Map<String, dynamic> json) => _$ConversationTurnFromJson(json);
+
+@override final  String? role;
+@override final  String? text;
+
+/// Create a copy of ConversationTurn
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ConversationTurnCopyWith<_ConversationTurn> get copyWith => __$ConversationTurnCopyWithImpl<_ConversationTurn>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ConversationTurnToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ConversationTurn&&(identical(other.role, role) || other.role == role)&&(identical(other.text, text) || other.text == text));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,role,text);
+
+@override
+String toString() {
+  return 'ConversationTurn(role: $role, text: $text)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ConversationTurnCopyWith<$Res> implements $ConversationTurnCopyWith<$Res> {
+  factory _$ConversationTurnCopyWith(_ConversationTurn value, $Res Function(_ConversationTurn) _then) = __$ConversationTurnCopyWithImpl;
+@override @useResult
+$Res call({
+ String? role, String? text
+});
+
+
+
+
+}
+/// @nodoc
+class __$ConversationTurnCopyWithImpl<$Res>
+    implements _$ConversationTurnCopyWith<$Res> {
+  __$ConversationTurnCopyWithImpl(this._self, this._then);
+
+  final _ConversationTurn _self;
+  final $Res Function(_ConversationTurn) _then;
+
+/// Create a copy of ConversationTurn
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? role = freezed,Object? text = freezed,}) {
+  return _then(_ConversationTurn(
+role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
+as String?,text: freezed == text ? _self.text : text // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$Diagnosis {
+
+@JsonKey(name: "disease_name") String? get diseaseName; double? get probability; String? get confidence; String? get specialist; String? get advice;@JsonKey(name: "disease_name_local") String? get diseaseNameLocal;@JsonKey(name: "specialist_local") String? get specialistLocal;@JsonKey(name: "advice_local") String? get adviceLocal;
+/// Create a copy of Diagnosis
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DiagnosisCopyWith<Diagnosis> get copyWith => _$DiagnosisCopyWithImpl<Diagnosis>(this as Diagnosis, _$identity);
+
+  /// Serializes this Diagnosis to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Diagnosis&&(identical(other.diseaseName, diseaseName) || other.diseaseName == diseaseName)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.specialist, specialist) || other.specialist == specialist)&&(identical(other.advice, advice) || other.advice == advice)&&(identical(other.diseaseNameLocal, diseaseNameLocal) || other.diseaseNameLocal == diseaseNameLocal)&&(identical(other.specialistLocal, specialistLocal) || other.specialistLocal == specialistLocal)&&(identical(other.adviceLocal, adviceLocal) || other.adviceLocal == adviceLocal));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,diseaseName,probability,confidence,specialist,advice,diseaseNameLocal,specialistLocal,adviceLocal);
+
+@override
+String toString() {
+  return 'Diagnosis(diseaseName: $diseaseName, probability: $probability, confidence: $confidence, specialist: $specialist, advice: $advice, diseaseNameLocal: $diseaseNameLocal, specialistLocal: $specialistLocal, adviceLocal: $adviceLocal)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DiagnosisCopyWith<$Res>  {
+  factory $DiagnosisCopyWith(Diagnosis value, $Res Function(Diagnosis) _then) = _$DiagnosisCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: "disease_name") String? diseaseName, double? probability, String? confidence, String? specialist, String? advice,@JsonKey(name: "disease_name_local") String? diseaseNameLocal,@JsonKey(name: "specialist_local") String? specialistLocal,@JsonKey(name: "advice_local") String? adviceLocal
+});
+
+
+
+
+}
+/// @nodoc
+class _$DiagnosisCopyWithImpl<$Res>
+    implements $DiagnosisCopyWith<$Res> {
+  _$DiagnosisCopyWithImpl(this._self, this._then);
+
+  final Diagnosis _self;
+  final $Res Function(Diagnosis) _then;
+
+/// Create a copy of Diagnosis
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? diseaseName = freezed,Object? probability = freezed,Object? confidence = freezed,Object? specialist = freezed,Object? advice = freezed,Object? diseaseNameLocal = freezed,Object? specialistLocal = freezed,Object? adviceLocal = freezed,}) {
+  return _then(Diagnosis(
+diseaseName: freezed == diseaseName ? _self.diseaseName : diseaseName // ignore: cast_nullable_to_non_nullable
+as String?,probability: freezed == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
+as double?,confidence: freezed == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
+as String?,specialist: freezed == specialist ? _self.specialist : specialist // ignore: cast_nullable_to_non_nullable
+as String?,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,diseaseNameLocal: freezed == diseaseNameLocal ? _self.diseaseNameLocal : diseaseNameLocal // ignore: cast_nullable_to_non_nullable
+as String?,specialistLocal: freezed == specialistLocal ? _self.specialistLocal : specialistLocal // ignore: cast_nullable_to_non_nullable
+as String?,adviceLocal: freezed == adviceLocal ? _self.adviceLocal : adviceLocal // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [Diagnosis].
+extension DiagnosisPatterns on Diagnosis {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _Diagnosis value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _Diagnosis() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _Diagnosis value)  $default,){
+final _that = this;
+switch (_that) {
+case _Diagnosis():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _Diagnosis value)?  $default,){
+final _that = this;
+switch (_that) {
+case _Diagnosis() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "disease_name")  String? diseaseName,  double? probability,  String? confidence,  String? specialist,  String? advice, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal, @JsonKey(name: "specialist_local")  String? specialistLocal, @JsonKey(name: "advice_local")  String? adviceLocal)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _Diagnosis() when $default != null:
+return $default(_that.diseaseName,_that.probability,_that.confidence,_that.specialist,_that.advice,_that.diseaseNameLocal,_that.specialistLocal,_that.adviceLocal);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "disease_name")  String? diseaseName,  double? probability,  String? confidence,  String? specialist,  String? advice, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal, @JsonKey(name: "specialist_local")  String? specialistLocal, @JsonKey(name: "advice_local")  String? adviceLocal)  $default,) {final _that = this;
+switch (_that) {
+case _Diagnosis():
+return $default(_that.diseaseName,_that.probability,_that.confidence,_that.specialist,_that.advice,_that.diseaseNameLocal,_that.specialistLocal,_that.adviceLocal);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "disease_name")  String? diseaseName,  double? probability,  String? confidence,  String? specialist,  String? advice, @JsonKey(name: "disease_name_local")  String? diseaseNameLocal, @JsonKey(name: "specialist_local")  String? specialistLocal, @JsonKey(name: "advice_local")  String? adviceLocal)?  $default,) {final _that = this;
+switch (_that) {
+case _Diagnosis() when $default != null:
+return $default(_that.diseaseName,_that.probability,_that.confidence,_that.specialist,_that.advice,_that.diseaseNameLocal,_that.specialistLocal,_that.adviceLocal);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _Diagnosis implements Diagnosis {
+  const _Diagnosis({@JsonKey(name: "disease_name") this.diseaseName, this.probability, this.confidence, this.specialist, this.advice, @JsonKey(name: "disease_name_local") this.diseaseNameLocal, @JsonKey(name: "specialist_local") this.specialistLocal, @JsonKey(name: "advice_local") this.adviceLocal});
+  factory _Diagnosis.fromJson(Map<String, dynamic> json) => _$DiagnosisFromJson(json);
+
+@override@JsonKey(name: "disease_name") final  String? diseaseName;
+@override final  double? probability;
+@override final  String? confidence;
+@override final  String? specialist;
+@override final  String? advice;
+@override@JsonKey(name: "disease_name_local") final  String? diseaseNameLocal;
+@override@JsonKey(name: "specialist_local") final  String? specialistLocal;
+@override@JsonKey(name: "advice_local") final  String? adviceLocal;
+
+/// Create a copy of Diagnosis
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DiagnosisCopyWith<_Diagnosis> get copyWith => __$DiagnosisCopyWithImpl<_Diagnosis>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DiagnosisToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Diagnosis&&(identical(other.diseaseName, diseaseName) || other.diseaseName == diseaseName)&&(identical(other.probability, probability) || other.probability == probability)&&(identical(other.confidence, confidence) || other.confidence == confidence)&&(identical(other.specialist, specialist) || other.specialist == specialist)&&(identical(other.advice, advice) || other.advice == advice)&&(identical(other.diseaseNameLocal, diseaseNameLocal) || other.diseaseNameLocal == diseaseNameLocal)&&(identical(other.specialistLocal, specialistLocal) || other.specialistLocal == specialistLocal)&&(identical(other.adviceLocal, adviceLocal) || other.adviceLocal == adviceLocal));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,diseaseName,probability,confidence,specialist,advice,diseaseNameLocal,specialistLocal,adviceLocal);
+
+@override
+String toString() {
+  return 'Diagnosis(diseaseName: $diseaseName, probability: $probability, confidence: $confidence, specialist: $specialist, advice: $advice, diseaseNameLocal: $diseaseNameLocal, specialistLocal: $specialistLocal, adviceLocal: $adviceLocal)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DiagnosisCopyWith<$Res> implements $DiagnosisCopyWith<$Res> {
+  factory _$DiagnosisCopyWith(_Diagnosis value, $Res Function(_Diagnosis) _then) = __$DiagnosisCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: "disease_name") String? diseaseName, double? probability, String? confidence, String? specialist, String? advice,@JsonKey(name: "disease_name_local") String? diseaseNameLocal,@JsonKey(name: "specialist_local") String? specialistLocal,@JsonKey(name: "advice_local") String? adviceLocal
+});
+
+
+
+
+}
+/// @nodoc
+class __$DiagnosisCopyWithImpl<$Res>
+    implements _$DiagnosisCopyWith<$Res> {
+  __$DiagnosisCopyWithImpl(this._self, this._then);
+
+  final _Diagnosis _self;
+  final $Res Function(_Diagnosis) _then;
+
+/// Create a copy of Diagnosis
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? diseaseName = freezed,Object? probability = freezed,Object? confidence = freezed,Object? specialist = freezed,Object? advice = freezed,Object? diseaseNameLocal = freezed,Object? specialistLocal = freezed,Object? adviceLocal = freezed,}) {
+  return _then(_Diagnosis(
+diseaseName: freezed == diseaseName ? _self.diseaseName : diseaseName // ignore: cast_nullable_to_non_nullable
+as String?,probability: freezed == probability ? _self.probability : probability // ignore: cast_nullable_to_non_nullable
+as double?,confidence: freezed == confidence ? _self.confidence : confidence // ignore: cast_nullable_to_non_nullable
+as String?,specialist: freezed == specialist ? _self.specialist : specialist // ignore: cast_nullable_to_non_nullable
+as String?,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,diseaseNameLocal: freezed == diseaseNameLocal ? _self.diseaseNameLocal : diseaseNameLocal // ignore: cast_nullable_to_non_nullable
+as String?,specialistLocal: freezed == specialistLocal ? _self.specialistLocal : specialistLocal // ignore: cast_nullable_to_non_nullable
+as String?,adviceLocal: freezed == adviceLocal ? _self.adviceLocal : adviceLocal // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$FinalReport {
+
+@JsonKey(name: "session_id") String? get sessionId;@JsonKey(name: "patient_name") String? get patientName;@JsonKey(name: "started_at") String? get startedAt;@JsonKey(name: "completed_at") String? get completedAt; String? get status; List<Diagnosis> get diagnoses; String? get advice; List<ConversationTurn> get conversation;
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FinalReportCopyWith<FinalReport> get copyWith => _$FinalReportCopyWithImpl<FinalReport>(this as FinalReport, _$identity);
+
+  /// Serializes this FinalReport to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinalReport&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.patientName, patientName) || other.patientName == patientName)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.diagnoses, diagnoses)&&(identical(other.advice, advice) || other.advice == advice)&&const DeepCollectionEquality().equals(other.conversation, conversation));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sessionId,patientName,startedAt,completedAt,status,const DeepCollectionEquality().hash(diagnoses),advice,const DeepCollectionEquality().hash(conversation));
+
+@override
+String toString() {
+  return 'FinalReport(sessionId: $sessionId, patientName: $patientName, startedAt: $startedAt, completedAt: $completedAt, status: $status, diagnoses: $diagnoses, advice: $advice, conversation: $conversation)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $FinalReportCopyWith<$Res>  {
+  factory $FinalReportCopyWith(FinalReport value, $Res Function(FinalReport) _then) = _$FinalReportCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: "session_id") String? sessionId,@JsonKey(name: "patient_name") String? patientName,@JsonKey(name: "started_at") String? startedAt,@JsonKey(name: "completed_at") String? completedAt, String? status, List<Diagnosis> diagnoses, String? advice, List<ConversationTurn> conversation
+});
+
+
+
+
+}
+/// @nodoc
+class _$FinalReportCopyWithImpl<$Res>
+    implements $FinalReportCopyWith<$Res> {
+  _$FinalReportCopyWithImpl(this._self, this._then);
+
+  final FinalReport _self;
+  final $Res Function(FinalReport) _then;
+
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = freezed,Object? patientName = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? status = freezed,Object? diagnoses = null,Object? advice = freezed,Object? conversation = null,}) {
+  return _then(FinalReport(
+sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String?,patientName: freezed == patientName ? _self.patientName : patientName // ignore: cast_nullable_to_non_nullable
+as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as String?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,diagnoses: null == diagnoses ? _self.diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
+as List<Diagnosis>,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,conversation: null == conversation ? _self.conversation : conversation // ignore: cast_nullable_to_non_nullable
+as List<ConversationTurn>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [FinalReport].
+extension FinalReportPatterns on FinalReport {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FinalReport value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _FinalReport() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FinalReport value)  $default,){
+final _that = this;
+switch (_that) {
+case _FinalReport():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FinalReport value)?  $default,){
+final _that = this;
+switch (_that) {
+case _FinalReport() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _FinalReport() when $default != null:
+return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)  $default,) {final _that = this;
+switch (_that) {
+case _FinalReport():
+return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)?  $default,) {final _that = this;
+switch (_that) {
+case _FinalReport() when $default != null:
+return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _FinalReport implements FinalReport {
+  const _FinalReport({@JsonKey(name: "session_id") this.sessionId, @JsonKey(name: "patient_name") this.patientName, @JsonKey(name: "started_at") this.startedAt, @JsonKey(name: "completed_at") this.completedAt, this.status,  List<Diagnosis> diagnoses = const [], this.advice,  List<ConversationTurn> conversation = const []}): _diagnoses = diagnoses,_conversation = conversation;
+  factory _FinalReport.fromJson(Map<String, dynamic> json) => _$FinalReportFromJson(json);
+
+@override@JsonKey(name: "session_id") final  String? sessionId;
+@override@JsonKey(name: "patient_name") final  String? patientName;
+@override@JsonKey(name: "started_at") final  String? startedAt;
+@override@JsonKey(name: "completed_at") final  String? completedAt;
+@override final  String? status;
+ final  List<Diagnosis> _diagnoses;
+@override@JsonKey() List<Diagnosis> get diagnoses {
+  if (_diagnoses is EqualUnmodifiableListView) return _diagnoses;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_diagnoses);
+}
+
+@override final  String? advice;
+ final  List<ConversationTurn> _conversation;
+@override@JsonKey() List<ConversationTurn> get conversation {
+  if (_conversation is EqualUnmodifiableListView) return _conversation;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_conversation);
+}
+
+
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FinalReportCopyWith<_FinalReport> get copyWith => __$FinalReportCopyWithImpl<_FinalReport>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$FinalReportToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinalReport&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.patientName, patientName) || other.patientName == patientName)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._diagnoses, _diagnoses)&&(identical(other.advice, advice) || other.advice == advice)&&const DeepCollectionEquality().equals(other._conversation, _conversation));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sessionId,patientName,startedAt,completedAt,status,const DeepCollectionEquality().hash(_diagnoses),advice,const DeepCollectionEquality().hash(_conversation));
+
+@override
+String toString() {
+  return 'FinalReport(sessionId: $sessionId, patientName: $patientName, startedAt: $startedAt, completedAt: $completedAt, status: $status, diagnoses: $diagnoses, advice: $advice, conversation: $conversation)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FinalReportCopyWith<$Res> implements $FinalReportCopyWith<$Res> {
+  factory _$FinalReportCopyWith(_FinalReport value, $Res Function(_FinalReport) _then) = __$FinalReportCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: "session_id") String? sessionId,@JsonKey(name: "patient_name") String? patientName,@JsonKey(name: "started_at") String? startedAt,@JsonKey(name: "completed_at") String? completedAt, String? status, List<Diagnosis> diagnoses, String? advice, List<ConversationTurn> conversation
+});
+
+
+
+
+}
+/// @nodoc
+class __$FinalReportCopyWithImpl<$Res>
+    implements _$FinalReportCopyWith<$Res> {
+  __$FinalReportCopyWithImpl(this._self, this._then);
+
+  final _FinalReport _self;
+  final $Res Function(_FinalReport) _then;
+
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = freezed,Object? patientName = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? status = freezed,Object? diagnoses = null,Object? advice = freezed,Object? conversation = null,}) {
+  return _then(_FinalReport(
+sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String?,patientName: freezed == patientName ? _self.patientName : patientName // ignore: cast_nullable_to_non_nullable
+as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as String?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,diagnoses: null == diagnoses ? _self._diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
+as List<Diagnosis>,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
+as String?,conversation: null == conversation ? _self._conversation : conversation // ignore: cast_nullable_to_non_nullable
+as List<ConversationTurn>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$SessionHistoryItem {
+
+@JsonKey(name: 'session_id') String? get sessionId;@JsonKey(name: 'created_at') String? get createdAt; String? get status;@JsonKey(name: 'top_disease') String? get topDisease;@JsonKey(name: 'top_probability') double? get topProbability;
+/// Create a copy of SessionHistoryItem
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionHistoryItemCopyWith<SessionHistoryItem> get copyWith => _$SessionHistoryItemCopyWithImpl<SessionHistoryItem>(this as SessionHistoryItem, _$identity);
+
+  /// Serializes this SessionHistoryItem to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionHistoryItem&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sessionId,createdAt,status,topDisease,topProbability);
+
+@override
+String toString() {
+  return 'SessionHistoryItem(sessionId: $sessionId, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SessionHistoryItemCopyWith<$Res>  {
+  factory $SessionHistoryItemCopyWith(SessionHistoryItem value, $Res Function(SessionHistoryItem) _then) = _$SessionHistoryItemCopyWithImpl;
+@useResult
+$Res call({
+@JsonKey(name: 'session_id') String? sessionId,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
+});
+
+
+
+
+}
+/// @nodoc
+class _$SessionHistoryItemCopyWithImpl<$Res>
+    implements $SessionHistoryItemCopyWith<$Res> {
+  _$SessionHistoryItemCopyWithImpl(this._self, this._then);
+
+  final SessionHistoryItem _self;
+  final $Res Function(SessionHistoryItem) _then;
+
+/// Create a copy of SessionHistoryItem
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
+  return _then(SessionHistoryItem(
+sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,topDisease: freezed == topDisease ? _self.topDisease : topDisease // ignore: cast_nullable_to_non_nullable
+as String?,topProbability: freezed == topProbability ? _self.topProbability : topProbability // ignore: cast_nullable_to_non_nullable
+as double?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SessionHistoryItem].
+extension SessionHistoryItemPatterns on SessionHistoryItem {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionHistoryItem value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionHistoryItem() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionHistoryItem value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionHistoryItem():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionHistoryItem value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionHistoryItem() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionHistoryItem() when $default != null:
+return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)  $default,) {final _that = this;
+switch (_that) {
+case _SessionHistoryItem():
+return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionHistoryItem() when $default != null:
+return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SessionHistoryItem implements SessionHistoryItem {
+  const _SessionHistoryItem({@JsonKey(name: 'session_id') this.sessionId, @JsonKey(name: 'created_at') this.createdAt, this.status, @JsonKey(name: 'top_disease') this.topDisease, @JsonKey(name: 'top_probability') this.topProbability});
+  factory _SessionHistoryItem.fromJson(Map<String, dynamic> json) => _$SessionHistoryItemFromJson(json);
+
+@override@JsonKey(name: 'session_id') final  String? sessionId;
+@override@JsonKey(name: 'created_at') final  String? createdAt;
+@override final  String? status;
+@override@JsonKey(name: 'top_disease') final  String? topDisease;
+@override@JsonKey(name: 'top_probability') final  double? topProbability;
+
+/// Create a copy of SessionHistoryItem
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionHistoryItemCopyWith<_SessionHistoryItem> get copyWith => __$SessionHistoryItemCopyWithImpl<_SessionHistoryItem>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionHistoryItemToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionHistoryItem&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,sessionId,createdAt,status,topDisease,topProbability);
+
+@override
+String toString() {
+  return 'SessionHistoryItem(sessionId: $sessionId, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionHistoryItemCopyWith<$Res> implements $SessionHistoryItemCopyWith<$Res> {
+  factory _$SessionHistoryItemCopyWith(_SessionHistoryItem value, $Res Function(_SessionHistoryItem) _then) = __$SessionHistoryItemCopyWithImpl;
+@override @useResult
+$Res call({
+@JsonKey(name: 'session_id') String? sessionId,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionHistoryItemCopyWithImpl<$Res>
+    implements _$SessionHistoryItemCopyWith<$Res> {
+  __$SessionHistoryItemCopyWithImpl(this._self, this._then);
+
+  final _SessionHistoryItem _self;
+  final $Res Function(_SessionHistoryItem) _then;
+
+/// Create a copy of SessionHistoryItem
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
+  return _then(_SessionHistoryItem(
+sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,topDisease: freezed == topDisease ? _self.topDisease : topDisease // ignore: cast_nullable_to_non_nullable
+as String?,topProbability: freezed == topProbability ? _self.topProbability : topProbability // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

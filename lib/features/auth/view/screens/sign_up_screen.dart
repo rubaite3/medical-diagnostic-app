@@ -7,7 +7,7 @@ import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/terms_cubit/terms_cubit.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/register_request.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
@@ -47,20 +47,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 15),
                   const AuthLogo(),
                   const SizedBox(height: 25),
-                  const Text(
-                    AuthStrings.signUpTitle,
+                  Text(
+                    S.of(context).signUpTitle,
                     style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    AuthStrings.signUpSubTitle,
+                  Text(
+                    S.of(context).signUpSubtitle,
                     style: TextStyle(fontSize: 16),
                   ),
                   const SizedBox(height: 30),
                   CustomTextField(
                     validator: (value) =>
                         value!.isEmpty ? "Name must not be empty" : null,
-                    hintText: AuthStrings.hintFullName,
+                    hintText: S.of(context).hintFullName,
                     prefixIcon: Icons.person_outline,
                     controller: _nameController,
                   ),
@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         : Utils.isEmail(value)
                         ? null
                         : "Wrong email format",
-                    hintText: AuthStrings.hintEmail,
+                    hintText: S.of(context).hintEmail,
                     prefixIcon: Icons.email_outlined,
                     controller: _emailController,
                   ),
@@ -82,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         : value.trim().length < 7
                         ? "Password must be at least 8 chars"
                         : null,
-                    hintText: AuthStrings.hintPassword,
+                    hintText: S.of(context).hintPassword,
                     prefixIcon: Icons.vpn_key_outlined,
                     isPassword: true,
                     controller: _passController,
@@ -90,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   const SizedBox(height: 16),
 
                   CustomTextField(
-                    hintText: AuthStrings.confirmPasswordHint,
+                    hintText: S.of(context).confirmPasswordHint,
                     prefixIcon: Icons.lock_reset_outlined,
                     isPassword: true,
                     controller: _passConfirmController,
@@ -121,8 +121,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onTap: () {
                             _termsCubit.toggle();
                           },
-                          child: const Text(
-                            AuthStrings.termsAgree,
+                          child: Text(
+                            S.of(context).termsAgree,
                             style: TextStyle(fontSize: 14),
                           ),
                         ),
@@ -150,30 +150,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: const SizedBox(height: 20),
                   ),
                   CustomButton(
-                    text: AuthStrings.signUpBtn,
+                    text: S.of(context).signUpBtn,
                     onPressed: () {
                       _register(context);
                     },
                   ),
 
                   // لا تحذفيه
-                  if (false) _buildGoogle(),
+                  if (false) _buildGoogle(context),
 
                   const SizedBox(height: 30),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        AuthStrings.alreadyHaveAccount,
+                      Text(
+                        S.of(context).alreadyHaveAccount,
                         style: TextStyle(fontSize: 15),
                       ),
                       GestureDetector(
                         onTap: () {
                           context.goNamed(RoutePaths.login);
                         },
-                        child: const Text(
-                          AuthStrings.loginLink,
+                  child: Text(
+                    S.of(context).loginLink,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -191,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Column _buildGoogle() {
+  Column _buildGoogle(BuildContext context) {
     return Column(
       children: [
         const SizedBox(height: 24),
@@ -201,7 +201,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Expanded(child: Divider()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(AuthStrings.orContinueWith),
+              child: Text(S.of(context).orContinueWith),
             ),
             Expanded(child: Divider()),
           ],

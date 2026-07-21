@@ -6,6 +6,7 @@ import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth_bloc.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 
 import '../../../../core/theme/colors.dart';
 
@@ -43,7 +44,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         widget.onImageSelected(_selectedImage);
       }
     } catch (e) {
-      _showErrorSnackBar('Failed to pick image: $e');
+      _showErrorSnackBar(S.of(context).profileImagePickFailed);
     }
   }
 
@@ -67,7 +68,7 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
         Utils.showToast(
           context,
           level: -1,
-          message: 'Failed to capture image: $e',
+          message: S.of(context).profileImageCaptureFailed,
         );
       }
     }
@@ -107,9 +108,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                     Icons.photo_library_rounded,
                     color: AppColors.medical,
                   ),
-                  title: const Text(
-                    'Choose from Gallery',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  title: Text(
+                    S.of(context).profileChooseFromGallery,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -121,9 +122,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                     Icons.camera_alt_rounded,
                     color: AppColors.medical,
                   ),
-                  title: const Text(
-                    'Take a Photo',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  title: Text(
+                    S.of(context).profileTakePhoto,
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -136,9 +137,9 @@ class _ProfileImagePickerState extends State<ProfileImagePicker> {
                       Icons.delete_outline_rounded,
                       color: Colors.redAccent,
                     ),
-                    title: const Text(
-                      'Remove Photo',
-                      style: TextStyle(
+                    title: Text(
+                      S.of(context).profileRemovePhoto,
+                      style: const TextStyle(
                         color: Colors.redAccent,
                         fontWeight: FontWeight.w500,
                       ),

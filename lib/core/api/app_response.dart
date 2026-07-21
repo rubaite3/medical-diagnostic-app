@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:equatable/equatable.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 
 part 'app_response.g.dart';
 
@@ -39,7 +40,7 @@ class AppResponse<T> extends Equatable {
       success: success,
       message: message,
       statusCode: statusCode ?? 500,
-      statusMessage: statusMessage ?? "Some Error occurred.",
+      statusMessage: statusMessage ?? S.current.errorGeneric,
       data: data,
     );
   }

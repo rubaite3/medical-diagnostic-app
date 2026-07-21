@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/forgot_pass_cubit/forgot_pass_cubit.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../../core/utils/utils.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -40,8 +40,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               const SizedBox(height: 30),
               const AuthLogo(),
               const SizedBox(height: 40),
-              const Text(
-                AuthStrings.forgotTitle,
+              Text(
+                S.of(context).forgotTitle,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -52,7 +52,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Text(
-                  AuthStrings.forgotSubTitle,
+                  S.of(context).forgotSubtitle,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 15,
@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       ? null
                       : "Invalid Email format",
                   controller: _emailController,
-                  hintText: AuthStrings.hintEmail,
+                  hintText: S.of(context).hintEmail,
                   prefixIcon: Icons.email_outlined,
                 ),
               ),
@@ -97,7 +97,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 child: const SizedBox(height: 40),
               ),
               CustomButton(
-                text: AuthStrings.sendLinkBtn,
+                text: S.of(context).sendResetOtpBtn,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _forgotPassCubit.sendOTP(
@@ -111,8 +111,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 onTap: () {
                   context.pop();
                 },
-                child: const Text(
-                  AuthStrings.backToLogin,
+                child: Text(
+                  S.of(context).backToLogin,
                   style: TextStyle(
                     fontSize: 16,
                     // color: AppColors.textSecondary,

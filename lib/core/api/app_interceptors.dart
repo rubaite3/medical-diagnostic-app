@@ -33,6 +33,16 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
+    // Binary responses (e.g. PDF download requested with
+    // `responseType: ResponseType.bytes`) must be passed through untouched so
+    // callers receive the raw bytes instead of an AppResponse wrapper.
+    final isBinary = response.data is List<int> ||
+        response.requestOptions.responseType == ResponseType.bytes;
+    if (isBinary) {
+      handler.next(response);
+      return;
+    }
+
     final responseData = mapResponseData(
       requestOptions: response.requestOptions,
       response: response,

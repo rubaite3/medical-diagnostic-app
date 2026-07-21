@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:medical_diagnostic_app1/core/controllers/loader_cubit.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/resend_email_verification_request.dart';
@@ -13,7 +13,9 @@ import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/reg
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/profile/update_profile_request.dart';
 
+import '../../../../core/controllers/loader_cubit/loader_cubit.dart';
 import '../../../../core/utils/utils.dart';
+import '../../../../generated/l10n.dart';
 import '../../models/user.dart';
 
 part 'auth_event.dart';
@@ -23,16 +25,17 @@ part 'auth_bloc.freezed.dart';
 
 class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   AuthBloc({required this._authRepo}) : super(AuthState.initial()) {
+    on<AuthEvent>((event, emit) {
+      if (event.runtimeType != _AuthLoading) {
+        GetIt.instance<LoaderCubit>().hide();
+      }
+    }, transformer: droppable());
     on<_CheckConnectivity>((event, emit) {
       _connectivityTimer = Timer.periodic(Duration(seconds: 30), (_) async {
         await _checkConnection();
       });
     });
-    on<AuthEvent>((event, emit) {
-      if (event.runtimeType != _AuthLoading) {
-        GetIt.instance<LoaderCubit>().hide();
-      }
-    });
+
     on<_AuthLoading>(((_, emit) {
       GetIt.instance<LoaderCubit>().show();
       emit(state.copyWith(auth: Auth.loading));
@@ -41,7 +44,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       if (!event.isOnline) {
         emit(
           state.copyWith(
-            statusMessage: "You are offline!",
+            statusMessage: S.current.authOffline,
             op: Operation.failure,
           ),
         );
@@ -55,7 +58,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       } else if ((event.isOnline == true) && (state.isOnline == false)) {
         emit(
           state.copyWith(
-            statusMessage: "Internet was restored!",
+            statusMessage: S.current.authOnlineRestored,
             op: Operation.success,
           ),
         );
@@ -72,7 +75,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       if (event.user == null && !state.auth.isGuest) {
         emit(
           state.copyWith(
-            statusMessage: "Session expired, Please login",
+            statusMessage: S.current.authSessionExpired,
             op: Operation.failure,
           ),
         );
@@ -84,6 +87,18 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     on<_Register>(_register);
     on<_Logout>(_logout);
     on<_UpdateProfile>(_updateProfile);
+    on<_GetProfile>(_getProfile);
+  }
+
+  bool isProfileNull() {
+    return state.user == null ||
+        (state.user?.gender == null ||
+            state.user?.activityLevel == null ||
+            state.user?.isSmoker == null ||
+            state.user?.hasDiabetes == null ||
+            state.user?.hasHypertension == null ||
+            state.user?.occupation == null ||
+            state.user?.drinksAlcohol == null);
   }
 
   Future<void> _login(_Login event, Emitter<AuthState> emit) async {
@@ -98,7 +113,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
               auth: Auth.auth,
               token: r.data["data"]["access_token"],
               op: Operation.success,
-              statusMessage: "Logged in successfully!",
+              statusMessage: S.current.authLoggedInSuccess,
               user: User.fromJson(r.data["data"]["user"]),
             ),
           );
@@ -129,7 +144,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               op: Operation.success,
-              statusMessage: "Account created! check your email",
+              statusMessage: S.current.authAccountCreated,
               user: User(email: event.registerRequest.email),
             ),
           );
@@ -187,7 +202,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               op: Operation.success,
-              statusMessage: "Logged out successfully!",
+              statusMessage: S.current.authLoggedOut,
             ),
           );
           emit(AuthState.initial());
@@ -220,7 +235,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
           emit(
             state.copyWith(
               op: Operation.success,
-              statusMessage: "Profile Updated!",
+              statusMessage: S.current.authProfileUpdated,
               user: User.fromJson(r.data['data']),
             ),
           );
@@ -239,6 +254,13 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
         }
         break;
     }
+  }
+
+  FutureOr<void> _getProfile(_GetProfile event, Emitter<AuthState> emit) async {
+    final response = await _authRepo.viewProfile();
+    response.fold((_) {}, (response) {
+      emit(state.copyWith(user: User.fromJson(response.data["data"])));
+    });
   }
 
   @override

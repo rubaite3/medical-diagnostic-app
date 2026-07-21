@@ -5,8 +5,11 @@ part 'login_request.g.dart';
 
 @freezed
 sealed class LoginRequest with _$LoginRequest {
-  factory LoginRequest({required String email, required String password}) =
-      _LoginRequest;
+  factory LoginRequest({
+    required String email,
+    required String password,
+    @JsonKey(name: 'fcm_token') String? fcmToken,
+  }) = _LoginRequest;
 
   factory LoginRequest.fromJson(Map<String, dynamic> json) =>
       _$LoginRequestFromJson(json);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/consts/strings.dart';
+import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../../core/utils/utils.dart';
 import '../../../auth/controllers/auth_bloc/auth_bloc.dart';
 
@@ -23,7 +23,7 @@ class AccountScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: colorScheme.surface,
           appBar: AppBar(
-            title: const Text(SettingsStrings.accountTitle),
+            title: Text(S.of(context).accountTitle),
             centerTitle: true,
           ),
           body: Padding(
@@ -32,7 +32,7 @@ class AccountScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  SettingsStrings.signedUpWithGoogle,
+                  S.of(context).signedUpWithGoogle,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -45,7 +45,7 @@ class AccountScreen extends StatelessWidget {
                 const Divider(height: 32),
                 
                 Text(
-                  SettingsStrings.userIdLabel,
+                  S.of(context).userIdLabel,
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -65,7 +65,7 @@ class AccountScreen extends StatelessWidget {
                       color: colorScheme.primary,
                       onPressed: () {
                         Clipboard.setData(const ClipboardData(text: userId));
-                        Utils.showToast(context, message: "User ID copied");
+                        Utils.showToast(context, message: S.of(context).accountUserIdCopied);
                       },
                     ),
                   ],
@@ -75,7 +75,7 @@ class AccountScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     
-                    Utils.showToast(context, message: "Delete account feature is not available in the current API");
+                    Utils.showToast(context, message: S.of(context).accountDeleteUnavailable);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -83,7 +83,7 @@ class AccountScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          SettingsStrings.deleteAccount,
+                          S.of(context).deleteAccount,
                           style: theme.textTheme.bodyLarge?.copyWith(
                             color: theme.colorScheme.error,
                           ),
