@@ -18,6 +18,8 @@ _StartDiagnosisRequest _$StartDiagnosisRequestFromJson(
   assessmentFor: json['assessment_for'] as String? ?? "myself",
   isAlcoholic: json['is_alcoholic'] as bool?,
   patientJob: json['patient_job'] as String?,
+  birthDate: json['birth_date'] as String?,
+  modelName: json['model_name'] as String?,
 );
 
 Map<String, dynamic> _$StartDiagnosisRequestToJson(
@@ -32,6 +34,8 @@ Map<String, dynamic> _$StartDiagnosisRequestToJson(
   'assessment_for': instance.assessmentFor,
   'is_alcoholic': instance.isAlcoholic,
   'patient_job': instance.patientJob,
+  'birth_date': instance.birthDate,
+  'model_name': instance.modelName,
 };
 
 _StartDiagnosisResponse _$StartDiagnosisResponseFromJson(

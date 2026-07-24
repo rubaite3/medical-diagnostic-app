@@ -455,6 +455,16 @@ class S {
     return Intl.message('Age', name: 'ageHint', desc: '', args: []);
   }
 
+  /// `Occupation`
+  String get occupationHint {
+    return Intl.message(
+      'Occupation',
+      name: 'occupationHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Gender`
   String get genderHint {
     return Intl.message('Gender', name: 'genderHint', desc: '', args: []);
@@ -495,6 +505,16 @@ class S {
     return Intl.message(
       'Do you have hypertension?',
       name: 'hypertensionQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do you drink alcohol?`
+  String get alcoholQuestion {
+    return Intl.message(
+      'Do you drink alcohol?',
+      name: 'alcoholQuestion',
       desc: '',
       args: [],
     );
@@ -655,10 +675,10 @@ class S {
     return Intl.message('Account', name: 'accountTitle', desc: '', args: []);
   }
 
-  /// `You have signed up with Google:`
+  /// `You have signed up with Email:`
   String get signedUpWithGoogle {
     return Intl.message(
-      'You have signed up with Google:',
+      'You have signed up with Email:',
       name: 'signedUpWithGoogle',
       desc: '',
       args: [],
@@ -825,6 +845,46 @@ class S {
     return Intl.message(
       'Smoking status is a key factor in many health conditions.',
       name: 'diagnosisSmokerSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is your date of birth?`
+  String get diagnosisBirthDateTitle {
+    return Intl.message(
+      'What is your date of birth?',
+      name: 'diagnosisBirthDateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your age helps us provide more accurate assessments.`
+  String get diagnosisBirthDateSubtitle {
+    return Intl.message(
+      'Your age helps us provide more accurate assessments.',
+      name: 'diagnosisBirthDateSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap to select your birth date`
+  String get diagnosisBirthDateHint {
+    return Intl.message(
+      'Tap to select your birth date',
+      name: 'diagnosisBirthDateHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must select your birth date!`
+  String get diagMustEnterBirthDate {
+    return Intl.message(
+      'You must select your birth date!',
+      name: 'diagMustEnterBirthDate',
       desc: '',
       args: [],
     );

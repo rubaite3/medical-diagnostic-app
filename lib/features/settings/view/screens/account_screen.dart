@@ -12,12 +12,11 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         final userEmail = state.user?.email ?? "Not logged in";
-        
+
         const String userId = "d34ac463-c0d3-40a1-b094-8cd034b5eb1b";
 
         return Scaffold(
@@ -40,10 +39,12 @@ class AccountScreen extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text(
                   userEmail,
-                  style: theme.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const Divider(height: 32),
-                
+
                 Text(
                   S.of(context).userIdLabel,
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -55,27 +56,29 @@ class AccountScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Text(
-                        userId,
-                        style: theme.textTheme.bodyMedium,
-                      ),
+                      child: Text(userId, style: theme.textTheme.bodyMedium),
                     ),
                     IconButton(
                       icon: const Icon(Icons.copy, size: 20),
                       color: colorScheme.primary,
                       onPressed: () {
                         Clipboard.setData(const ClipboardData(text: userId));
-                        Utils.showToast(context, message: S.of(context).accountUserIdCopied);
+                        Utils.showToast(
+                          context,
+                          message: S.of(context).accountUserIdCopied,
+                        );
                       },
                     ),
                   ],
                 ),
                 const Divider(height: 32),
-                
+
                 InkWell(
                   onTap: () {
-                    
-                    Utils.showToast(context, message: S.of(context).accountDeleteUnavailable);
+                    Utils.showToast(
+                      context,
+                      message: S.of(context).accountDeleteUnavailable,
+                    );
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -88,7 +91,10 @@ class AccountScreen extends StatelessWidget {
                             color: theme.colorScheme.error,
                           ),
                         ),
-                        Icon(Icons.delete_outline, color: theme.colorScheme.error),
+                        Icon(
+                          Icons.delete_outline,
+                          color: theme.colorScheme.error,
+                        ),
                       ],
                     ),
                   ),

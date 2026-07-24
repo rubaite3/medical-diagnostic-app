@@ -131,6 +131,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagMustChooseGender": MessageLookupByLibrary.simpleMessage(
       "Sie müssen ein Geschlecht auswählen!",
     ),
+    "diagMustEnterBirthDate": MessageLookupByLibrary.simpleMessage(
+      "Sie müssen Ihr Geburtsdatum auswählen!",
+    ),
     "diagMustEnterOccupation": MessageLookupByLibrary.simpleMessage(
       "Sie müssen einen Beruf eingeben!",
     ),
@@ -170,6 +173,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosisAlcoholTitle": MessageLookupByLibrary.simpleMessage(
       "Trinken Sie Alkohol?",
+    ),
+    "diagnosisBirthDateHint": MessageLookupByLibrary.simpleMessage(
+      "Tippen Sie, um Ihr Geburtsdatum auszuwählen",
+    ),
+    "diagnosisBirthDateSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Ihr Alter hilft uns, genauere Bewertungen zu geben.",
+    ),
+    "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
+      "Was ist Ihr Geburtsdatum?",
     ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "Diagnosedetails",

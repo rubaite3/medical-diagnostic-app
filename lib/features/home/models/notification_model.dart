@@ -6,14 +6,16 @@ part 'notification_model.g.dart';
 @freezed
 sealed class NotificationModel with _$NotificationModel {
   factory NotificationModel({
-    String? id,
-    String? type,
+    int? id,
     String? title,
     String? message,
+    String? type,
+    @JsonKey(name: "notifiable_type") String? notifiableType,
+    @JsonKey(name: "notifiable_id") int? notifiableId,
     String? data,
-    @JsonKey(name: "is_read") bool? isRead,
     @JsonKey(name: "read_at") String? readAt,
-    @JsonKey(name: "user_id") String? userId,
+    @JsonKey(name: "created_at") String? createdAt,
+    @JsonKey(name: "updated_at") String? updatedAt,
   }) = _NotificationModel;
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) =>

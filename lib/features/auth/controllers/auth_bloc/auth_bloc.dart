@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -29,7 +28,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       if (event.runtimeType != _AuthLoading) {
         GetIt.instance<LoaderCubit>().hide();
       }
-    }, transformer: droppable());
+    });
     on<_CheckConnectivity>((event, emit) {
       _connectivityTimer = Timer.periodic(Duration(seconds: 30), (_) async {
         await _checkConnection();
@@ -41,6 +40,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       emit(state.copyWith(auth: Auth.loading));
     }));
     on<_ConnectivityToggeled>((event, emit) async {
+      {}
       if (!event.isOnline) {
         emit(
           state.copyWith(
@@ -103,6 +103,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
 
   Future<void> _login(_Login event, Emitter<AuthState> emit) async {
     GetIt.instance<LoaderCubit>().show();
+    add(AuthEvent.authLoading());
     final res = await _authRepo.login(event.loginRequest);
     GetIt.instance<LoaderCubit>().hide();
     switch (res) {
@@ -179,16 +180,18 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   }
 
   Future<void> _checkAuth() async {
-    final res = await _authRepo.checkAuthState();
-    switch (res) {
-      case Right():
-        if (!state.auth.isAuth) {
-          add(_AuthToggeled(state.user));
-        }
-      case Left(value: final l):
-        if (l.statusCode == 401 && !state.auth.isGuest) {
-          add(const _AuthToggeled(null));
-        }
+    if (!state.op.isLoading) {
+      final res = await _authRepo.checkAuthState();
+      switch (res) {
+        case Right():
+          if (!state.auth.isAuth) {
+            add(_AuthToggeled(state.user));
+          }
+        case Left(value: final l):
+          if (l.statusCode == 401 && !state.auth.isGuest) {
+            add(const _AuthToggeled(null));
+          }
+      }
     }
   }
 
@@ -257,7 +260,9 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> _getProfile(_GetProfile event, Emitter<AuthState> emit) async {
+    GetIt.instance<LoaderCubit>().show();
     final response = await _authRepo.viewProfile();
+    GetIt.instance<LoaderCubit>().hide();
     response.fold((_) {}, (response) {
       emit(state.copyWith(user: User.fromJson(response.data["data"])));
     });

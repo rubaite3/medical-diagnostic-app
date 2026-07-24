@@ -19,10 +19,11 @@ class FullReportCubit extends Cubit<FullReportState> {
   final DiagnosisRepo repo;
 
   Future<void> loadReport() async {
-    GetIt.instance<LoaderCubit>().show();
+    emit(
+      state.copyWith(status: ReportStatus.loading, statusMessage: "loading"),
+    );
 
     final result = await repo.getReport(sessionId);
-    GetIt.instance<LoaderCubit>().hide();
     result.fold(
       (error) {
         emit(

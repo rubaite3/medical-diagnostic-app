@@ -3,6 +3,7 @@ import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth
 import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/repos/diagnosis_repo.dart';
+import 'package:medical_diagnostic_app1/features/home/controllers/notifications_cubit/notifications_cubit.dart';
 
 import '../controllers/loader_cubit/loader_cubit.dart';
 import '../controllers/locale_cubit/locale_cubit.dart';
@@ -23,4 +24,7 @@ void initGetIt() {
     () => DiagnosisCubit(repo: _instance<DiagnosisRepo>()),
   );
   _instance.registerSingleton<LocaleCubit>(LocaleCubit());
+  _instance.registerLazySingleton<NotificationsCubit>(
+    () => NotificationsCubit(),
+  );
 }

@@ -1,13 +1,26 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:medical_diagnostic_app1/features/home/controllers/notifications_cubit/notifications_cubit.dart';
+
+import 'core/services/cloudflare_provider.dart';
 import "main_exports.dart";
 import 'package:firebase_core/firebase_core.dart';
+import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
 import 'package:medical_diagnostic_app1/core/services/notification_service.dart';
 import 'package:medical_diagnostic_app1/core/services/fcm_service.dart';
+import 'package:medical_diagnostic_app1/core/services/stripe_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   await Firebase.initializeApp();
   await NotificationService.instance.init();
   await FcmService.instance.init();
+  await StripeService.instance.init(dotenv.get("STRIPE_KEY"));
+
+  CloudflareProvider.init(
+    accID: dotenv.get("CLOUDFLARE_ACCOUNT_ID"),
+    apiK: dotenv.get("CLOUDFLARE_API_KEY"),
+  );
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorageDirectory.web
@@ -28,6 +41,7 @@ class MyApp extends StatelessWidget {
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
         BlocProvider.value(value: GetIt.instance<DiagnosisCubit>()),
         BlocProvider.value(value: GetIt.instance<LocaleCubit>()),
+        BlocProvider.value(value: GetIt.instance<NotificationsCubit>()),
       ],
       child: BlocBuilder<LocaleCubit, LocaleState>(
         builder: (context, state) => MaterialApp.router(
@@ -63,8 +77,9 @@ class MyApp extends StatelessWidget {
                 children: [
                   ?child,
                   BlocConsumer<LoaderCubit, LoaderState>(
-                    builder: (context, state) =>
-                        LoadingOverlay(isLoading: state.isLoading),
+                    builder: (context, state) => !state.isLoading
+                        ? SizedBox()
+                        : LoadingOverlay(isLoading: state.isLoading),
                     listenWhen: (previous, current) => current.message != null,
                     listener: (BuildContext context, LoaderState state) {
                       Utils.showToast(context, message: state.message!);

@@ -118,7 +118,7 @@ class _FullReportScreenState extends State<FullReportScreen> {
           bloc: _fullReportCubit,
           builder: (context, state) {
             final report = state.finalReport;
-            if (context.read<LoaderCubit>().state.isLoading) {
+            if (state.status == ReportStatus.loading) {
               return Center(child: CircularProgressIndicator());
             } else if (report == null) {
               return DiagnosisErrorWidget(

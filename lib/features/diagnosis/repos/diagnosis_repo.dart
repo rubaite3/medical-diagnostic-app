@@ -6,17 +6,15 @@ import 'package:medical_diagnostic_app1/core/api/app_error.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/api/dio_client.dart';
 import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
-import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
 import 'package:medical_diagnostic_app1/main_exports.dart';
-import 'package:path_provider/path_provider.dart';
 
 class DiagnosisRepo {
   DiagnosisRepo() {
     dioTimeoutInstance = dioInstance;
-    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 25);
-    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 25);
-    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 25);
+    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 45);
+    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 45);
+    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 45);
   }
   Future<Either<AppError, AppResponse>> startDiagnosis(
     StartDiagnosisRequest request,
@@ -28,10 +26,13 @@ class DiagnosisRepo {
     return Utils.mapStatusCodeToResponse(response);
   }
 
-  Future<Either<AppError, AppResponse>> searchSymptoms(String query) async {
+  Future<Either<AppError, AppResponse>> searchSymptoms(
+    String query, {
+    String modelName = '',
+  }) async {
     final response = await dioTimeoutInstance.get(
       ApiConsts.diagnosisSearchSymptoms,
-      queryParameters: {'q': query},
+      queryParameters: {'q': query, 'model_name': modelName},
     );
     return Utils.mapStatusCodeToResponse(response);
   }
@@ -122,6 +123,27 @@ class DiagnosisRepo {
     }
 
     return Right(filePath);
+  }
+
+  Future<Either<AppError, AppResponse>> createPaymentIntent(
+    String sessionId,
+  ) async {
+    final response = await dioTimeoutInstance.post(
+      ApiConsts.createPaymentIntent,
+      data: {'session_hash': sessionId},
+    );
+
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
+  Future<Either<AppError, AppResponse>> getPaymentStatus(
+    String sessionId,
+  ) async {
+    final response = await dioTimeoutInstance.get(
+      "${ApiConsts.payments}/$sessionId/status",
+    );
+
+    return Utils.mapStatusCodeToResponse(response);
   }
 
   late final Dio dioTimeoutInstance;

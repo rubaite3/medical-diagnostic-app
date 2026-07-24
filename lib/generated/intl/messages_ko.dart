@@ -101,6 +101,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagMustChooseGender": MessageLookupByLibrary.simpleMessage(
       "성별을 선택해야 합니다!",
     ),
+    "diagMustEnterBirthDate": MessageLookupByLibrary.simpleMessage(
+      "생년월일을 선택해야 합니다!",
+    ),
     "diagMustEnterOccupation": MessageLookupByLibrary.simpleMessage(
       "직업을 입력해야 합니다!",
     ),
@@ -133,6 +136,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "음주는 여러 건강 상태에 영향을 줄 수 있습니다.",
     ),
     "diagnosisAlcoholTitle": MessageLookupByLibrary.simpleMessage("술을 드시나요?"),
+    "diagnosisBirthDateHint": MessageLookupByLibrary.simpleMessage(
+      "탭하여 생년월일 선택",
+    ),
+    "diagnosisBirthDateSubtitle": MessageLookupByLibrary.simpleMessage(
+      "나이는 더 정확한 평가를 제공하는 데 도움이 됩니다.",
+    ),
+    "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
+      "생년월일이 어떻게 되나요?",
+    ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage("진단 세부정보"),
     "diagnosisDiabetesSubtitle": MessageLookupByLibrary.simpleMessage(
       "당뇨병 진단을 받은 적이 있는지 알려주세요.",

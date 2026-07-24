@@ -2,15 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
+import 'package:medical_diagnostic_app1/core/services/stripe_service.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/controllers/payment_cubit/payment_cubit.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
 
 import '../../../../core/utils/utils.dart';
 
-class DiagnosisPaymentScreen extends StatelessWidget {
-  const DiagnosisPaymentScreen({super.key});
+class DiagnosisPaymentScreen extends StatefulWidget {
+  const DiagnosisPaymentScreen({super.key, required this.sessionId});
+  final String sessionId;
+
+  @override
+  State<DiagnosisPaymentScreen> createState() => _DiagnosisPaymentScreenState();
+}
+
+class _DiagnosisPaymentScreenState extends State<DiagnosisPaymentScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _paymentCubit = PaymentCubit(widget.sessionId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,28 +102,28 @@ class DiagnosisPaymentScreen extends StatelessWidget {
               const Spacer(),
 
               // Stripe Payment Button
-              BlocConsumer<DiagnosisCubit, DiagnosisState>(
+              BlocConsumer<PaymentCubit, PaymentState>(
+                bloc: _paymentCubit,
                 builder: (context, state) {
                   return _StripePayButton(
                     isLoading: state.op.isLoading,
-                    onPressed: () async {
-                      // TODO: Integrate Stripe SDK here.
-                      // On successful payment, call getReport then navigate.
+                    onPressed: () {
+                      _paymentCubit.createPaymentIntent();
                     },
                   );
                 },
-                listener: (BuildContext context, DiagnosisState state) {
-                  Utils.showToast(
-                    context,
-                    message: state.statusMessage,
-                    level: -1,
-                  );
+                listener: (BuildContext context, PaymentState state) {
+                  if (state.statusMessage.isNotEmpty) {
+                    Utils.showToast(
+                      context,
+                      message: state.statusMessage,
+                      level: Utils.mapOp(state.op),
+                    );
+                  }
                   if (state.op.isSuccess) {
-                    final String sessionId =
-                        context.read<DiagnosisCubit>().state.sessionId ?? "";
                     context.goNamed(
                       RoutePaths.fullReport,
-                      queryParameters: {'sessionId': sessionId},
+                      queryParameters: {"sessionId": widget.sessionId},
                     );
                   }
                 },
@@ -142,6 +156,8 @@ class DiagnosisPaymentScreen extends StatelessWidget {
       ),
     );
   }
+
+  late final PaymentCubit _paymentCubit;
 }
 
 class _StripePayButton extends StatelessWidget {

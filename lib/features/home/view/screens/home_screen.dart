@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
+import 'package:medical_diagnostic_app1/features/diagnosis/models/diagnosis_models.dart';
+import 'package:medical_diagnostic_app1/features/home/controllers/notifications_cubit/notifications_cubit.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/main_exports.dart';
 import '../../../../core/navigation/route_paths.dart';
 import '../../../auth/controllers/auth_bloc/auth_bloc.dart';
 import '../widgets/home_widgets.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<NotificationsCubit>().countUnreadNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +45,27 @@ class HomeScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8),
-                      child: Badge(
-                        label: const Text("2"),
-                        isLabelVisible: true,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.notifications_outlined,
-                            color: colorScheme.onSurface,
+                      child:
+                          BlocSelector<
+                            NotificationsCubit,
+                            NotificationsState,
+                            int
+                          >(
+                            selector: (state) => state.notificationCount,
+                            builder: (context, state) => Badge(
+                              label: Text(state.toString()),
+                              isLabelVisible: state > 0,
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.notifications_outlined,
+                                  color: colorScheme.onSurface,
+                                ),
+                                onPressed: () {
+                                  context.pushNamed(RoutePaths.notifications);
+                                },
+                              ),
+                            ),
                           ),
-                          onPressed: () {
-                            context.pushNamed(RoutePaths.notifications);
-                          },
-                        ),
-                      ),
                     ),
                   ),
                   const Spacer(flex: 1),
@@ -90,7 +112,7 @@ class HomeScreen extends StatelessWidget {
                         if (context.read<AuthBloc>().isProfileNull()) {
                           context.pushNamed(RoutePaths.baselineGender);
                         } else {
-                          context.read<DiagnosisCubit>().startDiagnosis();
+                          context.goNamed(RoutePaths.availableLLms);
                         }
                       },
                     ),

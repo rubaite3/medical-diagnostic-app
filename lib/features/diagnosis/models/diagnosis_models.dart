@@ -15,6 +15,8 @@ abstract class StartDiagnosisRequest with _$StartDiagnosisRequest {
     @Default("myself") @JsonKey(name: 'assessment_for') String assessmentFor,
     @JsonKey(name: 'is_alcoholic') bool? isAlcoholic,
     @JsonKey(name: 'patient_job') String? patientJob,
+    @JsonKey(name: 'birth_date') String? birthDate,
+    @JsonKey(name: 'model_name') String? modelName,
   }) = _StartDiagnosisRequest;
 
   factory StartDiagnosisRequest.fromJson(Map<String, dynamic> json) =>

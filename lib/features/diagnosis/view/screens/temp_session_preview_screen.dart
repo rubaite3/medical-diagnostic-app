@@ -29,11 +29,14 @@ class _TempSessionPreviewScreenState extends State<TempSessionPreviewScreen> {
     if (sessionId.isEmpty) return;
 
     setState(() => _loading = true);
-    context.read<DiagnosisCubit>().setSessionId(sessionId);
-    await context.read<DiagnosisCubit>().getReport();
+    // context.read<DiagnosisCubit>().setSessionId(sessionId);
+    // await context.read<DiagnosisCubit>().getReport();
     if (mounted) {
       setState(() => _loading = false);
-      context.goNamed(RoutePaths.fullReport);
+      context.goNamed(
+        RoutePaths.diagnosisPayment,
+        queryParameters: {'sessionId': sessionId},
+      );
     }
   }
 

@@ -19,9 +19,11 @@ class RoutePaths {
   static const baselineDiabetes = '/diagnosis/baseline/diabetes';
   static const baselineHypertension = '/diagnosis/baseline/hypertension';
   static const baselinePregnant = '/diagnosis/baseline/pregnant';
+  static const baselineBirthDate = '/diagnosis/baseline/birthDate';
   static const baselineOccupation = '/diagnosis/baseline/occupation';
   static const baselineAlcohol = '/diagnosis/baseline/alcohol';
 
+  static const availableLLms = '/llms';
   static const symptomSearch = '/diagnosis/symptoms';
   static const symptomQuestions = '/diagnosis/symptomQuestions';
   static const followUpQuestions = '/diagnosis/followUp';

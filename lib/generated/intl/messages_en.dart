@@ -42,6 +42,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adviceLabel": MessageLookupByLibrary.simpleMessage("Advice"),
     "ageHint": MessageLookupByLibrary.simpleMessage("Age"),
+    "alcoholQuestion": MessageLookupByLibrary.simpleMessage(
+      "Do you drink alcohol?",
+    ),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account? ",
     ),
@@ -125,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagMustChooseGender": MessageLookupByLibrary.simpleMessage(
       "You must Choose a gender!",
     ),
+    "diagMustEnterBirthDate": MessageLookupByLibrary.simpleMessage(
+      "You must select your birth date!",
+    ),
     "diagMustEnterOccupation": MessageLookupByLibrary.simpleMessage(
       "You must enter your occupation!",
     ),
@@ -164,6 +170,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosisAlcoholTitle": MessageLookupByLibrary.simpleMessage(
       "Do you drink alcohol?",
+    ),
+    "diagnosisBirthDateHint": MessageLookupByLibrary.simpleMessage(
+      "Tap to select your birth date",
+    ),
+    "diagnosisBirthDateSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Your age helps us provide more accurate assessments.",
+    ),
+    "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
+      "What is your date of birth?",
     ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "Diagnosis Details",
@@ -305,6 +320,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "No symptoms selected yet.",
     ),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "occupationHint": MessageLookupByLibrary.simpleMessage("Occupation"),
     "onboardingButton": MessageLookupByLibrary.simpleMessage("Continue"),
     "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
       "Answer an intelligent questionnaire powered by AI to determine your symptoms accurately.",
@@ -434,7 +450,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "signUpTitle": MessageLookupByLibrary.simpleMessage("Create Account"),
     "signedUpWithGoogle": MessageLookupByLibrary.simpleMessage(
-      "You have signed up with Google:",
+      "You have signed up with Email:",
     ),
     "smokerQuestion": MessageLookupByLibrary.simpleMessage("Are you a smoker?"),
     "someErrorOccurred": MessageLookupByLibrary.simpleMessage(

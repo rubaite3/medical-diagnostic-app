@@ -29,4 +29,14 @@ class ApiConsts {
   static final diagnosisFollowUpAnswer = "$baseUrl/follow-up/answer";
   static final diagnosisReport = "$baseUrl/reports";
   static final diagnosisHistory = "$baseUrl/diagnose/history";
+
+  // Notifications
+  static final notifications = "$baseUrl/notifications";
+  static final markAllAsRead = "$notifications/mark-all-as-read";
+  static final removeAllNotifications = "$notifications/destroy-all";
+  static final countUnread = "$notifications/count-unread";
+
+  // Stripe
+  static final payments = "$baseUrl/payments";
+  static final createPaymentIntent = "$payments/create-intent";
 }

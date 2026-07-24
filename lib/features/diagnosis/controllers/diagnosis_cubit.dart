@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/core/enums/enums.dart';
 import 'package:medical_diagnostic_app1/core/services/notification_service.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -23,6 +24,10 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     emit(state.copyWith(sessionId: sessionId));
   }
 
+  void setStripeClientSecret(String? clientSecret) {
+    emit(state.copyWith(clientSecret: clientSecret));
+  }
+
   void clearSearch() {
     emit(
       state.copyWith(
@@ -42,6 +47,8 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     bool? isPregnant,
     bool? isAlcoholic,
     String? patientJob,
+    String? birthDate,
+    String? modelName,
   }) {
     emit(
       state.copyWith(
@@ -53,22 +60,38 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
         isPregnant: isPregnant ?? state.isPregnant,
         isAlcoholic: isAlcoholic ?? state.isAlcoholic,
         patientJob: patientJob ?? state.patientJob,
+        birthDate: birthDate ?? state.birthDate,
+
+        modelName: modelName,
       ),
     );
   }
 
-  Future<void> startDiagnosis() async {
-    final request = StartDiagnosisRequest(
-      gender: state.gender ?? "male",
-      isSmoker: state.isSmoker,
-      hasDiabetes: state.hasDiabetes,
-      hasHypertension: state.hasHypertension,
-      isPregnant: state.isPregnant,
-      activityLevel: state.activityLevel ?? "moderate",
-      assessmentFor: "myself",
-      isAlcoholic: state.isAlcoholic,
-      patientJob: state.patientJob,
-    );
+  Future<void> startDiagnosis({
+    StartDiagnosisRequest? startDiagnosisRequest,
+  }) async {
+    String? formattedBirthDate;
+    if (state.birthDate != null && state.birthDate!.isNotEmpty) {
+      formattedBirthDate = DateFormat(
+        'MM/dd/yyyy',
+      ).format(DateTime.parse(state.birthDate!));
+    }
+
+    final request =
+        startDiagnosisRequest ??
+        StartDiagnosisRequest(
+          gender: state.gender ?? "male",
+          isSmoker: state.isSmoker,
+          hasDiabetes: state.hasDiabetes,
+          hasHypertension: state.hasHypertension,
+          isPregnant: state.isPregnant,
+          activityLevel: state.activityLevel ?? "moderate",
+          assessmentFor: "myself",
+          isAlcoholic: state.isAlcoholic,
+          patientJob: state.patientJob,
+          birthDate: formattedBirthDate,
+          modelName: state.modelName,
+        );
     GetIt.instance<LoaderCubit>().show(message: S.current.diagStarting);
 
     final result = await _repo.startDiagnosis(request);
@@ -85,16 +108,25 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
         emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
       },
       (response) {
-        final data = StartDiagnosisResponse.fromJson(
-          Map<String, dynamic>.from(response.data["data"]["data"]),
-        );
-        emit(
-          state.copyWith(
-            op: Operation.success,
-            statusMessage: S.current.diagSessionStarted,
-            sessionId: data.sessionId,
-          ),
-        );
+        if (response.data["data"]["data"] == null) {
+          emit(
+            state.copyWith(
+              op: Operation.failure,
+              statusMessage: S.current.errorGeneral,
+            ),
+          );
+        } else {
+          final data = StartDiagnosisResponse.fromJson(
+            Map<String, dynamic>.from(response.data["data"]["data"]),
+          );
+          emit(
+            state.copyWith(
+              op: Operation.success,
+              statusMessage: S.current.diagSessionStarted,
+              sessionId: data.sessionId,
+            ),
+          );
+        }
         emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
       },
     );
@@ -112,7 +144,10 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
       ),
     );
 
-    final result = await _repo.searchSymptoms(query);
+    final result = await _repo.searchSymptoms(
+      query,
+      modelName: state.modelName ?? '',
+    );
     result.fold(
       (error) {
         emit(
@@ -285,6 +320,32 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
           ),
         );
         emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+      },
+    );
+  }
+
+  Future<void> createPaymentIntent() async {
+    if (state.sessionId == null) return;
+    emit(state.copyWith(op: Operation.loading, statusMessage: ""));
+    final result = await _repo.createPaymentIntent(state.sessionId!);
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            op: Operation.failure,
+            statusMessage: error.errorMessage,
+          ),
+        );
+        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+      },
+      (clientSecret) {
+        emit(
+          state.copyWith(
+            op: Operation.neutral,
+            // clientSecret: clientSecret,
+            statusMessage: "",
+          ),
+        );
       },
     );
   }

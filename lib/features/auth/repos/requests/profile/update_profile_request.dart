@@ -14,8 +14,8 @@ sealed class UpdateProfileRequest with _$UpdateProfileRequest {
     @JsonKey(includeIfNull: false, name: "birth_date") DateTime? birthDate,
     @JsonKey(includeIfNull: false) String? gender,
     @JsonKey(includeIfNull: false, name: "is_smoker") bool? isSmoker,
-    String? occupation,
-    @JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,
+    @JsonKey(includeIfNull: false) String? occupation,
+    @JsonKey(includeIfNull: false, name: "drinks_alcohol") bool? drinksAlcohol,
 
     @JsonKey(includeIfNull: false, name: "has_diabetes") bool? hasDiabetes,
     @JsonKey(includeIfNull: false, name: "has_hypertension")
@@ -56,6 +56,9 @@ extension UpdateProfileRequestX on UpdateProfileRequest {
     }
     if (isPregnant != null) {
       map['is_pregnant'] = isPregnant! ? 1 : 0;
+    }
+    if (drinksAlcohol != null) {
+      map['drinks_alcohol'] = drinksAlcohol! ? 1 : 0;
     }
     debugPrint(map.toString());
     return FormData.fromMap(map);

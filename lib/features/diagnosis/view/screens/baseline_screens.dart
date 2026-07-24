@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -93,7 +94,7 @@ class GenderSelectionScreen extends StatelessWidget {
                 level: -1,
               );
             } else {
-              context.pushNamed(RoutePaths.baselineOccupation);
+              context.pushNamed(RoutePaths.baselineBirthDate);
             }
           },
           content: Column(
@@ -121,7 +122,123 @@ class GenderSelectionScreen extends StatelessWidget {
   }
 }
 
-// 1b. Occupation Screen (text input)
+// 1b. Birth Date Screen (date picker)
+class BirthDateScreen extends StatelessWidget {
+  const BirthDateScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+      builder: (context, state) {
+        final displayDate =
+            state.birthDate != null && state.birthDate!.isNotEmpty
+            ? DateFormat('MM/dd/yyyy').format(DateTime.parse(state.birthDate!))
+            : "";
+
+        return BaselineStepScreen(
+          title: S.of(context).diagnosisBirthDateTitle,
+          subtitle: S.of(context).diagnosisBirthDateSubtitle,
+          icon: Icons.cake_outlined,
+          onNext: () {
+            if (state.birthDate == null || state.birthDate!.isEmpty) {
+              Utils.showToast(
+                context,
+                message: S.of(context).diagMustEnterBirthDate,
+                level: -1,
+              );
+            } else {
+              context.pushNamed(RoutePaths.baselineOccupation);
+            }
+          },
+          content: GestureDetector(
+            onTap: () async {
+              final theme = Theme.of(context);
+              final DateTime? picked = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now().subtract(
+                  const Duration(days: 365 * 25),
+                ),
+                firstDate: DateTime(1920),
+                lastDate: DateTime.now(),
+                builder: (context, child) {
+                  return Theme(
+                    data: theme.copyWith(colorScheme: theme.colorScheme),
+                    child: child!,
+                  );
+                },
+              );
+              if (picked != null) {
+                context.read<DiagnosisCubit>().updateBaseline(
+                  birthDate: picked.toIso8601String(),
+                );
+              }
+            },
+            child: FittedBox(
+              fit: BoxFit.contain,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.9,
+                padding: const EdgeInsets.all(16),
+
+                decoration: BoxDecoration(
+                  color: colorScheme.surface,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: displayDate.isNotEmpty
+                        ? colorScheme.primary
+                        : colorScheme.outline.withValues(alpha: 0.2),
+                    width: displayDate.isNotEmpty ? 1.5 : 1.0,
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today_outlined,
+                      color: displayDate.isNotEmpty
+                          ? colorScheme.primary
+                          : colorScheme.onSurfaceVariant,
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Text(
+                        displayDate.isNotEmpty
+                            ? displayDate
+                            : S.of(context).diagnosisBirthDateHint,
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: displayDate.isNotEmpty
+                              ? colorScheme.onSurface
+                              : colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+                    if (displayDate.isNotEmpty)
+                      GestureDetector(
+                        onTap: () {
+                          context.read<DiagnosisCubit>().updateBaseline(
+                            birthDate: "",
+                          );
+                        },
+                        child: Icon(
+                          Icons.close,
+                          size: 18,
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// 1c. Occupation Screen (text input)
 class OccupationScreen extends StatefulWidget {
   const OccupationScreen({super.key});
 
@@ -171,7 +288,7 @@ class _OccupationScreenState extends State<OccupationScreen> {
             ),
             child: TextField(
               controller: _controller,
-              textInputAction: TextInputAction.next,
+              textInputAction: TextInputAction.done,
               decoration: InputDecoration(
                 hintText: S.of(context).diagnosisOccupationHint,
                 prefixIcon: const Icon(Icons.work_outline_rounded),
@@ -336,7 +453,7 @@ class HypertensionSelectionScreen extends StatelessWidget {
           level: Utils.mapOp(state.op),
         );
         if (state.op.isSuccess) {
-          context.goNamed(RoutePaths.symptomSearch);
+          context.goNamed(RoutePaths.availableLLms);
           context.read<AuthBloc>().add(AuthEvent.getProfile());
         }
       },
@@ -381,7 +498,7 @@ class PregnancySelectionScreen extends StatelessWidget {
           level: Utils.mapOp(state.op),
         );
         if (state.op.isSuccess) {
-          context.goNamed(RoutePaths.symptomSearch);
+          context.goNamed(RoutePaths.availableLLms);
           context.read<AuthBloc>().add(AuthEvent.getProfile());
         }
       },

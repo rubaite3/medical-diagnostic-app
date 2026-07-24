@@ -17,8 +17,10 @@ abstract class DiagnosisState with _$DiagnosisState {
     @Default(false) bool isPregnant,
     @Default(false) bool? isAlcoholic,
     @Default("") String? patientJob,
+    @Default("") String? birthDate,
 
     String? sessionId,
+    String? modelName,
     @Default(Operation.neutral) Operation searchOp,
     @Default([]) List<Symptom> searchResults,
     @Default([]) List<Question> currentQuestions,
@@ -28,5 +30,7 @@ abstract class DiagnosisState with _$DiagnosisState {
     FinalReport? finalReport,
 
     @Default(0.0) double downloadProgress,
+
+    String? clientSecret,
   }) = _DiagnosisState;
 }

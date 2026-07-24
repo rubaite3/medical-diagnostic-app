@@ -1,3 +1,5 @@
+import "package:medical_diagnostic_app1/features/diagnosis/view/screens/available_llms_screen.dart";
+
 import "app_router_exports.dart";
 
 class AppRouter {
@@ -98,6 +100,11 @@ class AppRouter {
                         const TempSessionPreviewScreen(),
                   ),
                   GoRoute(
+                    name: RoutePaths.availableLLms,
+                    path: RoutePaths.availableLLms,
+                    builder: (context, state) => const AvailableLlmsScreen(),
+                  ),
+                  GoRoute(
                     name: RoutePaths.notifications,
                     path: RoutePaths.notifications,
                     builder: (context, state) => const NotificationsScreen(),
@@ -106,6 +113,11 @@ class AppRouter {
                     name: RoutePaths.baselineGender,
                     path: RoutePaths.baselineGender,
                     builder: (context, state) => GenderSelectionScreen(),
+                  ),
+                  GoRoute(
+                    name: RoutePaths.baselineBirthDate,
+                    path: RoutePaths.baselineBirthDate,
+                    builder: (context, state) => BirthDateScreen(),
                   ),
                   GoRoute(
                     name: RoutePaths.baselineOccupation,
@@ -169,7 +181,11 @@ class AppRouter {
                   GoRoute(
                     name: RoutePaths.diagnosisPayment,
                     path: RoutePaths.diagnosisPayment,
-                    builder: (context, state) => DiagnosisPaymentScreen(),
+                    builder: (context, state) {
+                      final sessionId =
+                          state.uri.queryParameters["sessionId"] ?? "";
+                      return DiagnosisPaymentScreen(sessionId: sessionId);
+                    },
                   ),
                   GoRoute(
                     name: RoutePaths.fullReport,

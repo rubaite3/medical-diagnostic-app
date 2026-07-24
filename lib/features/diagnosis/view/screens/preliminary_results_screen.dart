@@ -110,8 +110,10 @@ class PreliminaryResultsScreen extends StatelessWidget {
 
                   CustomButton(
                     text: S.of(context).viewFullReportBtn,
-                    onPressed: () =>
-                        context.goNamed(RoutePaths.diagnosisPayment),
+                    onPressed: () => context.goNamed(
+                      RoutePaths.diagnosisPayment,
+                      queryParameters: {'sessionId': state.sessionId},
+                    ),
                   ),
                   const SizedBox(height: 12),
 

@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "adviceLabel": MessageLookupByLibrary.simpleMessage("النصيحة"),
     "ageHint": MessageLookupByLibrary.simpleMessage("العمر"),
+    "alcoholQuestion": MessageLookupByLibrary.simpleMessage("هل تشرب الكحول؟"),
     "alreadyHaveAccount": MessageLookupByLibrary.simpleMessage(
       "لديك حساب بالفعل؟ ",
     ),
@@ -123,6 +124,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagMustChooseGender": MessageLookupByLibrary.simpleMessage(
       "يجب أن تختار الجنس!",
     ),
+    "diagMustEnterBirthDate": MessageLookupByLibrary.simpleMessage(
+      "يجب اختيار تاريخ ميلادك!",
+    ),
     "diagMustEnterOccupation": MessageLookupByLibrary.simpleMessage(
       "يجب إدخال مهنتك!",
     ),
@@ -156,6 +160,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosisAlcoholTitle": MessageLookupByLibrary.simpleMessage(
       "هل تشرب الكحول؟",
+    ),
+    "diagnosisBirthDateHint": MessageLookupByLibrary.simpleMessage(
+      "اضغط لاختيار تاريخ ميلادك",
+    ),
+    "diagnosisBirthDateSubtitle": MessageLookupByLibrary.simpleMessage(
+      "يساعدنا عمرك في تقديم تقييمات أكثر دقة.",
+    ),
+    "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
+      "ما هو تاريخ ميلادك؟",
     ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "تفاصيل التشخيص",
@@ -287,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "لم يتم اختيار أي أعراض بعد.",
     ),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("الإشعارات"),
+    "occupationHint": MessageLookupByLibrary.simpleMessage("المهنة"),
     "onboardingButton": MessageLookupByLibrary.simpleMessage("متابعة"),
     "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
       "أجب على استبيان ذكي مدعوم بالذكاء الاصطناعي لتحديد أعراضك بدقة.",
@@ -410,7 +424,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signUpSubtitle": MessageLookupByLibrary.simpleMessage("سجل للبدء"),
     "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "signedUpWithGoogle": MessageLookupByLibrary.simpleMessage(
-      "لقد سجلت باستخدام جوجل:",
+      "لقد سجلت باستخدام الايميل:",
     ),
     "smokerQuestion": MessageLookupByLibrary.simpleMessage("هل أنت مدخن؟"),
     "someErrorOccurred": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
