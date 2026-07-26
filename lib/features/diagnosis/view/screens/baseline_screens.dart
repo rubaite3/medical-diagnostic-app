@@ -444,19 +444,7 @@ class HypertensionSelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DiagnosisCubit, DiagnosisState>(
-      listenWhen: (previous, current) => !current.op.isNeutral,
-      listener: (context, state) {
-        Utils.showToast(
-          context,
-          message: state.statusMessage,
-          level: Utils.mapOp(state.op),
-        );
-        if (state.op.isSuccess) {
-          context.goNamed(RoutePaths.availableLLms);
-          context.read<AuthBloc>().add(AuthEvent.getProfile());
-        }
-      },
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         final isFemale = state.gender == 'female';
         return BaselineStepScreen(
@@ -479,7 +467,7 @@ class HypertensionSelectionScreen extends StatelessWidget {
   }
 
   void _finish(BuildContext context) async {
-    context.read<DiagnosisCubit>().startDiagnosis();
+    context.goNamed(RoutePaths.availableLLms);
   }
 }
 
@@ -489,19 +477,7 @@ class PregnancySelectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DiagnosisCubit, DiagnosisState>(
-      listenWhen: (previous, current) => !current.op.isNeutral,
-      listener: (context, state) {
-        Utils.showToast(
-          context,
-          message: state.statusMessage,
-          level: Utils.mapOp(state.op),
-        );
-        if (state.op.isSuccess) {
-          context.goNamed(RoutePaths.availableLLms);
-          context.read<AuthBloc>().add(AuthEvent.getProfile());
-        }
-      },
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
       builder: (context, state) {
         return BaselineStepScreen(
           title: S.of(context).diagnosisPregnantTitle,
@@ -520,7 +496,7 @@ class PregnancySelectionScreen extends StatelessWidget {
   }
 
   void _finish(BuildContext context) async {
-    context.read<DiagnosisCubit>().startDiagnosis();
+    context.goNamed(RoutePaths.availableLLms);
   }
 }
 

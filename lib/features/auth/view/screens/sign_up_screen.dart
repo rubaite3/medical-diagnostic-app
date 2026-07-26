@@ -68,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   CustomTextField(
                     validator: (value) => value!.isEmpty
                         ? "Email must not be empty"
-                        : Utils.isEmail(value)
+                        : Utils.isEmail(value.trim())
                         ? null
                         : "Wrong email format",
                     hintText: S.of(context).hintEmail,
@@ -172,8 +172,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onTap: () {
                           context.goNamed(RoutePaths.login);
                         },
-                  child: Text(
-                    S.of(context).loginLink,
+                        child: Text(
+                          S.of(context).loginLink,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
@@ -221,10 +221,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
       context.read<AuthBloc>().add(
         AuthEvent.register(
           RegisterRequest(
-            email: _emailController.text,
-            name: _nameController.text,
-            password: _passController.text,
-            passwordConfirmation: _passController.text,
+            email: _emailController.text.trim(),
+            name: _nameController.text.trim(),
+            password: _passController.text.trim(),
+            passwordConfirmation: _passController.text.trim(),
           ),
         ),
       );

@@ -47,6 +47,19 @@ class _SessionHistoryScreenState extends State<SessionHistoryScreen> {
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
+        actions: [
+          BlocBuilder<SessionHistoryCubit, SessionHistoryState>(
+            bloc: _sessionHistoryCubit,
+            builder: (context, state) => IconButton(
+              onPressed: state.op.isLoading
+                  ? null
+                  : () {
+                      _sessionHistoryCubit.fetchSessions();
+                    },
+              icon: Icon(Icons.refresh_rounded),
+            ),
+          ),
+        ],
       ),
       body: BlocBuilder<SessionHistoryCubit, SessionHistoryState>(
         bloc: _sessionHistoryCubit,

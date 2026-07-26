@@ -2,7 +2,9 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/main_exports.dart';
 
+import '../../../../core/navigation/route_paths.dart';
 import '../../controllers/available_llms_cubit/available_llms_cubit.dart';
+import '../../controllers/diagnosis_state.dart';
 import '../../models/diagnosis_models.dart';
 
 class AvailableLlmsScreen extends StatefulWidget {
@@ -37,7 +39,22 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
             context.pop();
           },
         ),
-        title: const Text("Available LLMs"),
+        title: BlocListener<DiagnosisCubit, DiagnosisState>(
+          listenWhen: (previous, current) => !current.op.isNeutral,
+          listener: (context, state) {
+            Utils.showToast(
+              context,
+              message: state.statusMessage,
+              level: Utils.mapOp(state.op),
+            );
+            if (state.op.isSuccess) {
+              context.goNamed(RoutePaths.symptomSearch);
+              context.read<AuthBloc>().add(AuthEvent.getProfile());
+            }
+          },
+
+          child: const Text("Available LLMs"),
+        ),
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         elevation: 0,
@@ -174,41 +191,39 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _selectedLlm == null
-            ? null
-            : () {
-                final dCubit = context.read<DiagnosisCubit>();
-                final aUser = context.read<AuthBloc>().state.user;
-                context.read<DiagnosisCubit>().updateBaseline(
-                  modelName: _selectedLlm,
-                );
-                if ((dCubit.state.patientJob ?? "").isNotEmpty) {
-                  dCubit.startDiagnosis();
-                } else {
-                  dCubit.startDiagnosis(
-                    startDiagnosisRequest: StartDiagnosisRequest(
-                      gender: aUser?.gender ?? "",
-                      isSmoker: aUser?.isSmoker ?? false,
-                      hasDiabetes: aUser?.hasDiabetes ?? false,
-                      hasHypertension: aUser?.hasHypertension ?? false,
-                      activityLevel: aUser?.activityLevel ?? "",
-                      assessmentFor: "myself",
-                      birthDate: aUser?.birthDate == null
-                          ? null
-                          : DateFormat('MM/dd/yyyy').format(aUser!.birthDate!),
-                      isAlcoholic: aUser?.drinksAlcohol ?? false,
-                      isPregnant: aUser?.isPregnant ?? false,
-                      patientJob: aUser?.occupation ?? "",
-                      modelName: _selectedLlm,
-                    ),
-                  );
-                }
-                Utils.showToast(
-                  context,
-                  message: "Selected: $_selectedLlm",
-                  level: 1,
-                );
-              },
+        onPressed: () {
+          final dCubit = context.read<DiagnosisCubit>();
+          final aUser = context.read<AuthBloc>().state.user;
+          context.read<DiagnosisCubit>().updateBaseline(
+            modelName: _selectedLlm,
+          );
+          if ((dCubit.state.patientJob ?? "").isNotEmpty) {
+            dCubit.startDiagnosis();
+          } else {
+            dCubit.startDiagnosis(
+              startDiagnosisRequest: StartDiagnosisRequest(
+                gender: aUser?.gender ?? "",
+                isSmoker: aUser?.isSmoker ?? false,
+                hasDiabetes: aUser?.hasDiabetes ?? false,
+                hasHypertension: aUser?.hasHypertension ?? false,
+                activityLevel: aUser?.activityLevel ?? "",
+                assessmentFor: "myself",
+                birthDate: aUser?.birthDate == null
+                    ? null
+                    : DateFormat('MM/dd/yyyy').format(aUser!.birthDate!),
+                isAlcoholic: aUser?.drinksAlcohol ?? false,
+                isPregnant: aUser?.isPregnant ?? false,
+                patientJob: aUser?.occupation ?? "",
+                modelName: _selectedLlm,
+              ),
+            );
+          }
+          Utils.showToast(
+            context,
+            message: "Selected: $_selectedLlm",
+            level: 1,
+          );
+        },
         icon: const Icon(Icons.check_rounded),
         label: const Text("Submit"),
       ),

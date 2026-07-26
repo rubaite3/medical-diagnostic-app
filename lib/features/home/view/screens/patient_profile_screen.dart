@@ -65,19 +65,14 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
     final date = authUser?.birthDate;
     if (date != null) {
       birthDate = date;
-      int age = DateTime.now().year - date.year;
       if (DateTime.now().month < date.month ||
           (DateTime.now().month == date.month &&
-              DateTime.now().day < date.day)) {
-        age--;
-        _ageController.text = age.toString();
-      }
+              DateTime.now().day < date.day)) {}
       _birthDateController.text = DateFormat(
         DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY,
       ).format(date);
     } else {
       _birthDateController.clear();
-      _ageController.clear();
     }
     _patientProfileCubit.updateUser(authUser);
   }
@@ -85,7 +80,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   void dispose() {
     _birthDateController.dispose();
-    _ageController.dispose();
     _occupationController.dispose();
     super.dispose();
   }
@@ -112,13 +106,9 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
         DateFormat.YEAR_ABBR_MONTH_WEEKDAY_DAY,
       ).format(picked);
 
-      int age = DateTime.now().year - picked.year;
       if (DateTime.now().month < picked.month ||
           (DateTime.now().month == picked.month &&
-              DateTime.now().day < picked.day)) {
-        age--;
-      }
-      _ageController.text = age.toString();
+              DateTime.now().day < picked.day)) {}
     }
   }
 
@@ -528,7 +518,6 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   }
 
   final TextEditingController _birthDateController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
   final TextEditingController _occupationController = TextEditingController();
   late final PatientProfileCubit _patientProfileCubit;
   DateTime? birthDate;

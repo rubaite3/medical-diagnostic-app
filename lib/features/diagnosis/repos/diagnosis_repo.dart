@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/core/api/app_error.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/api/dio_client.dart';
@@ -12,9 +13,9 @@ import 'package:medical_diagnostic_app1/main_exports.dart';
 class DiagnosisRepo {
   DiagnosisRepo() {
     dioTimeoutInstance = dioInstance;
-    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 45);
-    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 45);
-    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 45);
+    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 70);
+    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 70);
+    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 70);
   }
   Future<Either<AppError, AppResponse>> startDiagnosis(
     StartDiagnosisRequest request,
@@ -70,6 +71,7 @@ class DiagnosisRepo {
   Future<Either<AppError, AppResponse>> getReport(String sessionId) async {
     final response = await dioTimeoutInstance.get(
       "${ApiConsts.diagnosisReport}/$sessionId/preview",
+      queryParameters: {'language_code': Intl.defaultLocale},
     );
     return Utils.mapStatusCodeToResponse(response);
   }
@@ -87,6 +89,7 @@ class DiagnosisRepo {
         "${ApiConsts.diagnosisReport}/$sessionId/download",
         options: Options(responseType: ResponseType.bytes),
         onReceiveProgress: onReceiveProgress,
+        queryParameters: {'language_code': Intl.defaultLocale},
       );
       final status = response.statusCode ?? 500;
       if (status < 200 || status >= 300) {

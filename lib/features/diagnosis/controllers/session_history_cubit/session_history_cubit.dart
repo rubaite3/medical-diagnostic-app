@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 import 'package:medical_diagnostic_app1/core/api/app_response.dart';
 import 'package:medical_diagnostic_app1/core/api/dio_client.dart';
 import 'package:medical_diagnostic_app1/core/consts/api_consts.dart';
@@ -45,7 +46,10 @@ class SessionHistoryCubit extends Cubit<SessionHistoryState> {
   }
 
   Future<Either<AppError, AppResponse>> _fetchSessions() async {
-    final response = await dioInstance.get(ApiConsts.diagnosisHistory);
+    final response = await dioInstance.get(
+      ApiConsts.diagnosisHistory,
+      queryParameters: {'language_code': Intl.defaultLocale},
+    );
 
     return Utils.mapStatusCodeToResponse(response);
   }

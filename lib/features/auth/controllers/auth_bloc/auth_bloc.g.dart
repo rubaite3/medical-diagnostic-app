@@ -13,6 +13,7 @@ _AuthState _$AuthStateFromJson(Map<String, dynamic> json) => _AuthState(
       ? null
       : User.fromJson(json['user'] as Map<String, dynamic>),
   token: json['token'] as String?,
+  isRecentlyLoggedIn: json['isRecentlyLoggedIn'] as bool? ?? false,
   op: $enumDecode(_$OperationEnumMap, json['op']),
   statusMessage: json['statusMessage'] as String,
 );
@@ -23,6 +24,7 @@ Map<String, dynamic> _$AuthStateToJson(_AuthState instance) =>
       'isOnline': instance.isOnline,
       'user': instance.user,
       'token': instance.token,
+      'isRecentlyLoggedIn': instance.isRecentlyLoggedIn,
       'op': _$OperationEnumMap[instance.op]!,
       'statusMessage': instance.statusMessage,
     };

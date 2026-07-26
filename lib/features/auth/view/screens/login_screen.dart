@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextField(
                     validator: (value) => value!.isEmpty
                         ? "Email must not be empty"
-                        : Utils.isEmail(value)
+                        : Utils.isEmail(value.trim())
                         ? null
                         : "Invalid Email format",
                     controller: _emailController,
@@ -121,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         context.read<AuthBloc>().add(
                           AuthEvent.login(
                             LoginRequest(
-                              email: _emailController.text,
-                              password: _passwordController.text,
+                              email: _emailController.text.trim(),
+                              password: _passwordController.text.trim(),
                             ),
                           ),
                         );
@@ -145,8 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTap: () {
                           context.goNamed(RoutePaths.signUp);
                         },
-                  child: Text(
-                    S.of(context).signUpLink,
+                        child: Text(
+                          S.of(context).signUpLink,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15,

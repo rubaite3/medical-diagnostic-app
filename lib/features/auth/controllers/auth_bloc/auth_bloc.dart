@@ -40,7 +40,6 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       emit(state.copyWith(auth: Auth.loading));
     }));
     on<_ConnectivityToggeled>((event, emit) async {
-      {}
       if (!event.isOnline) {
         emit(
           state.copyWith(
@@ -72,14 +71,18 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
       }
     });
     on<_AuthToggeled>((event, emit) {
-      if (event.user == null && !state.auth.isGuest) {
-        emit(
-          state.copyWith(
-            statusMessage: S.current.authSessionExpired,
-            op: Operation.failure,
-          ),
-        );
-        emit(AuthState.initial());
+      if (state.isRecentlyLoggedIn) {
+        emit(state.copyWith(isRecentlyLoggedIn: false));
+      } else {
+        if (event.user == null && !state.auth.isGuest) {
+          emit(
+            state.copyWith(
+              statusMessage: S.current.authSessionExpired,
+              op: Operation.failure,
+            ),
+          );
+          emit(AuthState.initial());
+        }
       }
     });
 
@@ -118,7 +121,13 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
               user: User.fromJson(r.data["data"]["user"]),
             ),
           );
-          emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+          emit(
+            state.copyWith(
+              op: Operation.neutral,
+              statusMessage: "",
+              isRecentlyLoggedIn: true,
+            ),
+          );
         }
         break;
       case Left(value: final l):

@@ -27,13 +27,14 @@ class Utils {
   }
 
   static Either<AppError, AppResponse> mapStatusCodeToResponse(
-    Response response,
-  ) {
+    Response response, {
+    bool isExternal = false,
+  }) {
     if (200 <= (response.statusCode ?? 500).toInt() &&
         (response.statusCode ?? 500).toInt() < 300) {
       return Right(response.data);
     } else {
-      if (response.statusCode == 401) {
+      if (response.statusCode == 401 && !isExternal) {
         GetIt.instance<AuthBloc>().add(AuthEvent.authToggeled(null));
       }
       if (response.statusCode == 422) {
@@ -128,7 +129,7 @@ class Utils {
 
   static bool isEmail(String value) => RegExp(
     r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-  ).hasMatch(value);
+  ).hasMatch(value.trim());
 
   static Future<bool> hasInternet() async {
     try {

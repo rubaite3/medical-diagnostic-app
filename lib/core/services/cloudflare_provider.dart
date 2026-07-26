@@ -32,6 +32,6 @@ class CloudflareProvider implements LlmProvider {
     );
     final response = await dio.get(uri);
 
-    return Utils.mapStatusCodeToResponse(response);
+    return Utils.mapStatusCodeToResponse(response, isExternal: true);
   }
 }

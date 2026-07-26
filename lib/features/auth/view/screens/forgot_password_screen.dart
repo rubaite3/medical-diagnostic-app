@@ -67,7 +67,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 child: CustomTextField(
                   validator: (value) => value!.isEmpty
                       ? "Email must not be empty"
-                      : Utils.isEmail(value)
+                      : Utils.isEmail(value.trim())
                       ? null
                       : "Invalid Email format",
                   controller: _emailController,
@@ -87,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     context.pushNamed(
                       RoutePaths.emailVerification,
                       queryParameters: {
-                        'email': _emailController.text,
+                        'email': _emailController.text.trim(),
                         'isPass': '1',
                       },
                     );
