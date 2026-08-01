@@ -91,6 +91,10 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
     on<_Logout>(_logout);
     on<_UpdateProfile>(_updateProfile);
     on<_GetProfile>(_getProfile);
+    on<_ToggleIsRecentlyLoggedIn>(
+      (event, emit) =>
+          emit(state.copyWith(isRecentlyLoggedIn: event.isRecentlyLoggedIn)),
+    );
   }
 
   bool isProfileNull() {
@@ -106,7 +110,6 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
 
   Future<void> _login(_Login event, Emitter<AuthState> emit) async {
     GetIt.instance<LoaderCubit>().show();
-    emit(state.copyWith(op: Operation.loading));
     final res = await _authRepo.login(event.loginRequest);
     GetIt.instance<LoaderCubit>().hide();
     switch (res) {
@@ -114,6 +117,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
         {
           emit(
             state.copyWith(
+              isRecentlyLoggedIn: true,
               auth: Auth.auth,
               token: r.data["data"]["access_token"],
               op: Operation.success,
@@ -189,17 +193,21 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   }
 
   Future<void> _checkAuth() async {
-    if (!state.op.isLoading) {
-      final res = await _authRepo.checkAuthState();
-      switch (res) {
-        case Right():
-          if (!state.auth.isAuth) {
-            add(_AuthToggeled(state.user));
-          }
-        case Left(value: final l):
-          if (l.statusCode == 401 && !state.auth.isGuest) {
-            add(const _AuthToggeled(null));
-          }
+    if (state.isRecentlyLoggedIn) {
+      add(AuthEvent.toggleIsRecentlyLoggedIn(false));
+    } else {
+      if (!state.op.isLoading) {
+        final res = await _authRepo.checkAuthState();
+        switch (res) {
+          case Right():
+            if (!state.auth.isAuth) {
+              add(_AuthToggeled(state.user));
+            }
+          case Left(value: final l):
+            if (l.statusCode == 401 && !state.auth.isGuest) {
+              add(const _AuthToggeled(null));
+            }
+        }
       }
     }
   }

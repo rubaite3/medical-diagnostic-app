@@ -11,6 +11,9 @@ sealed class AuthEvent with _$AuthEvent {
   const factory AuthEvent.checkConnectivity() = _CheckConnectivity;
   const factory AuthEvent.register(RegisterRequest registerRequest) = _Register;
   const factory AuthEvent.refreshToken() = _RefreshToken;
+  const factory AuthEvent.toggleIsRecentlyLoggedIn(bool isRecentlyLoggedIn) =
+      _ToggleIsRecentlyLoggedIn;
+
   const factory AuthEvent.resendEmailVerify(
     ResendEmailVerificationRequest resendEmailVerificationRequest,
   ) = _ResendEmailVerification;

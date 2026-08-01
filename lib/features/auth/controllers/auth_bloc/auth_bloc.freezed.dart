@@ -56,7 +56,7 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckConnectivity value)?  checkConnectivity,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,TResult Function( _UpdateProfile value)?  updateProfile,TResult Function( _GetProfile value)?  getProfile,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult Function( _AuthToggeled value)?  authToggeled,TResult Function( _AuthLoading value)?  authLoading,TResult Function( _Login value)?  login,TResult Function( _Logout value)?  logout,TResult Function( _CheckConnectivity value)?  checkConnectivity,TResult Function( _Register value)?  register,TResult Function( _RefreshToken value)?  refreshToken,TResult Function( _ToggleIsRecentlyLoggedIn value)?  toggleIsRecentlyLoggedIn,TResult Function( _ResendEmailVerification value)?  resendEmailVerify,TResult Function( _ForgotPass value)?  forgotPass,TResult Function( _UpdateProfile value)?  updateProfile,TResult Function( _GetProfile value)?  getProfile,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -67,7 +67,8 @@ return login(_that);case _Logout() when logout != null:
 return logout(_that);case _CheckConnectivity() when checkConnectivity != null:
 return checkConnectivity(_that);case _Register() when register != null:
 return register(_that);case _RefreshToken() when refreshToken != null:
-return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
+return refreshToken(_that);case _ToggleIsRecentlyLoggedIn() when toggleIsRecentlyLoggedIn != null:
+return toggleIsRecentlyLoggedIn(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
 return updateProfile(_that);case _GetProfile() when getProfile != null:
@@ -89,7 +90,7 @@ return getProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckConnectivity value)  checkConnectivity,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,required TResult Function( _UpdateProfile value)  updateProfile,required TResult Function( _GetProfile value)  getProfile,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ConnectivityToggeled value)  connectivityToggeled,required TResult Function( _AuthToggeled value)  authToggeled,required TResult Function( _AuthLoading value)  authLoading,required TResult Function( _Login value)  login,required TResult Function( _Logout value)  logout,required TResult Function( _CheckConnectivity value)  checkConnectivity,required TResult Function( _Register value)  register,required TResult Function( _RefreshToken value)  refreshToken,required TResult Function( _ToggleIsRecentlyLoggedIn value)  toggleIsRecentlyLoggedIn,required TResult Function( _ResendEmailVerification value)  resendEmailVerify,required TResult Function( _ForgotPass value)  forgotPass,required TResult Function( _UpdateProfile value)  updateProfile,required TResult Function( _GetProfile value)  getProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
@@ -100,7 +101,8 @@ return login(_that);case _Logout():
 return logout(_that);case _CheckConnectivity():
 return checkConnectivity(_that);case _Register():
 return register(_that);case _RefreshToken():
-return refreshToken(_that);case _ResendEmailVerification():
+return refreshToken(_that);case _ToggleIsRecentlyLoggedIn():
+return toggleIsRecentlyLoggedIn(_that);case _ResendEmailVerification():
 return resendEmailVerify(_that);case _ForgotPass():
 return forgotPass(_that);case _UpdateProfile():
 return updateProfile(_that);case _GetProfile():
@@ -118,7 +120,7 @@ return getProfile(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckConnectivity value)?  checkConnectivity,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,TResult? Function( _UpdateProfile value)?  updateProfile,TResult? Function( _GetProfile value)?  getProfile,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ConnectivityToggeled value)?  connectivityToggeled,TResult? Function( _AuthToggeled value)?  authToggeled,TResult? Function( _AuthLoading value)?  authLoading,TResult? Function( _Login value)?  login,TResult? Function( _Logout value)?  logout,TResult? Function( _CheckConnectivity value)?  checkConnectivity,TResult? Function( _Register value)?  register,TResult? Function( _RefreshToken value)?  refreshToken,TResult? Function( _ToggleIsRecentlyLoggedIn value)?  toggleIsRecentlyLoggedIn,TResult? Function( _ResendEmailVerification value)?  resendEmailVerify,TResult? Function( _ForgotPass value)?  forgotPass,TResult? Function( _UpdateProfile value)?  updateProfile,TResult? Function( _GetProfile value)?  getProfile,}){
 final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
@@ -129,7 +131,8 @@ return login(_that);case _Logout() when logout != null:
 return logout(_that);case _CheckConnectivity() when checkConnectivity != null:
 return checkConnectivity(_that);case _Register() when register != null:
 return register(_that);case _RefreshToken() when refreshToken != null:
-return refreshToken(_that);case _ResendEmailVerification() when resendEmailVerify != null:
+return refreshToken(_that);case _ToggleIsRecentlyLoggedIn() when toggleIsRecentlyLoggedIn != null:
+return toggleIsRecentlyLoggedIn(_that);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that);case _UpdateProfile() when updateProfile != null:
 return updateProfile(_that);case _GetProfile() when getProfile != null:
@@ -150,7 +153,7 @@ return getProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function()?  checkConnectivity,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult Function()?  getProfile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( bool isOnline)?  connectivityToggeled,TResult Function( User? user)?  authToggeled,TResult Function()?  authLoading,TResult Function( LoginRequest loginRequest)?  login,TResult Function()?  logout,TResult Function()?  checkConnectivity,TResult Function( RegisterRequest registerRequest)?  register,TResult Function()?  refreshToken,TResult Function( bool isRecentlyLoggedIn)?  toggleIsRecentlyLoggedIn,TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult Function()?  getProfile,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
@@ -160,7 +163,8 @@ return login(_that.loginRequest);case _Logout() when logout != null:
 return logout();case _CheckConnectivity() when checkConnectivity != null:
 return checkConnectivity();case _Register() when register != null:
 return register(_that.registerRequest);case _RefreshToken() when refreshToken != null:
-return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
+return refreshToken();case _ToggleIsRecentlyLoggedIn() when toggleIsRecentlyLoggedIn != null:
+return toggleIsRecentlyLoggedIn(_that.isRecentlyLoggedIn);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
 return updateProfile(_that.updateProfileRequest);case _GetProfile() when getProfile != null:
@@ -182,7 +186,7 @@ return getProfile();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function()  checkConnectivity,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,required TResult Function( UpdateProfileRequest updateProfileRequest)  updateProfile,required TResult Function()  getProfile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( bool isOnline)  connectivityToggeled,required TResult Function( User? user)  authToggeled,required TResult Function()  authLoading,required TResult Function( LoginRequest loginRequest)  login,required TResult Function()  logout,required TResult Function()  checkConnectivity,required TResult Function( RegisterRequest registerRequest)  register,required TResult Function()  refreshToken,required TResult Function( bool isRecentlyLoggedIn)  toggleIsRecentlyLoggedIn,required TResult Function( ResendEmailVerificationRequest resendEmailVerificationRequest)  resendEmailVerify,required TResult Function( ForgetPasswordRequest forgetPasswordRequest)  forgotPass,required TResult Function( UpdateProfileRequest updateProfileRequest)  updateProfile,required TResult Function()  getProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled():
 return connectivityToggeled(_that.isOnline);case _AuthToggeled():
@@ -192,7 +196,8 @@ return login(_that.loginRequest);case _Logout():
 return logout();case _CheckConnectivity():
 return checkConnectivity();case _Register():
 return register(_that.registerRequest);case _RefreshToken():
-return refreshToken();case _ResendEmailVerification():
+return refreshToken();case _ToggleIsRecentlyLoggedIn():
+return toggleIsRecentlyLoggedIn(_that.isRecentlyLoggedIn);case _ResendEmailVerification():
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass():
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile():
 return updateProfile(_that.updateProfileRequest);case _GetProfile():
@@ -210,7 +215,7 @@ return getProfile();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function()?  checkConnectivity,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult? Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult? Function()?  getProfile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( bool isOnline)?  connectivityToggeled,TResult? Function( User? user)?  authToggeled,TResult? Function()?  authLoading,TResult? Function( LoginRequest loginRequest)?  login,TResult? Function()?  logout,TResult? Function()?  checkConnectivity,TResult? Function( RegisterRequest registerRequest)?  register,TResult? Function()?  refreshToken,TResult? Function( bool isRecentlyLoggedIn)?  toggleIsRecentlyLoggedIn,TResult? Function( ResendEmailVerificationRequest resendEmailVerificationRequest)?  resendEmailVerify,TResult? Function( ForgetPasswordRequest forgetPasswordRequest)?  forgotPass,TResult? Function( UpdateProfileRequest updateProfileRequest)?  updateProfile,TResult? Function()?  getProfile,}) {final _that = this;
 switch (_that) {
 case _ConnectivityToggeled() when connectivityToggeled != null:
 return connectivityToggeled(_that.isOnline);case _AuthToggeled() when authToggeled != null:
@@ -220,7 +225,8 @@ return login(_that.loginRequest);case _Logout() when logout != null:
 return logout();case _CheckConnectivity() when checkConnectivity != null:
 return checkConnectivity();case _Register() when register != null:
 return register(_that.registerRequest);case _RefreshToken() when refreshToken != null:
-return refreshToken();case _ResendEmailVerification() when resendEmailVerify != null:
+return refreshToken();case _ToggleIsRecentlyLoggedIn() when toggleIsRecentlyLoggedIn != null:
+return toggleIsRecentlyLoggedIn(_that.isRecentlyLoggedIn);case _ResendEmailVerification() when resendEmailVerify != null:
 return resendEmailVerify(_that.resendEmailVerificationRequest);case _ForgotPass() when forgotPass != null:
 return forgotPass(_that.forgetPasswordRequest);case _UpdateProfile() when updateProfile != null:
 return updateProfile(_that.updateProfileRequest);case _GetProfile() when getProfile != null:
@@ -653,6 +659,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _ToggleIsRecentlyLoggedIn implements AuthEvent {
+  const _ToggleIsRecentlyLoggedIn(this.isRecentlyLoggedIn);
+  
+
+ final  bool isRecentlyLoggedIn;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ToggleIsRecentlyLoggedInCopyWith<_ToggleIsRecentlyLoggedIn> get copyWith => __$ToggleIsRecentlyLoggedInCopyWithImpl<_ToggleIsRecentlyLoggedIn>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ToggleIsRecentlyLoggedIn&&(identical(other.isRecentlyLoggedIn, isRecentlyLoggedIn) || other.isRecentlyLoggedIn == isRecentlyLoggedIn));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,isRecentlyLoggedIn);
+
+@override
+String toString() {
+  return 'AuthEvent.toggleIsRecentlyLoggedIn(isRecentlyLoggedIn: $isRecentlyLoggedIn)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ToggleIsRecentlyLoggedInCopyWith<$Res> implements $AuthEventCopyWith<$Res> {
+  factory _$ToggleIsRecentlyLoggedInCopyWith(_ToggleIsRecentlyLoggedIn value, $Res Function(_ToggleIsRecentlyLoggedIn) _then) = __$ToggleIsRecentlyLoggedInCopyWithImpl;
+@useResult
+$Res call({
+ bool isRecentlyLoggedIn
+});
+
+
+
+
+}
+/// @nodoc
+class __$ToggleIsRecentlyLoggedInCopyWithImpl<$Res>
+    implements _$ToggleIsRecentlyLoggedInCopyWith<$Res> {
+  __$ToggleIsRecentlyLoggedInCopyWithImpl(this._self, this._then);
+
+  final _ToggleIsRecentlyLoggedIn _self;
+  final $Res Function(_ToggleIsRecentlyLoggedIn) _then;
+
+/// Create a copy of AuthEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? isRecentlyLoggedIn = null,}) {
+  return _then(_ToggleIsRecentlyLoggedIn(
+null == isRecentlyLoggedIn ? _self.isRecentlyLoggedIn : isRecentlyLoggedIn // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 /// @nodoc
 
