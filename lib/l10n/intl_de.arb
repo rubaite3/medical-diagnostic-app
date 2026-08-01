@@ -218,5 +218,53 @@
   "profileTakePhoto": "Foto aufnehmen",
   "profileRemovePhoto": "Foto entfernen",
   "settingsAccountDeleted": "Konto erfolgreich gelöscht",
-  "settingsDeletingAccount": "Konto wird gelöscht..."
+  "settingsDeletingAccount": "Konto wird gelöscht...",
+
+  "symptomsSubmitted": "Symptome erfolgreich übermittelt",
+  "keyword_of": "von",
+  "disclaimerMessage": "Dies sind vorläufige Ergebnisse basierend auf KI-Analyse. Bitte konsultieren Sie einen Arzt für eine bestätigte Diagnose.",
+  "someErrorOccurred": "Ein Fehler ist aufgetreten",
+
+  "chooseLlm": "LLM auswählen",
+  "refresh": "Aktualisieren",
+  "failedToLoadLlm": "LLMs konnten nicht geladen werden",
+  "retry": "Wiederholen",
+  "noLlmsAvailable": "Keine LLMs verfügbar",
+  "submit": "Absenden",
+  "stripeBrand": "stripe",
+
+  "termsAndConditions": "Allgemeine Geschäftsbedingungen",
+  "privacyPolicy": "Datenschutzrichtlinie",
+  "thirdPartySoftware": "Drittanbieter-Software",
+  "medicalQuality": "Medizinische Qualität",
+  "companyName": "Vitalia GmbH",
+  "companyAddress": "Neue Grünstraße 17\n10179 Berlin\nDeutschland",
+  "supportEmail": "support@vitalia.com",
+  "safetyInfoBody": "Dieser Abschnitt enthält wichtige Sicherheitsinformationen zur Nutzung der Anwendung. Bitte sorgfältig lesen.",
+
+  "sessionPreview": "Sitzungsvorschau",
+  "enterSessionId": "Sitzungs-ID eingeben...",
+
+  "emailEmpty": "E-Mail darf nicht leer sein",
+  "invalidEmail": "Ungültiges E-Mail-Format",
+  "passwordEmpty": "Passwort darf nicht leer sein",
+  "passwordTooShort": "Passwort muss mindestens 8 Zeichen lang sein",
+  "passwordsMustMatch": "Passwörter müssen übereinstimmen",
+  "nameEmpty": "Name darf nicht leer sein",
+  "confirmPasswordEmpty": "Passwortbestätigung darf nicht leer sein",
+
+  "medicalHistory": "Krankengeschichte",
+  "notLoggedIn": "Nicht angemeldet",
+  "downloadFailed": "Download fehlgeschlagen",
+  "failedToDownloadReport": "Bericht konnte nicht heruntergeladen werden",
+
+  "invalidRequest": "Ungültige Anfrage",
+  "accessDenied": "Zugriff verweigert",
+  "notFound": "Die angeforderte Information konnte nicht gefunden werden",
+  "conflictOccurred": "Konflikt aufgetreten",
+  "unexpectedError": "Unerwarteter Fehler aufgetreten",
+  "noInternet": "Keine Internetverbindung erkannt, bitte versuchen Sie es erneut.",
+  "connectionTimeout": "Die Verbindung hat eine Zeitüberschreitung, bitte versuchen Sie es erneut.",
+
+  "user": "Benutzer"
 }

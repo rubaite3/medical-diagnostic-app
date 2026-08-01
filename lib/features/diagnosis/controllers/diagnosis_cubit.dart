@@ -233,7 +233,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
       },
       (response) {
         final data = FollowUpResponse.fromJson(
-          Map<String, dynamic>.from(response.data),
+          Map<String, dynamic>.from(response.data["data"]["data"]),
         );
         emit(
           state.copyWith(

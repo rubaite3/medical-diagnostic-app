@@ -9,7 +9,9 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String? value)? validator;
   final TextInputAction? textInputAction;
   final bool? readOnly;
+  final TextInputType? keyboardType;
   final void Function(String)? onSubmitted;
+  final TextDirection? textDirection;
   const CustomTextField({
     super.key,
     required this.hintText,
@@ -20,6 +22,8 @@ class CustomTextField extends StatelessWidget {
     this.textInputAction,
     this.readOnly,
     this.onSubmitted,
+    this.keyboardType,
+    this.textDirection = TextDirection.ltr,
   });
 
   @override
@@ -37,6 +41,8 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        textDirection: textDirection,
+        keyboardType: keyboardType,
         onFieldSubmitted: onSubmitted,
         readOnly: readOnly ?? false,
         textInputAction: textInputAction,

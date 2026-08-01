@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import '../../../../core/theme/colors.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
+import '../../../../core/widgets/language_dropdown.dart';
 import '../widgets/custom_button.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -47,16 +48,27 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final titles = [S.of(context).onboardingTitle1, S.of(context).onboardingTitle2, S.of(context).onboardingTitle3];
-    final descs = [S.of(context).onboardingDesc1, S.of(context).onboardingDesc2, S.of(context).onboardingDesc3];
+    final titles = [
+      S.of(context).onboardingTitle1,
+      S.of(context).onboardingTitle2,
+      S.of(context).onboardingTitle3,
+    ];
+    final descs = [
+      S.of(context).onboardingDesc1,
+      S.of(context).onboardingDesc2,
+      S.of(context).onboardingDesc3,
+    ];
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          LanguageDropdown(),
+        ],
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 2.0),
           child: Column(
             children: [
-              const SizedBox(height: 20),
-
               Expanded(
                 child: PageView.builder(
                   controller: _pageController,

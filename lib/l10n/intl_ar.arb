@@ -224,5 +224,48 @@
   "symptomsSubmitted": "تم تسجيل الأعراض بنجاح",
   "keyword_of": "من",
   "disclaimerMessage": "هذه نتائج أولية تستند إلى تحليل الذكاء الاصطناعي. يرجى استشارة الطبيب للحصول على تشخيص مؤكد.",
-  "someErrorOccurred": "حدث خطأ ما"
+  "someErrorOccurred": "حدث خطأ ما",
+
+  "chooseLlm": "اختر نموذج اللغة",
+  "refresh": "تحديث",
+  "failedToLoadLlm": "فشل تحميل نماذج اللغة",
+  "retry": "إعادة المحاولة",
+  "noLlmsAvailable": "لا توجد نماذج لغة متاحة",
+  "submit": "إرسال",
+  "stripeBrand": "stripe",
+
+  "termsAndConditions": "الشروط والأحكام",
+  "privacyPolicy": "سياسة الخصوصية",
+  "thirdPartySoftware": "برامج الطرف الثالث",
+  "medicalQuality": "الجودة الطبية",
+  "companyName": "Vitalia GmbH",
+  "companyAddress": "Neue Grünstraße 17\n10179 Berlin\nألمانيا",
+  "supportEmail": "support@vitalia.com",
+  "safetyInfoBody": "يقدم هذا القسم معلومات مهمة عن السلامة فيما يتعلق باستخدام التطبيق. يرجى القراءة بعناية.",
+
+  "sessionPreview": "معاينة الجلسة",
+  "enterSessionId": "أدخل معرف الجلسة...",
+
+  "emailEmpty": "البريد الإلكتروني مطلوب",
+  "invalidEmail": "تنسيق البريد الإلكتروني غير صحيح",
+  "passwordEmpty": "كلمة المرور مطلوبة",
+  "passwordTooShort": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+  "passwordsMustMatch": "يجب أن تتطابق كلمات المرور",
+  "nameEmpty": "الاسم مطلوب",
+  "confirmPasswordEmpty": "تأكيد كلمة المرور مطلوب",
+
+  "medicalHistory": "التاريخ الطبي",
+  "notLoggedIn": "غير مسجل الدخول",
+  "downloadFailed": "فشل التنزيل",
+  "failedToDownloadReport": "فشل تنزيل التقرير",
+
+  "invalidRequest": "طلب غير صالح",
+  "accessDenied": "تم رفض الوصول",
+  "notFound": "المعلومات المطلوبة غير موجودة",
+  "conflictOccurred": "حدث تعارض",
+  "unexpectedError": "حدث خطأ غير متوقع",
+  "noInternet": "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى.",
+  "connectionTimeout": "انتهت مهلة الاتصال، يرجى المحاولة مرة أخرى.",
+
+  "user": "مستخدم"
 }

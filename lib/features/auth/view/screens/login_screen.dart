@@ -6,6 +6,8 @@ import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/login_request.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import '../../../../core/enums/enums.dart';
+import '../../../../core/widgets/language_dropdown.dart';
+
 import '../../../../core/utils/utils.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -40,11 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(actions: [LanguageDropdown()]),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(
               horizontal: 24.0,
-              vertical: 20.0,
+              // vertical: 20.0,
             ),
             child: Form(
               key: _formKey,
@@ -65,7 +68,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         level: Utils.mapOp(state.op),
                         message: state.statusMessage,
                       );
-                      if (state.op.isSuccess) {
+                      if (state.op.isSuccess &&
+                          !state.statusMessage.contains("Internet")) {
                         context.goNamed(RoutePaths.homeScreen);
                       }
                     },
@@ -79,6 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 35),
                   CustomTextField(
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                     validator: (value) => value!.isEmpty
                         ? "Email must not be empty"
                         : Utils.isEmail(value.trim())

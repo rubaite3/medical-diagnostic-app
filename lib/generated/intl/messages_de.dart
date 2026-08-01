@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("Über Vitalia"),
+    "accessDenied": MessageLookupByLibrary.simpleMessage("Zugriff verweigert"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
       "Die Kontolöschung ist in der aktuellen API nicht verfügbar",
     ),
@@ -75,12 +76,26 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthDateHint": MessageLookupByLibrary.simpleMessage("Geburtsdatum"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Abbrechen"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Sprache ändern"),
+    "chooseLlm": MessageLookupByLibrary.simpleMessage("LLM auswählen"),
+    "companyAddress": MessageLookupByLibrary.simpleMessage(
+      "Neue Grünstraße 17\n10179 Berlin\nDeutschland",
+    ),
+    "companyName": MessageLookupByLibrary.simpleMessage("Vitalia GmbH"),
     "completedAtLabel": MessageLookupByLibrary.simpleMessage(
       "Abgeschlossen am",
     ),
     "confidenceLabel": MessageLookupByLibrary.simpleMessage("Konfidenz"),
+    "confirmPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+      "Passwortbestätigung darf nicht leer sein",
+    ),
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
       "Passwort bestätigen",
+    ),
+    "conflictOccurred": MessageLookupByLibrary.simpleMessage(
+      "Konflikt aufgetreten",
+    ),
+    "connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "Die Verbindung hat eine Zeitüberschreitung, bitte versuchen Sie es erneut.",
     ),
     "consultDoctorDefault": MessageLookupByLibrary.simpleMessage(
       "Bitte konsultieren Sie einen qualifizierten medizinischen Fachmann für eine weitere Bewertung.",
@@ -229,8 +244,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagnosisSmokerTitle": MessageLookupByLibrary.simpleMessage(
       "Rauchen Sie?",
     ),
+    "disclaimerMessage": MessageLookupByLibrary.simpleMessage(
+      "Dies sind vorläufige Ergebnisse basierend auf KI-Analyse. Bitte konsultieren Sie einen Arzt für eine bestätigte Diagnose.",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Noch kein Konto? ",
+    ),
+    "downloadFailed": MessageLookupByLibrary.simpleMessage(
+      "Download fehlgeschlagen",
     ),
     "downloadReportBtn": MessageLookupByLibrary.simpleMessage(
       "PDF herunterladen",
@@ -238,11 +259,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "downloadingReportBtn": MessageLookupByLibrary.simpleMessage(
       "Wird heruntergeladen...",
     ),
+    "emailEmpty": MessageLookupByLibrary.simpleMessage(
+      "E-Mail darf nicht leer sein",
+    ),
+    "enterSessionId": MessageLookupByLibrary.simpleMessage(
+      "Sitzungs-ID eingeben...",
+    ),
     "errorGeneral": MessageLookupByLibrary.simpleMessage(
       "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
     ),
     "errorGeneric": MessageLookupByLibrary.simpleMessage(
       "Es ist ein Fehler aufgetreten.",
+    ),
+    "failedToDownloadReport": MessageLookupByLibrary.simpleMessage(
+      "Bericht konnte nicht heruntergeladen werden",
+    ),
+    "failedToLoadLlm": MessageLookupByLibrary.simpleMessage(
+      "LLMs konnten nicht geladen werden",
     ),
     "feedback": MessageLookupByLibrary.simpleMessage("Feedback"),
     "followUpProgress": MessageLookupByLibrary.simpleMessage("Frage"),
@@ -283,6 +316,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "hypertensionQuestion": MessageLookupByLibrary.simpleMessage(
       "Haben Sie Bluthochdruck?",
     ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "Ungültiges E-Mail-Format",
+    ),
+    "invalidRequest": MessageLookupByLibrary.simpleMessage("Ungültige Anfrage"),
+    "keyword_of": MessageLookupByLibrary.simpleMessage("von"),
     "language": MessageLookupByLibrary.simpleMessage("Sprache"),
     "languagesAdded": MessageLookupByLibrary.simpleMessage(
       "Rumänisch und Swahili sind wieder verfügbar. Sie können die App jetzt auf Englisch, Deutsch, Französisch, Spanisch, Portugiesisch, Rumänisch oder Swahili nutzen.",
@@ -302,6 +340,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "markAsUnread": MessageLookupByLibrary.simpleMessage(
       "Als ungelesen markieren",
     ),
+    "medicalHistory": MessageLookupByLibrary.simpleMessage("Krankengeschichte"),
+    "medicalQuality": MessageLookupByLibrary.simpleMessage(
+      "Medizinische Qualität",
+    ),
+    "nameEmpty": MessageLookupByLibrary.simpleMessage(
+      "Name darf nicht leer sein",
+    ),
     "navHome": MessageLookupByLibrary.simpleMessage("Start"),
     "navProfile": MessageLookupByLibrary.simpleMessage("Profil"),
     "navSettings": MessageLookupByLibrary.simpleMessage("Einstellungen"),
@@ -309,6 +354,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("Nein"),
     "noDiagnosesAvailable": MessageLookupByLibrary.simpleMessage(
       "Keine Diagnosen verfügbar.",
+    ),
+    "noInternet": MessageLookupByLibrary.simpleMessage(
+      "Keine Internetverbindung erkannt, bitte versuchen Sie es erneut.",
+    ),
+    "noLlmsAvailable": MessageLookupByLibrary.simpleMessage(
+      "Keine LLMs verfügbar",
     ),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
       "Noch keine Benachrichtigungen.",
@@ -322,6 +373,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noSymptomsSelected": MessageLookupByLibrary.simpleMessage(
       "Noch keine Symptome ausgewählt.",
     ),
+    "notFound": MessageLookupByLibrary.simpleMessage(
+      "Die angeforderte Information konnte nicht gefunden werden",
+    ),
+    "notLoggedIn": MessageLookupByLibrary.simpleMessage("Nicht angemeldet"),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage(
       "Benachrichtigungen",
     ),
@@ -359,6 +414,15 @@ class MessageLookup extends MessageLookupByLibrary {
       "E-Mail erfolgreich bestätigt!",
     ),
     "otpTitle": MessageLookupByLibrary.simpleMessage("E-Mail bestätigen"),
+    "passwordEmpty": MessageLookupByLibrary.simpleMessage(
+      "Passwort darf nicht leer sein",
+    ),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "Passwort muss mindestens 8 Zeichen lang sein",
+    ),
+    "passwordsMustMatch": MessageLookupByLibrary.simpleMessage(
+      "Passwörter müssen übereinstimmen",
+    ),
     "patientLabel": MessageLookupByLibrary.simpleMessage("Patient"),
     "patientProfileSubtitle": MessageLookupByLibrary.simpleMessage(
       "Bitte vervollständigen Sie Ihre medizinischen Angaben genau",
@@ -404,6 +468,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "preliminaryResultsTitle": MessageLookupByLibrary.simpleMessage(
       "Vorläufige Ergebnisse",
     ),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage(
+      "Datenschutzrichtlinie",
+    ),
     "probabilityLabel": MessageLookupByLibrary.simpleMessage(
       "Wahrscheinlichkeit",
     ),
@@ -430,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "recommendationsLabel": MessageLookupByLibrary.simpleMessage(
       "Empfehlungen",
     ),
+    "refresh": MessageLookupByLibrary.simpleMessage("Aktualisieren"),
     "resetProfileBtn": MessageLookupByLibrary.simpleMessage(
       "Medizinisches Profil zurücksetzen",
     ),
@@ -440,9 +508,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Reset-Link erfolgreich gesendet.",
     ),
     "resetTitle": MessageLookupByLibrary.simpleMessage("Passwort zurücksetzen"),
+    "retry": MessageLookupByLibrary.simpleMessage("Wiederholen"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("Wiederholen"),
     "safetyInfo": MessageLookupByLibrary.simpleMessage(
       "Sicherheitsinformationen",
+    ),
+    "safetyInfoBody": MessageLookupByLibrary.simpleMessage(
+      "Dieser Abschnitt enthält wichtige Sicherheitsinformationen zur Nutzung der Anwendung. Bitte sorgfältig lesen.",
     ),
     "saveProfileBtn": MessageLookupByLibrary.simpleMessage(
       "Medizinisches Profil speichern",
@@ -455,6 +527,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sitzungsverlauf",
     ),
     "sessionIdLabel": MessageLookupByLibrary.simpleMessage("Sitzungs-ID"),
+    "sessionPreview": MessageLookupByLibrary.simpleMessage("Sitzungsvorschau"),
     "settingsAccountDeleted": MessageLookupByLibrary.simpleMessage(
       "Konto erfolgreich gelöscht",
     ),
@@ -473,16 +546,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sie haben sich mit Google registriert:",
     ),
     "smokerQuestion": MessageLookupByLibrary.simpleMessage("Sind Sie Raucher?"),
+    "someErrorOccurred": MessageLookupByLibrary.simpleMessage(
+      "Ein Fehler ist aufgetreten",
+    ),
     "specialistLabel": MessageLookupByLibrary.simpleMessage("Facharzt"),
     "startDiagnosis": MessageLookupByLibrary.simpleMessage("Diagnose starten"),
     "startNewDiagnosisBtn": MessageLookupByLibrary.simpleMessage(
       "Neue Diagnose starten",
     ),
+    "stripeBrand": MessageLookupByLibrary.simpleMessage("stripe"),
+    "submit": MessageLookupByLibrary.simpleMessage("Absenden"),
     "submitAnswersBtn": MessageLookupByLibrary.simpleMessage(
       "Absenden und weiter",
     ),
     "submitFollowUpBtn": MessageLookupByLibrary.simpleMessage("Weiter"),
     "support": MessageLookupByLibrary.simpleMessage("Support"),
+    "supportEmail": MessageLookupByLibrary.simpleMessage("support@vitalia.com"),
     "symptomQuestionsSubtitle": MessageLookupByLibrary.simpleMessage(
       "Bitte beantworten Sie die folgenden Fragen zu Ihrem Symptom.",
     ),
@@ -498,8 +577,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "symptomSearchTitle": MessageLookupByLibrary.simpleMessage(
       "Wählen Sie Ihre Symptome",
     ),
+    "symptomsSubmitted": MessageLookupByLibrary.simpleMessage(
+      "Symptome erfolgreich übermittelt",
+    ),
     "termsAgree": MessageLookupByLibrary.simpleMessage(
       "Ich stimme den AGB und der Datenschutzerklärung zu",
+    ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "Allgemeine Geschäftsbedingungen",
+    ),
+    "thirdPartySoftware": MessageLookupByLibrary.simpleMessage(
+      "Drittanbieter-Software",
+    ),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "Unerwarteter Fehler aufgetreten",
     ),
     "updatePasswordBtn": MessageLookupByLibrary.simpleMessage(
       "Passwort aktualisieren",
@@ -510,6 +601,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updatesTitle": MessageLookupByLibrary.simpleMessage(
       "Änderungen an Ihrer Vitalia-App",
     ),
+    "user": MessageLookupByLibrary.simpleMessage("Benutzer"),
     "userIdLabel": MessageLookupByLibrary.simpleMessage("Benutzer-ID:"),
     "version": MessageLookupByLibrary.simpleMessage(
       "Version 4.4.2 (2010356790)",

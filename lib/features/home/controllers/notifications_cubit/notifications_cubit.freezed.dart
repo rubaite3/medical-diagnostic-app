@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NotificationsState {
 
- List<NotificationModel> get notifications; int get notificationCount; Operation get op; String get statusMessage; List<int> get loadingNotifications;
+ List<NotificationModel> get notifications; int get notificationCount; Operation get op; String get statusMessage; List<String> get loadingNotifications;
 /// Create a copy of NotificationsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -46,7 +46,7 @@ abstract mixin class $NotificationsStateCopyWith<$Res>  {
   factory $NotificationsStateCopyWith(NotificationsState value, $Res Function(NotificationsState) _then) = _$NotificationsStateCopyWithImpl;
 @useResult
 $Res call({
- List<NotificationModel> notifications, int notificationCount, Operation op, String statusMessage, List<int> loadingNotifications
+ List<NotificationModel> notifications, int notificationCount, Operation op, String statusMessage, List<String> loadingNotifications
 });
 
 
@@ -70,7 +70,7 @@ as List<NotificationModel>,notificationCount: null == notificationCount ? _self.
 as int,op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
 as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
 as String,loadingNotifications: null == loadingNotifications ? _self.loadingNotifications : loadingNotifications // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<String>,
   ));
 }
 
@@ -152,7 +152,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<int> loadingNotifications)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<String> loadingNotifications)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NotificationsState() when $default != null:
 return $default(_that.notifications,_that.notificationCount,_that.op,_that.statusMessage,_that.loadingNotifications);case _:
@@ -173,7 +173,7 @@ return $default(_that.notifications,_that.notificationCount,_that.op,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<int> loadingNotifications)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<String> loadingNotifications)  $default,) {final _that = this;
 switch (_that) {
 case _NotificationsState():
 return $default(_that.notifications,_that.notificationCount,_that.op,_that.statusMessage,_that.loadingNotifications);}
@@ -190,7 +190,7 @@ return $default(_that.notifications,_that.notificationCount,_that.op,_that.statu
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<int> loadingNotifications)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<NotificationModel> notifications,  int notificationCount,  Operation op,  String statusMessage,  List<String> loadingNotifications)?  $default,) {final _that = this;
 switch (_that) {
 case _NotificationsState() when $default != null:
 return $default(_that.notifications,_that.notificationCount,_that.op,_that.statusMessage,_that.loadingNotifications);case _:
@@ -205,7 +205,7 @@ return $default(_that.notifications,_that.notificationCount,_that.op,_that.statu
 
 
 class _NotificationsState implements NotificationsState {
-  const _NotificationsState({required  List<NotificationModel> notifications, required this.notificationCount, required this.op, required this.statusMessage, required  List<int> loadingNotifications}): _notifications = notifications,_loadingNotifications = loadingNotifications;
+  const _NotificationsState({required  List<NotificationModel> notifications, required this.notificationCount, required this.op, required this.statusMessage, required  List<String> loadingNotifications}): _notifications = notifications,_loadingNotifications = loadingNotifications;
   
 
  final  List<NotificationModel> _notifications;
@@ -218,8 +218,8 @@ class _NotificationsState implements NotificationsState {
 @override final  int notificationCount;
 @override final  Operation op;
 @override final  String statusMessage;
- final  List<int> _loadingNotifications;
-@override List<int> get loadingNotifications {
+ final  List<String> _loadingNotifications;
+@override List<String> get loadingNotifications {
   if (_loadingNotifications is EqualUnmodifiableListView) return _loadingNotifications;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_loadingNotifications);
@@ -256,7 +256,7 @@ abstract mixin class _$NotificationsStateCopyWith<$Res> implements $Notification
   factory _$NotificationsStateCopyWith(_NotificationsState value, $Res Function(_NotificationsState) _then) = __$NotificationsStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<NotificationModel> notifications, int notificationCount, Operation op, String statusMessage, List<int> loadingNotifications
+ List<NotificationModel> notifications, int notificationCount, Operation op, String statusMessage, List<String> loadingNotifications
 });
 
 
@@ -280,7 +280,7 @@ as List<NotificationModel>,notificationCount: null == notificationCount ? _self.
 as int,op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
 as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
 as String,loadingNotifications: null == loadingNotifications ? _self._loadingNotifications : loadingNotifications // ignore: cast_nullable_to_non_nullable
-as List<int>,
+as List<String>,
   ));
 }
 

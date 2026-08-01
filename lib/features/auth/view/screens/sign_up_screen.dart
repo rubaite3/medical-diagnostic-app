@@ -8,6 +8,9 @@ import 'package:medical_diagnostic_app1/features/auth/controllers/auth_bloc/auth
 import 'package:medical_diagnostic_app1/features/auth/controllers/terms_cubit/terms_cubit.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/general/register_request.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
+
+import '../../../../core/widgets/language_dropdown.dart';
+
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
@@ -33,18 +36,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
         }
       },
       child: Scaffold(
+        appBar: AppBar(actions: [LanguageDropdown()]),
         body: SafeArea(
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(
               horizontal: 24.0,
-              vertical: 20.0,
+              // vertical: 20.0,
             ),
             child: Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 15),
                   const AuthLogo(),
                   const SizedBox(height: 25),
                   Text(
@@ -58,6 +61,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: 30),
                   CustomTextField(
+                    textInputAction: TextInputAction.next,
+
+                    keyboardType: TextInputType.name,
                     validator: (value) =>
                         value!.isEmpty ? "Name must not be empty" : null,
                     hintText: S.of(context).hintFullName,
@@ -66,6 +72,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
+                    textInputAction: TextInputAction.next,
+
+                    keyboardType: TextInputType.emailAddress,
+
                     validator: (value) => value!.isEmpty
                         ? "Email must not be empty"
                         : Utils.isEmail(value.trim())
@@ -77,6 +87,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   const SizedBox(height: 16),
                   CustomTextField(
+                    textInputAction: TextInputAction.next,
+
                     validator: (value) => value!.isEmpty
                         ? "Password must not be empty"
                         : value.trim().length < 7
@@ -182,6 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),

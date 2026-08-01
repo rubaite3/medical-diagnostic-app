@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("비탈리아 소개"),
+    "accessDenied": MessageLookupByLibrary.simpleMessage("액세스 거부됨"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
       "계정 삭제 기능은 현재 API에서 사용할 수 없습니다",
     ),
@@ -61,9 +62,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthDateHint": MessageLookupByLibrary.simpleMessage("생년월일"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("취소"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("언어 변경"),
+    "chooseLlm": MessageLookupByLibrary.simpleMessage("LLM 선택"),
+    "companyAddress": MessageLookupByLibrary.simpleMessage(
+      "Neue Grünstraße 17\n10179 Berlin\n독일",
+    ),
+    "companyName": MessageLookupByLibrary.simpleMessage("Vitalia GmbH"),
     "completedAtLabel": MessageLookupByLibrary.simpleMessage("완료 시간"),
     "confidenceLabel": MessageLookupByLibrary.simpleMessage("신뢰도"),
+    "confirmPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+      "비밀번호 확인을 입력하세요",
+    ),
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage("비밀번호 확인"),
+    "conflictOccurred": MessageLookupByLibrary.simpleMessage("충돌이 발생했습니다"),
+    "connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "연결 시간이 초과되었습니다. 다시 시도해주세요.",
+    ),
     "consultDoctorDefault": MessageLookupByLibrary.simpleMessage(
       "추가 평가를 위해 자격을 갖춘 의료 전문가와 상담하시기 바랍니다.",
     ),
@@ -181,13 +194,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "흡연 상태는 많은 건강 상태의 주요 요소입니다.",
     ),
     "diagnosisSmokerTitle": MessageLookupByLibrary.simpleMessage("흡연하시나요?"),
+    "disclaimerMessage": MessageLookupByLibrary.simpleMessage(
+      "이는 AI 분석에 기반한 예비 결과입니다. 확진을 위해 의사와 상담하시기 바랍니다.",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("계정이 없으신가요? "),
+    "downloadFailed": MessageLookupByLibrary.simpleMessage("다운로드 실패"),
     "downloadReportBtn": MessageLookupByLibrary.simpleMessage("PDF 다운로드"),
     "downloadingReportBtn": MessageLookupByLibrary.simpleMessage("다운로드 중..."),
+    "emailEmpty": MessageLookupByLibrary.simpleMessage("이메일을 입력하세요"),
+    "enterSessionId": MessageLookupByLibrary.simpleMessage("세션 ID 입력..."),
     "errorGeneral": MessageLookupByLibrary.simpleMessage(
       "문제가 발생했습니다. 다시 시도해주세요.",
     ),
     "errorGeneric": MessageLookupByLibrary.simpleMessage("오류가 발생했습니다."),
+    "failedToDownloadReport": MessageLookupByLibrary.simpleMessage(
+      "보고서 다운로드에 실패했습니다",
+    ),
+    "failedToLoadLlm": MessageLookupByLibrary.simpleMessage("LLM을 불러오지 못했습니다"),
     "feedback": MessageLookupByLibrary.simpleMessage("피드백"),
     "followUpProgress": MessageLookupByLibrary.simpleMessage("질문"),
     "followUpSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -219,6 +242,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "오늘 기분이 어떠신가요? 건강 평가를 시작해볼까요?",
     ),
     "hypertensionQuestion": MessageLookupByLibrary.simpleMessage("고혈압이 있으신가요?"),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage("잘못된 이메일 형식입니다"),
+    "invalidRequest": MessageLookupByLibrary.simpleMessage("잘못된 요청"),
+    "keyword_of": MessageLookupByLibrary.simpleMessage("/"),
     "language": MessageLookupByLibrary.simpleMessage("언어"),
     "languagesAdded": MessageLookupByLibrary.simpleMessage(
       "루마니아어와 스와힐리어를 다시 사용할 수 있습니다. 이제 영어, 독일어, 프랑스어, 스페인어, 포르투갈어, 루마니아어 또는 스와힐리어로 앱을 사용할 수 있습니다.",
@@ -232,6 +258,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "markAllAsRead": MessageLookupByLibrary.simpleMessage("모두 읽음으로 표시"),
     "markAsRead": MessageLookupByLibrary.simpleMessage("읽음으로 표시"),
     "markAsUnread": MessageLookupByLibrary.simpleMessage("읽지 않음으로 표시"),
+    "medicalHistory": MessageLookupByLibrary.simpleMessage("병력"),
+    "medicalQuality": MessageLookupByLibrary.simpleMessage("의료 품질"),
+    "nameEmpty": MessageLookupByLibrary.simpleMessage("이름을 입력하세요"),
     "navHome": MessageLookupByLibrary.simpleMessage("홈"),
     "navProfile": MessageLookupByLibrary.simpleMessage("프로필"),
     "navSettings": MessageLookupByLibrary.simpleMessage("설정"),
@@ -240,6 +269,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noDiagnosesAvailable": MessageLookupByLibrary.simpleMessage(
       "사용 가능한 진단이 없습니다.",
     ),
+    "noInternet": MessageLookupByLibrary.simpleMessage(
+      "인터넷 연결이 감지되지 않습니다. 다시 시도해주세요.",
+    ),
+    "noLlmsAvailable": MessageLookupByLibrary.simpleMessage("사용 가능한 LLM이 없습니다"),
     "noNotifications": MessageLookupByLibrary.simpleMessage("아직 알림이 없습니다."),
     "noSessionsYet": MessageLookupByLibrary.simpleMessage("아직 완료된 세션이 없습니다."),
     "noSymptomsFound": MessageLookupByLibrary.simpleMessage(
@@ -248,6 +281,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "noSymptomsSelected": MessageLookupByLibrary.simpleMessage(
       "아직 선택한 증상이 없습니다.",
     ),
+    "notFound": MessageLookupByLibrary.simpleMessage("요청한 정보를 찾을 수 없습니다"),
+    "notLoggedIn": MessageLookupByLibrary.simpleMessage("로그인되지 않음"),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("알림"),
     "onboardingButton": MessageLookupByLibrary.simpleMessage("계속"),
     "onboardingDesc1": MessageLookupByLibrary.simpleMessage(
@@ -269,6 +304,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "otpSubtitle": MessageLookupByLibrary.simpleMessage("전송된 6자리 코드를 입력하세요"),
     "otpSuccess": MessageLookupByLibrary.simpleMessage("이메일이 성공적으로 인증되었습니다!"),
     "otpTitle": MessageLookupByLibrary.simpleMessage("이메일 인증"),
+    "passwordEmpty": MessageLookupByLibrary.simpleMessage("비밀번호를 입력하세요"),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "비밀번호는 8자 이상이어야 합니다",
+    ),
+    "passwordsMustMatch": MessageLookupByLibrary.simpleMessage(
+      "비밀번호가 일치하지 않습니다",
+    ),
     "patientLabel": MessageLookupByLibrary.simpleMessage("환자"),
     "patientProfileSubtitle": MessageLookupByLibrary.simpleMessage(
       "의료 정보를 정확하게 입력해주세요",
@@ -294,6 +336,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "증상을 기반으로 가장 가능성이 높은 상태입니다.",
     ),
     "preliminaryResultsTitle": MessageLookupByLibrary.simpleMessage("예비 결과"),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("개인정보 처리방침"),
     "probabilityLabel": MessageLookupByLibrary.simpleMessage("확률"),
     "profileChooseFromGallery": MessageLookupByLibrary.simpleMessage(
       "갤러리에서 선택",
@@ -312,6 +355,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "readMore": MessageLookupByLibrary.simpleMessage("더 읽기"),
     "recommendationsLabel": MessageLookupByLibrary.simpleMessage("추천 사항"),
+    "refresh": MessageLookupByLibrary.simpleMessage("새로고침"),
     "resetProfileBtn": MessageLookupByLibrary.simpleMessage("의료 프로필 초기화"),
     "resetSubtitle": MessageLookupByLibrary.simpleMessage(
       "아래에 새 비밀번호를 입력하고 확인하여 계정을 업데이트하세요.",
@@ -320,13 +364,18 @@ class MessageLookup extends MessageLookupByLibrary {
       "재설정 링크가 성공적으로 전송되었습니다.",
     ),
     "resetTitle": MessageLookupByLibrary.simpleMessage("비밀번호 재설정"),
+    "retry": MessageLookupByLibrary.simpleMessage("재시도"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("재시도"),
     "safetyInfo": MessageLookupByLibrary.simpleMessage("안전 정보"),
+    "safetyInfoBody": MessageLookupByLibrary.simpleMessage(
+      "이 섹션은 애플리케이션 사용과 관련된 중요한 안전 정보를 제공합니다. 주의 깊게 읽어주십시오.",
+    ),
     "saveProfileBtn": MessageLookupByLibrary.simpleMessage("의료 프로필 저장"),
     "selectedSymptomsLabel": MessageLookupByLibrary.simpleMessage("선택한 증상"),
     "sendResetOtpBtn": MessageLookupByLibrary.simpleMessage("재설정 OTP 보내기"),
     "sessionHistoryTitle": MessageLookupByLibrary.simpleMessage("세션 기록"),
     "sessionIdLabel": MessageLookupByLibrary.simpleMessage("세션 ID"),
+    "sessionPreview": MessageLookupByLibrary.simpleMessage("세션 미리보기"),
     "settingsAccountDeleted": MessageLookupByLibrary.simpleMessage(
       "계정이 성공적으로 삭제되었습니다",
     ),
@@ -343,12 +392,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Google로 가입하셨습니다:",
     ),
     "smokerQuestion": MessageLookupByLibrary.simpleMessage("흡연자이신가요?"),
+    "someErrorOccurred": MessageLookupByLibrary.simpleMessage("오류가 발생했습니다"),
     "specialistLabel": MessageLookupByLibrary.simpleMessage("전문의"),
     "startDiagnosis": MessageLookupByLibrary.simpleMessage("진단 시작"),
     "startNewDiagnosisBtn": MessageLookupByLibrary.simpleMessage("새 진단 시작"),
+    "stripeBrand": MessageLookupByLibrary.simpleMessage("stripe"),
+    "submit": MessageLookupByLibrary.simpleMessage("제출"),
     "submitAnswersBtn": MessageLookupByLibrary.simpleMessage("제출 및 계속"),
     "submitFollowUpBtn": MessageLookupByLibrary.simpleMessage("다음"),
     "support": MessageLookupByLibrary.simpleMessage("지원"),
+    "supportEmail": MessageLookupByLibrary.simpleMessage("support@vitalia.com"),
     "symptomQuestionsSubtitle": MessageLookupByLibrary.simpleMessage(
       "증상에 대한 다음 질문에 답변해주세요.",
     ),
@@ -358,14 +411,23 @@ class MessageLookup extends MessageLookupByLibrary {
       "현재 경험하고 있는 모든 증상을 검색하고 추가하세요.",
     ),
     "symptomSearchTitle": MessageLookupByLibrary.simpleMessage("증상 선택"),
+    "symptomsSubmitted": MessageLookupByLibrary.simpleMessage(
+      "증상이 성공적으로 제출되었습니다",
+    ),
     "termsAgree": MessageLookupByLibrary.simpleMessage(
       "이용약관 및 개인정보 처리방침에 동의합니다",
+    ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage("이용약관"),
+    "thirdPartySoftware": MessageLookupByLibrary.simpleMessage("타사 소프트웨어"),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "예기치 않은 오류가 발생했습니다",
     ),
     "updatePasswordBtn": MessageLookupByLibrary.simpleMessage("비밀번호 업데이트"),
     "updatesDesc": MessageLookupByLibrary.simpleMessage(
       "더 나은 경험을 제공하고 최상의 건강 평가 경험을 지속적으로 제공하기 위해 몇 가지 업데이트를 진행했습니다.",
     ),
     "updatesTitle": MessageLookupByLibrary.simpleMessage("비탈리아 앱 변경사항"),
+    "user": MessageLookupByLibrary.simpleMessage("사용자"),
     "userIdLabel": MessageLookupByLibrary.simpleMessage("사용자 ID:"),
     "version": MessageLookupByLibrary.simpleMessage("버전 4.4.2 (2010356790)"),
     "viewFullReportBtn": MessageLookupByLibrary.simpleMessage("전체 보고서 보기"),

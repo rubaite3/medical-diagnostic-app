@@ -19,7 +19,7 @@ class NotificationsRepo {
   }
 
   Future<Either<AppError, AppResponse>> deleteNotification({
-    required int notificationId,
+    required String notificationId,
   }) async {
     final response = await _dio.delete(
       "${ApiConsts.notifications}/$notificationId",
@@ -33,7 +33,7 @@ class NotificationsRepo {
   }
 
   Future<Either<AppError, AppResponse>> readNotification({
-    int notificationId = -1,
+    String notificationId = "",
   }) async {
     final response = await _dio.patch(
       "${ApiConsts.notifications}/$notificationId/read",
@@ -42,7 +42,7 @@ class NotificationsRepo {
   }
 
   Future<Either<AppError, AppResponse>> unreadNotification({
-    int notificationId = -1,
+    String notificationId = "",
   }) async {
     final response = await _dio.patch(
       "${ApiConsts.notifications}/$notificationId/unread",

@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("حول فيتاليا"),
+    "accessDenied": MessageLookupByLibrary.simpleMessage("تم رفض الوصول"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
       "ميزة حذف الحساب غير متاحة في واجهة برمجة التطبيقات الحالية",
     ),
@@ -76,10 +77,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "birthDateHint": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+    "chooseLlm": MessageLookupByLibrary.simpleMessage("اختر نموذج اللغة"),
+    "companyAddress": MessageLookupByLibrary.simpleMessage(
+      "Neue Grünstraße 17\n10179 Berlin\nألمانيا",
+    ),
+    "companyName": MessageLookupByLibrary.simpleMessage("Vitalia GmbH"),
     "completedAtLabel": MessageLookupByLibrary.simpleMessage("اكتمل في"),
     "confidenceLabel": MessageLookupByLibrary.simpleMessage("الثقة"),
+    "confirmPasswordEmpty": MessageLookupByLibrary.simpleMessage(
+      "تأكيد كلمة المرور مطلوب",
+    ),
     "confirmPasswordHint": MessageLookupByLibrary.simpleMessage(
       "تأكيد كلمة المرور",
+    ),
+    "conflictOccurred": MessageLookupByLibrary.simpleMessage("حدث تعارض"),
+    "connectionTimeout": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاتصال، يرجى المحاولة مرة أخرى.",
     ),
     "consultDoctorDefault": MessageLookupByLibrary.simpleMessage(
       "يرجى استشارة أخصائي رعاية صحية مؤهل لمزيد من التقييم.",
@@ -216,14 +229,27 @@ class MessageLookup extends MessageLookupByLibrary {
       "هذه نتائج أولية تستند إلى تحليل الذكاء الاصطناعي. يرجى استشارة الطبيب للحصول على تشخيص مؤكد.",
     ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟ "),
+    "downloadFailed": MessageLookupByLibrary.simpleMessage("فشل التنزيل"),
     "downloadReportBtn": MessageLookupByLibrary.simpleMessage("تحميل PDF"),
     "downloadingReportBtn": MessageLookupByLibrary.simpleMessage(
       "جارٍ التنزيل...",
+    ),
+    "emailEmpty": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني مطلوب",
+    ),
+    "enterSessionId": MessageLookupByLibrary.simpleMessage(
+      "أدخل معرف الجلسة...",
     ),
     "errorGeneral": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
     ),
     "errorGeneric": MessageLookupByLibrary.simpleMessage("حدث خطأ ما."),
+    "failedToDownloadReport": MessageLookupByLibrary.simpleMessage(
+      "فشل تنزيل التقرير",
+    ),
+    "failedToLoadLlm": MessageLookupByLibrary.simpleMessage(
+      "فشل تحميل نماذج اللغة",
+    ),
     "feedback": MessageLookupByLibrary.simpleMessage("الملاحظات"),
     "followUpProgress": MessageLookupByLibrary.simpleMessage("سؤال"),
     "followUpSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -265,6 +291,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "hypertensionQuestion": MessageLookupByLibrary.simpleMessage(
       "هل تعاني من ارتفاع ضغط الدم؟",
     ),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "تنسيق البريد الإلكتروني غير صحيح",
+    ),
+    "invalidRequest": MessageLookupByLibrary.simpleMessage("طلب غير صالح"),
     "keyword_of": MessageLookupByLibrary.simpleMessage("من"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "languagesAdded": MessageLookupByLibrary.simpleMessage(
@@ -281,6 +311,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "markAllAsRead": MessageLookupByLibrary.simpleMessage("تحديد الكل كمقروء"),
     "markAsRead": MessageLookupByLibrary.simpleMessage("تحديد كمقروء"),
     "markAsUnread": MessageLookupByLibrary.simpleMessage("تحديد كغير مقروء"),
+    "medicalHistory": MessageLookupByLibrary.simpleMessage("التاريخ الطبي"),
+    "medicalQuality": MessageLookupByLibrary.simpleMessage("الجودة الطبية"),
+    "nameEmpty": MessageLookupByLibrary.simpleMessage("الاسم مطلوب"),
     "navHome": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "navProfile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "navSettings": MessageLookupByLibrary.simpleMessage("الإعدادات"),
@@ -288,6 +321,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("لا"),
     "noDiagnosesAvailable": MessageLookupByLibrary.simpleMessage(
       "لا تتوفر تشخيصات.",
+    ),
+    "noInternet": MessageLookupByLibrary.simpleMessage(
+      "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى.",
+    ),
+    "noLlmsAvailable": MessageLookupByLibrary.simpleMessage(
+      "لا توجد نماذج لغة متاحة",
     ),
     "noNotifications": MessageLookupByLibrary.simpleMessage(
       "لا توجد إشعارات بعد.",
@@ -299,6 +338,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "noSymptomsSelected": MessageLookupByLibrary.simpleMessage(
       "لم يتم اختيار أي أعراض بعد.",
     ),
+    "notFound": MessageLookupByLibrary.simpleMessage(
+      "المعلومات المطلوبة غير موجودة",
+    ),
+    "notLoggedIn": MessageLookupByLibrary.simpleMessage("غير مسجل الدخول"),
     "notificationsTitle": MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "occupationHint": MessageLookupByLibrary.simpleMessage("المهنة"),
     "onboardingButton": MessageLookupByLibrary.simpleMessage("متابعة"),
@@ -329,6 +372,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم تأكيد البريد الإلكتروني بنجاح!",
     ),
     "otpTitle": MessageLookupByLibrary.simpleMessage("تأكيد البريد الإلكتروني"),
+    "passwordEmpty": MessageLookupByLibrary.simpleMessage("كلمة المرور مطلوبة"),
+    "passwordTooShort": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    ),
+    "passwordsMustMatch": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تتطابق كلمات المرور",
+    ),
     "patientLabel": MessageLookupByLibrary.simpleMessage("المريض"),
     "patientProfileSubtitle": MessageLookupByLibrary.simpleMessage(
       "يرجى إكمال معلوماتك الطبية بدقة",
@@ -368,6 +418,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "preliminaryResultsTitle": MessageLookupByLibrary.simpleMessage(
       "النتائج الأولية",
     ),
+    "privacyPolicy": MessageLookupByLibrary.simpleMessage("سياسة الخصوصية"),
     "probabilityLabel": MessageLookupByLibrary.simpleMessage("الاحتمالية"),
     "profileChooseFromGallery": MessageLookupByLibrary.simpleMessage(
       "اختيار من المعرض",
@@ -386,6 +437,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "readMore": MessageLookupByLibrary.simpleMessage("اقرأ المزيد"),
     "recommendationsLabel": MessageLookupByLibrary.simpleMessage("التوصيات"),
+    "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
     "resetProfileBtn": MessageLookupByLibrary.simpleMessage(
       "إعادة تعيين الملف الطبي",
     ),
@@ -398,8 +450,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetTitle": MessageLookupByLibrary.simpleMessage(
       "إعادة تعيين كلمة المرور",
     ),
+    "retry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "retryBtn": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "safetyInfo": MessageLookupByLibrary.simpleMessage("معلومات السلامة"),
+    "safetyInfoBody": MessageLookupByLibrary.simpleMessage(
+      "يقدم هذا القسم معلومات مهمة عن السلامة فيما يتعلق باستخدام التطبيق. يرجى القراءة بعناية.",
+    ),
     "saveProfileBtn": MessageLookupByLibrary.simpleMessage("حفظ الملف الطبي"),
     "selectedSymptomsLabel": MessageLookupByLibrary.simpleMessage(
       "الأعراض المختارة",
@@ -411,6 +467,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الجلسات السابقة",
     ),
     "sessionIdLabel": MessageLookupByLibrary.simpleMessage("معرف الجلسة"),
+    "sessionPreview": MessageLookupByLibrary.simpleMessage("معاينة الجلسة"),
     "settingsAccountDeleted": MessageLookupByLibrary.simpleMessage(
       "تم حذف الحساب بنجاح",
     ),
@@ -433,9 +490,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "startNewDiagnosisBtn": MessageLookupByLibrary.simpleMessage(
       "بدء تشخيص جديد",
     ),
+    "stripeBrand": MessageLookupByLibrary.simpleMessage("stripe"),
+    "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "submitAnswersBtn": MessageLookupByLibrary.simpleMessage("إرسال ومتابعة"),
     "submitFollowUpBtn": MessageLookupByLibrary.simpleMessage("التالي"),
     "support": MessageLookupByLibrary.simpleMessage("الدعم"),
+    "supportEmail": MessageLookupByLibrary.simpleMessage("support@vitalia.com"),
     "symptomQuestionsSubtitle": MessageLookupByLibrary.simpleMessage(
       "يرجى الإجابة على الأسئلة التالية حول عرضك.",
     ),
@@ -453,6 +513,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "termsAgree": MessageLookupByLibrary.simpleMessage(
       "أوافق على الشروط وسياسة الخصوصية",
     ),
+    "termsAndConditions": MessageLookupByLibrary.simpleMessage(
+      "الشروط والأحكام",
+    ),
+    "thirdPartySoftware": MessageLookupByLibrary.simpleMessage(
+      "برامج الطرف الثالث",
+    ),
+    "unexpectedError": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ غير متوقع",
+    ),
     "updatePasswordBtn": MessageLookupByLibrary.simpleMessage(
       "تحديث كلمة المرور",
     ),
@@ -462,6 +531,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "updatesTitle": MessageLookupByLibrary.simpleMessage(
       "التغييرات في تطبيق فيتاليا",
     ),
+    "user": MessageLookupByLibrary.simpleMessage("مستخدم"),
     "userIdLabel": MessageLookupByLibrary.simpleMessage("معرف المستخدم:"),
     "version": MessageLookupByLibrary.simpleMessage(
       "الإصدار 4.4.2 (2010356790)",

@@ -37,7 +37,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
 
     on<_AuthLoading>(((_, emit) {
       GetIt.instance<LoaderCubit>().show();
-      emit(state.copyWith(auth: Auth.loading));
+      // emit(state.copyWith(op: Operation.loading));
     }));
     on<_ConnectivityToggeled>((event, emit) async {
       if (!event.isOnline) {
@@ -106,7 +106,7 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
 
   Future<void> _login(_Login event, Emitter<AuthState> emit) async {
     GetIt.instance<LoaderCubit>().show();
-    add(AuthEvent.authLoading());
+    emit(state.copyWith(op: Operation.loading));
     final res = await _authRepo.login(event.loginRequest);
     GetIt.instance<LoaderCubit>().hide();
     switch (res) {

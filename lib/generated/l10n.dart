@@ -2069,6 +2069,336 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose LLM`
+  String get chooseLlm {
+    return Intl.message('Choose LLM', name: 'chooseLlm', desc: '', args: []);
+  }
+
+  /// `Refresh`
+  String get refresh {
+    return Intl.message('Refresh', name: 'refresh', desc: '', args: []);
+  }
+
+  /// `Failed to load LLMs`
+  String get failedToLoadLlm {
+    return Intl.message(
+      'Failed to load LLMs',
+      name: 'failedToLoadLlm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get retry {
+    return Intl.message('Retry', name: 'retry', desc: '', args: []);
+  }
+
+  /// `No LLMs available`
+  String get noLlmsAvailable {
+    return Intl.message(
+      'No LLMs available',
+      name: 'noLlmsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message('Submit', name: 'submit', desc: '', args: []);
+  }
+
+  /// `stripe`
+  String get stripeBrand {
+    return Intl.message('stripe', name: 'stripeBrand', desc: '', args: []);
+  }
+
+  /// `Terms and conditions`
+  String get termsAndConditions {
+    return Intl.message(
+      'Terms and conditions',
+      name: 'termsAndConditions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Privacy Policy`
+  String get privacyPolicy {
+    return Intl.message(
+      'Privacy Policy',
+      name: 'privacyPolicy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Third-party software`
+  String get thirdPartySoftware {
+    return Intl.message(
+      'Third-party software',
+      name: 'thirdPartySoftware',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medical quality`
+  String get medicalQuality {
+    return Intl.message(
+      'Medical quality',
+      name: 'medicalQuality',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vitalia GmbH`
+  String get companyName {
+    return Intl.message(
+      'Vitalia GmbH',
+      name: 'companyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Neue Grünstraße 17\n10179 Berlin\nGermany`
+  String get companyAddress {
+    return Intl.message(
+      'Neue Grünstraße 17\n10179 Berlin\nGermany',
+      name: 'companyAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `support@vitalia.com`
+  String get supportEmail {
+    return Intl.message(
+      'support@vitalia.com',
+      name: 'supportEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This section provides important safety information regarding the use of the application. Please read carefully.`
+  String get safetyInfoBody {
+    return Intl.message(
+      'This section provides important safety information regarding the use of the application. Please read carefully.',
+      name: 'safetyInfoBody',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Session Preview`
+  String get sessionPreview {
+    return Intl.message(
+      'Session Preview',
+      name: 'sessionPreview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter session id...`
+  String get enterSessionId {
+    return Intl.message(
+      'Enter session id...',
+      name: 'enterSessionId',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email must not be empty`
+  String get emailEmpty {
+    return Intl.message(
+      'Email must not be empty',
+      name: 'emailEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email format`
+  String get invalidEmail {
+    return Intl.message(
+      'Invalid email format',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must not be empty`
+  String get passwordEmpty {
+    return Intl.message(
+      'Password must not be empty',
+      name: 'passwordEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters`
+  String get passwordTooShort {
+    return Intl.message(
+      'Password must be at least 8 characters',
+      name: 'passwordTooShort',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords must match`
+  String get passwordsMustMatch {
+    return Intl.message(
+      'Passwords must match',
+      name: 'passwordsMustMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name must not be empty`
+  String get nameEmpty {
+    return Intl.message(
+      'Name must not be empty',
+      name: 'nameEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password must not be empty`
+  String get confirmPasswordEmpty {
+    return Intl.message(
+      'Confirm password must not be empty',
+      name: 'confirmPasswordEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medical History`
+  String get medicalHistory {
+    return Intl.message(
+      'Medical History',
+      name: 'medicalHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not logged in`
+  String get notLoggedIn {
+    return Intl.message(
+      'Not logged in',
+      name: 'notLoggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Download failed`
+  String get downloadFailed {
+    return Intl.message(
+      'Download failed',
+      name: 'downloadFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to download report`
+  String get failedToDownloadReport {
+    return Intl.message(
+      'Failed to download report',
+      name: 'failedToDownloadReport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid request`
+  String get invalidRequest {
+    return Intl.message(
+      'Invalid request',
+      name: 'invalidRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Access denied`
+  String get accessDenied {
+    return Intl.message(
+      'Access denied',
+      name: 'accessDenied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The requested information could not be found`
+  String get notFound {
+    return Intl.message(
+      'The requested information could not be found',
+      name: 'notFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conflict occurred`
+  String get conflictOccurred {
+    return Intl.message(
+      'Conflict occurred',
+      name: 'conflictOccurred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unexpected error occurred`
+  String get unexpectedError {
+    return Intl.message(
+      'Unexpected error occurred',
+      name: 'unexpectedError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No internet connection detected, please try again.`
+  String get noInternet {
+    return Intl.message(
+      'No internet connection detected, please try again.',
+      name: 'noInternet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The connection has timed out, please try again.`
+  String get connectionTimeout {
+    return Intl.message(
+      'The connection has timed out, please try again.',
+      name: 'connectionTimeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get user {
+    return Intl.message('User', name: 'user', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

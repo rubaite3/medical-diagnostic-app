@@ -205,8 +205,8 @@ class _StripePayButton extends StatelessWidget {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(4),
                     ),
-                    child: const Text(
-                      "stripe",
+                    child: Text(
+                      S.of(context).stripeBrand,
                       style: TextStyle(
                         color: Color(0xFF635BFF),
                         fontWeight: FontWeight.bold,

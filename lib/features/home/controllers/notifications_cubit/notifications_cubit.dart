@@ -110,7 +110,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     );
   }
 
-  Future<void> deleteNotification({required int notificationId}) async {
+  Future<void> deleteNotification({required String notificationId}) async {
     emit(
       state.copyWith(
         loadingNotifications: [...state.loadingNotifications, notificationId],
@@ -145,7 +145,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     );
   }
 
-  Future<void> readNotification({required int notificationId}) async {
+  Future<void> readNotification({required String notificationId}) async {
     emit(
       state.copyWith(
         loadingNotifications: [...state.loadingNotifications, notificationId],
@@ -180,7 +180,7 @@ class NotificationsCubit extends Cubit<NotificationsState> {
     );
   }
 
-  Future<void> unreadNotification({required int notificationId}) async {
+  Future<void> unreadNotification({required String notificationId}) async {
     emit(
       state.copyWith(
         loadingNotifications: [...state.loadingNotifications, notificationId],

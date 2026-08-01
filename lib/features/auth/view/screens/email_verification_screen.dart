@@ -9,6 +9,7 @@ import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/auth_repo.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/resend_email_verification_request.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/email_verification/verify_email_request.dart';
+import '../../../../core/widgets/language_dropdown.dart';
 import '../../controllers/email_verification_cubit/email_verification_cubit.dart';
 import '../widgets/custom_button.dart';
 
@@ -80,14 +81,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: [LanguageDropdown()]),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 20),
               Container(
                 width: 80,
                 height: 80,
@@ -222,6 +222,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),

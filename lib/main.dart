@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          title: 'Medical_Diagnostic_App',
+          title: "Vitalia",
           theme: CentralTheme.lightTheme,
           darkTheme: CentralTheme.darkTheme,
           themeMode: ThemeMode.system,

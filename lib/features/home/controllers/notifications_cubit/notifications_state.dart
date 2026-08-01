@@ -7,7 +7,7 @@ sealed class NotificationsState with _$NotificationsState {
     required int notificationCount,
     required Operation op,
     required String statusMessage,
-    required List<int> loadingNotifications,
+    required List<String> loadingNotifications,
   }) = _NotificationsState;
   factory NotificationsState.initial() {
     return NotificationsState(

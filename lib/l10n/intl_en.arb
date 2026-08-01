@@ -1,12 +1,10 @@
 {
   "@@locale": "en",
   "@@last_modified": "2026-07-15",
-
   "appTitle": "Vitalia",
   "@appTitle": {
-    "description": "App title" 
+    "description": "App title"
   },
-
   "onboardingTitle1": "Smart AI Diagnosis",
   "onboardingDesc1": "Answer an intelligent questionnaire powered by AI to determine your symptoms accurately.",
   "onboardingTitle2": "Connect with a Doctor",
@@ -14,7 +12,6 @@
   "onboardingTitle3": "Comprehensive Medical Record",
   "onboardingDesc3": "View and download encoded diagnostic reports in PDF format for easy future reference.",
   "onboardingButton": "Continue",
-
   "loginTitle": "Welcome Back",
   "loginSubtitle": "Log in to your account",
   "loginBtn": "Login",
@@ -27,24 +24,20 @@
   "alreadyHaveAccount": "Already have an account? ",
   "loginLink": "Login",
   "termsAgree": "I agree to the Terms & Privacy Policy",
-
   "forgotTitle": "Forgot Password?",
   "forgotSubtitle": "Don't worry! Enter your email below to receive a password reset OTP.",
   "sendResetOtpBtn": "Send Reset OTP",
   "backToLogin": "Back to Login",
-
   "resetTitle": "Reset Password",
   "resetSubtitle": "Enter your new password below and confirm it to update your account.",
   "updatePasswordBtn": "Update Password",
   "resetSuccessMessage": "Reset link sent successfully.",
-
   "otpTitle": "Verify Email",
   "otpSubtitle": "Enter the 6-digit code sent to",
   "otpBtn": "Verify",
   "otpResend": "Resend code in ",
   "otpResendActive": "Resend code",
   "otpSuccess": "Email verified successfully!",
-
   "hintFullName": "Full Name",
   "hintEmail": "Email Address",
   "hintPassword": "Password",
@@ -53,12 +46,11 @@
   "confirmPasswordHint": "Confirm Password",
   "orContinueWith": "Or continue with",
   "googleSignIn": "Google",
-
   "patientProfileTitle": "Medical Profile",
   "patientProfileSubtitle": "Please complete your medical info accurately",
   "birthDateHint": "Birth Date",
   "ageHint": "Age",
-  "occupationHint" : "Occupation",
+  "occupationHint": "Occupation",
   "genderHint": "Gender",
   "activityLevelHint": "Activity Level",
   "smokerQuestion": "Are you a smoker?",
@@ -68,14 +60,12 @@
   "pregnantQuestion": "Are you currently pregnant?",
   "saveProfileBtn": "Save Medical Profile",
   "resetProfileBtn": "Reset Medical Profile",
-
   "welcome": "Welcome, ",
   "homeIntro": "How are you feeling today? Let's start your health assessment.",
   "startDiagnosis": "Start Diagnosis",
   "navHome": "Home",
   "navProfile": "Profile",
   "navSettings": "Settings",
-
   "settingsTitle": "Settings",
   "accountSettings": "Account settings",
   "accountLogin": "Account login",
@@ -101,7 +91,6 @@
   "questionsFeedback": "Questions or feedback?",
   "contactSupport": "We'd love to hear from you. Contact us at support@vitalia.com.",
   "readMore": "Read more",
-
   "diagnosisGenderTitle": "What is your gender?",
   "diagnosisGenderSubtitle": "This helps us provide gender-specific medical analysis.",
   "diagnosisActivityTitle": "What is your activity level?",
@@ -126,7 +115,6 @@
   "diagnosisPregnantSubtitle": "Pregnancy changes how we evaluate certain symptoms.",
   "diagnosisNextBtn": "Next",
   "diagnosisFinishBaselineBtn": "Start Assessment",
-
   "symptomSearchTitle": "Select Your Symptoms",
   "symptomSearchSubtitle": "Search and add all symptoms you are currently experiencing.",
   "symptomSearchHint": "Search for a symptom...",
@@ -134,23 +122,19 @@
   "noSymptomsFound": "No symptoms found. Try a different search.",
   "noSymptomsSelected": "No symptoms selected yet.",
   "continueBtn": "Continue",
-
   "symptomQuestionsTitle": "Symptom Details",
   "symptomQuestionsSubtitle": "Please answer the following questions about your symptom.",
   "nextSymptomBtn": "Next",
   "submitAnswersBtn": "Submit & Continue",
-
   "followUpTitle": "Follow-Up Questions",
   "followUpSubtitle": "Answer these questions to help us refine your diagnosis.",
   "followUpProgress": "Question",
   "submitFollowUpBtn": "Next",
-
   "preliminaryResultsTitle": "Preliminary Results",
   "preliminaryResultsSubtitle": "Based on your symptoms, here are the most probable conditions.",
   "probabilityLabel": "Probability",
   "viewFullReportBtn": "View Full Report",
   "startNewDiagnosisBtn": "Start New Diagnosis",
-
   "paymentTitle": "Unlock Full Report",
   "paymentSubtitle": "Get your detailed medical report with personalized recommendations.",
   "paymentFeature1": "Detailed disease analysis",
@@ -161,7 +145,6 @@
   "paymentBtn": "Pay with Stripe",
   "paymentSecure": "Secured by Stripe",
   "paymentCancelAnytime": "One-time payment, no subscription",
-
   "fullReportTitle": "Full Diagnostic Report",
   "fullReportSubtitle": "Your comprehensive health analysis and recommendations.",
   "downloadReportBtn": "Download PDF",
@@ -192,13 +175,11 @@
   "confidenceLabel": "Confidence",
   "specialistLabel": "Specialist",
   "adviceLabel": "Advice",
-
   "backBtn": "Back",
   "cancelBtn": "Cancel",
   "retryBtn": "Retry",
   "errorGeneral": "Something went wrong. Please try again.",
   "loadingText": "Please wait...",
-
   "genderMale": "Male",
   "genderFemale": "Female",
   "activitySedentary": "Sedentary (Low Activity)",
@@ -206,7 +187,6 @@
   "activityActive": "Highly Active",
   "yes": "Yes",
   "no": "No",
-
   "accountDeleteUnavailable": "Delete account feature is not available in the current API",
   "accountUserIdCopied": "User ID copied",
   "authAccountCreated": "Account created! check your email",
@@ -244,8 +224,44 @@
   "profileRemovePhoto": "Remove Photo",
   "settingsAccountDeleted": "Account deleted successfully",
   "settingsDeletingAccount": "Deleting account...",
-  "symptomsSubmitted" : "Symptoms Submitted successfully",
-  "keyword_of" : "of",
-  "disclaimerMessage" : "These are preliminary results based on AI analysis. Please consult a doctor for a confirmed diagnosis.",
-  "someErrorOccurred" : "Some error occurred"
+  "symptomsSubmitted": "Symptoms Submitted successfully",
+  "keyword_of": "of",
+  "disclaimerMessage": "These are preliminary results based on AI analysis. Please consult a doctor for a confirmed diagnosis.",
+  "someErrorOccurred": "Some error occurred",
+  "chooseLlm": "Choose LLM",
+  "refresh": "Refresh",
+  "failedToLoadLlm": "Failed to load LLMs",
+  "retry": "Retry",
+  "noLlmsAvailable": "No LLMs available",
+  "submit": "Submit",
+  "stripeBrand": "stripe",
+  "termsAndConditions": "Terms and conditions",
+  "privacyPolicy": "Privacy Policy",
+  "thirdPartySoftware": "Third-party software",
+  "medicalQuality": "Medical quality",
+  "companyName": "Vitalia GmbH",
+  "companyAddress": "Neue Grünstraße 17\n10179 Berlin\nGermany",
+  "supportEmail": "support@vitalia.com",
+  "safetyInfoBody": "This section provides important safety information regarding the use of the application. Please read carefully.",
+  "sessionPreview": "Session Preview",
+  "enterSessionId": "Enter session id...",
+  "emailEmpty": "Email must not be empty",
+  "invalidEmail": "Invalid email format",
+  "passwordEmpty": "Password must not be empty",
+  "passwordTooShort": "Password must be at least 8 characters",
+  "passwordsMustMatch": "Passwords must match",
+  "nameEmpty": "Name must not be empty",
+  "confirmPasswordEmpty": "Confirm password must not be empty",
+  "medicalHistory": "Medical History",
+  "notLoggedIn": "Not logged in",
+  "downloadFailed": "Download failed",
+  "failedToDownloadReport": "Failed to download report",
+  "invalidRequest": "Invalid request",
+  "accessDenied": "Access denied",
+  "notFound": "The requested information could not be found",
+  "conflictOccurred": "Conflict occurred",
+  "unexpectedError": "Unexpected error occurred",
+  "noInternet": "No internet connection detected, please try again.",
+  "connectionTimeout": "The connection has timed out, please try again.",
+  "user": "User"
 }

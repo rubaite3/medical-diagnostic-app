@@ -13,9 +13,9 @@ import 'package:medical_diagnostic_app1/main_exports.dart';
 class DiagnosisRepo {
   DiagnosisRepo() {
     dioTimeoutInstance = dioInstance;
-    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 70);
-    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 70);
-    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 70);
+    dioTimeoutInstance.options.connectTimeout = Duration(seconds: 100);
+    dioTimeoutInstance.options.receiveTimeout = Duration(seconds: 100);
+    dioTimeoutInstance.options.sendTimeout = Duration(seconds: 100);
   }
   Future<Either<AppError, AppResponse>> startDiagnosis(
     StartDiagnosisRequest request,

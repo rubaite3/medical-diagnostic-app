@@ -5,6 +5,8 @@ import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/reset_password_request.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
+import '../../../../core/widgets/language_dropdown.dart';
+
 import '../../controllers/reset_password_cubit/reset_password_cubit.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -32,20 +34,19 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: [LanguageDropdown()]),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(height: 30),
                 const AuthLogo(),
                 const SizedBox(height: 40),
-              Text(
-                S.of(context).resetTitle,
+                Text(
+                  S.of(context).resetTitle,
                   style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -120,6 +121,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   },
                   child: const SizedBox(height: 24),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           ),

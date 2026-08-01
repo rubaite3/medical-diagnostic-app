@@ -53,7 +53,7 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
             }
           },
 
-          child: const Text("Available LLMs"),
+          child: const Text("Available LLMs (optional)"),
         ),
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
@@ -86,7 +86,7 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
                   Text(
                     state.message.isNotEmpty
                         ? state.message
-                        : "Failed to load LLMs",
+                        : S.of(context).failedToLoadLlm,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -96,7 +96,7 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
                   FilledButton.tonalIcon(
                     onPressed: () => _availableLlmsCubit.loadLLMs(),
                     icon: const Icon(Icons.refresh_rounded),
-                    label: const Text("Retry"),
+                    label: Text(S.of(context).retry),
                   ),
                 ],
               ),
@@ -114,7 +114,7 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "No LLMs available",
+                    S.of(context).noLlmsAvailable,
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -225,7 +225,7 @@ class _AvailableLlmsScreenState extends State<AvailableLlmsScreen> {
           );
         },
         icon: const Icon(Icons.check_rounded),
-        label: const Text("Submit"),
+        label: Text(S.of(context).submit),
       ),
     );
   }

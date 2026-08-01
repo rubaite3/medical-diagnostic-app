@@ -5,6 +5,8 @@ import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/auth/controllers/forgot_pass_cubit/forgot_pass_cubit.dart';
 import 'package:medical_diagnostic_app1/features/auth/repos/requests/password/forget_password_request.dart';
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
+import '../../../../core/widgets/language_dropdown.dart';
+
 import '../../../../core/utils/utils.dart';
 import '../widgets/auth_logo.dart';
 import '../widgets/custom_text_field.dart';
@@ -30,10 +32,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: [LanguageDropdown()]),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -65,6 +67,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               Form(
                 key: _formKey,
                 child: CustomTextField(
+                  keyboardType: TextInputType.emailAddress,
+
                   validator: (value) => value!.isEmpty
                       ? "Email must not be empty"
                       : Utils.isEmail(value.trim())

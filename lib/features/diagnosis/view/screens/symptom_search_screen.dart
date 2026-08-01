@@ -52,6 +52,9 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
   }
 
   void _onSearchSubmitted(String query) {
+    setState(() {
+      _selectedSymptoms.add(Symptom(nameLocal: query));
+    });
     context.read<DiagnosisCubit>().searchSymptoms(query);
   }
 

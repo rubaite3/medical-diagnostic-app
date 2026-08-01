@@ -21,7 +21,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   bool _isRead(NotificationModel n) => n.readAt != null;
 
-  void _setRead(int? id, bool read) {
+  void _setRead(String? id, bool read) {
     if (id != null) {
       if (read) {
         context.read<NotificationsCubit>().readNotification(notificationId: id);
@@ -37,7 +37,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     context.read<NotificationsCubit>().markAllAsRead();
   }
 
-  void _delete(int? id) {
+  void _delete(String? id) {
     if (id != null) {
       context.read<NotificationsCubit>().deleteNotification(notificationId: id);
     }
