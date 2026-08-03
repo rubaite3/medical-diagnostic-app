@@ -2,7 +2,7 @@ class ApiConsts {
   static final yousefUrl = "https://deep-pangolin-normally.ngrok-free.app";
   static final rubaUrl = "https://enjoyment-tiling-glandular.ngrok-free.dev";
   static final serverUrl =
-      yousefUrl; // Change this to yousefUrl when you want to use the other server
+      rubaUrl; // Change this to yousefUrl when you want to use the other server
 
   // Auth
   static final baseUrl = "$serverUrl/api/v1/auth";

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import '../../../../core/theme/colors.dart'; 
 
 class ProfileDropdownField extends StatelessWidget {
   final String hint;
   final String value;
   final List<DropdownMenuItem<String>> items;
   final ValueChanged<String?> onChanged;
+  final IconData? prefixIcon; 
 
   const ProfileDropdownField({
     super.key,
@@ -12,38 +14,58 @@ class ProfileDropdownField extends StatelessWidget {
     required this.value,
     required this.items,
     required this.onChanged,
+    this.prefixIcon, 
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
+    
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(
-          0.5,
-        ), // استخدام لون الحاوية من الثيم
+       
+        color: AppColors.dotInactive.withValues(alpha:0.6),
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha:0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: DropdownButtonFormField<String>(
         initialValue: value,
         items: items,
         onChanged: onChanged,
+        isExpanded: true,
+        icon: const Icon(Icons.arrow_drop_down),
         style: theme.textTheme.bodyLarge?.copyWith(
-          color: colorScheme.onSurface,
+          fontSize: 16,
         ),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurfaceVariant,
-          ),
+         
+           prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 28) : null, 
           border: InputBorder.none,
+          isDense: true,
           contentPadding: const EdgeInsets.symmetric(
             horizontal: 16,
-            vertical: 4,
+            vertical: 14, 
           ),
         ),
+        
+        selectedItemBuilder: (BuildContext context) {
+          return items.map<Widget>((DropdownMenuItem<String> item) {
+            return Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                item.value ?? '',
+                style: const TextStyle(fontSize: 16),
+              ),
+            );
+          }).toList();
+        },
       ),
     );
   }
@@ -72,7 +94,7 @@ class ProfileCheckboxRow extends StatelessWidget {
         children: [
           Checkbox(
             value: value,
-            activeColor: colorScheme.primary, // لون التحديد من الثيم
+            activeColor: colorScheme.primary, 
             onChanged: onChanged,
           ),
           Expanded(

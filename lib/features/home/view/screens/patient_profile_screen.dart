@@ -233,6 +233,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   },
                   builder: (context, state) => ProfileDropdownField(
                     hint: S.of(context).genderHint,
+                    prefixIcon:Icons.person_outline ,
                     value: state,
                     items: const [
                       DropdownMenuItem(value: 'male', child: Text('Male')),
@@ -258,6 +259,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
 
                   builder: (context, state) => ProfileDropdownField(
                     hint: S.of(context).activityLevelHint,
+                    prefixIcon: Icons.fitness_center_outlined,
                     value: state,
                     items: const [
                       DropdownMenuItem(
@@ -283,6 +285,33 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
                   ),
                 ),
 
+                const SizedBox(height: 16),
+                BlocSelector<PatientProfileCubit, PatientProfileState, String>(
+                  bloc: _patientProfileCubit,
+                  selector: (state) => state.user.bloodGroup ?? "+A",
+                  builder: (context, state) => ProfileDropdownField(
+                    hint: S.of(context).bloodGroupHint,
+                    prefixIcon:Icons.bloodtype_outlined ,
+                    value: state,
+                    items: const [
+                      DropdownMenuItem(value: '+A', child: Text('+A')),
+                      DropdownMenuItem(value: '-A', child: Text('-A')),
+                      DropdownMenuItem(value: '+B', child: Text('+B')),
+                      DropdownMenuItem(value: '-B', child: Text('-B')),
+                      DropdownMenuItem(value: '+O', child: Text('+O')),
+                      DropdownMenuItem(value: '-O', child: Text('-O')),
+                      DropdownMenuItem(value: '+AB', child: Text('+AB')),
+                      DropdownMenuItem(value: '-AB', child: Text('-AB')),
+                    ],
+                    onChanged: (value) {
+                      _patientProfileCubit.updateUser(
+                        _patientProfileCubit.state.user.copyWith(
+                          bloodGroup: value!,
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 const SizedBox(height: 24),
 
                 // Health Questions Section

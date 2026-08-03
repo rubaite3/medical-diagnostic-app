@@ -113,7 +113,7 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   DiagnosisPageHeader(
                     title: S.of(context).symptomSearchTitle,
@@ -247,7 +247,7 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        DiagnosisSectionLabel(label: S.of(context).selectedSymptomsLabel),
+        Align(  alignment: Alignment.centerRight,child: DiagnosisSectionLabel(label: S.of(context).selectedSymptomsLabel)),
         if (_selectedSymptoms.isEmpty)
           Text(
             S.of(context).noSymptomsSelected,

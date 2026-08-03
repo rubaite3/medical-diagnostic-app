@@ -50,6 +50,7 @@
   "occupationHint" : "المهنة",
   "genderHint": "الجنس",
   "activityLevelHint": "مستوى النشاط",
+  "bloodGroupHint": "فصيلة الدم",
   "smokerQuestion": "هل أنت مدخن؟",
   "diabetesQuestion": "هل تعاني من السكري؟",
   "hypertensionQuestion": "هل تعاني من ارتفاع ضغط الدم؟",

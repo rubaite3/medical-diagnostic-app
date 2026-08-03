@@ -2394,6 +2394,15 @@ class S {
       args: [],
     );
   }
+  /// `Blood Group`
+  String get bloodGroupHint {
+    return Intl.message(
+      'Blood Group',
+      name: 'bloodGroupHint',
+      desc: '',
+      args: [],
+    );
+  }
 
   /// `User`
   String get user {

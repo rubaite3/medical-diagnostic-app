@@ -49,6 +49,7 @@
   "ageHint": "나이",
   "genderHint": "성별",
   "activityLevelHint": "활동 수준",
+  "bloodGroupHint": "혈액형",
   "smokerQuestion": "흡연자이신가요?",
   "diabetesQuestion": "당뇨병이 있으신가요?",
   "hypertensionQuestion": "고혈압이 있으신가요?",

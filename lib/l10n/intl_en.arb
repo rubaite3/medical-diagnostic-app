@@ -53,6 +53,7 @@
   "occupationHint": "Occupation",
   "genderHint": "Gender",
   "activityLevelHint": "Activity Level",
+  "bloodGroupHint": "Blood Group",
   "smokerQuestion": "Are you a smoker?",
   "diabetesQuestion": "Do you have diabetes?",
   "hypertensionQuestion": "Do you have hypertension?",

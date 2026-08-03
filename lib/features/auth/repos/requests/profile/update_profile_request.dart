@@ -25,6 +25,8 @@ sealed class UpdateProfileRequest with _$UpdateProfileRequest {
     @JsonKey(includeIfNull: false, name: "activity_level")
     @JsonKey(includeIfNull: false)
     String? activityLevel,
+    @JsonKey(includeIfNull: false, name: "blood_group") String? bloodGroup,
+
     @JsonKey(includeIfNull: false, name: "last_checkup_date")
     @JsonKey(includeIfNull: false)
     String? lastCheckupDate,

@@ -49,6 +49,7 @@
   "ageHint": "Alter",
   "genderHint": "Geschlecht",
   "activityLevelHint": "Aktivitätsniveau",
+  "bloodGroupHint": "Blutgruppe",
   "smokerQuestion": "Sind Sie Raucher?",
   "diabetesQuestion": "Haben Sie Diabetes?",
   "hypertensionQuestion": "Haben Sie Bluthochdruck?",

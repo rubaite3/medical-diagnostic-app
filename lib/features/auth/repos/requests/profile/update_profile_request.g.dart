@@ -22,6 +22,7 @@ _UpdateProfileRequest _$UpdateProfileRequestFromJson(
   hasHypertension: json['has_hypertension'] as bool?,
   isPregnant: json['is_pregnant'] as bool?,
   activityLevel: json['activity_level'] as String?,
+  bloodGroup: json['blood_group'] as String?,
   lastCheckupDate: json['last_checkup_date'] as String?,
 );
 
@@ -39,5 +40,6 @@ Map<String, dynamic> _$UpdateProfileRequestToJson(
   'has_hypertension': ?instance.hasHypertension,
   'is_pregnant': ?instance.isPregnant,
   'activity_level': ?instance.activityLevel,
+  'blood_group': ?instance.bloodGroup,
   'last_checkup_date': ?instance.lastCheckupDate,
 };
