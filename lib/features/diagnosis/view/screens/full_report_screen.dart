@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
-import 'package:medical_diagnostic_app1/core/controllers/loader_cubit/loader_cubit.dart';
-import 'package:medical_diagnostic_app1/core/dependencies/service_locator.dart';
 import 'package:medical_diagnostic_app1/core/navigation/route_paths.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/full_report_cubit/full_report_cubit.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/repos/diagnosis_repo.dart';
@@ -23,16 +20,16 @@ class FullReportScreen extends StatefulWidget {
 }
 
 class _FullReportScreenState extends State<FullReportScreen> {
+  late final FullReportCubit _fullReportCubit;
+
   @override
   void initState() {
-    if (widget.sessionId.isNotEmpty) {
-      _fullReportCubit = FullReportCubit(
-        sessionId: widget.sessionId,
-        repo: DiagnosisRepo(),
-      );
-    }
-    _fullReportCubit.loadReport();
     super.initState();
+    _fullReportCubit = FullReportCubit(
+      sessionId: widget.sessionId,
+      repo: DiagnosisRepo(),
+    );
+    _fullReportCubit.loadReport();
   }
 
   @override
@@ -45,6 +42,10 @@ class _FullReportScreenState extends State<FullReportScreen> {
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.onSurface),
+          onPressed: () => context.pop(),
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.share_outlined, color: colorScheme.onSurface),
@@ -52,428 +53,150 @@ class _FullReportScreenState extends State<FullReportScreen> {
           ),
         ],
       ),
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: SizedBox(
-          width: double.infinity,
-          child: BlocConsumer<FullReportCubit, FullReportState>(
-            bloc: _fullReportCubit,
-            listenWhen: (previous, current) =>
-                current.status == ReportStatus.failure &&
-                previous.status != ReportStatus.failure,
-            listener: (context, state) {
-              Utils.showToast(context, message: state.statusMessage, level: -1);
-            },
-            builder: (context, state) => FloatingActionButton.extended(
-              extendedPadding: EdgeInsets.zero,
-              elevation: 0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              onPressed: state.isDownloading
-                  ? null
-                  : () {
-                      _fullReportCubit.downloadReport();
-                    },
-              label: state.isDownloading
-                  ? Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            value: state.downloadProgress > 0
-                                ? state.downloadProgress
-                                : null,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        Text(
-                          S.of(context).downloadingReportBtn,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    )
-                  : Text(
-                      S.of(context).downloadReportBtn,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+      body: BlocBuilder<FullReportCubit, FullReportState>(
+        bloc: _fullReportCubit,
+        builder: (context, state) {
+          if (state.status == ReportStatus.loading) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          final report = state.finalReport;
+          if (report == null) {
+            return DiagnosisErrorWidget(
+              message: state.statusMessage.isEmpty ? S.of(context).errorGeneral : state.statusMessage,
+              onRetry: () => _fullReportCubit.loadReport(),
+            );
+          }
+
+          final isReviewed = report.status == "reviewed";
+
+          return SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Status Header
+                  Text(
+                    isReviewed ? S.of(context).reportStatusReviewed : S.of(context).reportStatusUnderReview,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: colorScheme.onSurface,
                     ),
-            ),
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      resizeToAvoidBottomInset: true,
-      body: SafeArea(
-        child: BlocBuilder<FullReportCubit, FullReportState>(
-          bloc: _fullReportCubit,
-          builder: (context, state) {
-            final report = state.finalReport;
-            if (state.status == ReportStatus.loading) {
-              return Center(child: CircularProgressIndicator());
-            } else if (report == null) {
-              return DiagnosisErrorWidget(
-                message: S.of(context).errorGeneral,
-                onRetry: () => _fullReportCubit.loadReport(),
-              );
-            } else {
-              final diagnoses = report.diagnoses;
-
-              return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24.0,
-                  vertical: 16,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    DiagnosisPageHeader(
-                      title: S.of(context).fullReportTitle,
-                      subtitle: S.of(context).fullReportSubtitle,
-                      icon: Icons.summarize_outlined,
-                    ),
-                    const SizedBox(height: 24),
-
-                    if (report.patientName != null)
-                      _MetaRow(
-                        label: S.of(context).patientLabel,
-                        value: report.patientName!,
-                        colorScheme: colorScheme,
-                        theme: theme,
-                      ),
-                    if (report.completedAt != null)
-                      _MetaRow(
-                        label: S.of(context).completedAtLabel,
-                        value: report.completedAt!,
-                        colorScheme: colorScheme,
-                        theme: theme,
-                      ),
-                    const SizedBox(height: 16),
-
-                    DiagnosisSectionLabel(label: S.of(context).diagnosesLabel),
-                    if (diagnoses.isEmpty)
-                      Text(
-                        S.of(context).noDiagnosesAvailable,
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      )
-                    else
-                      ...diagnoses.map(
-                        (d) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: _DiagnosisCard(
-                            diseaseName:
-                                d.diseaseNameLocal ?? d.diseaseName ?? "",
-                            probability: d.probability ?? 0.0,
-                            confidence: d.confidence,
-                            specialist: d.specialistLocal ?? d.specialist,
-                            advice: d.adviceLocal ?? d.advice,
-                            colorScheme: colorScheme,
-                            theme: theme,
-                          ),
-                        ),
-                      ),
-                    const SizedBox(height: 20),
-
-                    if (report.conversation.isNotEmpty) ...[
-                      DiagnosisSectionLabel(
-                        label: S.of(context).conversationLabel,
-                      ),
-                      _ConversationCard(
-                        conversation: report.conversation,
-                        colorScheme: colorScheme,
-                        theme: theme,
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-
-                    DiagnosisSectionLabel(
-                      label: S.of(context).consultDoctorLabel,
-                    ),
-                    _ConsultDoctorCard(
-                      colorScheme: colorScheme,
-                      theme: theme,
-                      content: S.of(context).consultDoctorDefault,
-                    ),
-                    const SizedBox(height: 32),
-
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          context.goNamed(RoutePaths.homeScreen);
-                        },
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(
-                            color: colorScheme.primary.withValues(alpha: 0.5),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                        child: Text(
-                          S.of(context).startNewDiagnosisBtn,
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 96),
-                  ],
-                ),
-              );
-            }
-          },
-        ),
-      ),
-    );
-  }
-
-  late final FullReportCubit _fullReportCubit;
-}
-
-class _MetaRow extends StatelessWidget {
-  final String label;
-  final String value;
-  final ColorScheme colorScheme;
-  final ThemeData theme;
-
-  const _MetaRow({
-    required this.label,
-    required this.value,
-    required this.colorScheme,
-    required this.theme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        children: [
-          Text(
-            "$label: ",
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _DiagnosisCard extends StatelessWidget {
-  final String diseaseName;
-  final double probability;
-  final String? confidence;
-  final String? specialist;
-  final String? advice;
-  final ColorScheme colorScheme;
-  final ThemeData theme;
-
-  const _DiagnosisCard({
-    required this.diseaseName,
-    required this.probability,
-    this.confidence,
-    this.specialist,
-    this.advice,
-    required this.colorScheme,
-    required this.theme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final percent = (probability * 100).toStringAsFixed(0);
-    final color = Utils.colorFromProbability(context, probability);
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.25)),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  diseaseName,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: colorScheme.onSurface,
                   ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  "$percent%",
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          LinearProgressIndicator(
-            value: probability,
-            backgroundColor: colorScheme.surfaceContainerHighest,
-            color: color,
-            minHeight: 6,
-            borderRadius: BorderRadius.circular(4),
-          ),
-          if (confidence != null) ...[
-            const SizedBox(height: 10),
-            Text(
-              "${S.of(context).confidenceLabel}: $confidence",
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-          ],
-          if (specialist != null) ...[
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Icon(
-                  Icons.local_hospital_outlined,
-                  size: 16,
-                  color: colorScheme.primary,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    "${S.of(context).specialistLabel}: $specialist",
-                    style: theme.textTheme.bodySmall?.copyWith(
+                  const SizedBox(height: 8),
+                  Text(
+                    S.of(context).reportStatusSubtitle,
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
-          if (advice != null && advice!.isNotEmpty) ...[
-            const SizedBox(height: 10),
-            Text(
-              "${S.of(context).adviceLabel}:",
-              style: theme.textTheme.bodySmall?.copyWith(
-                fontWeight: FontWeight.w600,
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              advice!,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface,
-                height: 1.5,
-              ),
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-}
+                  const SizedBox(height: 24),
 
-class _ConversationCard extends StatelessWidget {
-  final List<ConversationTurn> conversation;
-  final ColorScheme colorScheme;
-  final ThemeData theme;
-
-  const _ConversationCard({
-    required this.conversation,
-    required this.colorScheme,
-    required this.theme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.25)),
-      ),
-      child: ListView.separated(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: conversation.length,
-        separatorBuilder: (_, _) => const SizedBox(height: 10),
-        itemBuilder: (context, index) {
-          final turn = conversation[index];
-          final isUser = turn.role == "user";
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                  color: isUser
-                      ? colorScheme.primary.withValues(alpha: 0.12)
-                      : colorScheme.tertiary.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  isUser ? Icons.person_outline : Icons.smart_toy_outlined,
-                  size: 16,
-                  color: isUser ? colorScheme.primary : colorScheme.tertiary,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  turn.text ?? "",
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface,
-                    height: 1.5,
+                  // Doctor Card
+                  _DoctorCard(
+                    doctorName: S.of(context).mockDoctorName,
+                    specialist: S.of(context).mockDoctorSpecialist,
+                    isAvailable: true,
+                    expectedTime: S.of(context).mockExpectedTime,
+                    lastLogin: S.of(context).mockLastLogin,
                   ),
-                ),
+                  const SizedBox(height: 32),
+
+                  // Process Steps
+                  _ProcessStep(
+                    title: S.of(context).stepPaymentSuccess,
+                    isCompleted: true,
+                  ),
+                  _ProcessStep(
+                    title: S.of(context).stepAiAnalysis,
+                    isCompleted: true,
+                    showContent: true,
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...report.diagnoses.map((d) => _DetailedDiagnosisRow(
+                              name: d.diseaseNameLocal ?? d.diseaseName ?? "",
+                              probability: d.probability ?? 0.0,
+                            )),
+                        if (report.advice != null && report.advice!.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${S.of(context).adviceLabel}:",
+                                  style: theme.textTheme.labelMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: colorScheme.primary,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  report.advice!,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: colorScheme.onSurfaceVariant,
+                                    height: 1.5,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  _ProcessStep(
+                    title: isReviewed ? S.of(context).stepDoctorReview : S.of(context).stepDoctorReviewInProgress,
+                    isCompleted: isReviewed,
+                    isInProgress: !isReviewed,
+                  ),
+                  _ProcessStep(
+                    title: S.of(context).stepReceivePdf,
+                    isCompleted: false,
+                    isLast: true,
+                    stepNumber: 4,
+                  ),
+
+                  const SizedBox(height: 32),
+
+                  // PDF Download Button
+                  SizedBox(
+                    width: double.infinity,
+                    height: 56,
+                    child: ElevatedButton.icon(
+                      onPressed: state.isDownloading ? null : () => _fullReportCubit.downloadReport(),
+                      icon: state.isDownloading
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                            )
+                          : const Icon(Icons.picture_as_pdf_outlined),
+                      label: Text(
+                        state.isDownloading ? S.of(context).downloadingReportBtn : S.of(context).downloadReportBtn,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colorScheme.primary,
+                        foregroundColor: colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        elevation: 0,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  
+                  // Start New Button
+                  TextButton(
+                    onPressed: () => context.goNamed(RoutePaths.homeScreen),
+                    child: Text(S.of(context).startNewDiagnosisBtn),
+                  ),
+                  const SizedBox(height: 40),
+                ],
               ),
-            ],
+            ),
           );
         },
       ),
@@ -481,49 +204,296 @@ class _ConversationCard extends StatelessWidget {
   }
 }
 
-class _ConsultDoctorCard extends StatelessWidget {
-  final ColorScheme colorScheme;
-  final ThemeData theme;
-  final String content;
+class _DoctorCard extends StatelessWidget {
+  final String? doctorName;
+  final String? specialist;
+  final bool isAvailable;
+  final String expectedTime;
+  final String lastLogin;
 
-  const _ConsultDoctorCard({
-    required this.colorScheme,
-    required this.theme,
-    required this.content,
+  const _DoctorCard({
+    this.doctorName,
+    this.specialist,
+    this.isAvailable = false,
+    required this.expectedTime,
+    required this.lastLogin,
   });
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer.withValues(alpha: 0.25),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: colorScheme.primary.withValues(alpha: 0.3)),
+        color: colorScheme.primaryContainer.withValues(alpha: 0.3),
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(color: colorScheme.primary.withValues(alpha: 0.1)),
       ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            S.of(context).doctorInCharge,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: colorScheme.primary,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: colorScheme.primary,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Icon(Icons.person, color: Colors.white, size: 32),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      doctorName ?? S.of(context).noDoctorAssigned,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (specialist != null)
+                      Text(
+                        specialist!,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              if (isAvailable)
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: Colors.green.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    S.of(context).doctorAvailable,
+                    style: theme.textTheme.labelSmall?.copyWith(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _DoctorInfoItem(
+                label: S.of(context).expectedReviewTime,
+                value: expectedTime,
+                icon: Icons.access_time,
+              ),
+              _DoctorInfoItem(
+                label: S.of(context).lastLogin,
+                value: lastLogin,
+                icon: Icons.login,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DoctorInfoItem extends StatelessWidget {
+  final String label;
+  final String value;
+  final IconData icon;
+
+  const _DoctorInfoItem({required this.label, required this.value, required this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Icon(icon, size: 14, color: theme.colorScheme.onSurfaceVariant),
+            const SizedBox(width: 4),
+            Text(
+              label,
+              style: theme.textTheme.labelSmall?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: theme.textTheme.bodySmall?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ProcessStep extends StatelessWidget {
+  final String title;
+  final bool isCompleted;
+  final bool isInProgress;
+  final bool isLast;
+  final int? stepNumber;
+  final Widget? content;
+  final bool showContent;
+
+  const _ProcessStep({
+    required this.title,
+    this.isCompleted = false,
+    this.isInProgress = false,
+    this.isLast = false,
+    this.stepNumber,
+    this.content,
+    this.showContent = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return IntrinsicHeight(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: colorScheme.primary.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(
-              Icons.local_hospital_outlined,
-              color: colorScheme.primary,
-              size: 20,
+          Column(
+            children: [
+              Container(
+                width: 28,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: isCompleted
+                      ? Colors.green
+                      : (isInProgress ? colorScheme.primary : colorScheme.surfaceContainerHighest),
+                  shape: BoxShape.circle,
+                ),
+                child: isCompleted
+                    ? const Icon(Icons.check, size: 16, color: Colors.white)
+                    : Center(
+                        child: stepNumber != null
+                            ? Text(
+                                stepNumber.toString(),
+                                style: TextStyle(
+                                  color: isInProgress ? Colors.white : colorScheme.onSurfaceVariant,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            : Container(
+                                width: 8,
+                                height: 8,
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                      ),
+              ),
+              if (!isLast)
+                Expanded(
+                  child: Container(
+                    width: 2,
+                    color: isCompleted ? Colors.green : colorScheme.outlineVariant,
+                  ),
+                ),
+            ],
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    title,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      fontWeight: isCompleted || isInProgress ? FontWeight.bold : FontWeight.normal,
+                      color: isCompleted || isInProgress ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+                if (showContent && content != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: content!,
+                  ),
+                if (!isLast) const SizedBox(height: 24),
+              ],
             ),
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              content,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface,
-                height: 1.6,
+        ],
+      ),
+    );
+  }
+}
+
+class _DetailedDiagnosisRow extends StatelessWidget {
+  final String name;
+  final double probability;
+
+  const _DetailedDiagnosisRow({required this.name, required this.probability});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final color = Utils.colorFromProbability(context, probability);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  name,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
+              Text(
+                "${(probability * 100).toStringAsFixed(0)}%",
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: color,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: probability,
+              minHeight: 6,
+              backgroundColor: colorScheme.surfaceContainerHighest,
+              valueColor: AlwaysStoppedAnimation<Color>(color),
             ),
           ),
         ],

@@ -2408,6 +2408,145 @@ class S {
   String get user {
     return Intl.message('User', name: 'user', desc: '', args: []);
   }
+
+  String get reportStatusReviewed {
+    return Intl.message(
+      'Reviewed',
+      name: 'reportStatusReviewed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reportStatusUnderReview {
+    return Intl.message(
+      'Under Review',
+      name: 'reportStatusUnderReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get reportStatusSubtitle {
+    return Intl.message(
+      'Report Status',
+      name: 'reportStatusSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get stepPaymentSuccess {
+    return Intl.message(
+      'Payment Successful',
+      name: 'stepPaymentSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get stepAiAnalysis {
+    return Intl.message(
+      'AI Analysis',
+      name: 'stepAiAnalysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get stepDoctorReview {
+    return Intl.message(
+      'Doctor Review',
+      name: 'stepDoctorReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get stepDoctorReviewInProgress {
+    return Intl.message(
+      'Doctor Review in Progress',
+      name: 'stepDoctorReviewInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get stepReceivePdf {
+    return Intl.message(
+      'Receive PDF',
+      name: 'stepReceivePdf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get doctorInCharge {
+    return Intl.message(
+      'Doctor in Charge',
+      name: 'doctorInCharge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get noDoctorAssigned {
+    return Intl.message(
+      'No Doctor Assigned',
+      name: 'noDoctorAssigned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get doctorAvailable {
+    return Intl.message(
+      'Doctor Available',
+      name: 'doctorAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get expectedReviewTime {
+    return Intl.message(
+      'Expected Review Time',
+      name: 'expectedReviewTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get lastLogin {
+    return Intl.message(
+      'Last Login',
+      name: 'lastLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String? get mockDoctorName => null;
+
+  String? get mockDoctorSpecialist => null;
+
+  String get mockExpectedTime {
+    return Intl.message(
+      'Expected Time',
+      name: 'mockExpectedTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get mockLastLogin {
+    return Intl.message(
+      'Last Login',
+      name: 'mockLastLogin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

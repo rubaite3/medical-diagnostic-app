@@ -85,7 +85,7 @@ class _DiagnosisPaymentScreenState extends State<DiagnosisPaymentScreen> {
 
               // Price display
               Text(
-                S.of(context).paymentAmount,
+                 "\$${S.of(context).paymentAmount}",
                 style: theme.textTheme.displaySmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
