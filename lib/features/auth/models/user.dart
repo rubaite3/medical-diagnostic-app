@@ -18,7 +18,7 @@ sealed class User with _$User {
     @JsonKey(name: "has_hypertension") bool? hasHypertension,
     @JsonKey(name: "is_pregnant") bool? isPregnant,
     @JsonKey(name: "activity_level") String? activityLevel,
-    @JsonKey(name: "blood_group") String? bloodGroup,
+    @JsonKey(name: "blood_type") String? bloodType,
     @JsonKey(name: "last_checkup_date") String? lastCheckupDate,
   }) = _User;
 

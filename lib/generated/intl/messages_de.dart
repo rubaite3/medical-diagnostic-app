@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "DiagnoseNow": MessageLookupByLibrary.simpleMessage("Diagnose Now!"),
+    "NoMoreSymptoms": MessageLookupByLibrary.simpleMessage("No more symptoms"),
+    "NotAssignedYet": MessageLookupByLibrary.simpleMessage("Not assigned yet"),
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("Über Vitalia"),
     "accessDenied": MessageLookupByLibrary.simpleMessage("Zugriff verweigert"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
@@ -74,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backBtn": MessageLookupByLibrary.simpleMessage("Zurück"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("Zurück zum Login"),
     "birthDateHint": MessageLookupByLibrary.simpleMessage("Geburtsdatum"),
+    "bloodGroupHint": MessageLookupByLibrary.simpleMessage("Blutgruppe"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Abbrechen"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Sprache ändern"),
     "chooseLlm": MessageLookupByLibrary.simpleMessage("LLM auswählen"),
@@ -197,6 +201,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
       "Was ist Ihr Geburtsdatum?",
+    ),
+    "diagnosisBloodTypeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Dies hilft uns, individuellere Gesundheitshinweise zu geben.",
+    ),
+    "diagnosisBloodTypeTitle": MessageLookupByLibrary.simpleMessage(
+      "Welche Blutgruppe haben Sie?",
     ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "Diagnosedetails",

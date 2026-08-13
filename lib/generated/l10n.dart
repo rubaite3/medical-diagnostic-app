@@ -930,6 +930,26 @@ class S {
     );
   }
 
+  /// `What is your blood type?`
+  String get diagnosisBloodTypeTitle {
+    return Intl.message(
+      'What is your blood type?',
+      name: 'diagnosisBloodTypeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This helps us provide more personalized health guidance.`
+  String get diagnosisBloodTypeSubtitle {
+    return Intl.message(
+      'This helps us provide more personalized health guidance.',
+      name: 'diagnosisBloodTypeSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Do you drink alcohol?`
   String get diagnosisAlcoholTitle {
     return Intl.message(
@@ -1300,6 +1320,171 @@ class S {
     return Intl.message(
       'One-time payment, no subscription',
       name: 'paymentCancelAnytime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Under Review`
+  String get reportStatusUnderReview {
+    return Intl.message(
+      'Under Review',
+      name: 'reportStatusUnderReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviewed`
+  String get reportStatusReviewed {
+    return Intl.message(
+      'Reviewed',
+      name: 'reportStatusReviewed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your case has been received successfully - you will receive a notification when the report is ready.`
+  String get reportStatusSubtitle {
+    return Intl.message(
+      'Your case has been received successfully - you will receive a notification when the report is ready.',
+      name: 'reportStatusSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor in charge of your case`
+  String get doctorInCharge {
+    return Intl.message(
+      'Doctor in charge of your case',
+      name: 'doctorInCharge',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available now`
+  String get doctorAvailable {
+    return Intl.message(
+      'Available now',
+      name: 'doctorAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expected review time`
+  String get expectedReviewTime {
+    return Intl.message(
+      'Expected review time',
+      name: 'expectedReviewTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last login`
+  String get lastLogin {
+    return Intl.message('Last login', name: 'lastLogin', desc: '', args: []);
+  }
+
+  /// `No doctor assigned yet`
+  String get noDoctorAssigned {
+    return Intl.message(
+      'No doctor assigned yet',
+      name: 'noDoctorAssigned',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Payment successful`
+  String get stepPaymentSuccess {
+    return Intl.message(
+      'Payment successful',
+      name: 'stepPaymentSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `AI Symptom Analysis`
+  String get stepAiAnalysis {
+    return Intl.message(
+      'AI Symptom Analysis',
+      name: 'stepAiAnalysis',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor Review`
+  String get stepDoctorReview {
+    return Intl.message(
+      'Doctor Review',
+      name: 'stepDoctorReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor Review - In Progress`
+  String get stepDoctorReviewInProgress {
+    return Intl.message(
+      'Doctor Review - In Progress',
+      name: 'stepDoctorReviewInProgress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Receive PDF Report`
+  String get stepReceivePdf {
+    return Intl.message(
+      'Receive PDF Report',
+      name: 'stepReceivePdf',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dr. Ahmed Al-Khateeb`
+  String get mockDoctorName {
+    return Intl.message(
+      'Dr. Ahmed Al-Khateeb',
+      name: 'mockDoctorName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dermatologist`
+  String get mockDoctorSpecialist {
+    return Intl.message(
+      'Dermatologist',
+      name: 'mockDoctorSpecialist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Within 2 hours`
+  String get mockExpectedTime {
+    return Intl.message(
+      'Within 2 hours',
+      name: 'mockExpectedTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `30 minutes ago`
+  String get mockLastLogin {
+    return Intl.message(
+      '30 minutes ago',
+      name: 'mockLastLogin',
       desc: '',
       args: [],
     );
@@ -2394,6 +2579,12 @@ class S {
       args: [],
     );
   }
+
+  /// `User`
+  String get user {
+    return Intl.message('User', name: 'user', desc: '', args: []);
+  }
+
   /// `Blood Group`
   String get bloodGroupHint {
     return Intl.message(
@@ -2404,148 +2595,39 @@ class S {
     );
   }
 
-  /// `User`
-  String get user {
-    return Intl.message('User', name: 'user', desc: '', args: []);
-  }
-
-  String get reportStatusReviewed {
+  /// `No more symptoms`
+  String get NoMoreSymptoms {
     return Intl.message(
-      'Reviewed',
-      name: 'reportStatusReviewed',
+      'No more symptoms',
+      name: 'NoMoreSymptoms',
       desc: '',
       args: [],
     );
   }
 
-  String get reportStatusUnderReview {
+  /// `Diagnose Now!`
+  String get DiagnoseNow {
     return Intl.message(
-      'Under Review',
-      name: 'reportStatusUnderReview',
+      'Diagnose Now!',
+      name: 'DiagnoseNow',
       desc: '',
       args: [],
     );
   }
 
-  String get reportStatusSubtitle {
+  /// `Not assigned yet`
+  String get NotAssignedYet {
     return Intl.message(
-      'Report Status',
-      name: 'reportStatusSubtitle',
+      'Not assigned yet',
+      name: 'NotAssignedYet',
       desc: '',
       args: [],
     );
   }
 
-  String get stepPaymentSuccess {
-    return Intl.message(
-      'Payment Successful',
-      name: 'stepPaymentSuccess',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get stepAiAnalysis {
-    return Intl.message(
-      'AI Analysis',
-      name: 'stepAiAnalysis',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get stepDoctorReview {
-    return Intl.message(
-      'Doctor Review',
-      name: 'stepDoctorReview',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get stepDoctorReviewInProgress {
-    return Intl.message(
-      'Doctor Review in Progress',
-      name: 'stepDoctorReviewInProgress',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get stepReceivePdf {
-    return Intl.message(
-      'Receive PDF',
-      name: 'stepReceivePdf',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get doctorInCharge {
-    return Intl.message(
-      'Doctor in Charge',
-      name: 'doctorInCharge',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get noDoctorAssigned {
-    return Intl.message(
-      'No Doctor Assigned',
-      name: 'noDoctorAssigned',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get doctorAvailable {
-    return Intl.message(
-      'Doctor Available',
-      name: 'doctorAvailable',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get expectedReviewTime {
-    return Intl.message(
-      'Expected Review Time',
-      name: 'expectedReviewTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get lastLogin {
-    return Intl.message(
-      'Last Login',
-      name: 'lastLogin',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String? get mockDoctorName => null;
-
-  String? get mockDoctorSpecialist => null;
-
-  String get mockExpectedTime {
-    return Intl.message(
-      'Expected Time',
-      name: 'mockExpectedTime',
-      desc: '',
-      args: [],
-    );
-  }
-
-  String get mockLastLogin {
-    return Intl.message(
-      'Last Login',
-      name: 'mockLastLogin',
-      desc: '',
-      args: [],
-    );
+  /// `phone number`
+  String get phone {
+    return Intl.message('phone number', name: 'phone', desc: '', args: []);
   }
 }
 

@@ -43,7 +43,10 @@ class _FullReportScreenState extends State<FullReportScreen> {
         backgroundColor: colorScheme.surface,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.onSurface),
+          icon: Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: colorScheme.onSurface,
+          ),
           onPressed: () => context.pop(),
         ),
         actions: [
@@ -63,138 +66,158 @@ class _FullReportScreenState extends State<FullReportScreen> {
           final report = state.finalReport;
           if (report == null) {
             return DiagnosisErrorWidget(
-              message: state.statusMessage.isEmpty ? S.of(context).errorGeneral : state.statusMessage,
+              message: state.statusMessage.isEmpty
+                  ? S.of(context).errorGeneral
+                  : state.statusMessage,
               onRetry: () => _fullReportCubit.loadReport(),
             );
           }
 
-          final isReviewed = report.status == "reviewed";
+          final isReviewed = (report.session?.phase ?? "") != "doctor_review";
 
           return SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // Status Header
-                  Text(
-                    isReviewed ? S.of(context).reportStatusReviewed : S.of(context).reportStatusUnderReview,
-                    style: theme.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: colorScheme.onSurface,
+            child: RefreshIndicator(
+              onRefresh: () async {
+                _fullReportCubit.loadReport();
+              },
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24.0,
+                  vertical: 16,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // Status Header
+                    Text(
+                      isReviewed
+                          ? S.of(context).reportStatusReviewed
+                          : S.of(context).reportStatusUnderReview,
+                      style: theme.textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: colorScheme.onSurface,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    S.of(context).reportStatusSubtitle,
-                    textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
+                    const SizedBox(height: 8),
+                    Text(
+                      S.of(context).reportStatusSubtitle,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
+                    const SizedBox(height: 24),
 
-                  // Doctor Card
-                  _DoctorCard(
-                    doctorName: S.of(context).mockDoctorName,
-                    specialist: S.of(context).mockDoctorSpecialist,
-                    isAvailable: true,
-                    expectedTime: S.of(context).mockExpectedTime,
-                    lastLogin: S.of(context).mockLastLogin,
-                  ),
-                  const SizedBox(height: 32),
+                    // Doctor Card
+                    _DoctorCard(
+                      doctorName: state.finalReport?.doctor?.fullName ?? "",
+                      specialist:
+                          state.finalReport?.doctor?.specialization ?? "",
+                      isAvailable: false,
+                      expectedTime: S.of(context).mockExpectedTime,
+                      phone: state.finalReport?.doctor?.phone ?? "",
+                    ),
+                    const SizedBox(height: 32),
 
-                  // Process Steps
-                  _ProcessStep(
-                    title: S.of(context).stepPaymentSuccess,
-                    isCompleted: true,
-                  ),
-                  _ProcessStep(
-                    title: S.of(context).stepAiAnalysis,
-                    isCompleted: true,
-                    showContent: true,
-                    content: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ...report.diagnoses.map((d) => _DetailedDiagnosisRow(
-                              name: d.diseaseNameLocal ?? d.diseaseName ?? "",
+                    // Process Steps
+                    BlocListener<FullReportCubit, FullReportState>(
+                      bloc: _fullReportCubit,
+                      listenWhen: (previous, current) =>
+                          current.status != ReportStatus.initial,
+                      listener: (context, state) {
+                        if (state.status == ReportStatus.failure) {
+                          Utils.showToast(
+                            context,
+                            message: state.statusMessage,
+                            level: -1,
+                          );
+                        }
+                      },
+                      child: _ProcessStep(
+                        title: S.of(context).stepPaymentSuccess,
+                        isCompleted: true,
+                      ),
+                    ),
+                    _ProcessStep(
+                      title: S.of(context).stepAiAnalysis,
+                      isCompleted: true,
+                      showContent: true,
+                      content: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ...(report.session?.diagnoses ?? []).map(
+                            (d) => _DetailedDiagnosisRow(
+                              name: d.diseaseNameLocal ?? "",
                               probability: d.probability ?? 0.0,
-                            )),
-                        if (report.advice != null && report.advice!.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${S.of(context).adviceLabel}:",
-                                  style: theme.textTheme.labelMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    color: colorScheme.primary,
-                                  ),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  report.advice!,
-                                  style: theme.textTheme.bodySmall?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              ],
+                              advice: d.adviceLocal ?? "",
                             ),
                           ),
-                      ],
-                    ),
-                  ),
-                  _ProcessStep(
-                    title: isReviewed ? S.of(context).stepDoctorReview : S.of(context).stepDoctorReviewInProgress,
-                    isCompleted: isReviewed,
-                    isInProgress: !isReviewed,
-                  ),
-                  _ProcessStep(
-                    title: S.of(context).stepReceivePdf,
-                    isCompleted: false,
-                    isLast: true,
-                    stepNumber: 4,
-                  ),
-
-                  const SizedBox(height: 32),
-
-                  // PDF Download Button
-                  SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton.icon(
-                      onPressed: state.isDownloading ? null : () => _fullReportCubit.downloadReport(),
-                      icon: state.isDownloading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
-                            )
-                          : const Icon(Icons.picture_as_pdf_outlined),
-                      label: Text(
-                        state.isDownloading ? S.of(context).downloadingReportBtn : S.of(context).downloadReportBtn,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        elevation: 0,
+                        ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  // Start New Button
-                  TextButton(
-                    onPressed: () => context.goNamed(RoutePaths.homeScreen),
-                    child: Text(S.of(context).startNewDiagnosisBtn),
-                  ),
-                  const SizedBox(height: 40),
-                ],
+                    _ProcessStep(
+                      title: isReviewed
+                          ? S.of(context).stepDoctorReview
+                          : S.of(context).stepDoctorReviewInProgress,
+                      isCompleted: isReviewed,
+                      isInProgress: !isReviewed,
+                    ),
+                    _ProcessStep(
+                      title: S.of(context).stepReceivePdf,
+                      isCompleted: isReviewed,
+                      isLast: true,
+                      stepNumber: 4,
+                    ),
+
+                    const SizedBox(height: 32),
+
+                    // PDF Download Button
+                    SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton.icon(
+                        onPressed: state.isDownloading
+                            ? null
+                            : () => _fullReportCubit.downloadReport(),
+                        icon: state.isDownloading
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white,
+                                ),
+                              )
+                            : const Icon(Icons.picture_as_pdf_outlined),
+                        label: Text(
+                          state.isDownloading
+                              ? S.of(context).downloadingReportBtn
+                              : S.of(context).downloadReportBtn,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          elevation: 0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Start New Button
+                    TextButton(
+                      onPressed: () => context.goNamed(RoutePaths.homeScreen),
+                      child: Text(S.of(context).startNewDiagnosisBtn),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
+                ),
               ),
             ),
           );
@@ -209,20 +232,21 @@ class _DoctorCard extends StatelessWidget {
   final String? specialist;
   final bool isAvailable;
   final String expectedTime;
-  final String lastLogin;
+  final String phone;
 
   const _DoctorCard({
     this.doctorName,
     this.specialist,
     this.isAvailable = false,
     required this.expectedTime,
-    required this.lastLogin,
+    required this.phone,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final isAssigned = doctorName == "";
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -251,7 +275,11 @@ class _DoctorCard extends StatelessWidget {
                   color: colorScheme.primary,
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: const Icon(Icons.person, color: Colors.white, size: 32),
+                child: Icon(
+                  isAssigned ? Icons.question_mark : Icons.person,
+                  color: Colors.white,
+                  size: 32,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -259,10 +287,14 @@ class _DoctorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      doctorName ?? S.of(context).noDoctorAssigned,
-                      style: theme.textTheme.titleMedium?.copyWith(
+                      isAssigned
+                          ? S.of(context).noDoctorAssigned
+                          : doctorName ?? "",
+                      style: theme.textTheme.titleSmall?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     if (specialist != null)
                       Text(
@@ -276,7 +308,10 @@ class _DoctorCard extends StatelessWidget {
               ),
               if (isAvailable)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.green.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(8),
@@ -301,9 +336,9 @@ class _DoctorCard extends StatelessWidget {
                 icon: Icons.access_time,
               ),
               _DoctorInfoItem(
-                label: S.of(context).lastLogin,
-                value: lastLogin,
-                icon: Icons.login,
+                label: S.of(context).phone,
+                value: phone,
+                icon: Icons.phone,
               ),
             ],
           ),
@@ -318,7 +353,11 @@ class _DoctorInfoItem extends StatelessWidget {
   final String value;
   final IconData icon;
 
-  const _DoctorInfoItem({required this.label, required this.value, required this.icon});
+  const _DoctorInfoItem({
+    required this.label,
+    required this.value,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -386,7 +425,9 @@ class _ProcessStep extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isCompleted
                       ? Colors.green
-                      : (isInProgress ? colorScheme.primary : colorScheme.surfaceContainerHighest),
+                      : (isInProgress
+                            ? colorScheme.primary
+                            : colorScheme.surfaceContainerHighest),
                   shape: BoxShape.circle,
                 ),
                 child: isCompleted
@@ -396,7 +437,9 @@ class _ProcessStep extends StatelessWidget {
                             ? Text(
                                 stepNumber.toString(),
                                 style: TextStyle(
-                                  color: isInProgress ? Colors.white : colorScheme.onSurfaceVariant,
+                                  color: isInProgress
+                                      ? Colors.white
+                                      : colorScheme.onSurfaceVariant,
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -415,7 +458,9 @@ class _ProcessStep extends StatelessWidget {
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: isCompleted ? Colors.green : colorScheme.outlineVariant,
+                    color: isCompleted
+                        ? Colors.green
+                        : colorScheme.outlineVariant,
                   ),
                 ),
             ],
@@ -430,8 +475,12 @@ class _ProcessStep extends StatelessWidget {
                   child: Text(
                     title,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      fontWeight: isCompleted || isInProgress ? FontWeight.bold : FontWeight.normal,
-                      color: isCompleted || isInProgress ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+                      fontWeight: isCompleted || isInProgress
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                      color: isCompleted || isInProgress
+                          ? colorScheme.onSurface
+                          : colorScheme.onSurfaceVariant,
                     ),
                   ),
                 ),
@@ -452,9 +501,14 @@ class _ProcessStep extends StatelessWidget {
 
 class _DetailedDiagnosisRow extends StatelessWidget {
   final String name;
+  final String advice;
   final double probability;
 
-  const _DetailedDiagnosisRow({required this.name, required this.probability});
+  const _DetailedDiagnosisRow({
+    required this.name,
+    required this.probability,
+    required this.advice,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -494,6 +548,14 @@ class _DetailedDiagnosisRow extends StatelessWidget {
               minHeight: 6,
               backgroundColor: colorScheme.surfaceContainerHighest,
               valueColor: AlwaysStoppedAnimation<Color>(color),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            advice,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              height: 1.5,
             ),
           ),
         ],

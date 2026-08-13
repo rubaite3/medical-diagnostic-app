@@ -1,5 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'doctor_model.dart';
+import 'workflow_item_model.dart';
+
 part 'diagnosis_models.freezed.dart';
 part 'diagnosis_models.g.dart';
 
@@ -16,6 +19,7 @@ abstract class StartDiagnosisRequest with _$StartDiagnosisRequest {
     @JsonKey(name: 'is_alcoholic') bool? isAlcoholic,
     @JsonKey(name: 'patient_job') String? patientJob,
     @JsonKey(name: 'birth_date') String? birthDate,
+    @JsonKey(name: 'blood_type') String? bloodType,
     @JsonKey(name: 'model_name') String? modelName,
   }) = _StartDiagnosisRequest;
 
@@ -135,6 +139,7 @@ abstract class SubmitFollowUpAnswerRequest with _$SubmitFollowUpAnswerRequest {
     @JsonKey(name: 'session_id') required String sessionId,
     @JsonKey(name: 'question_id') required String questionId,
     required String answer,
+    @JsonKey(name: 'force_diagnosis') @Default(false) bool forceDiagnosis,
   }) = _SubmitFollowUpAnswerRequest;
 
   factory SubmitFollowUpAnswerRequest.fromJson(Map<String, dynamic> json) =>
@@ -168,16 +173,29 @@ abstract class Diagnosis with _$Diagnosis {
 }
 
 @freezed
+abstract class DiagnosisSessionModel with _$DiagnosisSessionModel {
+  const factory DiagnosisSessionModel({
+    int? id,
+    @JsonKey(name: "session_hash") String? sessionHash,
+    String? status,
+    String? phase,
+    @JsonKey(name: "started_at") DateTime? startedAt,
+    @JsonKey(name: "completed_at") DateTime? completedAt,
+    @JsonKey(name: "ai_result") @Default([]) List<Diagnosis> diagnoses,
+  }) = _DiagnosisSessionModel;
+
+  factory DiagnosisSessionModel.fromJson(Map<String, dynamic> json) =>
+      _$DiagnosisSessionModelFromJson(json);
+}
+
+@freezed
 abstract class FinalReport with _$FinalReport {
   const factory FinalReport({
-    @JsonKey(name: "session_id") String? sessionId,
-    @JsonKey(name: "patient_name") String? patientName,
+    DiagnosisSessionModel? session,
     @JsonKey(name: "started_at") String? startedAt,
+    DoctorModel? doctor,
     @JsonKey(name: "completed_at") String? completedAt,
-    String? status,
-    @Default([]) List<Diagnosis> diagnoses,
-    String? advice,
-    @Default([]) List<ConversationTurn> conversation,
+    @JsonKey(name: "workflow_steps") List<WorkflowItemModel>? workflowSteps,
   }) = _FinalReport;
 
   factory FinalReport.fromJson(Map<String, dynamic> json) =>
@@ -187,7 +205,7 @@ abstract class FinalReport with _$FinalReport {
 @freezed
 abstract class SessionHistoryItem with _$SessionHistoryItem {
   const factory SessionHistoryItem({
-    @JsonKey(name: 'session_id') String? sessionId,
+    String? id,
     @JsonKey(name: 'created_at') String? createdAt,
     String? status,
     @JsonKey(name: 'top_disease') String? topDisease,

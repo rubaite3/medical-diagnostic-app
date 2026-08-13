@@ -19,6 +19,7 @@ _StartDiagnosisRequest _$StartDiagnosisRequestFromJson(
   isAlcoholic: json['is_alcoholic'] as bool?,
   patientJob: json['patient_job'] as String?,
   birthDate: json['birth_date'] as String?,
+  bloodType: json['blood_type'] as String?,
   modelName: json['model_name'] as String?,
 );
 
@@ -35,6 +36,7 @@ Map<String, dynamic> _$StartDiagnosisRequestToJson(
   'is_alcoholic': instance.isAlcoholic,
   'patient_job': instance.patientJob,
   'birth_date': instance.birthDate,
+  'blood_type': instance.bloodType,
   'model_name': instance.modelName,
 };
 
@@ -167,6 +169,7 @@ _SubmitFollowUpAnswerRequest _$SubmitFollowUpAnswerRequestFromJson(
   sessionId: json['session_id'] as String,
   questionId: json['question_id'] as String,
   answer: json['answer'] as String,
+  forceDiagnosis: json['force_diagnosis'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$SubmitFollowUpAnswerRequestToJson(
@@ -175,6 +178,7 @@ Map<String, dynamic> _$SubmitFollowUpAnswerRequestToJson(
   'session_id': instance.sessionId,
   'question_id': instance.questionId,
   'answer': instance.answer,
+  'force_diagnosis': instance.forceDiagnosis,
 };
 
 _ConversationTurn _$ConversationTurnFromJson(Map<String, dynamic> json) =>
@@ -209,40 +213,64 @@ Map<String, dynamic> _$DiagnosisToJson(_Diagnosis instance) =>
       'advice_local': instance.adviceLocal,
     };
 
-_FinalReport _$FinalReportFromJson(Map<String, dynamic> json) => _FinalReport(
-  sessionId: json['session_id'] as String?,
-  patientName: json['patient_name'] as String?,
-  startedAt: json['started_at'] as String?,
-  completedAt: json['completed_at'] as String?,
+_DiagnosisSessionModel _$DiagnosisSessionModelFromJson(
+  Map<String, dynamic> json,
+) => _DiagnosisSessionModel(
+  id: (json['id'] as num?)?.toInt(),
+  sessionHash: json['session_hash'] as String?,
   status: json['status'] as String?,
+  phase: json['phase'] as String?,
+  startedAt: json['started_at'] == null
+      ? null
+      : DateTime.parse(json['started_at'] as String),
+  completedAt: json['completed_at'] == null
+      ? null
+      : DateTime.parse(json['completed_at'] as String),
   diagnoses:
-      (json['diagnoses'] as List<dynamic>?)
+      (json['ai_result'] as List<dynamic>?)
           ?.map((e) => Diagnosis.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      const [],
-  advice: json['advice'] as String?,
-  conversation:
-      (json['conversation'] as List<dynamic>?)
-          ?.map((e) => ConversationTurn.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
 );
 
+Map<String, dynamic> _$DiagnosisSessionModelToJson(
+  _DiagnosisSessionModel instance,
+) => <String, dynamic>{
+  'id': instance.id,
+  'session_hash': instance.sessionHash,
+  'status': instance.status,
+  'phase': instance.phase,
+  'started_at': instance.startedAt?.toIso8601String(),
+  'completed_at': instance.completedAt?.toIso8601String(),
+  'ai_result': instance.diagnoses,
+};
+
+_FinalReport _$FinalReportFromJson(Map<String, dynamic> json) => _FinalReport(
+  session: json['session'] == null
+      ? null
+      : DiagnosisSessionModel.fromJson(json['session'] as Map<String, dynamic>),
+  startedAt: json['started_at'] as String?,
+  doctor: json['doctor'] == null
+      ? null
+      : DoctorModel.fromJson(json['doctor'] as Map<String, dynamic>),
+  completedAt: json['completed_at'] as String?,
+  workflowSteps: (json['workflow_steps'] as List<dynamic>?)
+      ?.map((e) => WorkflowItemModel.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
+
 Map<String, dynamic> _$FinalReportToJson(_FinalReport instance) =>
     <String, dynamic>{
-      'session_id': instance.sessionId,
-      'patient_name': instance.patientName,
+      'session': instance.session,
       'started_at': instance.startedAt,
+      'doctor': instance.doctor,
       'completed_at': instance.completedAt,
-      'status': instance.status,
-      'diagnoses': instance.diagnoses,
-      'advice': instance.advice,
-      'conversation': instance.conversation,
+      'workflow_steps': instance.workflowSteps,
     };
 
 _SessionHistoryItem _$SessionHistoryItemFromJson(Map<String, dynamic> json) =>
     _SessionHistoryItem(
-      sessionId: json['session_id'] as String?,
+      id: json['id'] as String?,
       createdAt: json['created_at'] as String?,
       status: json['status'] as String?,
       topDisease: json['top_disease'] as String?,
@@ -251,7 +279,7 @@ _SessionHistoryItem _$SessionHistoryItemFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$SessionHistoryItemToJson(_SessionHistoryItem instance) =>
     <String, dynamic>{
-      'session_id': instance.sessionId,
+      'id': instance.id,
       'created_at': instance.createdAt,
       'status': instance.status,
       'top_disease': instance.topDisease,

@@ -105,6 +105,8 @@
   "diagnosisOccupationSubtitle": "Your occupation helps us understand your daily activity and environment.",
   "diagnosisOccupationHint": "e.g. Teacher, Engineer, Student",
   "diagMustEnterOccupation": "You must enter your occupation!",
+  "diagnosisBloodTypeTitle": "What is your blood type?",
+  "diagnosisBloodTypeSubtitle": "This helps us provide more personalized health guidance.",
   "diagnosisAlcoholTitle": "Do you drink alcohol?",
   "diagnosisAlcoholSubtitle": "Alcohol consumption can influence several health conditions.",
   "diagnosisDiabetesTitle": "Do you have diabetes?",
@@ -280,5 +282,10 @@
   "unexpectedError": "Unexpected error occurred",
   "noInternet": "No internet connection detected, please try again.",
   "connectionTimeout": "The connection has timed out, please try again.",
-  "user": "User"
+  "user": "User",
+  "bloodGroupHint": "Blood Group",
+  "NoMoreSymptoms": "No more symptoms",
+  "DiagnoseNow": "Diagnose Now!",
+  "NotAssignedYet": "Not assigned yet",
+  "phone" : "phone number"
 }

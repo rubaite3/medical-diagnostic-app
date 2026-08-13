@@ -48,6 +48,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     bool? isAlcoholic,
     String? patientJob,
     String? birthDate,
+    String? bloodGroup,
     String? modelName,
   }) {
     emit(
@@ -61,6 +62,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
         isAlcoholic: isAlcoholic ?? state.isAlcoholic,
         patientJob: patientJob ?? state.patientJob,
         birthDate: birthDate ?? state.birthDate,
+        bloodType: bloodGroup ?? state.bloodType,
 
         modelName: modelName,
       ),
@@ -90,10 +92,11 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
           isAlcoholic: state.isAlcoholic,
           patientJob: state.patientJob,
           birthDate: formattedBirthDate,
+          bloodType: state.bloodType,
           modelName: state.modelName,
         );
     GetIt.instance<LoaderCubit>().show(message: S.current.diagStarting);
-
+    emit(state.copyWith(op: Operation.loading));
     final result = await _repo.startDiagnosis(request);
     GetIt.instance<LoaderCubit>().hide();
 
@@ -183,6 +186,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
         syms += "${symptom.nameLocal ?? ""},";
       }
       GetIt.instance<LoaderCubit>().show();
+      emit(state.copyWith(op: Operation.loading));
       final response = await _repo.selectSymptom(
         SelectSymptomRequest(
           name: syms.substring(0, syms.length - 1),
@@ -219,6 +223,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     if (state.sessionId == null) return;
 
     GetIt.instance<LoaderCubit>().show();
+    emit(state.copyWith(op: Operation.loading));
     final result = await _repo.getNextFollowUp(state.sessionId!);
     GetIt.instance<LoaderCubit>().hide();
 
@@ -230,6 +235,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
             statusMessage: error.errorMessage,
           ),
         );
+        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
       },
       (response) {
         final data = FollowUpResponse.fromJson(
@@ -240,7 +246,6 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
             op: Operation.success,
             statusMessage: S.current.diagLoaded,
             currentFollowUp: data,
-            followUpProgress: state.followUpProgress + 1,
           ),
         );
         emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
@@ -248,12 +253,17 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     );
   }
 
-  Future<void> submitFollowUpAnswer(String questionId, String answerId) async {
+  Future<void> submitFollowUpAnswer(
+    String questionId,
+    String answerId, {
+    bool isForce = false,
+  }) async {
     if (state.sessionId == null) return;
     if (state.op.isFailure) {
       getNextFollowUp();
     } else {
       final request = SubmitFollowUpAnswerRequest(
+        forceDiagnosis: isForce,
         sessionId: state.sessionId!,
         questionId: questionId,
         answer:
@@ -267,7 +277,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
                 .label,
       );
       GetIt.instance<LoaderCubit>().show();
-
+      emit(state.copyWith(op: Operation.loading));
       final result = await _repo.submitFollowUpAnswer(request);
 
       GetIt.instance<LoaderCubit>().hide();
@@ -301,6 +311,7 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
   Future<void> getReport() async {
     if (state.sessionId == null) return;
     GetIt.instance<LoaderCubit>().show();
+    emit(state.copyWith(op: Operation.loading));
     final result = await _repo.getReport(state.sessionId!);
     GetIt.instance<LoaderCubit>().hide();
     result.fold(

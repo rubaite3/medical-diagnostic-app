@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DiagnosisState {
 
- Operation get op; String get statusMessage; String? get gender; String? get activityLevel; bool get isSmoker; bool get hasDiabetes; bool get hasHypertension; bool get isPregnant; bool? get isAlcoholic; String? get patientJob; String? get birthDate; String? get sessionId; String? get modelName; Operation get searchOp; List<Symptom> get searchResults; List<Question> get currentQuestions; FollowUpResponse? get currentFollowUp; int get followUpProgress; int get followUpTotal; FinalReport? get finalReport; double get downloadProgress; String? get clientSecret;
+ Operation get op; String get statusMessage; String? get gender; String? get activityLevel; bool get isSmoker; bool get hasDiabetes; bool get hasHypertension; bool get isPregnant; bool? get isAlcoholic; String? get patientJob; String? get birthDate; String? get bloodType; String? get sessionId; String? get modelName; Operation get searchOp; List<Symptom> get searchResults; List<Question> get currentQuestions; FollowUpResponse? get currentFollowUp; int get followUpProgress; int get followUpTotal; FinalReport? get finalReport; double get downloadProgress; String? get clientSecret;
 /// Create a copy of DiagnosisState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $DiagnosisStateCopyWith<DiagnosisState> get copyWith => _$DiagnosisStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiagnosisState&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.modelName, modelName) || other.modelName == modelName)&&(identical(other.searchOp, searchOp) || other.searchOp == searchOp)&&const DeepCollectionEquality().equals(other.searchResults, searchResults)&&const DeepCollectionEquality().equals(other.currentQuestions, currentQuestions)&&(identical(other.currentFollowUp, currentFollowUp) || other.currentFollowUp == currentFollowUp)&&(identical(other.followUpProgress, followUpProgress) || other.followUpProgress == followUpProgress)&&(identical(other.followUpTotal, followUpTotal) || other.followUpTotal == followUpTotal)&&(identical(other.finalReport, finalReport) || other.finalReport == finalReport)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.clientSecret, clientSecret) || other.clientSecret == clientSecret));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiagnosisState&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.modelName, modelName) || other.modelName == modelName)&&(identical(other.searchOp, searchOp) || other.searchOp == searchOp)&&const DeepCollectionEquality().equals(other.searchResults, searchResults)&&const DeepCollectionEquality().equals(other.currentQuestions, currentQuestions)&&(identical(other.currentFollowUp, currentFollowUp) || other.currentFollowUp == currentFollowUp)&&(identical(other.followUpProgress, followUpProgress) || other.followUpProgress == followUpProgress)&&(identical(other.followUpTotal, followUpTotal) || other.followUpTotal == followUpTotal)&&(identical(other.finalReport, finalReport) || other.finalReport == finalReport)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.clientSecret, clientSecret) || other.clientSecret == clientSecret));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,op,statusMessage,gender,activityLevel,isSmoker,hasDiabetes,hasHypertension,isPregnant,isAlcoholic,patientJob,birthDate,sessionId,modelName,searchOp,const DeepCollectionEquality().hash(searchResults),const DeepCollectionEquality().hash(currentQuestions),currentFollowUp,followUpProgress,followUpTotal,finalReport,downloadProgress,clientSecret]);
+int get hashCode => Object.hashAll([runtimeType,op,statusMessage,gender,activityLevel,isSmoker,hasDiabetes,hasHypertension,isPregnant,isAlcoholic,patientJob,birthDate,bloodType,sessionId,modelName,searchOp,const DeepCollectionEquality().hash(searchResults),const DeepCollectionEquality().hash(currentQuestions),currentFollowUp,followUpProgress,followUpTotal,finalReport,downloadProgress,clientSecret]);
 
 @override
 String toString() {
-  return 'DiagnosisState(op: $op, statusMessage: $statusMessage, gender: $gender, activityLevel: $activityLevel, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, sessionId: $sessionId, modelName: $modelName, searchOp: $searchOp, searchResults: $searchResults, currentQuestions: $currentQuestions, currentFollowUp: $currentFollowUp, followUpProgress: $followUpProgress, followUpTotal: $followUpTotal, finalReport: $finalReport, downloadProgress: $downloadProgress, clientSecret: $clientSecret)';
+  return 'DiagnosisState(op: $op, statusMessage: $statusMessage, gender: $gender, activityLevel: $activityLevel, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, bloodType: $bloodType, sessionId: $sessionId, modelName: $modelName, searchOp: $searchOp, searchResults: $searchResults, currentQuestions: $currentQuestions, currentFollowUp: $currentFollowUp, followUpProgress: $followUpProgress, followUpTotal: $followUpTotal, finalReport: $finalReport, downloadProgress: $downloadProgress, clientSecret: $clientSecret)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $DiagnosisStateCopyWith<$Res>  {
   factory $DiagnosisStateCopyWith(DiagnosisState value, $Res Function(DiagnosisState) _then) = _$DiagnosisStateCopyWithImpl;
 @useResult
 $Res call({
- Operation op, String statusMessage, String? gender, String? activityLevel, bool isSmoker, bool hasDiabetes, bool hasHypertension, bool isPregnant, bool? isAlcoholic, String? patientJob, String? birthDate, String? sessionId, String? modelName, Operation searchOp, List<Symptom> searchResults, List<Question> currentQuestions, FollowUpResponse? currentFollowUp, int followUpProgress, int followUpTotal, FinalReport? finalReport, double downloadProgress, String? clientSecret
+ Operation op, String statusMessage, String? gender, String? activityLevel, bool isSmoker, bool hasDiabetes, bool hasHypertension, bool isPregnant, bool? isAlcoholic, String? patientJob, String? birthDate, String? bloodType, String? sessionId, String? modelName, Operation searchOp, List<Symptom> searchResults, List<Question> currentQuestions, FollowUpResponse? currentFollowUp, int followUpProgress, int followUpTotal, FinalReport? finalReport, double downloadProgress, String? clientSecret
 });
 
 
@@ -63,7 +63,7 @@ class _$DiagnosisStateCopyWithImpl<$Res>
 
 /// Create a copy of DiagnosisState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? op = null,Object? statusMessage = null,Object? gender = freezed,Object? activityLevel = freezed,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? sessionId = freezed,Object? modelName = freezed,Object? searchOp = null,Object? searchResults = null,Object? currentQuestions = null,Object? currentFollowUp = freezed,Object? followUpProgress = null,Object? followUpTotal = null,Object? finalReport = freezed,Object? downloadProgress = null,Object? clientSecret = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? op = null,Object? statusMessage = null,Object? gender = freezed,Object? activityLevel = freezed,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? bloodType = freezed,Object? sessionId = freezed,Object? modelName = freezed,Object? searchOp = null,Object? searchResults = null,Object? currentQuestions = null,Object? currentFollowUp = freezed,Object? followUpProgress = null,Object? followUpTotal = null,Object? finalReport = freezed,Object? downloadProgress = null,Object? clientSecret = freezed,}) {
   return _then(DiagnosisState(
 op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
 as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
@@ -76,6 +76,7 @@ as bool,isPregnant: null == isPregnant ? _self.isPregnant : isPregnant // ignore
 as bool,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
 as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String?,modelName: freezed == modelName ? _self.modelName : modelName // ignore: cast_nullable_to_non_nullable
 as String?,searchOp: null == searchOp ? _self.searchOp : searchOp // ignore: cast_nullable_to_non_nullable
@@ -196,10 +197,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? bloodType,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DiagnosisState() when $default != null:
-return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
+return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
   return orElse();
 
 }
@@ -217,10 +218,10 @@ return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? bloodType,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)  $default,) {final _that = this;
 switch (_that) {
 case _DiagnosisState():
-return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
+return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -237,10 +238,10 @@ return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Operation op,  String statusMessage,  String? gender,  String? activityLevel,  bool isSmoker,  bool hasDiabetes,  bool hasHypertension,  bool isPregnant,  bool? isAlcoholic,  String? patientJob,  String? birthDate,  String? bloodType,  String? sessionId,  String? modelName,  Operation searchOp,  List<Symptom> searchResults,  List<Question> currentQuestions,  FollowUpResponse? currentFollowUp,  int followUpProgress,  int followUpTotal,  FinalReport? finalReport,  double downloadProgress,  String? clientSecret)?  $default,) {final _that = this;
 switch (_that) {
 case _DiagnosisState() when $default != null:
-return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
+return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.sessionId,_that.modelName,_that.searchOp,_that.searchResults,_that.currentQuestions,_that.currentFollowUp,_that.followUpProgress,_that.followUpTotal,_that.finalReport,_that.downloadProgress,_that.clientSecret);case _:
   return null;
 
 }
@@ -252,7 +253,7 @@ return $default(_that.op,_that.statusMessage,_that.gender,_that.activityLevel,_t
 
 
 class _DiagnosisState implements DiagnosisState {
-  const _DiagnosisState({this.op = Operation.neutral, this.statusMessage = "", this.gender, this.activityLevel, this.isSmoker = false, this.hasDiabetes = false, this.hasHypertension = false, this.isPregnant = false, this.isAlcoholic = false, this.patientJob = "", this.birthDate = "", this.sessionId, this.modelName, this.searchOp = Operation.neutral,  List<Symptom> searchResults = const [],  List<Question> currentQuestions = const [], this.currentFollowUp, this.followUpProgress = 0, this.followUpTotal = 0, this.finalReport, this.downloadProgress = 0.0, this.clientSecret}): _searchResults = searchResults,_currentQuestions = currentQuestions;
+  const _DiagnosisState({this.op = Operation.neutral, this.statusMessage = "", this.gender, this.activityLevel, this.isSmoker = false, this.hasDiabetes = false, this.hasHypertension = false, this.isPregnant = false, this.isAlcoholic = false, this.patientJob = "", this.birthDate = "", this.bloodType, this.sessionId, this.modelName, this.searchOp = Operation.neutral,  List<Symptom> searchResults = const [],  List<Question> currentQuestions = const [], this.currentFollowUp, this.followUpProgress = 0, this.followUpTotal = 0, this.finalReport, this.downloadProgress = 0.0, this.clientSecret}): _searchResults = searchResults,_currentQuestions = currentQuestions;
   
 
 @override@JsonKey() final  Operation op;
@@ -266,6 +267,7 @@ class _DiagnosisState implements DiagnosisState {
 @override@JsonKey() final  bool? isAlcoholic;
 @override@JsonKey() final  String? patientJob;
 @override@JsonKey() final  String? birthDate;
+@override final  String? bloodType;
 @override final  String? sessionId;
 @override final  String? modelName;
 @override@JsonKey() final  Operation searchOp;
@@ -300,16 +302,16 @@ _$DiagnosisStateCopyWith<_DiagnosisState> get copyWith => __$DiagnosisStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiagnosisState&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.modelName, modelName) || other.modelName == modelName)&&(identical(other.searchOp, searchOp) || other.searchOp == searchOp)&&const DeepCollectionEquality().equals(other._searchResults, _searchResults)&&const DeepCollectionEquality().equals(other._currentQuestions, _currentQuestions)&&(identical(other.currentFollowUp, currentFollowUp) || other.currentFollowUp == currentFollowUp)&&(identical(other.followUpProgress, followUpProgress) || other.followUpProgress == followUpProgress)&&(identical(other.followUpTotal, followUpTotal) || other.followUpTotal == followUpTotal)&&(identical(other.finalReport, finalReport) || other.finalReport == finalReport)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.clientSecret, clientSecret) || other.clientSecret == clientSecret));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiagnosisState&&(identical(other.op, op) || other.op == op)&&(identical(other.statusMessage, statusMessage) || other.statusMessage == statusMessage)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.modelName, modelName) || other.modelName == modelName)&&(identical(other.searchOp, searchOp) || other.searchOp == searchOp)&&const DeepCollectionEquality().equals(other._searchResults, _searchResults)&&const DeepCollectionEquality().equals(other._currentQuestions, _currentQuestions)&&(identical(other.currentFollowUp, currentFollowUp) || other.currentFollowUp == currentFollowUp)&&(identical(other.followUpProgress, followUpProgress) || other.followUpProgress == followUpProgress)&&(identical(other.followUpTotal, followUpTotal) || other.followUpTotal == followUpTotal)&&(identical(other.finalReport, finalReport) || other.finalReport == finalReport)&&(identical(other.downloadProgress, downloadProgress) || other.downloadProgress == downloadProgress)&&(identical(other.clientSecret, clientSecret) || other.clientSecret == clientSecret));
 }
 
 
 @override
-int get hashCode => Object.hashAll([runtimeType,op,statusMessage,gender,activityLevel,isSmoker,hasDiabetes,hasHypertension,isPregnant,isAlcoholic,patientJob,birthDate,sessionId,modelName,searchOp,const DeepCollectionEquality().hash(_searchResults),const DeepCollectionEquality().hash(_currentQuestions),currentFollowUp,followUpProgress,followUpTotal,finalReport,downloadProgress,clientSecret]);
+int get hashCode => Object.hashAll([runtimeType,op,statusMessage,gender,activityLevel,isSmoker,hasDiabetes,hasHypertension,isPregnant,isAlcoholic,patientJob,birthDate,bloodType,sessionId,modelName,searchOp,const DeepCollectionEquality().hash(_searchResults),const DeepCollectionEquality().hash(_currentQuestions),currentFollowUp,followUpProgress,followUpTotal,finalReport,downloadProgress,clientSecret]);
 
 @override
 String toString() {
-  return 'DiagnosisState(op: $op, statusMessage: $statusMessage, gender: $gender, activityLevel: $activityLevel, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, sessionId: $sessionId, modelName: $modelName, searchOp: $searchOp, searchResults: $searchResults, currentQuestions: $currentQuestions, currentFollowUp: $currentFollowUp, followUpProgress: $followUpProgress, followUpTotal: $followUpTotal, finalReport: $finalReport, downloadProgress: $downloadProgress, clientSecret: $clientSecret)';
+  return 'DiagnosisState(op: $op, statusMessage: $statusMessage, gender: $gender, activityLevel: $activityLevel, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, bloodType: $bloodType, sessionId: $sessionId, modelName: $modelName, searchOp: $searchOp, searchResults: $searchResults, currentQuestions: $currentQuestions, currentFollowUp: $currentFollowUp, followUpProgress: $followUpProgress, followUpTotal: $followUpTotal, finalReport: $finalReport, downloadProgress: $downloadProgress, clientSecret: $clientSecret)';
 }
 
 
@@ -320,7 +322,7 @@ abstract mixin class _$DiagnosisStateCopyWith<$Res> implements $DiagnosisStateCo
   factory _$DiagnosisStateCopyWith(_DiagnosisState value, $Res Function(_DiagnosisState) _then) = __$DiagnosisStateCopyWithImpl;
 @override @useResult
 $Res call({
- Operation op, String statusMessage, String? gender, String? activityLevel, bool isSmoker, bool hasDiabetes, bool hasHypertension, bool isPregnant, bool? isAlcoholic, String? patientJob, String? birthDate, String? sessionId, String? modelName, Operation searchOp, List<Symptom> searchResults, List<Question> currentQuestions, FollowUpResponse? currentFollowUp, int followUpProgress, int followUpTotal, FinalReport? finalReport, double downloadProgress, String? clientSecret
+ Operation op, String statusMessage, String? gender, String? activityLevel, bool isSmoker, bool hasDiabetes, bool hasHypertension, bool isPregnant, bool? isAlcoholic, String? patientJob, String? birthDate, String? bloodType, String? sessionId, String? modelName, Operation searchOp, List<Symptom> searchResults, List<Question> currentQuestions, FollowUpResponse? currentFollowUp, int followUpProgress, int followUpTotal, FinalReport? finalReport, double downloadProgress, String? clientSecret
 });
 
 
@@ -337,7 +339,7 @@ class __$DiagnosisStateCopyWithImpl<$Res>
 
 /// Create a copy of DiagnosisState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? op = null,Object? statusMessage = null,Object? gender = freezed,Object? activityLevel = freezed,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? sessionId = freezed,Object? modelName = freezed,Object? searchOp = null,Object? searchResults = null,Object? currentQuestions = null,Object? currentFollowUp = freezed,Object? followUpProgress = null,Object? followUpTotal = null,Object? finalReport = freezed,Object? downloadProgress = null,Object? clientSecret = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? op = null,Object? statusMessage = null,Object? gender = freezed,Object? activityLevel = freezed,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? bloodType = freezed,Object? sessionId = freezed,Object? modelName = freezed,Object? searchOp = null,Object? searchResults = null,Object? currentQuestions = null,Object? currentFollowUp = freezed,Object? followUpProgress = null,Object? followUpTotal = null,Object? finalReport = freezed,Object? downloadProgress = null,Object? clientSecret = freezed,}) {
   return _then(_DiagnosisState(
 op: null == op ? _self.op : op // ignore: cast_nullable_to_non_nullable
 as Operation,statusMessage: null == statusMessage ? _self.statusMessage : statusMessage // ignore: cast_nullable_to_non_nullable
@@ -350,6 +352,7 @@ as bool,isPregnant: null == isPregnant ? _self.isPregnant : isPregnant // ignore
 as bool,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
 as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String?,modelName: freezed == modelName ? _self.modelName : modelName // ignore: cast_nullable_to_non_nullable
 as String?,searchOp: null == searchOp ? _self.searchOp : searchOp // ignore: cast_nullable_to_non_nullable

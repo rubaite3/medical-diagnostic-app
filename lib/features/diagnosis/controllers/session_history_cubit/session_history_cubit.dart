@@ -27,14 +27,14 @@ class SessionHistoryCubit extends Cubit<SessionHistoryState> {
             statusMessage: error.errorMessage,
           ),
         );
-        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+        // emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
       },
       (response) {
         emit(
           state.copyWith(
             op: Operation.success,
             statusMessage: response.statusMessage,
-            sessions: (response.data["data"]["data"] as List<dynamic>).map((s) {
+            sessions: (response.data["data"] as List<dynamic>).map((s) {
               return SessionHistoryItem.fromJson(s);
             }).toList(),
           ),

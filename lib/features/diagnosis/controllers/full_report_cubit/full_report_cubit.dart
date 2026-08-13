@@ -32,19 +32,19 @@ class FullReportCubit extends Cubit<FullReportState> {
             statusMessage: error.errorMessage,
           ),
         );
+        emit(state.copyWith(status: ReportStatus.initial, statusMessage: ""));
       },
       (response) {
-        final raw = response.data["message"];
-        final decoded = raw is String ? jsonDecode(raw) : raw;
+        // final raw = response.data["message"];
+        // final decoded = raw is String ? jsonDecode(raw) : raw;
         emit(
           state.copyWith(
             status: ReportStatus.success,
             statusMessage: S.current.diagReportReady,
-            finalReport: FinalReport.fromJson(
-              Map<String, dynamic>.from(decoded),
-            ),
+            finalReport: FinalReport.fromJson(response.data),
           ),
         );
+        emit(state.copyWith(status: ReportStatus.initial, statusMessage: ""));
       },
     );
   }
@@ -69,6 +69,7 @@ class FullReportCubit extends Cubit<FullReportState> {
             downloadProgress: 0.0,
           ),
         );
+        emit(state.copyWith(status: ReportStatus.initial, statusMessage: ""));
       },
       (filePath) async {
         final granted = await NotificationService.instance.requestPermission();
@@ -76,6 +77,7 @@ class FullReportCubit extends Cubit<FullReportState> {
           await NotificationService.instance.showPdfDownloaded(filePath);
         }
         emit(state.copyWith(isDownloading: false, downloadProgress: 0.0));
+        emit(state.copyWith(status: ReportStatus.initial, statusMessage: ""));
       },
     );
   }

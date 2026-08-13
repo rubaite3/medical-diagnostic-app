@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "DiagnoseNow": MessageLookupByLibrary.simpleMessage("شخّص الآن!"),
+    "NoMoreSymptoms": MessageLookupByLibrary.simpleMessage("لا أعراض أخرى"),
+    "NotAssignedYet": MessageLookupByLibrary.simpleMessage("لم يتم الاسناد"),
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("حول فيتاليا"),
     "accessDenied": MessageLookupByLibrary.simpleMessage("تم رفض الوصول"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
@@ -75,6 +78,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "العودة إلى تسجيل الدخول",
     ),
     "birthDateHint": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
+    "bloodGroupHint": MessageLookupByLibrary.simpleMessage("زمرة الدم"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
     "chooseLlm": MessageLookupByLibrary.simpleMessage("اختر نموذج اللغة"),
@@ -183,6 +187,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
       "ما هو تاريخ ميلادك؟",
     ),
+    "diagnosisBloodTypeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "يساعدنا ذلك على تقديم إرشادات صحية أكثر تخصيصًا.",
+    ),
+    "diagnosisBloodTypeTitle": MessageLookupByLibrary.simpleMessage(
+      "ما هي فصيلة دمك؟",
+    ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "تفاصيل التشخيص",
     ),
@@ -228,6 +238,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "disclaimerMessage": MessageLookupByLibrary.simpleMessage(
       "هذه نتائج أولية تستند إلى تحليل الذكاء الاصطناعي. يرجى استشارة الطبيب للحصول على تشخيص مؤكد.",
     ),
+    "doctorAvailable": MessageLookupByLibrary.simpleMessage("متاح الآن"),
+    "doctorInCharge": MessageLookupByLibrary.simpleMessage(
+      "الطبيب المسؤول عن حالتك",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟ "),
     "downloadFailed": MessageLookupByLibrary.simpleMessage("فشل التنزيل"),
     "downloadReportBtn": MessageLookupByLibrary.simpleMessage("تحميل PDF"),
@@ -244,6 +258,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
     ),
     "errorGeneric": MessageLookupByLibrary.simpleMessage("حدث خطأ ما."),
+    "expectedReviewTime": MessageLookupByLibrary.simpleMessage(
+      "وقت المراجعة المتوقع",
+    ),
     "failedToDownloadReport": MessageLookupByLibrary.simpleMessage(
       "فشل تنزيل التقرير",
     ),
@@ -300,6 +317,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languagesAdded": MessageLookupByLibrary.simpleMessage(
       "الرومانية والسواحيلية متاحتان مرة أخرى. يمكنك الآن استخدام التطبيق باللغات الإنجليزية والألمانية والفرنسية والإسبانية والبرتغالية والرومانية أو السواحيلية.",
     ),
+    "lastLogin": MessageLookupByLibrary.simpleMessage("آخر تسجيل دخول"),
     "loadingText": MessageLookupByLibrary.simpleMessage("يرجى الانتظار..."),
     "loginBtn": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
     "loginLink": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
@@ -313,6 +331,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "markAsUnread": MessageLookupByLibrary.simpleMessage("تحديد كغير مقروء"),
     "medicalHistory": MessageLookupByLibrary.simpleMessage("التاريخ الطبي"),
     "medicalQuality": MessageLookupByLibrary.simpleMessage("الجودة الطبية"),
+    "mockDoctorName": MessageLookupByLibrary.simpleMessage("د. أحمد الخطيب"),
+    "mockDoctorSpecialist": MessageLookupByLibrary.simpleMessage(
+      "أخصائي أمراض جلدية",
+    ),
+    "mockExpectedTime": MessageLookupByLibrary.simpleMessage("خلال ساعتين"),
+    "mockLastLogin": MessageLookupByLibrary.simpleMessage("منذ ٣٠ دقيقة"),
     "nameEmpty": MessageLookupByLibrary.simpleMessage("الاسم مطلوب"),
     "navHome": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "navProfile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
@@ -321,6 +345,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("لا"),
     "noDiagnosesAvailable": MessageLookupByLibrary.simpleMessage(
       "لا تتوفر تشخيصات.",
+    ),
+    "noDoctorAssigned": MessageLookupByLibrary.simpleMessage(
+      "لم يتم تحديد طبيب بعد",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى.",
@@ -406,6 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "احصل على تقريرك الطبي المفصل مع توصيات مخصصة.",
     ),
     "paymentTitle": MessageLookupByLibrary.simpleMessage("فتح التقرير الكامل"),
+    "phone": MessageLookupByLibrary.simpleMessage("رقم الموبايل"),
     "pregnantQuestion": MessageLookupByLibrary.simpleMessage(
       "هل أنت حامل حالياً؟",
     ),
@@ -438,6 +466,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "readMore": MessageLookupByLibrary.simpleMessage("اقرأ المزيد"),
     "recommendationsLabel": MessageLookupByLibrary.simpleMessage("التوصيات"),
     "refresh": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "reportStatusReviewed": MessageLookupByLibrary.simpleMessage(
+      "تمت مراجعة حالتك",
+    ),
+    "reportStatusSubtitle": MessageLookupByLibrary.simpleMessage(
+      "تم استلام حالتك بنجاح - سيصلك إشعار عند جاهزية التقرير.",
+    ),
+    "reportStatusUnderReview": MessageLookupByLibrary.simpleMessage(
+      "جاري مراجعة حالتك",
+    ),
     "resetProfileBtn": MessageLookupByLibrary.simpleMessage(
       "إعادة تعيين الملف الطبي",
     ),
@@ -489,6 +526,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDiagnosis": MessageLookupByLibrary.simpleMessage("بدء التشخيص"),
     "startNewDiagnosisBtn": MessageLookupByLibrary.simpleMessage(
       "بدء تشخيص جديد",
+    ),
+    "stepAiAnalysis": MessageLookupByLibrary.simpleMessage(
+      "تحليل الأعراض بالذكاء الاصطناعي",
+    ),
+    "stepDoctorReview": MessageLookupByLibrary.simpleMessage("مراجعة الطبيب"),
+    "stepDoctorReviewInProgress": MessageLookupByLibrary.simpleMessage(
+      "مراجعة الطبيب - قيد التنفيذ",
+    ),
+    "stepPaymentSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم الدفع بنجاح",
+    ),
+    "stepReceivePdf": MessageLookupByLibrary.simpleMessage(
+      "استلام التقرير PDF",
     ),
     "stripeBrand": MessageLookupByLibrary.simpleMessage("stripe"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),

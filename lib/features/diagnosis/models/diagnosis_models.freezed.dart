@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$StartDiagnosisRequest {
 
- String get gender;@JsonKey(name: 'is_smoker') bool get isSmoker;@JsonKey(name: 'has_diabetes') bool get hasDiabetes;@JsonKey(name: 'has_hypertension') bool get hasHypertension;@JsonKey(name: 'is_pregnant') bool? get isPregnant;@JsonKey(name: 'activity_level') String get activityLevel;@JsonKey(name: 'assessment_for') String get assessmentFor;@JsonKey(name: 'is_alcoholic') bool? get isAlcoholic;@JsonKey(name: 'patient_job') String? get patientJob;@JsonKey(name: 'birth_date') String? get birthDate;@JsonKey(name: 'model_name') String? get modelName;
+ String get gender;@JsonKey(name: 'is_smoker') bool get isSmoker;@JsonKey(name: 'has_diabetes') bool get hasDiabetes;@JsonKey(name: 'has_hypertension') bool get hasHypertension;@JsonKey(name: 'is_pregnant') bool? get isPregnant;@JsonKey(name: 'activity_level') String get activityLevel;@JsonKey(name: 'assessment_for') String get assessmentFor;@JsonKey(name: 'is_alcoholic') bool? get isAlcoholic;@JsonKey(name: 'patient_job') String? get patientJob;@JsonKey(name: 'birth_date') String? get birthDate;@JsonKey(name: 'blood_type') String? get bloodType;@JsonKey(name: 'model_name') String? get modelName;
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $StartDiagnosisRequestCopyWith<StartDiagnosisRequest> get copyWith => _$StartDia
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.modelName, modelName) || other.modelName == modelName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.modelName, modelName) || other.modelName == modelName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob,birthDate,modelName);
+int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob,birthDate,bloodType,modelName);
 
 @override
 String toString() {
-  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, modelName: $modelName)';
+  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, bloodType: $bloodType, modelName: $modelName)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $StartDiagnosisRequestCopyWith<$Res>  {
   factory $StartDiagnosisRequestCopyWith(StartDiagnosisRequest value, $Res Function(StartDiagnosisRequest) _then) = _$StartDiagnosisRequestCopyWithImpl;
 @useResult
 $Res call({
- String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob,@JsonKey(name: 'birth_date') String? birthDate,@JsonKey(name: 'model_name') String? modelName
+ String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob,@JsonKey(name: 'birth_date') String? birthDate,@JsonKey(name: 'blood_type') String? bloodType,@JsonKey(name: 'model_name') String? modelName
 });
 
 
@@ -66,7 +66,7 @@ class _$StartDiagnosisRequestCopyWithImpl<$Res>
 
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? modelName = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? bloodType = freezed,Object? modelName = freezed,}) {
   return _then(StartDiagnosisRequest(
 gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,isSmoker: null == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
@@ -78,6 +78,7 @@ as String,assessmentFor: null == assessmentFor ? _self.assessmentFor : assessmen
 as String,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
 as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,modelName: freezed == modelName ? _self.modelName : modelName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -164,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'model_name')  String? modelName)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'blood_type')  String? bloodType, @JsonKey(name: 'model_name')  String? modelName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest() when $default != null:
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.modelName);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.modelName);case _:
   return orElse();
 
 }
@@ -185,10 +186,10 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'model_name')  String? modelName)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'blood_type')  String? bloodType, @JsonKey(name: 'model_name')  String? modelName)  $default,) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest():
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.modelName);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.modelName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +206,10 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'model_name')  String? modelName)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String gender, @JsonKey(name: 'is_smoker')  bool isSmoker, @JsonKey(name: 'has_diabetes')  bool hasDiabetes, @JsonKey(name: 'has_hypertension')  bool hasHypertension, @JsonKey(name: 'is_pregnant')  bool? isPregnant, @JsonKey(name: 'activity_level')  String activityLevel, @JsonKey(name: 'assessment_for')  String assessmentFor, @JsonKey(name: 'is_alcoholic')  bool? isAlcoholic, @JsonKey(name: 'patient_job')  String? patientJob, @JsonKey(name: 'birth_date')  String? birthDate, @JsonKey(name: 'blood_type')  String? bloodType, @JsonKey(name: 'model_name')  String? modelName)?  $default,) {final _that = this;
 switch (_that) {
 case _StartDiagnosisRequest() when $default != null:
-return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.modelName);case _:
+return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.assessmentFor,_that.isAlcoholic,_that.patientJob,_that.birthDate,_that.bloodType,_that.modelName);case _:
   return null;
 
 }
@@ -220,7 +221,7 @@ return $default(_that.gender,_that.isSmoker,_that.hasDiabetes,_that.hasHypertens
 @JsonSerializable()
 
 class _StartDiagnosisRequest implements StartDiagnosisRequest {
-  const _StartDiagnosisRequest({required this.gender, @JsonKey(name: 'is_smoker') required this.isSmoker, @JsonKey(name: 'has_diabetes') required this.hasDiabetes, @JsonKey(name: 'has_hypertension') required this.hasHypertension, @JsonKey(name: 'is_pregnant') this.isPregnant, @JsonKey(name: 'activity_level') required this.activityLevel, @JsonKey(name: 'assessment_for') this.assessmentFor = "myself", @JsonKey(name: 'is_alcoholic') this.isAlcoholic, @JsonKey(name: 'patient_job') this.patientJob, @JsonKey(name: 'birth_date') this.birthDate, @JsonKey(name: 'model_name') this.modelName});
+  const _StartDiagnosisRequest({required this.gender, @JsonKey(name: 'is_smoker') required this.isSmoker, @JsonKey(name: 'has_diabetes') required this.hasDiabetes, @JsonKey(name: 'has_hypertension') required this.hasHypertension, @JsonKey(name: 'is_pregnant') this.isPregnant, @JsonKey(name: 'activity_level') required this.activityLevel, @JsonKey(name: 'assessment_for') this.assessmentFor = "myself", @JsonKey(name: 'is_alcoholic') this.isAlcoholic, @JsonKey(name: 'patient_job') this.patientJob, @JsonKey(name: 'birth_date') this.birthDate, @JsonKey(name: 'blood_type') this.bloodType, @JsonKey(name: 'model_name') this.modelName});
   factory _StartDiagnosisRequest.fromJson(Map<String, dynamic> json) => _$StartDiagnosisRequestFromJson(json);
 
 @override final  String gender;
@@ -233,6 +234,7 @@ class _StartDiagnosisRequest implements StartDiagnosisRequest {
 @override@JsonKey(name: 'is_alcoholic') final  bool? isAlcoholic;
 @override@JsonKey(name: 'patient_job') final  String? patientJob;
 @override@JsonKey(name: 'birth_date') final  String? birthDate;
+@override@JsonKey(name: 'blood_type') final  String? bloodType;
 @override@JsonKey(name: 'model_name') final  String? modelName;
 
 /// Create a copy of StartDiagnosisRequest
@@ -248,16 +250,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.modelName, modelName) || other.modelName == modelName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _StartDiagnosisRequest&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.assessmentFor, assessmentFor) || other.assessmentFor == assessmentFor)&&(identical(other.isAlcoholic, isAlcoholic) || other.isAlcoholic == isAlcoholic)&&(identical(other.patientJob, patientJob) || other.patientJob == patientJob)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.modelName, modelName) || other.modelName == modelName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob,birthDate,modelName);
+int get hashCode => Object.hash(runtimeType,gender,isSmoker,hasDiabetes,hasHypertension,isPregnant,activityLevel,assessmentFor,isAlcoholic,patientJob,birthDate,bloodType,modelName);
 
 @override
 String toString() {
-  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, modelName: $modelName)';
+  return 'StartDiagnosisRequest(gender: $gender, isSmoker: $isSmoker, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, assessmentFor: $assessmentFor, isAlcoholic: $isAlcoholic, patientJob: $patientJob, birthDate: $birthDate, bloodType: $bloodType, modelName: $modelName)';
 }
 
 
@@ -268,7 +270,7 @@ abstract mixin class _$StartDiagnosisRequestCopyWith<$Res> implements $StartDiag
   factory _$StartDiagnosisRequestCopyWith(_StartDiagnosisRequest value, $Res Function(_StartDiagnosisRequest) _then) = __$StartDiagnosisRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob,@JsonKey(name: 'birth_date') String? birthDate,@JsonKey(name: 'model_name') String? modelName
+ String gender,@JsonKey(name: 'is_smoker') bool isSmoker,@JsonKey(name: 'has_diabetes') bool hasDiabetes,@JsonKey(name: 'has_hypertension') bool hasHypertension,@JsonKey(name: 'is_pregnant') bool? isPregnant,@JsonKey(name: 'activity_level') String activityLevel,@JsonKey(name: 'assessment_for') String assessmentFor,@JsonKey(name: 'is_alcoholic') bool? isAlcoholic,@JsonKey(name: 'patient_job') String? patientJob,@JsonKey(name: 'birth_date') String? birthDate,@JsonKey(name: 'blood_type') String? bloodType,@JsonKey(name: 'model_name') String? modelName
 });
 
 
@@ -285,7 +287,7 @@ class __$StartDiagnosisRequestCopyWithImpl<$Res>
 
 /// Create a copy of StartDiagnosisRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? modelName = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? gender = null,Object? isSmoker = null,Object? hasDiabetes = null,Object? hasHypertension = null,Object? isPregnant = freezed,Object? activityLevel = null,Object? assessmentFor = null,Object? isAlcoholic = freezed,Object? patientJob = freezed,Object? birthDate = freezed,Object? bloodType = freezed,Object? modelName = freezed,}) {
   return _then(_StartDiagnosisRequest(
 gender: null == gender ? _self.gender : gender // ignore: cast_nullable_to_non_nullable
 as String,isSmoker: null == isSmoker ? _self.isSmoker : isSmoker // ignore: cast_nullable_to_non_nullable
@@ -297,6 +299,7 @@ as String,assessmentFor: null == assessmentFor ? _self.assessmentFor : assessmen
 as String,isAlcoholic: freezed == isAlcoholic ? _self.isAlcoholic : isAlcoholic // ignore: cast_nullable_to_non_nullable
 as bool?,patientJob: freezed == patientJob ? _self.patientJob : patientJob // ignore: cast_nullable_to_non_nullable
 as String?,birthDate: freezed == birthDate ? _self.birthDate : birthDate // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,modelName: freezed == modelName ? _self.modelName : modelName // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -2796,7 +2799,7 @@ $DiagnosisSummaryCopyWith<$Res>? get diagnosisSummary {
 /// @nodoc
 mixin _$SubmitFollowUpAnswerRequest {
 
-@JsonKey(name: 'session_id') String get sessionId;@JsonKey(name: 'question_id') String get questionId; String get answer;
+@JsonKey(name: 'session_id') String get sessionId;@JsonKey(name: 'question_id') String get questionId; String get answer;@JsonKey(name: 'force_diagnosis') bool get forceDiagnosis;
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2809,16 +2812,16 @@ $SubmitFollowUpAnswerRequestCopyWith<SubmitFollowUpAnswerRequest> get copyWith =
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.forceDiagnosis, forceDiagnosis) || other.forceDiagnosis == forceDiagnosis));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer);
+int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer,forceDiagnosis);
 
 @override
 String toString() {
-  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer)';
+  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer, forceDiagnosis: $forceDiagnosis)';
 }
 
 
@@ -2829,7 +2832,7 @@ abstract mixin class $SubmitFollowUpAnswerRequestCopyWith<$Res>  {
   factory $SubmitFollowUpAnswerRequestCopyWith(SubmitFollowUpAnswerRequest value, $Res Function(SubmitFollowUpAnswerRequest) _then) = _$SubmitFollowUpAnswerRequestCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer
+@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer,@JsonKey(name: 'force_diagnosis') bool forceDiagnosis
 });
 
 
@@ -2846,12 +2849,13 @@ class _$SubmitFollowUpAnswerRequestCopyWithImpl<$Res>
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,Object? forceDiagnosis = null,}) {
   return _then(SubmitFollowUpAnswerRequest(
 sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
-as String,
+as String,forceDiagnosis: null == forceDiagnosis ? _self.forceDiagnosis : forceDiagnosis // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -2936,10 +2940,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer, @JsonKey(name: 'force_diagnosis')  bool forceDiagnosis)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest() when $default != null:
-return $default(_that.sessionId,_that.questionId,_that.answer);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer,_that.forceDiagnosis);case _:
   return orElse();
 
 }
@@ -2957,10 +2961,10 @@ return $default(_that.sessionId,_that.questionId,_that.answer);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer, @JsonKey(name: 'force_diagnosis')  bool forceDiagnosis)  $default,) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest():
-return $default(_that.sessionId,_that.questionId,_that.answer);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer,_that.forceDiagnosis);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -2977,10 +2981,10 @@ return $default(_that.sessionId,_that.questionId,_that.answer);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String sessionId, @JsonKey(name: 'question_id')  String questionId,  String answer, @JsonKey(name: 'force_diagnosis')  bool forceDiagnosis)?  $default,) {final _that = this;
 switch (_that) {
 case _SubmitFollowUpAnswerRequest() when $default != null:
-return $default(_that.sessionId,_that.questionId,_that.answer);case _:
+return $default(_that.sessionId,_that.questionId,_that.answer,_that.forceDiagnosis);case _:
   return null;
 
 }
@@ -2992,12 +2996,13 @@ return $default(_that.sessionId,_that.questionId,_that.answer);case _:
 @JsonSerializable()
 
 class _SubmitFollowUpAnswerRequest implements SubmitFollowUpAnswerRequest {
-  const _SubmitFollowUpAnswerRequest({@JsonKey(name: 'session_id') required this.sessionId, @JsonKey(name: 'question_id') required this.questionId, required this.answer});
+  const _SubmitFollowUpAnswerRequest({@JsonKey(name: 'session_id') required this.sessionId, @JsonKey(name: 'question_id') required this.questionId, required this.answer, @JsonKey(name: 'force_diagnosis') this.forceDiagnosis = false});
   factory _SubmitFollowUpAnswerRequest.fromJson(Map<String, dynamic> json) => _$SubmitFollowUpAnswerRequestFromJson(json);
 
 @override@JsonKey(name: 'session_id') final  String sessionId;
 @override@JsonKey(name: 'question_id') final  String questionId;
 @override final  String answer;
+@override@JsonKey(name: 'force_diagnosis') final  bool forceDiagnosis;
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
@@ -3012,16 +3017,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SubmitFollowUpAnswerRequest&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.questionId, questionId) || other.questionId == questionId)&&(identical(other.answer, answer) || other.answer == answer)&&(identical(other.forceDiagnosis, forceDiagnosis) || other.forceDiagnosis == forceDiagnosis));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer);
+int get hashCode => Object.hash(runtimeType,sessionId,questionId,answer,forceDiagnosis);
 
 @override
 String toString() {
-  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer)';
+  return 'SubmitFollowUpAnswerRequest(sessionId: $sessionId, questionId: $questionId, answer: $answer, forceDiagnosis: $forceDiagnosis)';
 }
 
 
@@ -3032,7 +3037,7 @@ abstract mixin class _$SubmitFollowUpAnswerRequestCopyWith<$Res> implements $Sub
   factory _$SubmitFollowUpAnswerRequestCopyWith(_SubmitFollowUpAnswerRequest value, $Res Function(_SubmitFollowUpAnswerRequest) _then) = __$SubmitFollowUpAnswerRequestCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer
+@JsonKey(name: 'session_id') String sessionId,@JsonKey(name: 'question_id') String questionId, String answer,@JsonKey(name: 'force_diagnosis') bool forceDiagnosis
 });
 
 
@@ -3049,12 +3054,13 @@ class __$SubmitFollowUpAnswerRequestCopyWithImpl<$Res>
 
 /// Create a copy of SubmitFollowUpAnswerRequest
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = null,Object? questionId = null,Object? answer = null,Object? forceDiagnosis = null,}) {
   return _then(_SubmitFollowUpAnswerRequest(
 sessionId: null == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
 as String,questionId: null == questionId ? _self.questionId : questionId // ignore: cast_nullable_to_non_nullable
 as String,answer: null == answer ? _self.answer : answer // ignore: cast_nullable_to_non_nullable
-as String,
+as String,forceDiagnosis: null == forceDiagnosis ? _self.forceDiagnosis : forceDiagnosis // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -3613,9 +3619,296 @@ as String?,
 
 
 /// @nodoc
+mixin _$DiagnosisSessionModel {
+
+ int? get id;@JsonKey(name: "session_hash") String? get sessionHash; String? get status; String? get phase;@JsonKey(name: "started_at") DateTime? get startedAt;@JsonKey(name: "completed_at") DateTime? get completedAt;@JsonKey(name: "ai_result") List<Diagnosis> get diagnoses;
+/// Create a copy of DiagnosisSessionModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DiagnosisSessionModelCopyWith<DiagnosisSessionModel> get copyWith => _$DiagnosisSessionModelCopyWithImpl<DiagnosisSessionModel>(this as DiagnosisSessionModel, _$identity);
+
+  /// Serializes this DiagnosisSessionModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DiagnosisSessionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.sessionHash, sessionHash) || other.sessionHash == sessionHash)&&(identical(other.status, status) || other.status == status)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&const DeepCollectionEquality().equals(other.diagnoses, diagnoses));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,sessionHash,status,phase,startedAt,completedAt,const DeepCollectionEquality().hash(diagnoses));
+
+@override
+String toString() {
+  return 'DiagnosisSessionModel(id: $id, sessionHash: $sessionHash, status: $status, phase: $phase, startedAt: $startedAt, completedAt: $completedAt, diagnoses: $diagnoses)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DiagnosisSessionModelCopyWith<$Res>  {
+  factory $DiagnosisSessionModelCopyWith(DiagnosisSessionModel value, $Res Function(DiagnosisSessionModel) _then) = _$DiagnosisSessionModelCopyWithImpl;
+@useResult
+$Res call({
+ int? id,@JsonKey(name: "session_hash") String? sessionHash, String? status, String? phase,@JsonKey(name: "started_at") DateTime? startedAt,@JsonKey(name: "completed_at") DateTime? completedAt,@JsonKey(name: "ai_result") List<Diagnosis> diagnoses
+});
+
+
+
+
+}
+/// @nodoc
+class _$DiagnosisSessionModelCopyWithImpl<$Res>
+    implements $DiagnosisSessionModelCopyWith<$Res> {
+  _$DiagnosisSessionModelCopyWithImpl(this._self, this._then);
+
+  final DiagnosisSessionModel _self;
+  final $Res Function(DiagnosisSessionModel) _then;
+
+/// Create a copy of DiagnosisSessionModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? sessionHash = freezed,Object? status = freezed,Object? phase = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? diagnoses = null,}) {
+  return _then(DiagnosisSessionModel(
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,sessionHash: freezed == sessionHash ? _self.sessionHash : sessionHash // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,phase: freezed == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
+as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,diagnoses: null == diagnoses ? _self.diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
+as List<Diagnosis>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [DiagnosisSessionModel].
+extension DiagnosisSessionModelPatterns on DiagnosisSessionModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DiagnosisSessionModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DiagnosisSessionModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DiagnosisSessionModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id, @JsonKey(name: "session_hash")  String? sessionHash,  String? status,  String? phase, @JsonKey(name: "started_at")  DateTime? startedAt, @JsonKey(name: "completed_at")  DateTime? completedAt, @JsonKey(name: "ai_result")  List<Diagnosis> diagnoses)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel() when $default != null:
+return $default(_that.id,_that.sessionHash,_that.status,_that.phase,_that.startedAt,_that.completedAt,_that.diagnoses);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id, @JsonKey(name: "session_hash")  String? sessionHash,  String? status,  String? phase, @JsonKey(name: "started_at")  DateTime? startedAt, @JsonKey(name: "completed_at")  DateTime? completedAt, @JsonKey(name: "ai_result")  List<Diagnosis> diagnoses)  $default,) {final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel():
+return $default(_that.id,_that.sessionHash,_that.status,_that.phase,_that.startedAt,_that.completedAt,_that.diagnoses);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id, @JsonKey(name: "session_hash")  String? sessionHash,  String? status,  String? phase, @JsonKey(name: "started_at")  DateTime? startedAt, @JsonKey(name: "completed_at")  DateTime? completedAt, @JsonKey(name: "ai_result")  List<Diagnosis> diagnoses)?  $default,) {final _that = this;
+switch (_that) {
+case _DiagnosisSessionModel() when $default != null:
+return $default(_that.id,_that.sessionHash,_that.status,_that.phase,_that.startedAt,_that.completedAt,_that.diagnoses);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _DiagnosisSessionModel implements DiagnosisSessionModel {
+  const _DiagnosisSessionModel({this.id, @JsonKey(name: "session_hash") this.sessionHash, this.status, this.phase, @JsonKey(name: "started_at") this.startedAt, @JsonKey(name: "completed_at") this.completedAt, @JsonKey(name: "ai_result")  List<Diagnosis> diagnoses = const []}): _diagnoses = diagnoses;
+  factory _DiagnosisSessionModel.fromJson(Map<String, dynamic> json) => _$DiagnosisSessionModelFromJson(json);
+
+@override final  int? id;
+@override@JsonKey(name: "session_hash") final  String? sessionHash;
+@override final  String? status;
+@override final  String? phase;
+@override@JsonKey(name: "started_at") final  DateTime? startedAt;
+@override@JsonKey(name: "completed_at") final  DateTime? completedAt;
+ final  List<Diagnosis> _diagnoses;
+@override@JsonKey(name: "ai_result") List<Diagnosis> get diagnoses {
+  if (_diagnoses is EqualUnmodifiableListView) return _diagnoses;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_diagnoses);
+}
+
+
+/// Create a copy of DiagnosisSessionModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DiagnosisSessionModelCopyWith<_DiagnosisSessionModel> get copyWith => __$DiagnosisSessionModelCopyWithImpl<_DiagnosisSessionModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DiagnosisSessionModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DiagnosisSessionModel&&(identical(other.id, id) || other.id == id)&&(identical(other.sessionHash, sessionHash) || other.sessionHash == sessionHash)&&(identical(other.status, status) || other.status == status)&&(identical(other.phase, phase) || other.phase == phase)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&const DeepCollectionEquality().equals(other._diagnoses, _diagnoses));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,sessionHash,status,phase,startedAt,completedAt,const DeepCollectionEquality().hash(_diagnoses));
+
+@override
+String toString() {
+  return 'DiagnosisSessionModel(id: $id, sessionHash: $sessionHash, status: $status, phase: $phase, startedAt: $startedAt, completedAt: $completedAt, diagnoses: $diagnoses)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DiagnosisSessionModelCopyWith<$Res> implements $DiagnosisSessionModelCopyWith<$Res> {
+  factory _$DiagnosisSessionModelCopyWith(_DiagnosisSessionModel value, $Res Function(_DiagnosisSessionModel) _then) = __$DiagnosisSessionModelCopyWithImpl;
+@override @useResult
+$Res call({
+ int? id,@JsonKey(name: "session_hash") String? sessionHash, String? status, String? phase,@JsonKey(name: "started_at") DateTime? startedAt,@JsonKey(name: "completed_at") DateTime? completedAt,@JsonKey(name: "ai_result") List<Diagnosis> diagnoses
+});
+
+
+
+
+}
+/// @nodoc
+class __$DiagnosisSessionModelCopyWithImpl<$Res>
+    implements _$DiagnosisSessionModelCopyWith<$Res> {
+  __$DiagnosisSessionModelCopyWithImpl(this._self, this._then);
+
+  final _DiagnosisSessionModel _self;
+  final $Res Function(_DiagnosisSessionModel) _then;
+
+/// Create a copy of DiagnosisSessionModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? sessionHash = freezed,Object? status = freezed,Object? phase = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? diagnoses = null,}) {
+  return _then(_DiagnosisSessionModel(
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,sessionHash: freezed == sessionHash ? _self.sessionHash : sessionHash // ignore: cast_nullable_to_non_nullable
+as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,phase: freezed == phase ? _self.phase : phase // ignore: cast_nullable_to_non_nullable
+as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as DateTime?,diagnoses: null == diagnoses ? _self._diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
+as List<Diagnosis>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$FinalReport {
 
-@JsonKey(name: "session_id") String? get sessionId;@JsonKey(name: "patient_name") String? get patientName;@JsonKey(name: "started_at") String? get startedAt;@JsonKey(name: "completed_at") String? get completedAt; String? get status; List<Diagnosis> get diagnoses; String? get advice; List<ConversationTurn> get conversation;
+ DiagnosisSessionModel? get session;@JsonKey(name: "started_at") String? get startedAt; DoctorModel? get doctor;@JsonKey(name: "completed_at") String? get completedAt;@JsonKey(name: "workflow_steps") List<WorkflowItemModel>? get workflowSteps;
 /// Create a copy of FinalReport
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3628,16 +3921,16 @@ $FinalReportCopyWith<FinalReport> get copyWith => _$FinalReportCopyWithImpl<Fina
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinalReport&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.patientName, patientName) || other.patientName == patientName)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other.diagnoses, diagnoses)&&(identical(other.advice, advice) || other.advice == advice)&&const DeepCollectionEquality().equals(other.conversation, conversation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FinalReport&&(identical(other.session, session) || other.session == session)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.doctor, doctor) || other.doctor == doctor)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&const DeepCollectionEquality().equals(other.workflowSteps, workflowSteps));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,patientName,startedAt,completedAt,status,const DeepCollectionEquality().hash(diagnoses),advice,const DeepCollectionEquality().hash(conversation));
+int get hashCode => Object.hash(runtimeType,session,startedAt,doctor,completedAt,const DeepCollectionEquality().hash(workflowSteps));
 
 @override
 String toString() {
-  return 'FinalReport(sessionId: $sessionId, patientName: $patientName, startedAt: $startedAt, completedAt: $completedAt, status: $status, diagnoses: $diagnoses, advice: $advice, conversation: $conversation)';
+  return 'FinalReport(session: $session, startedAt: $startedAt, doctor: $doctor, completedAt: $completedAt, workflowSteps: $workflowSteps)';
 }
 
 
@@ -3648,11 +3941,11 @@ abstract mixin class $FinalReportCopyWith<$Res>  {
   factory $FinalReportCopyWith(FinalReport value, $Res Function(FinalReport) _then) = _$FinalReportCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: "session_id") String? sessionId,@JsonKey(name: "patient_name") String? patientName,@JsonKey(name: "started_at") String? startedAt,@JsonKey(name: "completed_at") String? completedAt, String? status, List<Diagnosis> diagnoses, String? advice, List<ConversationTurn> conversation
+ DiagnosisSessionModel? session,@JsonKey(name: "started_at") String? startedAt, DoctorModel? doctor,@JsonKey(name: "completed_at") String? completedAt,@JsonKey(name: "workflow_steps") List<WorkflowItemModel>? workflowSteps
 });
 
 
-
+$DiagnosisSessionModelCopyWith<$Res>? get session;$DoctorModelCopyWith<$Res>? get doctor;
 
 }
 /// @nodoc
@@ -3665,20 +3958,41 @@ class _$FinalReportCopyWithImpl<$Res>
 
 /// Create a copy of FinalReport
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = freezed,Object? patientName = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? status = freezed,Object? diagnoses = null,Object? advice = freezed,Object? conversation = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? session = freezed,Object? startedAt = freezed,Object? doctor = freezed,Object? completedAt = freezed,Object? workflowSteps = freezed,}) {
   return _then(FinalReport(
-sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
-as String?,patientName: freezed == patientName ? _self.patientName : patientName // ignore: cast_nullable_to_non_nullable
-as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
-as String?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
-as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String?,diagnoses: null == diagnoses ? _self.diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
-as List<Diagnosis>,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
-as String?,conversation: null == conversation ? _self.conversation : conversation // ignore: cast_nullable_to_non_nullable
-as List<ConversationTurn>,
+session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as DiagnosisSessionModel?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as String?,doctor: freezed == doctor ? _self.doctor : doctor // ignore: cast_nullable_to_non_nullable
+as DoctorModel?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as String?,workflowSteps: freezed == workflowSteps ? _self.workflowSteps : workflowSteps // ignore: cast_nullable_to_non_nullable
+as List<WorkflowItemModel>?,
   ));
 }
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DiagnosisSessionModelCopyWith<$Res>? get session {
+    if (_self.session == null) {
+    return null;
+  }
 
+  return $DiagnosisSessionModelCopyWith<$Res>(_self.session!, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DoctorModelCopyWith<$Res>? get doctor {
+    if (_self.doctor == null) {
+    return null;
+  }
+
+  return $DoctorModelCopyWith<$Res>(_self.doctor!, (value) {
+    return _then(_self.copyWith(doctor: value));
+  });
+}
 }
 
 
@@ -3760,10 +4074,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DiagnosisSessionModel? session, @JsonKey(name: "started_at")  String? startedAt,  DoctorModel? doctor, @JsonKey(name: "completed_at")  String? completedAt, @JsonKey(name: "workflow_steps")  List<WorkflowItemModel>? workflowSteps)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FinalReport() when $default != null:
-return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+return $default(_that.session,_that.startedAt,_that.doctor,_that.completedAt,_that.workflowSteps);case _:
   return orElse();
 
 }
@@ -3781,10 +4095,10 @@ return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.complete
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DiagnosisSessionModel? session, @JsonKey(name: "started_at")  String? startedAt,  DoctorModel? doctor, @JsonKey(name: "completed_at")  String? completedAt, @JsonKey(name: "workflow_steps")  List<WorkflowItemModel>? workflowSteps)  $default,) {final _that = this;
 switch (_that) {
 case _FinalReport():
-return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+return $default(_that.session,_that.startedAt,_that.doctor,_that.completedAt,_that.workflowSteps);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -3801,10 +4115,10 @@ return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.complete
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: "session_id")  String? sessionId, @JsonKey(name: "patient_name")  String? patientName, @JsonKey(name: "started_at")  String? startedAt, @JsonKey(name: "completed_at")  String? completedAt,  String? status,  List<Diagnosis> diagnoses,  String? advice,  List<ConversationTurn> conversation)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DiagnosisSessionModel? session, @JsonKey(name: "started_at")  String? startedAt,  DoctorModel? doctor, @JsonKey(name: "completed_at")  String? completedAt, @JsonKey(name: "workflow_steps")  List<WorkflowItemModel>? workflowSteps)?  $default,) {final _that = this;
 switch (_that) {
 case _FinalReport() when $default != null:
-return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.completedAt,_that.status,_that.diagnoses,_that.advice,_that.conversation);case _:
+return $default(_that.session,_that.startedAt,_that.doctor,_that.completedAt,_that.workflowSteps);case _:
   return null;
 
 }
@@ -3816,27 +4130,20 @@ return $default(_that.sessionId,_that.patientName,_that.startedAt,_that.complete
 @JsonSerializable()
 
 class _FinalReport implements FinalReport {
-  const _FinalReport({@JsonKey(name: "session_id") this.sessionId, @JsonKey(name: "patient_name") this.patientName, @JsonKey(name: "started_at") this.startedAt, @JsonKey(name: "completed_at") this.completedAt, this.status,  List<Diagnosis> diagnoses = const [], this.advice,  List<ConversationTurn> conversation = const []}): _diagnoses = diagnoses,_conversation = conversation;
+  const _FinalReport({this.session, @JsonKey(name: "started_at") this.startedAt, this.doctor, @JsonKey(name: "completed_at") this.completedAt, @JsonKey(name: "workflow_steps")  List<WorkflowItemModel>? workflowSteps}): _workflowSteps = workflowSteps;
   factory _FinalReport.fromJson(Map<String, dynamic> json) => _$FinalReportFromJson(json);
 
-@override@JsonKey(name: "session_id") final  String? sessionId;
-@override@JsonKey(name: "patient_name") final  String? patientName;
+@override final  DiagnosisSessionModel? session;
 @override@JsonKey(name: "started_at") final  String? startedAt;
+@override final  DoctorModel? doctor;
 @override@JsonKey(name: "completed_at") final  String? completedAt;
-@override final  String? status;
- final  List<Diagnosis> _diagnoses;
-@override@JsonKey() List<Diagnosis> get diagnoses {
-  if (_diagnoses is EqualUnmodifiableListView) return _diagnoses;
+ final  List<WorkflowItemModel>? _workflowSteps;
+@override@JsonKey(name: "workflow_steps") List<WorkflowItemModel>? get workflowSteps {
+  final value = _workflowSteps;
+  if (value == null) return null;
+  if (_workflowSteps is EqualUnmodifiableListView) return _workflowSteps;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_diagnoses);
-}
-
-@override final  String? advice;
- final  List<ConversationTurn> _conversation;
-@override@JsonKey() List<ConversationTurn> get conversation {
-  if (_conversation is EqualUnmodifiableListView) return _conversation;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_conversation);
+  return EqualUnmodifiableListView(value);
 }
 
 
@@ -3853,16 +4160,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinalReport&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.patientName, patientName) || other.patientName == patientName)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&(identical(other.status, status) || other.status == status)&&const DeepCollectionEquality().equals(other._diagnoses, _diagnoses)&&(identical(other.advice, advice) || other.advice == advice)&&const DeepCollectionEquality().equals(other._conversation, _conversation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinalReport&&(identical(other.session, session) || other.session == session)&&(identical(other.startedAt, startedAt) || other.startedAt == startedAt)&&(identical(other.doctor, doctor) || other.doctor == doctor)&&(identical(other.completedAt, completedAt) || other.completedAt == completedAt)&&const DeepCollectionEquality().equals(other._workflowSteps, _workflowSteps));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,patientName,startedAt,completedAt,status,const DeepCollectionEquality().hash(_diagnoses),advice,const DeepCollectionEquality().hash(_conversation));
+int get hashCode => Object.hash(runtimeType,session,startedAt,doctor,completedAt,const DeepCollectionEquality().hash(_workflowSteps));
 
 @override
 String toString() {
-  return 'FinalReport(sessionId: $sessionId, patientName: $patientName, startedAt: $startedAt, completedAt: $completedAt, status: $status, diagnoses: $diagnoses, advice: $advice, conversation: $conversation)';
+  return 'FinalReport(session: $session, startedAt: $startedAt, doctor: $doctor, completedAt: $completedAt, workflowSteps: $workflowSteps)';
 }
 
 
@@ -3873,11 +4180,11 @@ abstract mixin class _$FinalReportCopyWith<$Res> implements $FinalReportCopyWith
   factory _$FinalReportCopyWith(_FinalReport value, $Res Function(_FinalReport) _then) = __$FinalReportCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: "session_id") String? sessionId,@JsonKey(name: "patient_name") String? patientName,@JsonKey(name: "started_at") String? startedAt,@JsonKey(name: "completed_at") String? completedAt, String? status, List<Diagnosis> diagnoses, String? advice, List<ConversationTurn> conversation
+ DiagnosisSessionModel? session,@JsonKey(name: "started_at") String? startedAt, DoctorModel? doctor,@JsonKey(name: "completed_at") String? completedAt,@JsonKey(name: "workflow_steps") List<WorkflowItemModel>? workflowSteps
 });
 
 
-
+@override $DiagnosisSessionModelCopyWith<$Res>? get session;@override $DoctorModelCopyWith<$Res>? get doctor;
 
 }
 /// @nodoc
@@ -3890,28 +4197,49 @@ class __$FinalReportCopyWithImpl<$Res>
 
 /// Create a copy of FinalReport
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = freezed,Object? patientName = freezed,Object? startedAt = freezed,Object? completedAt = freezed,Object? status = freezed,Object? diagnoses = null,Object? advice = freezed,Object? conversation = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? session = freezed,Object? startedAt = freezed,Object? doctor = freezed,Object? completedAt = freezed,Object? workflowSteps = freezed,}) {
   return _then(_FinalReport(
-sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
-as String?,patientName: freezed == patientName ? _self.patientName : patientName // ignore: cast_nullable_to_non_nullable
-as String?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
-as String?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
-as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as String?,diagnoses: null == diagnoses ? _self._diagnoses : diagnoses // ignore: cast_nullable_to_non_nullable
-as List<Diagnosis>,advice: freezed == advice ? _self.advice : advice // ignore: cast_nullable_to_non_nullable
-as String?,conversation: null == conversation ? _self._conversation : conversation // ignore: cast_nullable_to_non_nullable
-as List<ConversationTurn>,
+session: freezed == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
+as DiagnosisSessionModel?,startedAt: freezed == startedAt ? _self.startedAt : startedAt // ignore: cast_nullable_to_non_nullable
+as String?,doctor: freezed == doctor ? _self.doctor : doctor // ignore: cast_nullable_to_non_nullable
+as DoctorModel?,completedAt: freezed == completedAt ? _self.completedAt : completedAt // ignore: cast_nullable_to_non_nullable
+as String?,workflowSteps: freezed == workflowSteps ? _self._workflowSteps : workflowSteps // ignore: cast_nullable_to_non_nullable
+as List<WorkflowItemModel>?,
   ));
 }
 
+/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DiagnosisSessionModelCopyWith<$Res>? get session {
+    if (_self.session == null) {
+    return null;
+  }
 
+  return $DiagnosisSessionModelCopyWith<$Res>(_self.session!, (value) {
+    return _then(_self.copyWith(session: value));
+  });
+}/// Create a copy of FinalReport
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DoctorModelCopyWith<$Res>? get doctor {
+    if (_self.doctor == null) {
+    return null;
+  }
+
+  return $DoctorModelCopyWith<$Res>(_self.doctor!, (value) {
+    return _then(_self.copyWith(doctor: value));
+  });
+}
 }
 
 
 /// @nodoc
 mixin _$SessionHistoryItem {
 
-@JsonKey(name: 'session_id') String? get sessionId;@JsonKey(name: 'created_at') String? get createdAt; String? get status;@JsonKey(name: 'top_disease') String? get topDisease;@JsonKey(name: 'top_probability') double? get topProbability;
+ String? get id;@JsonKey(name: 'created_at') String? get createdAt; String? get status;@JsonKey(name: 'top_disease') String? get topDisease;@JsonKey(name: 'top_probability') double? get topProbability;
 /// Create a copy of SessionHistoryItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3924,16 +4252,16 @@ $SessionHistoryItemCopyWith<SessionHistoryItem> get copyWith => _$SessionHistory
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionHistoryItem&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionHistoryItem&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,createdAt,status,topDisease,topProbability);
+int get hashCode => Object.hash(runtimeType,id,createdAt,status,topDisease,topProbability);
 
 @override
 String toString() {
-  return 'SessionHistoryItem(sessionId: $sessionId, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
+  return 'SessionHistoryItem(id: $id, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
 }
 
 
@@ -3944,7 +4272,7 @@ abstract mixin class $SessionHistoryItemCopyWith<$Res>  {
   factory $SessionHistoryItemCopyWith(SessionHistoryItem value, $Res Function(SessionHistoryItem) _then) = _$SessionHistoryItemCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'session_id') String? sessionId,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
+ String? id,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
 });
 
 
@@ -3961,9 +4289,9 @@ class _$SessionHistoryItemCopyWithImpl<$Res>
 
 /// Create a copy of SessionHistoryItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? sessionId = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
   return _then(SessionHistoryItem(
-sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,topDisease: freezed == topDisease ? _self.topDisease : topDisease // ignore: cast_nullable_to_non_nullable
@@ -4053,10 +4381,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? id, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SessionHistoryItem() when $default != null:
-return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+return $default(_that.id,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
   return orElse();
 
 }
@@ -4074,10 +4402,10 @@ return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? id, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)  $default,) {final _that = this;
 switch (_that) {
 case _SessionHistoryItem():
-return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+return $default(_that.id,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -4094,10 +4422,10 @@ return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'session_id')  String? sessionId, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? id, @JsonKey(name: 'created_at')  String? createdAt,  String? status, @JsonKey(name: 'top_disease')  String? topDisease, @JsonKey(name: 'top_probability')  double? topProbability)?  $default,) {final _that = this;
 switch (_that) {
 case _SessionHistoryItem() when $default != null:
-return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
+return $default(_that.id,_that.createdAt,_that.status,_that.topDisease,_that.topProbability);case _:
   return null;
 
 }
@@ -4109,10 +4437,10 @@ return $default(_that.sessionId,_that.createdAt,_that.status,_that.topDisease,_t
 @JsonSerializable()
 
 class _SessionHistoryItem implements SessionHistoryItem {
-  const _SessionHistoryItem({@JsonKey(name: 'session_id') this.sessionId, @JsonKey(name: 'created_at') this.createdAt, this.status, @JsonKey(name: 'top_disease') this.topDisease, @JsonKey(name: 'top_probability') this.topProbability});
+  const _SessionHistoryItem({this.id, @JsonKey(name: 'created_at') this.createdAt, this.status, @JsonKey(name: 'top_disease') this.topDisease, @JsonKey(name: 'top_probability') this.topProbability});
   factory _SessionHistoryItem.fromJson(Map<String, dynamic> json) => _$SessionHistoryItemFromJson(json);
 
-@override@JsonKey(name: 'session_id') final  String? sessionId;
+@override final  String? id;
 @override@JsonKey(name: 'created_at') final  String? createdAt;
 @override final  String? status;
 @override@JsonKey(name: 'top_disease') final  String? topDisease;
@@ -4131,16 +4459,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionHistoryItem&&(identical(other.sessionId, sessionId) || other.sessionId == sessionId)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionHistoryItem&&(identical(other.id, id) || other.id == id)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt)&&(identical(other.status, status) || other.status == status)&&(identical(other.topDisease, topDisease) || other.topDisease == topDisease)&&(identical(other.topProbability, topProbability) || other.topProbability == topProbability));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,sessionId,createdAt,status,topDisease,topProbability);
+int get hashCode => Object.hash(runtimeType,id,createdAt,status,topDisease,topProbability);
 
 @override
 String toString() {
-  return 'SessionHistoryItem(sessionId: $sessionId, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
+  return 'SessionHistoryItem(id: $id, createdAt: $createdAt, status: $status, topDisease: $topDisease, topProbability: $topProbability)';
 }
 
 
@@ -4151,7 +4479,7 @@ abstract mixin class _$SessionHistoryItemCopyWith<$Res> implements $SessionHisto
   factory _$SessionHistoryItemCopyWith(_SessionHistoryItem value, $Res Function(_SessionHistoryItem) _then) = __$SessionHistoryItemCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'session_id') String? sessionId,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
+ String? id,@JsonKey(name: 'created_at') String? createdAt, String? status,@JsonKey(name: 'top_disease') String? topDisease,@JsonKey(name: 'top_probability') double? topProbability
 });
 
 
@@ -4168,9 +4496,9 @@ class __$SessionHistoryItemCopyWithImpl<$Res>
 
 /// Create a copy of SessionHistoryItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? sessionId = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? createdAt = freezed,Object? status = freezed,Object? topDisease = freezed,Object? topProbability = freezed,}) {
   return _then(_SessionHistoryItem(
-sessionId: freezed == sessionId ? _self.sessionId : sessionId // ignore: cast_nullable_to_non_nullable
+id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: freezed == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,topDisease: freezed == topDisease ? _self.topDisease : topDisease // ignore: cast_nullable_to_non_nullable

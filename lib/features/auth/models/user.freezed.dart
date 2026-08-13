@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- String? get email;@JsonKey(name: "full_name") String? get fullName; String? get avatar;@JsonKey(name: "birth_date") DateTime? get birthDate; String? get gender;@JsonKey(name: "is_smoker") bool? get isSmoker; String? get occupation;@JsonKey(name: "drinks_alcohol") bool? get drinksAlcohol;@JsonKey(name: "has_diabetes") bool? get hasDiabetes;@JsonKey(name: "has_hypertension") bool? get hasHypertension;@JsonKey(name: "is_pregnant") bool? get isPregnant;@JsonKey(name: "activity_level") String? get activityLevel;@JsonKey(name: "blood_group") String? get bloodGroup;@JsonKey(name: "last_checkup_date") String? get lastCheckupDate;
+ String? get email;@JsonKey(name: "full_name") String? get fullName; String? get avatar;@JsonKey(name: "birth_date") DateTime? get birthDate; String? get gender;@JsonKey(name: "is_smoker") bool? get isSmoker; String? get occupation;@JsonKey(name: "drinks_alcohol") bool? get drinksAlcohol;@JsonKey(name: "has_diabetes") bool? get hasDiabetes;@JsonKey(name: "has_hypertension") bool? get hasHypertension;@JsonKey(name: "is_pregnant") bool? get isPregnant;@JsonKey(name: "activity_level") String? get activityLevel;@JsonKey(name: "blood_type") String? get bloodType;@JsonKey(name: "last_checkup_date") String? get lastCheckupDate;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,16 +29,16 @@ $UserCopyWith<User> get copyWith => _$UserCopyWithImpl<User>(this as User, _$ide
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.email, email) || other.email == email)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.drinksAlcohol, drinksAlcohol) || other.drinksAlcohol == drinksAlcohol)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.lastCheckupDate, lastCheckupDate) || other.lastCheckupDate == lastCheckupDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is User&&(identical(other.email, email) || other.email == email)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.drinksAlcohol, drinksAlcohol) || other.drinksAlcohol == drinksAlcohol)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.lastCheckupDate, lastCheckupDate) || other.lastCheckupDate == lastCheckupDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,fullName,avatar,birthDate,gender,isSmoker,occupation,drinksAlcohol,hasDiabetes,hasHypertension,isPregnant,activityLevel,bloodGroup,lastCheckupDate);
+int get hashCode => Object.hash(runtimeType,email,fullName,avatar,birthDate,gender,isSmoker,occupation,drinksAlcohol,hasDiabetes,hasHypertension,isPregnant,activityLevel,bloodType,lastCheckupDate);
 
 @override
 String toString() {
-  return 'User(email: $email, fullName: $fullName, avatar: $avatar, birthDate: $birthDate, gender: $gender, isSmoker: $isSmoker, occupation: $occupation, drinksAlcohol: $drinksAlcohol, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, bloodGroup: $bloodGroup, lastCheckupDate: $lastCheckupDate)';
+  return 'User(email: $email, fullName: $fullName, avatar: $avatar, birthDate: $birthDate, gender: $gender, isSmoker: $isSmoker, occupation: $occupation, drinksAlcohol: $drinksAlcohol, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, bloodType: $bloodType, lastCheckupDate: $lastCheckupDate)';
 }
 
 
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- String? email,@JsonKey(name: "full_name") String? fullName, String? avatar,@JsonKey(name: "birth_date") DateTime? birthDate, String? gender,@JsonKey(name: "is_smoker") bool? isSmoker, String? occupation,@JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,@JsonKey(name: "has_diabetes") bool? hasDiabetes,@JsonKey(name: "has_hypertension") bool? hasHypertension,@JsonKey(name: "is_pregnant") bool? isPregnant,@JsonKey(name: "activity_level") String? activityLevel,@JsonKey(name: "blood_group") String? bloodGroup,@JsonKey(name: "last_checkup_date") String? lastCheckupDate
+ String? email,@JsonKey(name: "full_name") String? fullName, String? avatar,@JsonKey(name: "birth_date") DateTime? birthDate, String? gender,@JsonKey(name: "is_smoker") bool? isSmoker, String? occupation,@JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,@JsonKey(name: "has_diabetes") bool? hasDiabetes,@JsonKey(name: "has_hypertension") bool? hasHypertension,@JsonKey(name: "is_pregnant") bool? isPregnant,@JsonKey(name: "activity_level") String? activityLevel,@JsonKey(name: "blood_type") String? bloodType,@JsonKey(name: "last_checkup_date") String? lastCheckupDate
 });
 
 
@@ -66,7 +66,7 @@ class _$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? fullName = freezed,Object? avatar = freezed,Object? birthDate = freezed,Object? gender = freezed,Object? isSmoker = freezed,Object? occupation = freezed,Object? drinksAlcohol = freezed,Object? hasDiabetes = freezed,Object? hasHypertension = freezed,Object? isPregnant = freezed,Object? activityLevel = freezed,Object? bloodGroup = freezed,Object? lastCheckupDate = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? email = freezed,Object? fullName = freezed,Object? avatar = freezed,Object? birthDate = freezed,Object? gender = freezed,Object? isSmoker = freezed,Object? occupation = freezed,Object? drinksAlcohol = freezed,Object? hasDiabetes = freezed,Object? hasHypertension = freezed,Object? isPregnant = freezed,Object? activityLevel = freezed,Object? bloodType = freezed,Object? lastCheckupDate = freezed,}) {
   return _then(User(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
@@ -80,7 +80,7 @@ as bool?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes /
 as bool?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
 as bool?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
 as bool?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
-as String?,bloodGroup: freezed == bloodGroup ? _self.bloodGroup : bloodGroup // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,lastCheckupDate: freezed == lastCheckupDate ? _self.lastCheckupDate : lastCheckupDate // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -164,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_group")  String? bloodGroup, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_type")  String? bloodType, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodGroup,_that.lastCheckupDate);case _:
+return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodType,_that.lastCheckupDate);case _:
   return orElse();
 
 }
@@ -185,10 +185,10 @@ return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.ge
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_group")  String? bloodGroup, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_type")  String? bloodType, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)  $default,) {final _that = this;
 switch (_that) {
 case _User():
-return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodGroup,_that.lastCheckupDate);}
+return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodType,_that.lastCheckupDate);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -202,10 +202,10 @@ return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.ge
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_group")  String? bloodGroup, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? email, @JsonKey(name: "full_name")  String? fullName,  String? avatar, @JsonKey(name: "birth_date")  DateTime? birthDate,  String? gender, @JsonKey(name: "is_smoker")  bool? isSmoker,  String? occupation, @JsonKey(name: "drinks_alcohol")  bool? drinksAlcohol, @JsonKey(name: "has_diabetes")  bool? hasDiabetes, @JsonKey(name: "has_hypertension")  bool? hasHypertension, @JsonKey(name: "is_pregnant")  bool? isPregnant, @JsonKey(name: "activity_level")  String? activityLevel, @JsonKey(name: "blood_type")  String? bloodType, @JsonKey(name: "last_checkup_date")  String? lastCheckupDate)?  $default,) {final _that = this;
 switch (_that) {
 case _User() when $default != null:
-return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodGroup,_that.lastCheckupDate);case _:
+return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.gender,_that.isSmoker,_that.occupation,_that.drinksAlcohol,_that.hasDiabetes,_that.hasHypertension,_that.isPregnant,_that.activityLevel,_that.bloodType,_that.lastCheckupDate);case _:
   return null;
 
 }
@@ -217,7 +217,7 @@ return $default(_that.email,_that.fullName,_that.avatar,_that.birthDate,_that.ge
 @JsonSerializable()
 
 class _User implements User {
-   _User({this.email, @JsonKey(name: "full_name") this.fullName, this.avatar, @JsonKey(name: "birth_date") this.birthDate, this.gender, @JsonKey(name: "is_smoker") this.isSmoker, this.occupation, @JsonKey(name: "drinks_alcohol") this.drinksAlcohol, @JsonKey(name: "has_diabetes") this.hasDiabetes, @JsonKey(name: "has_hypertension") this.hasHypertension, @JsonKey(name: "is_pregnant") this.isPregnant, @JsonKey(name: "activity_level") this.activityLevel, @JsonKey(name: "blood_group") this.bloodGroup, @JsonKey(name: "last_checkup_date") this.lastCheckupDate});
+   _User({this.email, @JsonKey(name: "full_name") this.fullName, this.avatar, @JsonKey(name: "birth_date") this.birthDate, this.gender, @JsonKey(name: "is_smoker") this.isSmoker, this.occupation, @JsonKey(name: "drinks_alcohol") this.drinksAlcohol, @JsonKey(name: "has_diabetes") this.hasDiabetes, @JsonKey(name: "has_hypertension") this.hasHypertension, @JsonKey(name: "is_pregnant") this.isPregnant, @JsonKey(name: "activity_level") this.activityLevel, @JsonKey(name: "blood_type") this.bloodType, @JsonKey(name: "last_checkup_date") this.lastCheckupDate});
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  String? email;
@@ -232,7 +232,7 @@ class _User implements User {
 @override@JsonKey(name: "has_hypertension") final  bool? hasHypertension;
 @override@JsonKey(name: "is_pregnant") final  bool? isPregnant;
 @override@JsonKey(name: "activity_level") final  String? activityLevel;
-@override@JsonKey(name: "blood_group") final  String? bloodGroup;
+@override@JsonKey(name: "blood_type") final  String? bloodType;
 @override@JsonKey(name: "last_checkup_date") final  String? lastCheckupDate;
 
 /// Create a copy of User
@@ -248,16 +248,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.email, email) || other.email == email)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.drinksAlcohol, drinksAlcohol) || other.drinksAlcohol == drinksAlcohol)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.bloodGroup, bloodGroup) || other.bloodGroup == bloodGroup)&&(identical(other.lastCheckupDate, lastCheckupDate) || other.lastCheckupDate == lastCheckupDate));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _User&&(identical(other.email, email) || other.email == email)&&(identical(other.fullName, fullName) || other.fullName == fullName)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.birthDate, birthDate) || other.birthDate == birthDate)&&(identical(other.gender, gender) || other.gender == gender)&&(identical(other.isSmoker, isSmoker) || other.isSmoker == isSmoker)&&(identical(other.occupation, occupation) || other.occupation == occupation)&&(identical(other.drinksAlcohol, drinksAlcohol) || other.drinksAlcohol == drinksAlcohol)&&(identical(other.hasDiabetes, hasDiabetes) || other.hasDiabetes == hasDiabetes)&&(identical(other.hasHypertension, hasHypertension) || other.hasHypertension == hasHypertension)&&(identical(other.isPregnant, isPregnant) || other.isPregnant == isPregnant)&&(identical(other.activityLevel, activityLevel) || other.activityLevel == activityLevel)&&(identical(other.bloodType, bloodType) || other.bloodType == bloodType)&&(identical(other.lastCheckupDate, lastCheckupDate) || other.lastCheckupDate == lastCheckupDate));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,email,fullName,avatar,birthDate,gender,isSmoker,occupation,drinksAlcohol,hasDiabetes,hasHypertension,isPregnant,activityLevel,bloodGroup,lastCheckupDate);
+int get hashCode => Object.hash(runtimeType,email,fullName,avatar,birthDate,gender,isSmoker,occupation,drinksAlcohol,hasDiabetes,hasHypertension,isPregnant,activityLevel,bloodType,lastCheckupDate);
 
 @override
 String toString() {
-  return 'User(email: $email, fullName: $fullName, avatar: $avatar, birthDate: $birthDate, gender: $gender, isSmoker: $isSmoker, occupation: $occupation, drinksAlcohol: $drinksAlcohol, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, bloodGroup: $bloodGroup, lastCheckupDate: $lastCheckupDate)';
+  return 'User(email: $email, fullName: $fullName, avatar: $avatar, birthDate: $birthDate, gender: $gender, isSmoker: $isSmoker, occupation: $occupation, drinksAlcohol: $drinksAlcohol, hasDiabetes: $hasDiabetes, hasHypertension: $hasHypertension, isPregnant: $isPregnant, activityLevel: $activityLevel, bloodType: $bloodType, lastCheckupDate: $lastCheckupDate)';
 }
 
 
@@ -268,7 +268,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- String? email,@JsonKey(name: "full_name") String? fullName, String? avatar,@JsonKey(name: "birth_date") DateTime? birthDate, String? gender,@JsonKey(name: "is_smoker") bool? isSmoker, String? occupation,@JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,@JsonKey(name: "has_diabetes") bool? hasDiabetes,@JsonKey(name: "has_hypertension") bool? hasHypertension,@JsonKey(name: "is_pregnant") bool? isPregnant,@JsonKey(name: "activity_level") String? activityLevel,@JsonKey(name: "blood_group") String? bloodGroup,@JsonKey(name: "last_checkup_date") String? lastCheckupDate
+ String? email,@JsonKey(name: "full_name") String? fullName, String? avatar,@JsonKey(name: "birth_date") DateTime? birthDate, String? gender,@JsonKey(name: "is_smoker") bool? isSmoker, String? occupation,@JsonKey(name: "drinks_alcohol") bool? drinksAlcohol,@JsonKey(name: "has_diabetes") bool? hasDiabetes,@JsonKey(name: "has_hypertension") bool? hasHypertension,@JsonKey(name: "is_pregnant") bool? isPregnant,@JsonKey(name: "activity_level") String? activityLevel,@JsonKey(name: "blood_type") String? bloodType,@JsonKey(name: "last_checkup_date") String? lastCheckupDate
 });
 
 
@@ -285,7 +285,7 @@ class __$UserCopyWithImpl<$Res>
 
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? fullName = freezed,Object? avatar = freezed,Object? birthDate = freezed,Object? gender = freezed,Object? isSmoker = freezed,Object? occupation = freezed,Object? drinksAlcohol = freezed,Object? hasDiabetes = freezed,Object? hasHypertension = freezed,Object? isPregnant = freezed,Object? activityLevel = freezed,Object? bloodGroup = freezed,Object? lastCheckupDate = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? email = freezed,Object? fullName = freezed,Object? avatar = freezed,Object? birthDate = freezed,Object? gender = freezed,Object? isSmoker = freezed,Object? occupation = freezed,Object? drinksAlcohol = freezed,Object? hasDiabetes = freezed,Object? hasHypertension = freezed,Object? isPregnant = freezed,Object? activityLevel = freezed,Object? bloodType = freezed,Object? lastCheckupDate = freezed,}) {
   return _then(_User(
 email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,fullName: freezed == fullName ? _self.fullName : fullName // ignore: cast_nullable_to_non_nullable
@@ -299,7 +299,7 @@ as bool?,hasDiabetes: freezed == hasDiabetes ? _self.hasDiabetes : hasDiabetes /
 as bool?,hasHypertension: freezed == hasHypertension ? _self.hasHypertension : hasHypertension // ignore: cast_nullable_to_non_nullable
 as bool?,isPregnant: freezed == isPregnant ? _self.isPregnant : isPregnant // ignore: cast_nullable_to_non_nullable
 as bool?,activityLevel: freezed == activityLevel ? _self.activityLevel : activityLevel // ignore: cast_nullable_to_non_nullable
-as String?,bloodGroup: freezed == bloodGroup ? _self.bloodGroup : bloodGroup // ignore: cast_nullable_to_non_nullable
+as String?,bloodType: freezed == bloodType ? _self.bloodType : bloodType // ignore: cast_nullable_to_non_nullable
 as String?,lastCheckupDate: freezed == lastCheckupDate ? _self.lastCheckupDate : lastCheckupDate // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

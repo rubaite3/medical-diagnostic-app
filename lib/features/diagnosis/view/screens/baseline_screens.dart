@@ -10,6 +10,7 @@ import 'package:medical_diagnostic_app1/features/auth/view/widgets/custom_button
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_cubit.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/controllers/diagnosis_state.dart';
 import 'package:medical_diagnostic_app1/features/diagnosis/view/widgets/diagnosis_widgets.dart';
+import 'package:medical_diagnostic_app1/features/home/view/widgets/patient_profile_widgets.dart';
 
 class BaselineStepScreen extends StatelessWidget {
   final String title;
@@ -279,7 +280,7 @@ class _OccupationScreenState extends State<OccupationScreen> {
               );
             } else {
               context.read<DiagnosisCubit>().updateBaseline(patientJob: value);
-              context.pushNamed(RoutePaths.baselineActivity);
+              context.pushNamed(RoutePaths.baselineBloodType);
             }
           },
           content: SingleChildScrollView(
@@ -296,6 +297,50 @@ class _OccupationScreenState extends State<OccupationScreen> {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// 1d. Blood Type Screen (dropdown)
+class BloodTypeScreen extends StatelessWidget {
+  const BloodTypeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<DiagnosisCubit, DiagnosisState>(
+      builder: (context, state) {
+        return BaselineStepScreen(
+          title: S.of(context).diagnosisBloodTypeTitle,
+          subtitle: S.of(context).diagnosisBloodTypeSubtitle,
+          icon: Icons.bloodtype_outlined,
+          onNext: () => context.pushNamed(RoutePaths.baselineActivity),
+          content: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).padding.bottom + 10,
+            ),
+            child: ProfileDropdownField(
+              hint: S.of(context).bloodGroupHint,
+              prefixIcon: Icons.bloodtype_outlined,
+              value: state.bloodType ?? "A+",
+              items: const [
+                DropdownMenuItem(value: 'A+', child: Text('A+')),
+                DropdownMenuItem(value: 'A-', child: Text('A-')),
+                DropdownMenuItem(value: 'B+', child: Text('B+')),
+                DropdownMenuItem(value: 'B-', child: Text('B-')),
+                DropdownMenuItem(value: 'O+', child: Text('O+')),
+                DropdownMenuItem(value: 'O-', child: Text('O-')),
+                DropdownMenuItem(value: 'AB+', child: Text('AB+')),
+                DropdownMenuItem(value: 'AB-', child: Text('AB-')),
+              ],
+              onChanged: (value) {
+                context.read<DiagnosisCubit>().updateBaseline(
+                  bloodGroup: value,
+                );
+              },
             ),
           ),
         );

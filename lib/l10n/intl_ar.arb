@@ -47,7 +47,7 @@
   "patientProfileSubtitle": "يرجى إكمال معلوماتك الطبية بدقة",
   "birthDateHint": "تاريخ الميلاد",
   "ageHint": "العمر",
-  "occupationHint" : "المهنة",
+  "occupationHint": "المهنة",
   "genderHint": "الجنس",
   "activityLevelHint": "مستوى النشاط",
   "smokerQuestion": "هل أنت مدخن؟",
@@ -102,6 +102,8 @@
   "diagnosisOccupationSubtitle": "تساعدنا مهنتك في فهم نشاطك اليومي وبيئتك.",
   "diagnosisOccupationHint": "مثال: مدرس، مهندس، طالب",
   "diagMustEnterOccupation": "يجب إدخال مهنتك!",
+  "diagnosisBloodTypeTitle": "ما هي فصيلة دمك؟",
+  "diagnosisBloodTypeSubtitle": "يساعدنا ذلك على تقديم إرشادات صحية أكثر تخصيصًا.",
   "diagnosisAlcoholTitle": "هل تشرب الكحول؟",
   "diagnosisAlcoholSubtitle": "قد يؤثر استهلاك الكحول على عدة حالات صحية.",
   "diagnosisDiabetesTitle": "هل تعاني من السكري؟",
@@ -242,7 +244,6 @@
   "keyword_of": "من",
   "disclaimerMessage": "هذه نتائج أولية تستند إلى تحليل الذكاء الاصطناعي. يرجى استشارة الطبيب للحصول على تشخيص مؤكد.",
   "someErrorOccurred": "حدث خطأ ما",
-
   "chooseLlm": "اختر نموذج اللغة",
   "refresh": "تحديث",
   "failedToLoadLlm": "فشل تحميل نماذج اللغة",
@@ -250,7 +251,6 @@
   "noLlmsAvailable": "لا توجد نماذج لغة متاحة",
   "submit": "إرسال",
   "stripeBrand": "stripe",
-
   "termsAndConditions": "الشروط والأحكام",
   "privacyPolicy": "سياسة الخصوصية",
   "thirdPartySoftware": "برامج الطرف الثالث",
@@ -259,10 +259,8 @@
   "companyAddress": "Neue Grünstraße 17\n10179 Berlin\nألمانيا",
   "supportEmail": "support@vitalia.com",
   "safetyInfoBody": "يقدم هذا القسم معلومات مهمة عن السلامة فيما يتعلق باستخدام التطبيق. يرجى القراءة بعناية.",
-
   "sessionPreview": "معاينة الجلسة",
   "enterSessionId": "أدخل معرف الجلسة...",
-
   "emailEmpty": "البريد الإلكتروني مطلوب",
   "invalidEmail": "تنسيق البريد الإلكتروني غير صحيح",
   "passwordEmpty": "كلمة المرور مطلوبة",
@@ -270,12 +268,10 @@
   "passwordsMustMatch": "يجب أن تتطابق كلمات المرور",
   "nameEmpty": "الاسم مطلوب",
   "confirmPasswordEmpty": "تأكيد كلمة المرور مطلوب",
-
   "medicalHistory": "التاريخ الطبي",
   "notLoggedIn": "غير مسجل الدخول",
   "downloadFailed": "فشل التنزيل",
   "failedToDownloadReport": "فشل تنزيل التقرير",
-
   "invalidRequest": "طلب غير صالح",
   "accessDenied": "تم رفض الوصول",
   "notFound": "المعلومات المطلوبة غير موجودة",
@@ -283,6 +279,11 @@
   "unexpectedError": "حدث خطأ غير متوقع",
   "noInternet": "لا يوجد اتصال بالإنترنت، يرجى المحاولة مرة أخرى.",
   "connectionTimeout": "انتهت مهلة الاتصال، يرجى المحاولة مرة أخرى.",
+  "user": "مستخدم",
+  "bloodGroupHint": "زمرة الدم",
+  "NoMoreSymptoms": "لا أعراض أخرى",
+  "DiagnoseNow": "شخّص الآن!",
+  "NotAssignedYet": "لم يتم الاسناد",
+  "phone" : "رقم الموبايل"
 
-  "user": "مستخدم"
 }

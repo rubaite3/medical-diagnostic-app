@@ -18,6 +18,7 @@ abstract class DiagnosisState with _$DiagnosisState {
     @Default(false) bool? isAlcoholic,
     @Default("") String? patientJob,
     @Default("") String? birthDate,
+    String? bloodType,
 
     String? sessionId,
     String? modelName,

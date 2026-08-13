@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "DiagnoseNow": MessageLookupByLibrary.simpleMessage("Diagnose Now!"),
+    "NoMoreSymptoms": MessageLookupByLibrary.simpleMessage("No more symptoms"),
+    "NotAssignedYet": MessageLookupByLibrary.simpleMessage("Not assigned yet"),
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("비탈리아 소개"),
     "accessDenied": MessageLookupByLibrary.simpleMessage("액세스 거부됨"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
@@ -60,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backBtn": MessageLookupByLibrary.simpleMessage("뒤로"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("로그인으로 돌아가기"),
     "birthDateHint": MessageLookupByLibrary.simpleMessage("생년월일"),
+    "bloodGroupHint": MessageLookupByLibrary.simpleMessage("혈액형"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("취소"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("언어 변경"),
     "chooseLlm": MessageLookupByLibrary.simpleMessage("LLM 선택"),
@@ -157,6 +161,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
       "생년월일이 어떻게 되나요?",
+    ),
+    "diagnosisBloodTypeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "보다 맞춤형 건강 안내를 제공하는 데 도움이 됩니다.",
+    ),
+    "diagnosisBloodTypeTitle": MessageLookupByLibrary.simpleMessage(
+      "혈액형이 무엇인가요?",
     ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage("진단 세부정보"),
     "diagnosisDiabetesSubtitle": MessageLookupByLibrary.simpleMessage(

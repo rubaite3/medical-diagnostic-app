@@ -45,7 +45,7 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     });
   }
 
-  Future<void> _submitAnswer() async {
+  Future<void> _submitAnswer({bool isForce = false}) async {
     final state = context.read<DiagnosisCubit>().state;
     final question = state.currentFollowUp?.question;
     if (question == null) return;
@@ -62,6 +62,7 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     await context.read<DiagnosisCubit>().submitFollowUpAnswer(
       question.id,
       _selectedOptionIds.first,
+      isForce: isForce,
     );
 
     // if (!mounted) return;
@@ -179,21 +180,78 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
 
           Expanded(
             child: SingleChildScrollView(
-              child: QuestionCard(
-                question:
-                    question ??
-                    Question(id: "", text: "", type: "", options: []),
-                selectedIds: _selectedOptionIds,
-                onOptionToggled: (optId) => _toggleOption(optId, isSingle),
-              ),
+              child:
+                  ((state.currentFollowUp?.responseType ?? "") ==
+                      "need_more_symptoms")
+                  ? SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            question?.text ?? "",
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: colorScheme.onSurface,
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          CustomButton(
+                            text: S.of(context).symptomSearchHint,
+                            onPressed: () {
+                              context.goNamed(RoutePaths.symptomSearch);
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  : QuestionCard(
+                      question:
+                          question ??
+                          Question(id: "", text: "", type: "", options: []),
+                      selectedIds: _selectedOptionIds,
+                      onOptionToggled: (optId) =>
+                          _toggleOption(optId, isSingle),
+                    ),
             ),
           ),
 
           const SizedBox(height: 16),
-          CustomButton(
-            text: S.of(context).submitFollowUpBtn,
-            onPressed: state.op.isLoading ? null : _submitAnswer,
-          ),
+          if ((state.currentFollowUp?.responseType ?? "") !=
+              "need_more_symptoms")
+            BlocSelector<DiagnosisCubit, DiagnosisState, bool>(
+              selector: (state) => state.followUpProgress > 6,
+              builder: (context, isMoreThanSevenQs) => isMoreThanSevenQs
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: CustomButton(
+                            text: S.of(context).submitFollowUpBtn,
+                            onPressed: state.op.isLoading
+                                ? null
+                                : _submitAnswer,
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: CustomButton(
+                            text: S.of(context).DiagnoseNow,
+                            onPressed: state.op.isLoading
+                                ? null
+                                : () {
+                                    _submitAnswer(isForce: true);
+                                  },
+                          ),
+                        ),
+                      ],
+                    )
+                  : CustomButton(
+                      text: S.of(context).submitFollowUpBtn,
+                      onPressed: state.op.isLoading ? null : _submitAnswer,
+                    ),
+            ),
           const SizedBox(height: 8),
         ],
       ),

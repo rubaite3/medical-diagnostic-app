@@ -129,145 +129,161 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
               ? Center(child: CircularProgressIndicator())
               : state.notifications.isEmpty
               ? Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.notifications_off_outlined,
-                        size: 56,
-                        color: colorScheme.onSurfaceVariant,
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<NotificationsCubit>().fetchNotifications();
+                    },
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.notifications_off_outlined,
+                            size: 56,
+                            color: colorScheme.onSurfaceVariant,
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            S.of(context).noNotifications,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              color: colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 12),
-                      Text(
-                        S.of(context).noNotifications,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 )
-              : ListView.separated(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  itemCount: state.notifications.length,
-                  separatorBuilder: (_, _) => Divider(
-                    height: 1,
-                    indent: 72,
-                    color: colorScheme.outline.withValues(alpha: 0.12),
-                  ),
-                  itemBuilder: (context, index) {
-                    final n = state.notifications[index];
-                    final read = _isRead(n);
-                    return state.loadingNotifications.contains(n.id ?? -1)
-                        ? Center(child: CircularProgressIndicator())
-                        : Dismissible(
-                            key: ValueKey(n.id),
-                            background: Container(
-                              color: theme.colorScheme.errorContainer,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Icon(
-                                    Icons.delete_outline,
-                                    color: colorScheme.onError,
-                                  ),
-                                  Icon(
-                                    Icons.delete_outline,
-                                    color: colorScheme.onError,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            onDismissed: (_) => _delete(n.id),
-                            child: ListTile(
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 6,
-                              ),
-                              leading: CircleAvatar(
-                                backgroundColor: read
-                                    ? colorScheme.surfaceContainerHighest
-                                    : colorScheme.primaryContainer,
-                                child: Icon(
-                                  _iconForType(n.type),
-                                  color: read
-                                      ? colorScheme.onSurfaceVariant
-                                      : colorScheme.primary,
-                                ),
-                              ),
-                              title: Text(
-                                n.title ?? "",
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: read
-                                      ? FontWeight.w500
-                                      : FontWeight.bold,
-                                  color: colorScheme.onSurface,
-                                ),
-                              ),
-                              subtitle: Padding(
-                                padding: const EdgeInsets.only(top: 4),
-                                child: Text(
-                                  n.message ?? "",
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: colorScheme.onSurfaceVariant,
-                                  ),
-                                ),
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  if (!read)
-                                    Container(
-                                      width: 10,
-                                      height: 10,
-                                      margin: const EdgeInsets.only(right: 4),
-                                      decoration: BoxDecoration(
-                                        color: colorScheme.primary,
-                                        shape: BoxShape.circle,
-                                      ),
+              : RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<NotificationsCubit>().fetchNotifications();
+                  },
+                  child: ListView.separated(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    itemCount: state.notifications.length,
+                    separatorBuilder: (_, _) => Divider(
+                      height: 1,
+                      indent: 72,
+                      color: colorScheme.outline.withValues(alpha: 0.12),
+                    ),
+                    itemBuilder: (context, index) {
+                      final n = state.notifications[index];
+                      final read = _isRead(n);
+                      return state.loadingNotifications.contains(n.id ?? -1)
+                          ? Center(child: CircularProgressIndicator())
+                          : Dismissible(
+                              key: ValueKey(n.id),
+                              background: Container(
+                                color: theme.colorScheme.errorContainer,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Icon(
+                                      Icons.delete_outline,
+                                      color: colorScheme.onError,
                                     ),
-                                  PopupMenuButton<String>(
-                                    icon: const Icon(Icons.more_vert),
-                                    onSelected: (value) {
-                                      switch (value) {
-                                        case "read":
-                                          _setRead(n.id, true);
-                                          break;
-                                        case "unread":
-                                          _setRead(n.id, false);
-                                          break;
-                                        case "delete":
-                                          _delete(n.id);
-                                          break;
-                                      }
-                                    },
-                                    itemBuilder: (context) => [
-                                      if (!read)
-                                        PopupMenuItem(
-                                          value: "read",
-                                          child: Text(S.of(context).markAsRead),
+                                    Icon(
+                                      Icons.delete_outline,
+                                      color: colorScheme.onError,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              onDismissed: (_) => _delete(n.id),
+                              child: ListTile(
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 6,
+                                ),
+                                leading: CircleAvatar(
+                                  backgroundColor: read
+                                      ? colorScheme.surfaceContainerHighest
+                                      : colorScheme.primaryContainer,
+                                  child: Icon(
+                                    _iconForType(n.type),
+                                    color: read
+                                        ? colorScheme.onSurfaceVariant
+                                        : colorScheme.primary,
+                                  ),
+                                ),
+                                title: Text(
+                                  n.data?["title"] ?? "",
+                                  style: theme.textTheme.titleMedium?.copyWith(
+                                    fontWeight: read
+                                        ? FontWeight.w500
+                                        : FontWeight.bold,
+                                    color: colorScheme.onSurface,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                subtitle: Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    overflow: TextOverflow.ellipsis,
+                                    n.data?["message"] ?? "",
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    if (!read)
+                                      Container(
+                                        width: 10,
+                                        height: 10,
+                                        margin: const EdgeInsets.only(right: 4),
+                                        decoration: BoxDecoration(
+                                          color: colorScheme.primary,
+                                          shape: BoxShape.circle,
                                         ),
-                                      if (read)
+                                      ),
+                                    PopupMenuButton<String>(
+                                      icon: const Icon(Icons.more_vert),
+                                      onSelected: (value) {
+                                        switch (value) {
+                                          case "read":
+                                            _setRead(n.id, true);
+                                            break;
+                                          case "unread":
+                                            _setRead(n.id, false);
+                                            break;
+                                          case "delete":
+                                            _delete(n.id);
+                                            break;
+                                        }
+                                      },
+                                      itemBuilder: (context) => [
+                                        if (!read)
+                                          PopupMenuItem(
+                                            value: "read",
+                                            child: Text(
+                                              S.of(context).markAsRead,
+                                            ),
+                                          ),
+                                        if (read)
+                                          PopupMenuItem(
+                                            value: "unread",
+                                            child: Text(
+                                              S.of(context).markAsUnread,
+                                            ),
+                                          ),
                                         PopupMenuItem(
-                                          value: "unread",
+                                          value: "delete",
                                           child: Text(
-                                            S.of(context).markAsUnread,
+                                            S.of(context).deleteNotification,
                                           ),
                                         ),
-                                      PopupMenuItem(
-                                        value: "delete",
-                                        child: Text(
-                                          S.of(context).deleteNotification,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                  },
+                            );
+                    },
+                  ),
                 ),
         ),
       ),

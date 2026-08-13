@@ -21,6 +21,7 @@ class RoutePaths {
   static const baselinePregnant = '/diagnosis/baseline/pregnant';
   static const baselineBirthDate = '/diagnosis/baseline/birthDate';
   static const baselineOccupation = '/diagnosis/baseline/occupation';
+  static const baselineBloodType = '/diagnosis/baseline/bloodType';
   static const baselineAlcohol = '/diagnosis/baseline/alcohol';
 
   static const availableLLms = '/llms';

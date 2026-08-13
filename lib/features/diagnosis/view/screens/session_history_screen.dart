@@ -5,6 +5,8 @@ import 'package:medical_diagnostic_app1/features/diagnosis/controllers/session_h
 import 'package:medical_diagnostic_app1/generated/l10n.dart';
 import 'package:medical_diagnostic_app1/main_exports.dart';
 
+import '../widgets/diagnosis_widgets.dart';
+
 class _MockSession {
   const _MockSession({
     required this.sessionId,
@@ -66,6 +68,13 @@ class _SessionHistoryScreenState extends State<SessionHistoryScreen> {
         builder: (context, state) => SafeArea(
           child: state.op.isLoading
               ? Center(child: CircularProgressIndicator())
+              : state.op.isFailure
+              ? DiagnosisErrorWidget(
+                  message: state.statusMessage.isEmpty
+                      ? S.of(context).errorGeneral
+                      : state.statusMessage,
+                  onRetry: () => _sessionHistoryCubit.fetchSessions(),
+                )
               : state.sessions.isEmpty
               ? Center(
                   child: Text(
@@ -104,7 +113,7 @@ class _SessionHistoryScreenState extends State<SessionHistoryScreen> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  "${S.of(context).sessionIdLabel}: ${session.sessionId}",
+                                  "${S.of(context).sessionIdLabel}: ${session.id}",
                                   style: theme.textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -155,7 +164,7 @@ class _SessionHistoryScreenState extends State<SessionHistoryScreen> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(6),
                                   child: LinearProgressIndicator(
-                                    value: session.topProbability,
+                                    value: session.topProbability ?? 0.0,
                                     minHeight: 8,
                                     color: barColor,
                                     backgroundColor: colorScheme.outline
@@ -180,9 +189,7 @@ class _SessionHistoryScreenState extends State<SessionHistoryScreen> {
                               onPressed: () {
                                 context.pushNamed(
                                   RoutePaths.fullReport,
-                                  queryParameters: {
-                                    "sessionId": session.sessionId,
-                                  },
+                                  queryParameters: {"sessionId": session.id},
                                 );
                               },
                               icon: const Icon(Icons.visibility_outlined),

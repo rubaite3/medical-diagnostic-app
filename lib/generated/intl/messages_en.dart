@@ -22,6 +22,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "DiagnoseNow": MessageLookupByLibrary.simpleMessage("Diagnose Now!"),
+    "NoMoreSymptoms": MessageLookupByLibrary.simpleMessage("No more symptoms"),
+    "NotAssignedYet": MessageLookupByLibrary.simpleMessage("Not assigned yet"),
     "aboutVitalia": MessageLookupByLibrary.simpleMessage("About Vitalia"),
     "accessDenied": MessageLookupByLibrary.simpleMessage("Access denied"),
     "accountDeleteUnavailable": MessageLookupByLibrary.simpleMessage(
@@ -73,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backBtn": MessageLookupByLibrary.simpleMessage("Back"),
     "backToLogin": MessageLookupByLibrary.simpleMessage("Back to Login"),
     "birthDateHint": MessageLookupByLibrary.simpleMessage("Birth Date"),
+    "bloodGroupHint": MessageLookupByLibrary.simpleMessage("Blood Group"),
     "cancelBtn": MessageLookupByLibrary.simpleMessage("Cancel"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Change language"),
     "chooseLlm": MessageLookupByLibrary.simpleMessage("Choose LLM"),
@@ -195,6 +199,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "diagnosisBirthDateTitle": MessageLookupByLibrary.simpleMessage(
       "What is your date of birth?",
     ),
+    "diagnosisBloodTypeSubtitle": MessageLookupByLibrary.simpleMessage(
+      "This helps us provide more personalized health guidance.",
+    ),
+    "diagnosisBloodTypeTitle": MessageLookupByLibrary.simpleMessage(
+      "What is your blood type?",
+    ),
     "diagnosisDetailsLabel": MessageLookupByLibrary.simpleMessage(
       "Diagnosis Details",
     ),
@@ -244,6 +254,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "disclaimerMessage": MessageLookupByLibrary.simpleMessage(
       "These are preliminary results based on AI analysis. Please consult a doctor for a confirmed diagnosis.",
     ),
+    "doctorAvailable": MessageLookupByLibrary.simpleMessage("Available now"),
+    "doctorInCharge": MessageLookupByLibrary.simpleMessage(
+      "Doctor in charge of your case",
+    ),
     "dontHaveAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
     ),
@@ -263,6 +277,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorGeneric": MessageLookupByLibrary.simpleMessage(
       "Some Error occurred.",
+    ),
+    "expectedReviewTime": MessageLookupByLibrary.simpleMessage(
+      "Expected review time",
     ),
     "failedToDownloadReport": MessageLookupByLibrary.simpleMessage(
       "Failed to download report",
@@ -320,6 +337,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "languagesAdded": MessageLookupByLibrary.simpleMessage(
       "Romanian and Swahili are available again. You can now use the app in English, German, French, Spanish, Portuguese, Romanian or Swahili.",
     ),
+    "lastLogin": MessageLookupByLibrary.simpleMessage("Last login"),
     "loadingText": MessageLookupByLibrary.simpleMessage("Please wait..."),
     "loginBtn": MessageLookupByLibrary.simpleMessage("Login"),
     "loginLink": MessageLookupByLibrary.simpleMessage("Login"),
@@ -333,6 +351,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "markAsUnread": MessageLookupByLibrary.simpleMessage("Mark as unread"),
     "medicalHistory": MessageLookupByLibrary.simpleMessage("Medical History"),
     "medicalQuality": MessageLookupByLibrary.simpleMessage("Medical quality"),
+    "mockDoctorName": MessageLookupByLibrary.simpleMessage(
+      "Dr. Ahmed Al-Khateeb",
+    ),
+    "mockDoctorSpecialist": MessageLookupByLibrary.simpleMessage(
+      "Dermatologist",
+    ),
+    "mockExpectedTime": MessageLookupByLibrary.simpleMessage("Within 2 hours"),
+    "mockLastLogin": MessageLookupByLibrary.simpleMessage("30 minutes ago"),
     "nameEmpty": MessageLookupByLibrary.simpleMessage("Name must not be empty"),
     "navHome": MessageLookupByLibrary.simpleMessage("Home"),
     "navProfile": MessageLookupByLibrary.simpleMessage("Profile"),
@@ -341,6 +367,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "no": MessageLookupByLibrary.simpleMessage("No"),
     "noDiagnosesAvailable": MessageLookupByLibrary.simpleMessage(
       "No diagnoses available.",
+    ),
+    "noDoctorAssigned": MessageLookupByLibrary.simpleMessage(
+      "No doctor assigned yet",
     ),
     "noInternet": MessageLookupByLibrary.simpleMessage(
       "No internet connection detected, please try again.",
@@ -434,6 +463,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Get your detailed medical report with personalized recommendations.",
     ),
     "paymentTitle": MessageLookupByLibrary.simpleMessage("Unlock Full Report"),
+    "phone": MessageLookupByLibrary.simpleMessage("phone number"),
     "pregnantQuestion": MessageLookupByLibrary.simpleMessage(
       "Are you currently pregnant?",
     ),
@@ -468,6 +498,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Recommendations",
     ),
     "refresh": MessageLookupByLibrary.simpleMessage("Refresh"),
+    "reportStatusReviewed": MessageLookupByLibrary.simpleMessage("Reviewed"),
+    "reportStatusSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Your case has been received successfully - you will receive a notification when the report is ready.",
+    ),
+    "reportStatusUnderReview": MessageLookupByLibrary.simpleMessage(
+      "Under Review",
+    ),
     "resetProfileBtn": MessageLookupByLibrary.simpleMessage(
       "Reset Medical Profile",
     ),
@@ -521,6 +558,19 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDiagnosis": MessageLookupByLibrary.simpleMessage("Start Diagnosis"),
     "startNewDiagnosisBtn": MessageLookupByLibrary.simpleMessage(
       "Start New Diagnosis",
+    ),
+    "stepAiAnalysis": MessageLookupByLibrary.simpleMessage(
+      "AI Symptom Analysis",
+    ),
+    "stepDoctorReview": MessageLookupByLibrary.simpleMessage("Doctor Review"),
+    "stepDoctorReviewInProgress": MessageLookupByLibrary.simpleMessage(
+      "Doctor Review - In Progress",
+    ),
+    "stepPaymentSuccess": MessageLookupByLibrary.simpleMessage(
+      "Payment successful",
+    ),
+    "stepReceivePdf": MessageLookupByLibrary.simpleMessage(
+      "Receive PDF Report",
     ),
     "stripeBrand": MessageLookupByLibrary.simpleMessage("stripe"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),

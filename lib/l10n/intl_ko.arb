@@ -101,6 +101,8 @@
   "diagnosisOccupationSubtitle": "직업을 통해 일상 활동과 환경을 파악할 수 있습니다.",
   "diagnosisOccupationHint": "예: 교사, 엔지니어, 학생",
   "diagMustEnterOccupation": "직업을 입력해야 합니다!",
+  "diagnosisBloodTypeTitle": "혈액형이 무엇인가요?",
+  "diagnosisBloodTypeSubtitle": "보다 맞춤형 건강 안내를 제공하는 데 도움이 됩니다.",
   "diagnosisAlcoholTitle": "술을 드시나요?",
   "diagnosisAlcoholSubtitle": "음주는 여러 건강 상태에 영향을 줄 수 있습니다.",
   "diagnosisDiabetesTitle": "당뇨병이 있으신가요?",
@@ -259,5 +261,8 @@
   "unexpectedError": "예기치 않은 오류가 발생했습니다",
   "noInternet": "인터넷 연결이 감지되지 않습니다. 다시 시도해주세요.",
   "connectionTimeout": "연결 시간이 초과되었습니다. 다시 시도해주세요.",
-  "user": "사용자"
+  "user": "사용자",
+  "NoMoreSymptoms": "No more symptoms",
+  "DiagnoseNow": "Diagnose Now!",
+  "NotAssignedYet": "Not assigned yet"
 }

@@ -125,6 +125,11 @@ class AppRouter {
                     builder: (context, state) => OccupationScreen(),
                   ),
                   GoRoute(
+                    name: RoutePaths.baselineBloodType,
+                    path: RoutePaths.baselineBloodType,
+                    builder: (context, state) => const BloodTypeScreen(),
+                  ),
+                  GoRoute(
                     name: RoutePaths.baselineActivity,
                     path: RoutePaths.baselineActivity,
                     builder: (context, state) => ActivitySelectionScreen(),
