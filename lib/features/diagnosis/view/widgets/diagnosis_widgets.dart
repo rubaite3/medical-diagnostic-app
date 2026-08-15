@@ -233,12 +233,14 @@ class QuestionCard extends StatelessWidget {
   final Question question;
   final List<String> selectedIds;
   final ValueChanged<String> onOptionToggled;
+  final Widget? footer;
 
   const QuestionCard({
     super.key,
     required this.question,
     required this.selectedIds,
     required this.onOptionToggled,
+    this.footer,
   });
 
   @override
@@ -282,8 +284,94 @@ class QuestionCard extends StatelessWidget {
               onTap: () => onOptionToggled(opt.id),
             );
           }),
+          if (footer != null) ...[const SizedBox(height: 8), footer!],
         ],
       ),
+    );
+  }
+}
+
+// Free-text field matching the option tile theming, with a clear button.
+class FreeTextAnswerField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hint;
+
+  const FreeTextAnswerField({
+    super.key,
+    required this.controller,
+    required this.hint,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: controller,
+      builder: (context, value, _) {
+        final hasText = value.text.trim().isNotEmpty;
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: hasText
+                ? colorScheme.primary.withValues(alpha: 0.12)
+                : colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: hasText
+                  ? colorScheme.primary
+                  : colorScheme.outline.withValues(alpha: 0.3),
+              width: hasText ? 1.5 : 1.0,
+            ),
+          ),
+          child: Theme(
+            data: theme.copyWith(
+              inputDecorationTheme: const InputDecorationTheme(
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+                isDense: true,
+              ),
+            ),
+            child: TextField(
+              textInputAction: TextInputAction.done,
+              controller: controller,
+              maxLines: 1,
+              maxLength: 200,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurface,
+              ),
+              decoration: InputDecoration(
+                hintText: hint,
+                hintStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                border: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                contentPadding: EdgeInsets.zero,
+                isDense: true,
+                counterText: '',
+                suffixIcon: hasText
+                    ? IconButton(
+                        tooltip: 'Clear',
+                        icon: const Icon(Icons.close),
+                        onPressed: controller.clear,
+                      )
+                    : null,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

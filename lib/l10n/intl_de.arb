@@ -204,6 +204,7 @@
   "diagMustChooseGender": "Sie müssen ein Geschlecht auswählen!",
   "diagNoQuestionsAvailable": "Keine Fragen für dieses Symptom verfügbar.",
   "diagPleaseSelectAnswer": "Bitte wählen Sie eine Antwort aus.",
+  "enterAnswerHint": "Geben Sie Ihre Antwort ein",
   "diagReportReady": "Bericht bereit",
   "diagSearchCompleted": "Suche abgeschlossen",
   "diagSearching": "Suchen...",

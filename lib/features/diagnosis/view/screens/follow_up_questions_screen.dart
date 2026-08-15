@@ -20,6 +20,7 @@ class FollowUpQuestionsScreen extends StatefulWidget {
 
 class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
   List<String> _selectedOptionIds = [];
+  final TextEditingController _freeTextController = TextEditingController();
 
   @override
   void initState() {
@@ -29,6 +30,12 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     if (state.currentFollowUp == null) {
       context.read<DiagnosisCubit>().getNextFollowUp();
     }
+  }
+
+  @override
+  void dispose() {
+    _freeTextController.dispose();
+    super.dispose();
   }
 
   void _toggleOption(String optionId, bool isSingle) {
@@ -50,7 +57,9 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     final question = state.currentFollowUp?.question;
     if (question == null) return;
 
-    if (_selectedOptionIds.isEmpty) {
+    final customAnswer = _freeTextController.text.trim();
+
+    if (_selectedOptionIds.isEmpty && customAnswer.isEmpty) {
       Utils.showToast(
         context,
         message: S.of(context).diagPleaseSelectAnswer,
@@ -60,9 +69,10 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
     }
 
     await context.read<DiagnosisCubit>().submitFollowUpAnswer(
-      question.id,
-      _selectedOptionIds.first,
+      questionId: question.id,
+      answerId: _selectedOptionIds.isEmpty ? "" : _selectedOptionIds.first,
       isForce: isForce,
+      customAnswer: customAnswer.isEmpty ? null : customAnswer,
     );
 
     // if (!mounted) return;
@@ -100,6 +110,7 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
         if (state.op.isSuccess) {
           setState(() {
             _selectedOptionIds = [];
+            _freeTextController.clear();
           });
           if ((state.currentFollowUp?.responseType ?? "") == "diagnosis") {
             context.goNamed(RoutePaths.preliminaryResults);
@@ -212,6 +223,12 @@ class _FollowUpQuestionsScreenState extends State<FollowUpQuestionsScreen> {
                       selectedIds: _selectedOptionIds,
                       onOptionToggled: (optId) =>
                           _toggleOption(optId, isSingle),
+                      footer: (question?.type ?? "") == "yes_no"
+                          ? null
+                          : FreeTextAnswerField(
+                              controller: _freeTextController,
+                              hint: S.of(context).enterAnswerHint,
+                            ),
                     ),
             ),
           ),

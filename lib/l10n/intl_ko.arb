@@ -204,6 +204,7 @@
   "diagMustChooseGender": "성별을 선택해야 합니다!",
   "diagNoQuestionsAvailable": "이 증상에 대한 질문이 없습니다.",
   "diagPleaseSelectAnswer": "답변을 선택해주세요.",
+  "enterAnswerHint": "답변을 입력하세요",
   "diagReportReady": "보고서 준비 완료",
   "diagSearchCompleted": "검색이 완료되었습니다",
   "diagSearching": "검색 중...",

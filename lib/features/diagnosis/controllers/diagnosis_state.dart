@@ -24,6 +24,8 @@ abstract class DiagnosisState with _$DiagnosisState {
     String? modelName,
     @Default(Operation.neutral) Operation searchOp,
     @Default([]) List<Symptom> searchResults,
+    List<Symptom>? selectedSymptoms,
+    SubmitFollowUpAnswerRequest? currentFollowUpRequest,
     @Default([]) List<Question> currentQuestions,
     FollowUpResponse? currentFollowUp,
     @Default(0) int followUpProgress,
@@ -31,6 +33,7 @@ abstract class DiagnosisState with _$DiagnosisState {
     FinalReport? finalReport,
 
     @Default(0.0) double downloadProgress,
+    String? diagnosisCost,
 
     String? clientSecret,
   }) = _DiagnosisState;

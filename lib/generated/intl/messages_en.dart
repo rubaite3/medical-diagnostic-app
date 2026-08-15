@@ -269,6 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailEmpty": MessageLookupByLibrary.simpleMessage(
       "Email must not be empty",
     ),
+    "enterAnswerHint": MessageLookupByLibrary.simpleMessage("Type your answer"),
     "enterSessionId": MessageLookupByLibrary.simpleMessage(
       "Enter session id...",
     ),

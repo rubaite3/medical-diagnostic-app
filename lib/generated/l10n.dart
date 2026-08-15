@@ -2040,6 +2040,16 @@ class S {
     );
   }
 
+  /// `Type your answer`
+  String get enterAnswerHint {
+    return Intl.message(
+      'Type your answer',
+      name: 'enterAnswerHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report ready`
   String get diagReportReady {
     return Intl.message(

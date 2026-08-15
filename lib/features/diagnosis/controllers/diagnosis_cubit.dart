@@ -177,14 +177,20 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
     );
   }
 
-  Future<void> selectSymptoms(List<Symptom> symptoms) async {
+  Future<void> selectSymptoms({List<Symptom>? symptoms}) async {
     if (state.op.isFailure) {
       getNextFollowUp();
     } else {
       String syms = '';
-      for (var symptom in symptoms) {
+      for (var symptom in (state.selectedSymptoms ?? symptoms ?? [])) {
         syms += "${symptom.nameLocal ?? ""},";
       }
+      emit(
+        state.copyWith(
+          selectedSymptoms: symptoms,
+          currentFollowUpRequest: null,
+        ),
+      );
       GetIt.instance<LoaderCubit>().show();
       emit(state.copyWith(op: Operation.loading));
       final response = await _repo.selectSymptom(
@@ -204,15 +210,18 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
           );
         },
         (response) {
-          emit(
-            state.copyWith(
-              op: Operation.success,
-              followUpProgress: state.followUpProgress + 1,
-              currentFollowUp: FollowUpResponse.fromJson(
-                response.data["data"]["data"],
-              ),
-            ),
+          final followUpResponse = FollowUpResponse.fromJson(
+            response.data["data"]["data"],
           );
+          if (followUpResponse.question != null) {
+            emit(
+              state.copyWith(
+                op: Operation.success,
+                followUpProgress: state.followUpProgress + 1,
+                currentFollowUp: followUpResponse,
+              ),
+            );
+          }
           emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
         },
       );
@@ -224,49 +233,56 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
 
     GetIt.instance<LoaderCubit>().show();
     emit(state.copyWith(op: Operation.loading));
-    final result = await _repo.getNextFollowUp(state.sessionId!);
-    GetIt.instance<LoaderCubit>().hide();
+    if (state.currentFollowUpRequest != null) {
+      submitFollowUpAnswer();
+    } else if (state.selectedSymptoms != null) {
+      selectSymptoms();
+    } else {
+      final result = await _repo.getNextFollowUp(state.sessionId!);
+      GetIt.instance<LoaderCubit>().hide();
 
-    result.fold(
-      (error) {
-        emit(
-          state.copyWith(
-            op: Operation.failure,
-            statusMessage: error.errorMessage,
-          ),
-        );
-        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
-      },
-      (response) {
-        final data = FollowUpResponse.fromJson(
-          Map<String, dynamic>.from(response.data["data"]["data"]),
-        );
-        emit(
-          state.copyWith(
-            op: Operation.success,
-            statusMessage: S.current.diagLoaded,
-            currentFollowUp: data,
-          ),
-        );
-        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
-      },
-    );
+      result.fold(
+        (error) {
+          emit(
+            state.copyWith(
+              op: Operation.failure,
+              statusMessage: error.errorMessage,
+            ),
+          );
+          emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+        },
+        (response) {
+          final data = FollowUpResponse.fromJson(
+            Map<String, dynamic>.from(response.data["data"]["data"]),
+          );
+          emit(
+            state.copyWith(
+              op: Operation.success,
+              statusMessage: S.current.diagLoaded,
+              currentFollowUp: data,
+            ),
+          );
+          emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+        },
+      );
+    }
   }
 
-  Future<void> submitFollowUpAnswer(
-    String questionId,
-    String answerId, {
+  Future<void> submitFollowUpAnswer({
+    String? questionId,
+    String? answerId,
     bool isForce = false,
+    String? customAnswer,
   }) async {
     if (state.sessionId == null) return;
     if (state.op.isFailure) {
       getNextFollowUp();
     } else {
-      final request = SubmitFollowUpAnswerRequest(
-        forceDiagnosis: isForce,
-        sessionId: state.sessionId!,
-        questionId: questionId,
-        answer:
+      final String answer;
+      if (customAnswer != null && customAnswer.isNotEmpty) {
+        answer = customAnswer;
+      } else {
+        answer =
             (state.currentFollowUp?.question ??
                     Question(id: "", text: "", type: "", options: []))
                 .options
@@ -274,11 +290,22 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
                   return option.id == answerId;
                 })
                 .first
-                .label,
+                .label;
+      }
+      final request = SubmitFollowUpAnswerRequest(
+        forceDiagnosis: isForce,
+        sessionId: state.sessionId!,
+        questionId: questionId ?? "",
+        answer: answer,
+      );
+      emit(
+        state.copyWith(currentFollowUpRequest: request, selectedSymptoms: null),
       );
       GetIt.instance<LoaderCubit>().show();
       emit(state.copyWith(op: Operation.loading));
-      final result = await _repo.submitFollowUpAnswer(request);
+      final result = await _repo.submitFollowUpAnswer(
+        state.currentFollowUpRequest ?? request,
+      );
 
       GetIt.instance<LoaderCubit>().hide();
 
@@ -292,16 +319,19 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
           );
         },
         (response) {
-          emit(
-            state.copyWith(
-              currentFollowUp: FollowUpResponse.fromJson(
-                response.data["data"]["data"],
-              ),
-              followUpProgress: state.followUpProgress + 1,
-              op: Operation.success,
-              statusMessage: S.current.diagAnswerSubmitted,
-            ),
+          final followUpResponse = FollowUpResponse.fromJson(
+            response.data["data"]["data"],
           );
+          if (followUpResponse.question != null) {
+            emit(
+              state.copyWith(
+                currentFollowUp: followUpResponse,
+                followUpProgress: state.followUpProgress + 1,
+                op: Operation.success,
+                statusMessage: S.current.diagAnswerSubmitted,
+              ),
+            );
+          }
           emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
         },
       );
@@ -363,6 +393,26 @@ class DiagnosisCubit extends Cubit<DiagnosisState> {
             statusMessage: "",
           ),
         );
+      },
+    );
+  }
+
+  Future<void> getDiagnosisCost() async {
+    if (state.sessionId == null) return;
+    emit(state.copyWith(op: Operation.loading, statusMessage: ""));
+    final result = await _repo.getPaymentCost(state.sessionId!);
+    result.fold(
+      (error) {
+        emit(
+          state.copyWith(
+            op: Operation.failure,
+            statusMessage: error.errorMessage,
+          ),
+        );
+        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+      },
+      (response) {
+        emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
       },
     );
   }

@@ -71,7 +71,7 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
       ); // -1 = failure
       return;
     }
-    context.read<DiagnosisCubit>().selectSymptoms(_selectedSymptoms);
+    context.read<DiagnosisCubit>().selectSymptoms(symptoms: _selectedSymptoms);
   }
 
   @override
@@ -267,9 +267,9 @@ class _SymptomSearchScreenState extends State<SymptomSearchScreen> {
                     onPressed: state.op.isLoading
                         ? null
                         : () {
-                            context.read<DiagnosisCubit>().selectSymptoms([
-                              Symptom(nameLocal: "no"),
-                            ]);
+                            context.read<DiagnosisCubit>().selectSymptoms(
+                              symptoms: [Symptom(nameLocal: "no")],
+                            );
                           },
                   ),
               ],

@@ -222,6 +222,7 @@
   "diagMustChooseGender": "يجب أن تختار الجنس!",
   "diagNoQuestionsAvailable": "لا توجد أسئلة متاحة لهذا العرض.",
   "diagPleaseSelectAnswer": "يرجى اختيار إجابة.",
+  "enterAnswerHint": "اكتب إجابتك",
   "diagReportReady": "التقرير جاهز",
   "diagSearchCompleted": "اكتمل البحث",
   "diagSearching": "جارٍ البحث...",

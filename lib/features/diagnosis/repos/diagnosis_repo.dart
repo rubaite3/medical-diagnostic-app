@@ -149,5 +149,14 @@ class DiagnosisRepo {
     return Utils.mapStatusCodeToResponse(response);
   }
 
+  Future<Either<AppError, AppResponse>> getPaymentCost(String sessionId) async {
+    final response = await dioTimeoutInstance.get(
+      "${ApiConsts.payments}/cost",
+      queryParameters: {"session_id": sessionId},
+    );
+
+    return Utils.mapStatusCodeToResponse(response);
+  }
+
   late final Dio dioTimeoutInstance;
 }

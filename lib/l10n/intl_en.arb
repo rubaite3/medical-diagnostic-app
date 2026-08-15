@@ -225,6 +225,7 @@
   "diagMustChooseGender": "You must Choose a gender!",
   "diagNoQuestionsAvailable": "No questions available for this symptom.",
   "diagPleaseSelectAnswer": "Please select an answer.",
+  "enterAnswerHint": "Type your answer",
   "diagReportReady": "Report ready",
   "diagSearchCompleted": "Search completed",
   "diagSearching": "Searching...",

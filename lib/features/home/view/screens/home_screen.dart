@@ -124,11 +124,11 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     context.goNamed(RoutePaths.tempSessionPreview);
-      //   },
-      // ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.goNamed(RoutePaths.tempSessionPreview);
+        },
+      ),
     );
   }
 }

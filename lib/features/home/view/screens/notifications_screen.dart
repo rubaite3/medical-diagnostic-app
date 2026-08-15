@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medical_diagnostic_app1/core/utils/utils.dart';
@@ -128,28 +129,36 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           child: state.op.isLoading
               ? Center(child: CircularProgressIndicator())
               : state.notifications.isEmpty
-              ? Center(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      context.read<NotificationsCubit>().fetchNotifications();
-                    },
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Icon(
-                            Icons.notifications_off_outlined,
-                            size: 56,
-                            color: colorScheme.onSurfaceVariant,
+              ? RefreshIndicator(
+                  onRefresh: () async {
+                    context.read<NotificationsCubit>().fetchNotifications();
+                  },
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: constraints.maxHeight,
+                        ),
+                        child: Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.notifications_off_outlined,
+                                size: 56,
+                                color: colorScheme.onSurfaceVariant,
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                S.of(context).noNotifications,
+                                style: theme.textTheme.bodyLarge?.copyWith(
+                                  color: colorScheme.onSurfaceVariant,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 12),
-                          Text(
-                            S.of(context).noNotifications,
-                            style: theme.textTheme.bodyLarge?.copyWith(
-                              color: colorScheme.onSurfaceVariant,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),

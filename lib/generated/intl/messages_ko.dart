@@ -212,6 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "downloadReportBtn": MessageLookupByLibrary.simpleMessage("PDF 다운로드"),
     "downloadingReportBtn": MessageLookupByLibrary.simpleMessage("다운로드 중..."),
     "emailEmpty": MessageLookupByLibrary.simpleMessage("이메일을 입력하세요"),
+    "enterAnswerHint": MessageLookupByLibrary.simpleMessage("답변을 입력하세요"),
     "enterSessionId": MessageLookupByLibrary.simpleMessage("세션 ID 입력..."),
     "errorGeneral": MessageLookupByLibrary.simpleMessage(
       "문제가 발생했습니다. 다시 시도해주세요.",

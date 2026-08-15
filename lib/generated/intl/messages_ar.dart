@@ -251,6 +251,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailEmpty": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني مطلوب",
     ),
+    "enterAnswerHint": MessageLookupByLibrary.simpleMessage("اكتب إجابتك"),
     "enterSessionId": MessageLookupByLibrary.simpleMessage(
       "أدخل معرف الجلسة...",
     ),

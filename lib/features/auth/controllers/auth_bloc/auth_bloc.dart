@@ -213,33 +213,40 @@ class AuthBloc extends HydratedBloc<AuthEvent, AuthState> {
   }
 
   FutureOr<void> _logout(_Logout event, Emitter<AuthState> emit) async {
-    GetIt.instance<LoaderCubit>().show();
-    final res = await _authRepo.logout();
-    GetIt.instance<LoaderCubit>().hide();
-    switch (res) {
-      case Right():
-        {
-          emit(
-            state.copyWith(
-              op: Operation.success,
-              statusMessage: S.current.authLoggedOut,
-            ),
-          );
-          emit(AuthState.initial());
-        }
-        break;
-      case Left(value: final l):
-        {
-          emit(
-            state.copyWith(
-              op: Operation.failure,
-              statusMessage: l.errorMessage,
-            ),
-          );
-          emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
-        }
-        break;
-    }
+    emit(
+      state.copyWith(
+        op: Operation.success,
+        statusMessage: S.current.authLoggedOut,
+      ),
+    );
+    emit(AuthState.initial());
+    // GetIt.instance<LoaderCubit>().show();
+    // final res = await _authRepo.logout();
+    // GetIt.instance<LoaderCubit>().hide();
+    // switch (res) {
+    //   case Right():
+    //     {
+    //       emit(
+    //         state.copyWith(
+    //           op: Operation.success,
+    //           statusMessage: S.current.authLoggedOut,
+    //         ),
+    //       );
+    //       emit(AuthState.initial());
+    //     }
+    //     break;
+    //   case Left(value: final l):
+    //     {
+    //       emit(
+    //         state.copyWith(
+    //           op: Operation.failure,
+    //           statusMessage: l.errorMessage,
+    //         ),
+    //       );
+    //       emit(state.copyWith(op: Operation.neutral, statusMessage: ""));
+    //     }
+    //     break;
+    // }
   }
 
   Future<void> _updateProfile(
